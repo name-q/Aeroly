@@ -1,0 +1,28 @@
+// AeroUI 全局 Less Mixin
+
+@import './variables.less';
+
+// 毛玻璃效果
+.glass-effect(@bg-color: rgba(255, 255, 255, 0.3), @blur: @glass-blur) {
+  background: @bg-color;
+  backdrop-filter: blur(@blur);
+  -webkit-backdrop-filter: blur(@blur);
+
+  @supports not (backdrop-filter: blur(1px)) {
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
+
+// 阴影
+.shadow-default() {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-hover() {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+// 过渡
+.transition(@property: all) {
+  transition: @property @transition-duration @transition-timing;
+}

@@ -1,0 +1,28 @@
+@import '../styles/variables.less';
+
+.aero-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  color: currentColor;
+  line-height: 0;
+  transition: transform @transition-duration @transition-timing;
+
+  > svg {
+    display: block;
+  }
+}
+
+.aero-icon--spin {
+  animation: aero-icon-spin 1s linear infinite;
+}
+
+@keyframes aero-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

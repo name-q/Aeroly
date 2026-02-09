@@ -78,3 +78,7 @@ export default () => (
 | spin | 是否旋转动画 | `boolean` | `false` |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |
+
+## 图标列表
+
+<code src="./demos/gallery.tsx" inline></code>

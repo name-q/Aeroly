@@ -1,7 +1,7 @@
 # AeroUi
 
-[![NPM version](https://img.shields.io/npm/v/AeroUi.svg?style=flat)](https://npmjs.org/package/AeroUi)
-[![NPM downloads](http://img.shields.io/npm/dm/AeroUi.svg?style=flat)](https://npmjs.org/package/AeroUi)
+[![NPM version](https://img.shields.io/npm/v/aero-ui.svg?style=flat)](https://npmjs.org/package/aero-ui)
+[![NPM downloads](http://img.shields.io/npm/dm/aero-ui.svg?style=flat)](https://npmjs.org/package/aero-ui)
 
 Designed for AI collaboration and effortless interface building.
 

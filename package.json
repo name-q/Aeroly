@@ -1,5 +1,5 @@
 {
-  "name": "AeroUi",
+  "name": "aero-ui",
   "version": "0.0.1",
   "description": "Designed for AI collaboration and effortless interface building.",
   "module": "dist/index.js",

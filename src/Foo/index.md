@@ -3,7 +3,7 @@
 This is an example component.
 
 ```jsx
-import { Foo } from 'AeroUi';
+import { Foo } from 'aero-ui';
 
 export default () => <Foo title="Hello dumi!" />
 ```

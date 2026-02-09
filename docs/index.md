@@ -1,6 +1,6 @@
 ---
 hero:
-  title: library
+  title: AeroUi
   description: Designed for AI collaboration and effortless interface building.
   actions:
     - text: Hello

@@ -21,3 +21,6 @@ export type { DrawerProps, DrawerPlacement } from './Drawer';
 
 export { default as Modal } from './Modal';
 export type { ModalProps, ConfirmConfig } from './Modal';
+
+export { default as Checkbox } from './Checkbox';
+export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './Checkbox';

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aero Checkbox</title>
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#1b2a4a;
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+
+      /* Aero glass */
+      --glass: rgba(255,255,255,.10);
+      --glass-2: rgba(255,255,255,.14);
+      --stroke: rgba(255,255,255,.16);
+      --stroke-2: rgba(255,255,255,.24);
+
+      /* Accent (蓝灰科技感) */
+      --accent1: rgba(130,170,255,.95);
+      --accent2: rgba(90,255,220,.70);
+
+      --shadow: 0 10px 26px rgba(0,0,0,.34);
+      --shadow-soft: 0 8px 18px rgba(0,0,0,.22);
+      --radius: 14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(900px 600px at 18% 22%, rgba(130,170,255,.35), transparent 60%),
+        radial-gradient(800px 550px at 78% 32%, rgba(90,255,220,.18), transparent 55%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,160,240,.12), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "PingFang SC","Noto Sans CJK SC";
+    }
+
+    .panel{
+      width:min(860px, 92vw);
+      padding:24px;
+      border-radius: 26px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(16px) saturate(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(120%);
+      box-shadow: var(--shadow);
+    }
+
+    h1{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:650;
+      letter-spacing:.2px;
+    }
+    p{
+      margin:0 0 16px;
+      font-size:13px;
+      color: var(--muted);
+      line-height:1.6;
+    }
+
+    /* =========================
+       Aero Checkbox
+       ========================= */
+    .aero-check{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 12px;
+      border-radius: 16px;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .aero-check:hover{
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Hide native checkbox but keep accessible */
+    .aero-check input{
+      position:absolute;
+      opacity:0;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+      clip: rect(0 0 0 0);
+      white-space:nowrap;
+    }
+
+    .box{
+      width:22px;
+      height:22px;
+      border-radius: 7px;
+      position:relative;
+      display:grid;
+      place-items:center;
+
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow-soft);
+
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease, filter .15s ease;
+      overflow:hidden;
+    }
+
+    /* glass highlight */
+    .box::before{
+      content:"";
+      position:absolute;
+      inset:-40% -20% auto -20%;
+      height:90%;
+      background: radial-gradient(closest-side, rgba(255,255,255,.22), transparent 70%);
+      transform: rotate(-10deg);
+      pointer-events:none;
+      opacity:.9;
+      transition: opacity .15s ease, transform .15s ease;
+    }
+
+    /* check mark */
+    .box::after{
+      content:"";
+      width:10px;
+      height:6px;
+      border-left: 2px solid rgba(255,255,255,.96);
+      border-bottom: 2px solid rgba(255,255,255,.96);
+      transform: rotate(-45deg) scale(.6);
+      opacity:0;
+      transition: opacity .14s ease, transform .14s ease;
+      position:relative;
+      z-index:1;
+    }
+
+    .label{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      line-height:1.15;
+    }
+    .label .title{
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    .label .desc{
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    /* Focus ring */
+    .aero-check input:focus-visible + .box{
+      box-shadow: 0 0 0 3px rgba(255,255,255,.18), var(--shadow-soft);
+      border-color: rgba(255,255,255,.28);
+    }
+
+    /* Hover/active feel */
+    .aero-check:active .box{
+      transform: translateY(1px) scale(.98);
+      box-shadow: 0 6px 14px rgba(0,0,0,.20);
+    }
+
+    /* Checked state: “from glass to stable solid” */
+    .aero-check input:checked + .box{
+      background:
+        linear-gradient(135deg, rgba(130,170,255,.35), rgba(90,255,220,.18)),
+        rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.26);
+      filter: brightness(1.05);
+    }
+    .aero-check input:checked + .box::before{
+      opacity:.55; /* reduce highlight when “pressed/selected” */
+      transform: rotate(-10deg) translateY(2px);
+    }
+    .aero-check input:checked + .box::after{
+      opacity:1;
+      transform: rotate(-45deg) scale(1);
+    }
+
+    /* Optional: subtle “glow” on checked */
+    .aero-check input:checked + .box{
+      box-shadow:
+        0 10px 22px rgba(0,0,0,.30),
+        0 0 0 1px rgba(255,255,255,.10),
+        0 0 18px rgba(130,170,255,.16);
+    }
+
+    /* Disabled */
+    .aero-check input:disabled + .box{
+      opacity:.45;
+      filter:saturate(.7);
+      box-shadow:none;
+    }
+    .aero-check input:disabled ~ .label{
+      opacity:.55;
+    }
+    .aero-check input:disabled{
+      cursor:not-allowed;
+    }
+    .aero-check.disabled{
+      pointer-events:none;
+    }
+
+    /* Layout helpers */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+    @media (max-width: 760px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+      padding-top:14px;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .chip{
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <h1>Aero / 毛玻璃 Checkbox（现代风）</h1>
+    <p>特点：玻璃高光 + 选中后“更稳更实”的材质变化；键盘聚焦有清晰 Focus Ring；禁用态不抢视觉。</p>
+
+    <div class="grid">
+      <label class="aero-check">
+        <input type="checkbox" />
+        <span class="box" aria-hidden="true"></span>
+        <span class="label">
+          <span class="title">同意服务协议</span>
+          <span class="desc">用于继续下一步</span>
+        </span>
+      </label>
+
+      <label class="aero-check">
+        <input type="checkbox" checked />
+        <span class="box" aria-hidden="true"></span>
+        <span class="label">
+          <span class="title">保存本次偏好</span>
+          <span class="desc">下次自动应用</span>
+        </span>
+      </label>
+
+      <label class="aero-check">
+        <input type="checkbox" />
+        <span class="box" aria-hidden="true"></span>
+        <span class="label">
+          <span class="title">仅显示有库存</span>
+          <span class="desc">过滤无库存商品</span>
+        </span>
+      </label>
+
+      <label class="aero-check disabled">
+        <input type="checkbox" disabled checked />
+        <span class="box" aria-hidden="true"></span>
+        <span class="label">
+          <span class="title">会员专享券</span>
+          <span class="desc">当前不可用</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="row">
+      <span class="chip">Aero 关键：选中态别“变红变重”，而是更实、更稳</span>
+      <span class="chip">建议：checkbox 尺寸 20–24px，圆角 6–8px</span>
+      <span class="chip">Focus Ring 一定要有（无障碍 & 高级感）</span>
+    </div>
+  </div>
+</body>
+</html>

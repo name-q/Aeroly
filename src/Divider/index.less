@@ -1,0 +1,58 @@
+@import '../styles/variables.less';
+
+.aero-divider {
+  // ---- horizontal ----
+  &--horizontal {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    color: var(--aero-text-secondary, #666);
+    font-size: 12px;
+    white-space: nowrap;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--aero-border-color, rgba(0, 0, 0, 0.08)) 50%,
+        transparent
+      );
+    }
+  }
+
+  // ---- with text ----
+  &--with-text {
+    &::before,
+    &::after {
+      background: var(--aero-border-color, rgba(0, 0, 0, 0.08));
+    }
+  }
+
+  &--text-left::before {
+    flex: 0 0 5%;
+  }
+
+  &--text-right::after {
+    flex: 0 0 5%;
+  }
+
+  // ---- text node ----
+  &-text {
+    padding: 0 12px;
+    font-weight: 500;
+  }
+
+  // ---- vertical ----
+  &--vertical {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 0.9em;
+    margin: 0 8px;
+    background: var(--aero-border-color, rgba(0, 0, 0, 0.08));
+  }
+}

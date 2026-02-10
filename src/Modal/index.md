@@ -46,6 +46,7 @@ nav:
 | onOk | 确认回调，返回 Promise 时按钮自动 loading | `() => void \| Promise<void>` | - |
 | onCancel | 取消回调 | `() => void` | - |
 | width | 宽度 | `number \| string` | `420` |
+| mask | 是否显示遮罩 | `boolean` | `true` |
 | maskClosable | 点击遮罩是否关闭 | `boolean` | `true` |
 | keyboard | 按 Esc 是否关闭 | `boolean` | `true` |
 | closeIcon | 自定义关闭图标 | `ReactNode` | - |
@@ -73,4 +74,5 @@ nav:
 | cancelText | 取消按钮文案 | `ReactNode` | `'取消'` |
 | onOk | 确认回调 | `() => void \| Promise<void>` | - |
 | onCancel | 取消回调 | `() => void` | - |
+| mask | 是否显示遮罩 | `boolean` | `true` |
 | icon | 自定义图标 | `LucideIcon` | - |

@@ -26,6 +26,8 @@ export interface ModalProps {
   onCancel?: () => void;
   /** 宽度 */
   width?: number | string;
+  /** 是否显示遮罩 */
+  mask?: boolean;
   /** 点击遮罩是否关闭 */
   maskClosable?: boolean;
   /** 按 Esc 是否关闭 */
@@ -57,6 +59,7 @@ const Modal: React.FC<ModalProps> & {
   onOk,
   onCancel,
   width = 420,
+  mask = true,
   maskClosable = true,
   keyboard = true,
   closeIcon,
@@ -173,10 +176,12 @@ const Modal: React.FC<ModalProps> & {
 
   return (
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
-      <div
-        className="aero-modal-mask"
-        onClick={maskClosable ? handleCancel : undefined}
-      />
+      {mask && (
+        <div
+          className="aero-modal-mask"
+          onClick={maskClosable ? handleCancel : undefined}
+        />
+      )}
       <div className="aero-modal-wrap">
         <div className={modalClassNames} style={{ width, ...style }}>
           {title && (
@@ -210,6 +215,8 @@ export interface ConfirmConfig {
   onOk?: () => void | Promise<void>;
   /** 取消回调 */
   onCancel?: () => void;
+  /** 是否显示遮罩 */
+  mask?: boolean;
   /** 图标类型 */
   type?: 'confirm' | 'info' | 'success' | 'warning' | 'error';
   /** 自定义图标 */
@@ -285,7 +292,7 @@ function openConfirm(config: ConfirmConfig) {
         className={`aero-modal-root aero-modal-root--centered${open ? ' aero-modal-root--open' : ''}`}
         onTransitionEnd={handleTransitionEnd}
       >
-        <div className="aero-modal-mask" />
+        {config.mask !== false && <div className="aero-modal-mask" />}
         <div className="aero-modal-wrap">
           <div className="aero-modal aero-modal--confirm">
             <div className="aero-modal-confirm-body">

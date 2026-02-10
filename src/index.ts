@@ -9,3 +9,6 @@ export type { DividerProps } from './Divider';
 
 export { default as Segmented } from './Segmented';
 export type { SegmentedProps, SegmentedOption } from './Segmented';
+
+export { default as message } from './Message';
+export type { MessageConfig, MessageType } from './Message';

@@ -1,0 +1,80 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.aero-message-container {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.aero-message-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: @border-radius-base;
+  font-size: 14px;
+  line-height: 1.4;
+  pointer-events: auto;
+  .glass-effect(rgba(255, 255, 255, 0.65), 16px);
+  .shadow-default();
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  // 入场/出场动画
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 240ms @transition-timing,
+              transform 240ms @transition-timing;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @{dark-selector} & {
+    background: rgba(40, 40, 40, 0.75);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  // ---- 类型图标颜色 ----
+  &--info &-icon {
+    color: @primary-color;
+  }
+
+  &--success &-icon {
+    color: @success-color;
+  }
+
+  &--warning &-icon {
+    color: @warning-color;
+  }
+
+  &--error &-icon {
+    color: @error-color;
+  }
+
+  // ---- 内部元素 ----
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &-content {
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+}

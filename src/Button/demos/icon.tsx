@@ -7,7 +7,7 @@ import { Button } from 'aero-ui';
 import { Search, Plus, Download } from 'lucide-react';
 
 export default () => (
-  <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+  <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap:'wrap' }}>
     <Button icon={Search} type="primary">搜索</Button>
     <Button icon={Plus}>新增</Button>
     <Button icon={Download} type="text">下载</Button>

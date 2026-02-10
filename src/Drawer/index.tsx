@@ -124,6 +124,7 @@ const Drawer: React.FC<DrawerProps> = ({
           <div className="aero-drawer-header">
             <div className="aero-drawer-title">{title}</div>
             <button
+              type="button"
               className="aero-drawer-close"
               onClick={() => onOpenChange(false)}
             >
@@ -132,6 +133,7 @@ const Drawer: React.FC<DrawerProps> = ({
           </div>
         ) : (
           <button
+            type="button"
             className="aero-drawer-close aero-drawer-close--float"
             onClick={() => onOpenChange(false)}
           >

@@ -98,7 +98,7 @@ const Alert: React.FC<AlertProps> = ({
         )}
       </div>
       {closable && (
-        <button className="aero-alert-close" onClick={handleClose}>
+        <button type="button" className="aero-alert-close" onClick={handleClose}>
           <Icon icon={X} size={14} />
         </button>
       )}

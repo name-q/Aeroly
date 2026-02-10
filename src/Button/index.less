@@ -48,6 +48,11 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     color: var(--aero-text-color, #1a1a1a);
 
+    [data-theme='dark'] &,
+    [data-prefers-color='dark'] & {
+      color: #fff;
+    }
+
     &:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.14);
       border-color: rgba(255, 255, 255, 0.22);
@@ -80,6 +85,11 @@
     background: transparent;
     color: var(--aero-text-color, #1a1a1a);
     border: 1px solid transparent;
+
+    [data-theme='dark'] &,
+    [data-prefers-color='dark'] & {
+      color: #fff;
+    }
 
     &:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.08);

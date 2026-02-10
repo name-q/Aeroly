@@ -60,15 +60,19 @@ interface ColumnProps {
   onSelect: (val: number) => void;
 }
 
+const BUFFER = 10; // 视口上下各多渲染的条目数
+
 const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const snapTimer = useRef<number>(0);
-  const programmatic = useRef(false); // 标记程序化滚动
+  const programmatic = useRef(false);
   const count = items.length;
   const midBase = Math.floor(REPEAT_COUNT / 2) * count;
-  // 记录上一次外部传入的 selected，用于判断是否需要程序化定位
   const prevSelected = useRef(selected);
-  const mounted = useRef(false);
+  const mountedRef = useRef(false);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const totalHeight = count * REPEAT_COUNT * ITEM_HEIGHT;
 
   // 程序化滚动：设标记，滚动完成后清除
   const scrollTo = useCallback((top: number, smooth: boolean) => {
@@ -76,7 +80,6 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     if (!el) return;
     programmatic.current = true;
     el.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
-    // smooth 滚动结束时间不可控，用较长的超时兜底
     clearTimeout(snapTimer.current);
     snapTimer.current = window.setTimeout(() => {
       programmatic.current = false;
@@ -90,29 +93,52 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     return (midBase + idx) * ITEM_HEIGHT - CENTER_OFFSET;
   }, [items, midBase]);
 
-  // 首次挂载：立即定位（不触发 onSelect）
+  // 首次挂载：立即定位
   useEffect(() => {
-    mounted.current = true;
-    scrollTo(getTopForValue(selected), false);
-  }, []); // 只在挂载时执行一次
+    mountedRef.current = true;
+    const top = getTopForValue(selected);
+    setScrollTop(top);
+    scrollTo(top, false);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 外部 selected 变化（如点击"此刻"）：平滑滚动到新位置，不触发 onSelect
+  // 外部 selected 变化（如点击"此刻"）
   useEffect(() => {
-    if (!mounted.current) return;
+    if (!mountedRef.current) return;
     if (selected !== prevSelected.current) {
       prevSelected.current = selected;
       scrollTo(getTopForValue(selected), true);
     }
   }, [selected, scrollTo, getTopForValue]);
 
+  // 滚动到边缘时静默回弹到中间等价位置
+  const recenterIfNeeded = useCallback((currentTop: number, itemIdx: number): number => {
+    const lowerBound = count * ITEM_HEIGHT * 10;
+    const upperBound = totalHeight - count * ITEM_HEIGHT * 10;
+    if (currentTop < lowerBound || currentTop > upperBound) {
+      const centerTop = (midBase + itemIdx) * ITEM_HEIGHT - CENTER_OFFSET;
+      const el = listRef.current;
+      if (el) {
+        programmatic.current = true;
+        el.scrollTop = centerTop;
+        setScrollTop(centerTop);
+        programmatic.current = false;
+      }
+      return centerTop;
+    }
+    return currentTop;
+  }, [count, midBase, totalHeight]);
+
   // 用户滚动停止后：吸附 + 选中
   const handleScroll = useCallback(() => {
-    // 程序化滚动产生的 scroll 事件，忽略
+    const el = listRef.current;
+    if (!el) return;
+
+    setScrollTop(el.scrollTop);
+
     if (programmatic.current) return;
 
     clearTimeout(snapTimer.current);
     snapTimer.current = window.setTimeout(() => {
-      const el = listRef.current;
       if (!el) return;
 
       const centerScroll = el.scrollTop + CENTER_OFFSET;
@@ -121,8 +147,13 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
       const val = items[itemIdx];
 
       // 吸附
-      const snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
+      let snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
       scrollTo(snapTop, true);
+
+      // 吸附完成后回弹到中间区域
+      setTimeout(() => {
+        recenterIfNeeded(snapTop, itemIdx);
+      }, 350);
 
       // 选中
       if (val !== prevSelected.current) {
@@ -130,7 +161,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
         onSelect(val);
       }
     }, 100);
-  }, [count, items, onSelect, scrollTo]);
+  }, [count, items, onSelect, scrollTo, recenterIfNeeded]);
 
   // 点击选中
   const handleClick = useCallback(
@@ -142,40 +173,45 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     [onSelect, scrollTo, getTopForValue],
   );
 
-  const totalHeight = count * REPEAT_COUNT * ITEM_HEIGHT;
-  // 只渲染中间 20 组
-  const renderCount = count * 20;
-  const renderBase = midBase - count * 10;
+  // 基于 scrollTop 动态计算渲染窗口
+  const viewportHeight = VISIBLE_COUNT * ITEM_HEIGHT;
+  const startIdx = Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER);
+  const endIdx = Math.min(
+    count * REPEAT_COUNT,
+    Math.ceil((scrollTop + viewportHeight) / ITEM_HEIGHT) + BUFFER,
+  );
+
+  const cells: React.ReactNode[] = [];
+  for (let globalIdx = startIdx; globalIdx < endIdx; globalIdx++) {
+    const itemIdx = ((globalIdx % count) + count) % count;
+    const val = items[itemIdx];
+    cells.push(
+      <div
+        key={globalIdx}
+        className={`aero-time-picker-cell${val === selected ? ' aero-time-picker-cell--active' : ''}`}
+        style={{
+          position: 'absolute',
+          top: globalIdx * ITEM_HEIGHT,
+          left: 0,
+          right: 0,
+          height: ITEM_HEIGHT,
+        }}
+        onClick={() => handleClick(val)}
+      >
+        {pad(val)}
+      </div>,
+    );
+  }
 
   return (
     <div
       className="aero-time-picker-column"
       ref={listRef}
       onScroll={handleScroll}
-      style={{ height: VISIBLE_COUNT * ITEM_HEIGHT }}
+      style={{ height: viewportHeight }}
     >
       <div style={{ height: totalHeight, position: 'relative' }}>
-        {Array.from({ length: renderCount }, (_, i) => {
-          const globalIdx = renderBase + i;
-          const itemIdx = ((globalIdx % count) + count) % count;
-          const val = items[itemIdx];
-          return (
-            <div
-              key={i}
-              className={`aero-time-picker-cell${val === selected ? ' aero-time-picker-cell--active' : ''}`}
-              style={{
-                position: 'absolute',
-                top: globalIdx * ITEM_HEIGHT,
-                left: 0,
-                right: 0,
-                height: ITEM_HEIGHT,
-              }}
-              onClick={() => handleClick(val)}
-            >
-              {pad(val)}
-            </div>
-          );
-        })}
+        {cells}
       </div>
     </div>
   );

@@ -15,3 +15,6 @@ export type { MessageConfig, MessageType } from './Message';
 
 export { default as Alert } from './Alert';
 export type { AlertProps, AlertType } from './Alert';
+
+export { default as Drawer } from './Drawer';
+export type { DrawerProps, DrawerPlacement } from './Drawer';

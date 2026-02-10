@@ -14,11 +14,7 @@
   white-space: nowrap;
   user-select: none;
   outline: none;
-  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, border-color 150ms ease;
-
-  &:active:not(:disabled) {
-    transform: translateY(1px) scale(0.99);
-  }
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, border-color 150ms ease, backdrop-filter 150ms ease;
 
   // ---- sizes ----
   &--small {
@@ -59,6 +55,15 @@
       transform: translateY(-1px);
     }
 
+    &:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(12px) saturate(120%);
+      -webkit-backdrop-filter: blur(12px) saturate(120%);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
     &:focus-visible {
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18), 0 4px 16px rgba(0, 0, 0, 0.1);
     }
@@ -74,6 +79,12 @@
       background: lighten(@primary-color, 6%);
       transform: translateY(-1px);
       .shadow-hover();
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
+      background: darken(@primary-color, 6%);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     &:focus-visible {
@@ -95,6 +106,11 @@
       background: rgba(255, 255, 255, 0.08);
       color: @primary-color;
       transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
+      background: rgba(0, 0, 0, 0.06);
     }
 
     &:focus-visible {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 import './index.less';
@@ -52,6 +52,26 @@ const Drawer: React.FC<DrawerProps> = ({
   className,
   style,
 }) => {
+  // mounted 控制 DOM 挂载，animating 控制入场动画
+  const [mounted, setMounted] = useState(false);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      // 下一帧触发入场动画，确保 DOM 已挂载
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setAnimating(true));
+      });
+    } else {
+      setAnimating(false);
+    }
+  }, [open]);
+
+  const handleTransitionEnd = () => {
+    if (!open) setMounted(false);
+  };
+
   // 锁定背景滚动
   useEffect(() => {
     if (open) {
@@ -73,6 +93,8 @@ const Drawer: React.FC<DrawerProps> = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, keyboard, onOpenChange]);
 
+  if (!mounted) return null;
+
   const isHorizontal = placement === 'left' || placement === 'right';
 
   const panelStyle: React.CSSProperties = {
@@ -83,14 +105,14 @@ const Drawer: React.FC<DrawerProps> = ({
   const classNames = [
     'aero-drawer',
     `aero-drawer--${placement}`,
-    open ? 'aero-drawer--open' : '',
+    animating ? 'aero-drawer--open' : '',
     className || '',
   ]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={classNames}>
+    <div className={classNames} onTransitionEnd={handleTransitionEnd}>
       {mask && (
         <div
           className="aero-drawer-mask"
@@ -98,7 +120,7 @@ const Drawer: React.FC<DrawerProps> = ({
         />
       )}
       <div className="aero-drawer-panel" style={panelStyle}>
-        {(title || true) && (
+        {title ? (
           <div className="aero-drawer-header">
             <div className="aero-drawer-title">{title}</div>
             <button
@@ -108,6 +130,13 @@ const Drawer: React.FC<DrawerProps> = ({
               {closeIcon ?? <Icon icon={X} size={16} />}
             </button>
           </div>
+        ) : (
+          <button
+            className="aero-drawer-close aero-drawer-close--float"
+            onClick={() => onOpenChange(false)}
+          >
+            {closeIcon ?? <Icon icon={X} size={16} />}
+          </button>
         )}
         <div className="aero-drawer-body">{children}</div>
         {footer && <div className="aero-drawer-footer">{footer}</div>}

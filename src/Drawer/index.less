@@ -94,8 +94,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     flex-shrink: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
     @{dark-selector} & {
       border-bottom-color: rgba(255, 255, 255, 0.08);
@@ -140,6 +140,14 @@
         background: rgba(255, 255, 255, 0.08);
         color: #f0f0f0;
       }
+    }
+
+    // 无标题时悬浮在右上角
+    &--float {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
     }
   }
 

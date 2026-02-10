@@ -1,5 +1,5 @@
 /**
- * title: 尺寸
+ * title: " "
  * description: 提供 small、medium（默认）、large 三种尺寸。
  */
 import React from 'react';

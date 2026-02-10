@@ -1,5 +1,5 @@
 /**
- * title: 图标按钮
+ * title: " "
  * description: 通过 icon 属性传入 Lucide 图标，支持图标+文字和纯图标两种形态。
  */
 import React from 'react';

@@ -1,5 +1,5 @@
 /**
- * title: 加载与禁用
+ * title: " "
  * description: loading 状态自动显示旋转图标并禁用交互，disabled 直接禁用。
  */
 import React from 'react';

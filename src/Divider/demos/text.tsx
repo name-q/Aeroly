@@ -1,5 +1,5 @@
 /**
- * title: 带文字
+ * title: " "
  * description: 通过 children 嵌入文字，orientation 控制文字位置。
  */
 import React from 'react';

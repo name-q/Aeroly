@@ -1,5 +1,5 @@
 /**
- * title: 基础用法
+ * title: " "
  * description: 三种按钮类型：默认（毛玻璃）、主色、文本。
  */
 import React from 'react';

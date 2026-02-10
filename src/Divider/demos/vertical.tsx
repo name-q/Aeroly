@@ -1,5 +1,5 @@
 /**
- * title: 垂直分割线
+ * title: " "
  * description: 用于行内元素之间的分隔。
  */
 import React from 'react';

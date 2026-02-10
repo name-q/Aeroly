@@ -1,5 +1,5 @@
 /**
- * title: 基础用法
+ * title: " "
  * description: 默认水平分割线，线条从两端渐隐。
  */
 import React from 'react';

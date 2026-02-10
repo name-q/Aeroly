@@ -30,3 +30,6 @@ export type { RadioProps, RadioGroupProps, RadioOptionType } from './Radio';
 
 export { default as Switch } from './Switch';
 export type { SwitchProps } from './Switch';
+
+export { default as TimePicker } from './TimePicker';
+export type { TimePickerProps } from './TimePicker';

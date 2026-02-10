@@ -86,12 +86,22 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     }, smooth ? 300 : 50);
   }, []);
 
-  // 根据值计算滚动位置
-  const getTopForValue = useCallback((val: number) => {
+  // 根据值计算滚动位置（基于当前视口附近，避免跳回中间）
+  const getTopForValue = useCallback((val: number, nearCurrentScroll = false) => {
     const idx = items.indexOf(val);
     if (idx < 0) return 0;
-    return (midBase + idx) * ITEM_HEIGHT - CENTER_OFFSET;
-  }, [items, midBase]);
+    if (!nearCurrentScroll) {
+      return (midBase + idx) * ITEM_HEIGHT - CENTER_OFFSET;
+    }
+    // 找到当前 scrollTop 附近最近的该值出现位置
+    const el = listRef.current;
+    const currentTop = el ? el.scrollTop : 0;
+    const currentCenter = Math.round((currentTop + CENTER_OFFSET) / ITEM_HEIGHT);
+    // 当前中心对应的组号
+    const groupIdx = Math.round((currentCenter - idx) / count);
+    const nearestGlobal = groupIdx * count + idx;
+    return nearestGlobal * ITEM_HEIGHT - CENTER_OFFSET;
+  }, [items, midBase, count]);
 
   // 首次挂载：立即定位
   useEffect(() => {
@@ -106,27 +116,9 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     if (!mountedRef.current) return;
     if (selected !== prevSelected.current) {
       prevSelected.current = selected;
-      scrollTo(getTopForValue(selected), true);
+      scrollTo(getTopForValue(selected, true), true);
     }
   }, [selected, scrollTo, getTopForValue]);
-
-  // 滚动到边缘时静默回弹到中间等价位置
-  const recenterIfNeeded = useCallback((currentTop: number, itemIdx: number): number => {
-    const lowerBound = count * ITEM_HEIGHT * 10;
-    const upperBound = totalHeight - count * ITEM_HEIGHT * 10;
-    if (currentTop < lowerBound || currentTop > upperBound) {
-      const centerTop = (midBase + itemIdx) * ITEM_HEIGHT - CENTER_OFFSET;
-      const el = listRef.current;
-      if (el) {
-        programmatic.current = true;
-        el.scrollTop = centerTop;
-        setScrollTop(centerTop);
-        programmatic.current = false;
-      }
-      return centerTop;
-    }
-    return currentTop;
-  }, [count, midBase, totalHeight]);
 
   // 用户滚动停止后：吸附 + 选中
   const handleScroll = useCallback(() => {
@@ -147,13 +139,8 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
       const val = items[itemIdx];
 
       // 吸附
-      let snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
+      const snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
       scrollTo(snapTop, true);
-
-      // 吸附完成后回弹到中间区域
-      setTimeout(() => {
-        recenterIfNeeded(snapTop, itemIdx);
-      }, 350);
 
       // 选中
       if (val !== prevSelected.current) {
@@ -161,14 +148,14 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
         onSelect(val);
       }
     }, 100);
-  }, [count, items, onSelect, scrollTo, recenterIfNeeded]);
+  }, [count, items, onSelect, scrollTo]);
 
-  // 点击选中
+  // 点击选中（就近吸附，不跳回中间）
   const handleClick = useCallback(
     (val: number) => {
       prevSelected.current = val;
       onSelect(val);
-      scrollTo(getTopForValue(val), true);
+      scrollTo(getTopForValue(val, true), true);
     },
     [onSelect, scrollTo, getTopForValue],
   );

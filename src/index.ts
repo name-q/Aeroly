@@ -12,3 +12,6 @@ export type { SegmentedProps, SegmentedOption } from './Segmented';
 
 export { default as message } from './Message';
 export type { MessageConfig, MessageType } from './Message';
+
+export { default as Alert } from './Alert';
+export type { AlertProps, AlertType } from './Alert';

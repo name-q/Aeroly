@@ -1,0 +1,274 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@modal-duration: 240ms;
+
+// ---- 根容器 ----
+.aero-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+
+  &--open {
+    pointer-events: auto;
+
+    .aero-modal-mask {
+      opacity: 1;
+    }
+
+    .aero-modal {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &--centered .aero-modal-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// ---- 遮罩 ----
+.aero-modal-mask {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity @modal-duration @transition-timing;
+}
+
+// ---- 滚动容器 ----
+.aero-modal-wrap {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  padding: 72px 0;
+  text-align: center;
+
+  // 垂直居中辅助
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+// ---- 对话框 ----
+.aero-modal {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: @border-radius-lg;
+  .glass-effect(rgba(255, 255, 255, 0), 24px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  // 入场动画
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity @modal-duration @transition-timing,
+              transform @modal-duration @transition-timing;
+
+  @{dark-selector} & {
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  // ---- 头部 ----
+  &-header {
+    padding: 20px 24px 0;
+  }
+
+  &-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--aero-text-color, #1a1a1a);
+    line-height: 1.4;
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+
+  // ---- 关闭按钮 ----
+  &-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--aero-text-secondary, #666);
+    cursor: pointer;
+    z-index: 1;
+    .transition();
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--aero-text-color, #1a1a1a);
+    }
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.45);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #f0f0f0;
+      }
+    }
+  }
+
+  // ---- 内容 ----
+  &-body {
+    padding: 16px 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+
+  // ---- 底部 ----
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 24px 20px;
+  }
+
+  // ---- 内置按钮 ----
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    border: none;
+    .transition();
+
+    &--cancel {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--aero-text-color, #1a1a1a);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.07);
+      }
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.06);
+        color: #f0f0f0;
+        border-color: rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    &--ok {
+      background: @primary-color;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: lighten(@primary-color, 6%);
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: default;
+      }
+    }
+
+    &--loading {
+      cursor: default;
+    }
+
+    &-spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: aero-modal-spin 0.6s linear infinite;
+    }
+  }
+
+  // ---- confirm 模式 ----
+  &--confirm {
+    width: 400px;
+
+    .aero-modal-confirm-body {
+      display: flex;
+      gap: 12px;
+      padding: 24px 24px 8px;
+    }
+
+    .aero-modal-confirm-icon {
+      display: inline-flex;
+      align-items: flex-start;
+      flex-shrink: 0;
+      padding-top: 1px;
+
+      &--info { color: @primary-color; }
+      &--confirm { color: @warning-color; }
+      &--success { color: @success-color; }
+      &--warning { color: @warning-color; }
+      &--error { color: @error-color; }
+    }
+
+    .aero-modal-confirm-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .aero-modal-confirm-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--aero-text-color, #1a1a1a);
+      line-height: 1.4;
+
+      @{dark-selector} & {
+        color: #f0f0f0;
+      }
+    }
+
+    .aero-modal-confirm-text {
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--aero-text-secondary, #666);
+      line-height: 1.6;
+
+      @{dark-selector} & {
+        color: rgba(255, 255, 255, 0.55);
+      }
+    }
+  }
+}
+
+@keyframes aero-modal-spin {
+  to { transform: rotate(360deg); }
+}

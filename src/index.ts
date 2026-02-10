@@ -18,3 +18,6 @@ export type { AlertProps, AlertType } from './Alert';
 
 export { default as Drawer } from './Drawer';
 export type { DrawerProps, DrawerPlacement } from './Drawer';
+
+export { default as Modal } from './Modal';
+export type { ModalProps, ConfirmConfig } from './Modal';

@@ -1,8 +1,8 @@
 ---
 title: Divider 分割线
 group:
-  title: 通用
-  order: 1
+  title: 布局
+  order: 2
 nav:
   title: 组件
   path: /components

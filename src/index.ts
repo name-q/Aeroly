@@ -24,3 +24,6 @@ export type { ModalProps, ConfirmConfig } from './Modal';
 
 export { default as Checkbox } from './Checkbox';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './Checkbox';
+
+export { default as Radio } from './Radio';
+export type { RadioProps, RadioGroupProps, RadioOptionType } from './Radio';

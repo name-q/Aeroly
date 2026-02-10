@@ -33,3 +33,6 @@ export type { SwitchProps } from './Switch';
 
 export { default as TimePicker } from './TimePicker';
 export type { TimePickerProps } from './TimePicker';
+
+export { default as Input } from './Input';
+export type { InputProps } from './Input';

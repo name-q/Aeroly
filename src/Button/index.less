@@ -44,8 +44,7 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     color: var(--aero-text-color, #1a1a1a);
 
-    [data-theme='dark'] &,
-    [data-prefers-color='dark'] & {
+    @{dark-selector} & {
       color: #fff;
     }
 
@@ -97,8 +96,7 @@
     color: var(--aero-text-color, #1a1a1a);
     border: 1px solid transparent;
 
-    [data-theme='dark'] &,
-    [data-prefers-color='dark'] & {
+    @{dark-selector} & {
       color: #fff;
     }
 

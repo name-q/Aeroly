@@ -1,0 +1,280 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- Size tokens ----
+@switch-height-sm: 18px;
+@switch-height-md: 22px;
+@switch-height-lg: 28px;
+
+@switch-handle-sm: 14px;
+@switch-handle-md: 18px;
+@switch-handle-lg: 24px;
+
+@switch-padding: 2px;
+
+.aero-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background @transition-duration @transition-timing,
+              border-color @transition-duration @transition-timing,
+              box-shadow @transition-duration @transition-timing,
+              filter @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  }
+
+  // ---- 滑块（垂直居中） ----
+  &-handle {
+    position: absolute;
+    top: 50%;
+    left: @switch-padding;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    transition: left @transition-duration @transition-timing,
+                box-shadow @transition-duration @transition-timing;
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  // ---- 文案容器（grid 重叠，取较宽文案撑开宽度） ----
+  &-text {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    white-space: nowrap;
+
+    > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  &-text-inner {
+    font-weight: 500;
+    line-height: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 100ms ease;
+  }
+
+  &-text-inner--active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  // ---- Loading spinner ----
+  &-spinner {
+    display: block;
+    width: 60%;
+    height: 60%;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-top-color: @primary-color;
+    border-radius: 50%;
+    animation: aero-switch-spin 0.6s linear infinite;
+  }
+
+  // ---- Hover ----
+  &:hover:not(&--disabled) {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+
+    @{dark-selector} & {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.30);
+    }
+  }
+
+  &:active:not(&--disabled) {
+    transform: scale(0.97);
+  }
+
+  // ---- Focus ----
+  &:focus-visible {
+    box-shadow: 0 0 0 3px fade(@primary-color, 25%),
+                0 2px 8px rgba(0, 0, 0, 0.10);
+    border-color: fade(@primary-color, 40%);
+
+    @{dark-selector} & {
+      box-shadow: 0 0 0 3px fade(@primary-color, 20%),
+                  0 2px 8px rgba(0, 0, 0, 0.20);
+    }
+  }
+}
+
+// ---- 选中态 ----
+.aero-switch--checked {
+  background:
+    linear-gradient(135deg, @primary-color, fade(@primary-color, 65%)),
+    rgba(255, 255, 255, 0.10);
+  border-color: @primary-color;
+  filter: brightness(1.05);
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.12),
+    0 0 0 1px fade(@primary-color, 12%),
+    0 0 16px fade(@primary-color, 16%);
+
+  @{dark-selector} & {
+    background:
+      linear-gradient(135deg, fade(@primary-color, 50%), fade(@primary-color, 30%)),
+      rgba(255, 255, 255, 0.08);
+    border-color: fade(@primary-color, 40%);
+    box-shadow:
+      0 2px 10px rgba(0, 0, 0, 0.25),
+      0 0 0 1px fade(@primary-color, 10%),
+      0 0 16px fade(@primary-color, 20%);
+  }
+
+  .aero-switch-text-inner--active {
+    color: #fff;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+.aero-switch--checked:hover:not(.aero-switch--disabled) {
+  filter: brightness(1.1);
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px fade(@primary-color, 16%),
+    0 0 20px fade(@primary-color, 22%);
+}
+
+// ---- 未选中态文案颜色 ----
+.aero-switch:not(.aero-switch--checked) .aero-switch-text-inner--active {
+  color: var(--aero-text-secondary, #666);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+// ---- 未选中 hover ----
+.aero-switch:not(.aero-switch--checked):not(.aero-switch--disabled):hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.28);
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+// ---- 禁用 ----
+.aero-switch--disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  filter: saturate(0.7);
+  box-shadow: none;
+}
+
+// ---- 尺寸：small ----
+.aero-switch--small {
+  height: @switch-height-sm;
+  min-width: @switch-height-sm * 2 - @switch-padding;
+
+  .aero-switch-handle {
+    width: @switch-handle-sm;
+    height: @switch-handle-sm;
+  }
+
+  .aero-switch-text-inner { font-size: 10px; }
+}
+
+.aero-switch--small:not(.aero-switch--checked) .aero-switch-text {
+  margin-left: @switch-handle-sm + @switch-padding + 2px;
+  margin-right: 6px;
+}
+
+.aero-switch--small.aero-switch--checked .aero-switch-text {
+  margin-left: 6px;
+  margin-right: @switch-handle-sm + @switch-padding + 2px;
+}
+
+.aero-switch--small.aero-switch--checked .aero-switch-handle {
+  left: calc(100% - @switch-handle-sm - @switch-padding);
+}
+
+// ---- 尺寸：medium ----
+.aero-switch--medium {
+  height: @switch-height-md;
+  min-width: @switch-height-md * 2 - @switch-padding;
+
+  .aero-switch-handle {
+    width: @switch-handle-md;
+    height: @switch-handle-md;
+  }
+
+  .aero-switch-text-inner { font-size: 12px; }
+}
+
+.aero-switch--medium:not(.aero-switch--checked) .aero-switch-text {
+  margin-left: @switch-handle-md + @switch-padding + 4px;
+  margin-right: 8px;
+}
+
+.aero-switch--medium.aero-switch--checked .aero-switch-text {
+  margin-left: 8px;
+  margin-right: @switch-handle-md + @switch-padding + 4px;
+}
+
+.aero-switch--medium.aero-switch--checked .aero-switch-handle {
+  left: calc(100% - @switch-handle-md - @switch-padding);
+}
+
+// ---- 尺寸：large ----
+.aero-switch--large {
+  height: @switch-height-lg;
+  min-width: @switch-height-lg * 2 - @switch-padding;
+
+  .aero-switch-handle {
+    width: @switch-handle-lg;
+    height: @switch-handle-lg;
+  }
+
+  .aero-switch-text-inner { font-size: 13px; }
+}
+
+.aero-switch--large:not(.aero-switch--checked) .aero-switch-text {
+  margin-left: @switch-handle-lg + @switch-padding + 4px;
+  margin-right: 10px;
+}
+
+.aero-switch--large.aero-switch--checked .aero-switch-text {
+  margin-left: 10px;
+  margin-right: @switch-handle-lg + @switch-padding + 4px;
+}
+
+.aero-switch--large.aero-switch--checked .aero-switch-handle {
+  left: calc(100% - @switch-handle-lg - @switch-padding);
+}
+
+// ---- Loading spinner ----
+.aero-switch--checked .aero-switch-spinner {
+  border-color: fade(@primary-color, 30%);
+  border-top-color: @primary-color;
+}
+
+@keyframes aero-switch-spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,388 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ============================================================
+//  Size tokens
+// ============================================================
+
+@pg-size-sm: 28px;
+@pg-size-md: 32px;
+@pg-size-lg: 40px;
+
+@pg-font-sm: 12px;
+@pg-font-md: 14px;
+@pg-font-lg: 15px;
+
+// ============================================================
+//  Container
+// ============================================================
+
+.aero-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: @pg-font-md;
+  color: var(--aero-text-color, #1a1a1a);
+  user-select: none;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+
+  // ---- sizes ----
+  &--small {
+    gap: 3px;
+    font-size: @pg-font-sm;
+
+    .aero-pagination-item {
+      min-width: @pg-size-sm;
+      height: @pg-size-sm;
+      font-size: @pg-font-sm;
+    }
+
+    .aero-pagination-jumper-input,
+    .aero-pagination-simple-input {
+      width: 36px;
+      height: @pg-size-sm;
+      font-size: @pg-font-sm;
+    }
+
+    .aero-pagination-size-changer select {
+      height: @pg-size-sm;
+      font-size: @pg-font-sm;
+    }
+  }
+
+  &--medium {
+    .aero-pagination-item {
+      min-width: @pg-size-md;
+      height: @pg-size-md;
+      font-size: @pg-font-md;
+    }
+
+    .aero-pagination-jumper-input,
+    .aero-pagination-simple-input {
+      width: 40px;
+      height: @pg-size-md;
+      font-size: @pg-font-md;
+    }
+
+    .aero-pagination-size-changer select {
+      height: @pg-size-md;
+      font-size: @pg-font-md;
+    }
+  }
+
+  &--large {
+    gap: 6px;
+    font-size: @pg-font-lg;
+
+    .aero-pagination-item {
+      min-width: @pg-size-lg;
+      height: @pg-size-lg;
+      font-size: @pg-font-lg;
+    }
+
+    .aero-pagination-jumper-input,
+    .aero-pagination-simple-input {
+      width: 48px;
+      height: @pg-size-lg;
+      font-size: @pg-font-lg;
+    }
+
+    .aero-pagination-size-changer select {
+      height: @pg-size-lg;
+      font-size: @pg-font-lg;
+    }
+  }
+
+  // ---- disabled ----
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ============================================================
+//  Page item (页码 & 前后按钮)
+// ============================================================
+
+.aero-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border-radius: @border-radius-base;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--aero-text-color, #1a1a1a);
+  transition: transform 120ms ease,
+              background 120ms ease,
+              border-color 120ms ease,
+              box-shadow 120ms ease,
+              color 120ms ease;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+    border-color: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  &:hover:not(&--disabled):not(&--active) {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+  }
+
+  &:active:not(&--disabled):not(&--active) {
+    transform: translateY(1px) scale(0.96);
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  // ---- active (当前页) ----
+  &--active {
+    background: @primary-color;
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 2px 10px fade(@primary-color, 35%);
+
+    @{dark-selector} & {
+      background: fade(@primary-color, 80%);
+      box-shadow: 0 2px 10px fade(@primary-color, 25%);
+    }
+
+    &:hover {
+      background: lighten(@primary-color, 4%);
+    }
+  }
+
+  // ---- disabled ----
+  &--disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ============================================================
+//  省略号
+// ============================================================
+
+.aero-pagination-ellipsis {
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  color: var(--aero-text-secondary, #999);
+
+  @{dark-selector} & {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:hover:not(.aero-pagination-item--disabled) {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: @primary-color;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.10);
+      color: lighten(@primary-color, 10%);
+    }
+  }
+}
+
+// ============================================================
+//  总数
+// ============================================================
+
+.aero-pagination-total {
+  margin-right: 4px;
+  color: var(--aero-text-secondary, #666);
+  white-space: nowrap;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ============================================================
+//  pageSize 切换器
+// ============================================================
+
+.aero-pagination-size-changer {
+  margin-left: 4px;
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0 28px 0 10px;
+    border-radius: @border-radius-base;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(255, 255, 255, 0.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    color: var(--aero-text-color, #1a1a1a);
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border-color @transition-duration @transition-timing,
+                box-shadow @transition-duration @transition-timing;
+
+    @{dark-selector} & {
+      border-color: rgba(255, 255, 255, 0.12);
+      background-color: rgba(255, 255, 255, 0.08);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      color: #f0f0f0;
+    }
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.18);
+
+      @{dark-selector} & {
+        border-color: rgba(255, 255, 255, 0.20);
+      }
+    }
+
+    &:focus {
+      border-color: @primary-color;
+      box-shadow: 0 0 0 3px fade(@primary-color, 18%);
+
+      @{dark-selector} & {
+        border-color: fade(@primary-color, 60%);
+        box-shadow: 0 0 0 3px fade(@primary-color, 14%);
+      }
+    }
+  }
+}
+
+// ============================================================
+//  快速跳转
+// ============================================================
+
+.aero-pagination-jumper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 4px;
+}
+
+.aero-pagination-jumper-text {
+  color: var(--aero-text-secondary, #666);
+  white-space: nowrap;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.aero-pagination-jumper-input {
+  text-align: center;
+  border-radius: @border-radius-base;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: var(--aero-text-color, #1a1a1a);
+  font-family: inherit;
+  outline: none;
+  transition: border-color @transition-duration @transition-timing,
+              box-shadow @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f0f0f0;
+  }
+
+  &:focus {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 3px fade(@primary-color, 18%);
+
+    @{dark-selector} & {
+      border-color: fade(@primary-color, 60%);
+      box-shadow: 0 0 0 3px fade(@primary-color, 14%);
+    }
+  }
+}
+
+// ============================================================
+//  Simple 模式
+// ============================================================
+
+.aero-pagination-simple-pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aero-pagination-simple-input {
+  text-align: center;
+  border-radius: @border-radius-base;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: var(--aero-text-color, #1a1a1a);
+  font-family: inherit;
+  outline: none;
+  transition: border-color @transition-duration @transition-timing,
+              box-shadow @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f0f0f0;
+  }
+
+  &:focus {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 3px fade(@primary-color, 18%);
+
+    @{dark-selector} & {
+      border-color: fade(@primary-color, 60%);
+      box-shadow: 0 0 0 3px fade(@primary-color, 14%);
+    }
+  }
+}
+
+.aero-pagination-simple-separator {
+  color: var(--aero-text-secondary, #999);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+.aero-pagination-simple-total {
+  color: var(--aero-text-secondary, #666);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}

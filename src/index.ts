@@ -60,3 +60,6 @@ export type { NotificationConfig, NotificationType, NotificationPlacement } from
 
 export { default as Tag } from './Tag';
 export type { TagProps, TagType, TagSize } from './Tag';
+
+export { default as Pagination } from './Pagination';
+export type { PaginationProps } from './Pagination';

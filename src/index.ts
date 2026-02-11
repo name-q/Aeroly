@@ -66,3 +66,9 @@ export type { PaginationProps } from './Pagination';
 
 export { default as Badge } from './Badge';
 export type { BadgeProps } from './Badge';
+
+export { default as InputNumber } from './InputNumber';
+export type { InputNumberProps } from './InputNumber';
+
+export { default as Select } from './Select';
+export type { SelectProps, SelectOption, SelectGroupOption, SelectOptionType } from './Select';

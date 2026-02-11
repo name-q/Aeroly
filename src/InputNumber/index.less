@@ -1,0 +1,376 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ============================================================
+//  Size tokens (与 Input 保持一致)
+// ============================================================
+
+@in-height-sm: 28px;
+@in-height-md: 36px;
+@in-height-lg: 44px;
+
+@in-font-sm: 12px;
+@in-font-md: 14px;
+@in-font-lg: 16px;
+
+@in-padding-sm: 8px;
+@in-padding-md: 12px;
+@in-padding-lg: 16px;
+
+// ============================================================
+//  Wrapper
+// ============================================================
+
+.aero-input-number {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: @border-radius-base;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: border-color @transition-duration @transition-timing,
+              box-shadow @transition-duration @transition-timing,
+              background @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  // ---- Hover ----
+  &:hover:not(&--disabled):not(&--focused) {
+    border-color: rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+
+    @{dark-selector} & {
+      border-color: rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  // ---- Focus ----
+  &--focused {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 3px fade(@primary-color, 18%),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.25);
+
+    @{dark-selector} & {
+      border-color: fade(@primary-color, 60%);
+      box-shadow: 0 0 0 3px fade(@primary-color, 14%),
+                  0 2px 8px rgba(0, 0, 0, 0.20);
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  // ---- Disabled ----
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: saturate(0.7);
+    box-shadow: none;
+  }
+
+  // ---- Status ----
+  &--error {
+    border-color: @error-color;
+
+    @{dark-selector} & {
+      border-color: fade(@error-color, 70%);
+    }
+  }
+
+  &--error&--focused {
+    box-shadow: 0 0 0 3px fade(@error-color, 16%),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  &--warning {
+    border-color: @warning-color;
+
+    @{dark-selector} & {
+      border-color: fade(@warning-color, 70%);
+    }
+  }
+
+  &--warning&--focused {
+    box-shadow: 0 0 0 3px fade(@warning-color, 16%),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  // ---- Sizes ----
+  &--small {
+    height: @in-height-sm;
+    border-radius: 6px;
+
+    .aero-input-number-input,
+    .aero-input-number-mirror {
+      padding: 0 (@in-padding-sm + 22px + 1px) 0 @in-padding-sm;
+      font-size: @in-font-sm;
+    }
+
+    .aero-input-number-prefix {
+      font-size: @in-font-sm;
+    }
+
+    .aero-input-number-step {
+      width: 22px;
+    }
+  }
+
+  &--medium {
+    height: @in-height-md;
+
+    .aero-input-number-input,
+    .aero-input-number-mirror {
+      padding: 0 (@in-padding-md + 28px + 1px) 0 @in-padding-md;
+      font-size: @in-font-md;
+    }
+
+    .aero-input-number-prefix {
+      font-size: @in-font-md;
+    }
+
+    .aero-input-number-step {
+      width: 28px;
+    }
+  }
+
+  &--large {
+    height: @in-height-lg;
+    border-radius: 10px;
+
+    .aero-input-number-input,
+    .aero-input-number-mirror {
+      padding: 0 (@in-padding-lg + 32px + 1px) 0 @in-padding-lg;
+      font-size: @in-font-lg;
+    }
+
+    .aero-input-number-prefix {
+      font-size: @in-font-lg;
+    }
+
+    .aero-input-number-step {
+      width: 32px;
+    }
+  }
+
+  // 无控制按钮时恢复正常 padding
+  &--no-controls {
+    &.aero-input-number--small {
+      .aero-input-number-input,
+      .aero-input-number-mirror {
+        padding: 0 @in-padding-sm;
+      }
+    }
+    &.aero-input-number--medium {
+      .aero-input-number-input,
+      .aero-input-number-mirror {
+        padding: 0 @in-padding-md;
+      }
+    }
+    &.aero-input-number--large {
+      .aero-input-number-input,
+      .aero-input-number-mirror {
+        padding: 0 @in-padding-lg;
+      }
+    }
+
+    .aero-input-number-input {
+      border-radius: inherit;
+    }
+  }
+}
+
+// ============================================================
+//  前缀
+// ============================================================
+
+.aero-input-number-prefix {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--aero-text-secondary, #999);
+  line-height: 1;
+  margin-left: 10px;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+// ============================================================
+//  Body（mirror + input 的相对定位容器）
+// ============================================================
+
+.aero-input-number-body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+// ============================================================
+//  镜像（撑开宽度）
+// ============================================================
+
+.aero-input-number-mirror {
+  display: inline-block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+  min-width: 90px;
+}
+
+// ============================================================
+//  Input
+// ============================================================
+
+.aero-input-number-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--aero-text-color, #1a1a1a);
+  font-family: inherit;
+  line-height: 1;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+
+  &::placeholder {
+    color: var(--aero-text-secondary, #999);
+    opacity: 0.7;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  // 去掉 number spinner
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  -moz-appearance: textfield;
+}
+
+// ============================================================
+//  步进按钮
+// ============================================================
+
+.aero-input-number-controls {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100%;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-left-color: rgba(255, 255, 255, 0.10);
+  }
+
+  // hover 或 focus 时显示
+  .aero-input-number:hover &,
+  .aero-input-number--focused & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.aero-input-number-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--aero-text-secondary, #999);
+  padding: 0;
+  transition: background @transition-duration @transition-timing,
+              color @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:hover:not(&--disabled) {
+    background: rgba(0, 0, 0, 0.04);
+    color: @primary-color;
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.08);
+      color: lighten(@primary-color, 10%);
+    }
+  }
+
+  &:active:not(&--disabled) {
+    background: rgba(0, 0, 0, 0.08);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  &--up {
+    border-radius: 0 @border-radius-base 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  &--down {
+    border-radius: 0 0 @border-radius-base 0;
+  }
+
+  &--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  // 小尺寸圆角
+  .aero-input-number--small &--up {
+    border-radius: 0 5px 0 0;
+  }
+
+  .aero-input-number--small &--down {
+    border-radius: 0 0 5px 0;
+  }
+
+  // 大尺寸圆角
+  .aero-input-number--large &--up {
+    border-radius: 0 9px 0 0;
+  }
+
+  .aero-input-number--large &--down {
+    border-radius: 0 0 9px 0;
+  }
+}

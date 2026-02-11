@@ -36,3 +36,13 @@ export type { TimePickerProps } from './TimePicker';
 
 export { default as Input } from './Input';
 export type { InputProps } from './Input';
+
+export { default as DatePicker } from './DatePicker';
+export type { DatePickerProps } from './DatePicker';
+
+export { default as DateRangePicker } from './DateRangePicker';
+export type { DateRangePickerProps } from './DateRangePicker';
+
+export { default as TextArea } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+

@@ -1,0 +1,10 @@
+/**
+ * title: " "
+ * description: 基础日期范围选择，点选两个日期即可。
+ */
+import React from 'react';
+import { DateRangePicker } from 'aero-ui';
+
+export default () => (
+  <DateRangePicker onChange={(val) => console.log('onChange', val)} />
+);

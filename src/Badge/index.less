@@ -1,0 +1,158 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- 光影掠过动画 ----
+@keyframes aero-badge-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.aero-badge {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+
+  // ---- 徽标数 ----
+  &-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    z-index: 1;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: @error-color;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 18px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 0 0 2px #fff;
+    overflow: hidden;
+    .transition();
+
+    @{dark-selector} & {
+      box-shadow: 0 0 0 2px #1a1a1a;
+    }
+
+    // 小红点
+    &--dot {
+      min-width: 8px;
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    // 独立使用（无 children）
+    &--standalone {
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      box-shadow: none;
+    }
+
+    // shimmer 光影
+    &--shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.35) 45%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.35) 55%,
+        transparent 65%,
+        transparent 100%
+      );
+      animation: aero-badge-shimmer 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+  }
+
+  // ---- 状态点模式 ----
+  &-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+  }
+
+  &-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+
+    &--default {
+      background: rgba(0, 0, 0, 0.25);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.30);
+      }
+    }
+
+    &--processing {
+      background: @primary-color;
+    }
+
+    &--success {
+      background: @success-color;
+    }
+
+    &--warning {
+      background: @warning-color;
+    }
+
+    &--error {
+      background: @error-color;
+    }
+
+    // shimmer 光影
+    &--shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 25%,
+        rgba(255, 255, 255, 0.45) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.45) 55%,
+        transparent 75%,
+        transparent 100%
+      );
+      animation: aero-badge-shimmer 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+  }
+
+  &-status-text {
+    font-size: 13px;
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+}

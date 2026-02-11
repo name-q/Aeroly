@@ -1,0 +1,46 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// Tooltip 覆盖 Popover 的面板样式
+.aero-tooltip {
+
+  // 内容面板：深色半透明 + 毛玻璃
+  .aero-popover-inner {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(30, 30, 30, 0.78);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+
+    @{dark-selector} & {
+      background: rgba(50, 50, 50, 0.82);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // 去掉 Popover 的 title 区域（Tooltip 不用）
+  .aero-popover-title {
+    display: none;
+  }
+
+  // 内容区域：紧凑 padding，白色文字
+  .aero-popover-content {
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.92);
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.88);
+    }
+  }
+}
+
+// 文字容器
+.aero-tooltip-text {
+  display: inline-block;
+  max-width: 280px;
+  word-wrap: break-word;
+}

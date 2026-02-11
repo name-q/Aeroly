@@ -48,3 +48,7 @@ export type { TextAreaProps } from './TextArea';
 
 export { default as Popover } from './Popover';
 export type { PopoverProps, PopoverPlacement } from './Popover';
+
+export { default as Tooltip } from './Tooltip';
+export type { TooltipProps, TooltipPlacement } from './Tooltip';
+

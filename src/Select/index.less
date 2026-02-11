@@ -370,13 +370,14 @@
 
   // ---- 禁用 ----
   &--disabled {
-    pointer-events: none;
+    cursor: not-allowed;
   }
 
   &--disabled &-selector {
     opacity: 0.5;
     filter: saturate(0.7);
     box-shadow: none;
+    cursor: not-allowed;
   }
 
   // ---- 尺寸 ----

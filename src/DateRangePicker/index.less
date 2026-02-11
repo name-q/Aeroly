@@ -512,13 +512,14 @@
 
   // ---- 禁用 ----
   &--disabled {
-    pointer-events: none;
+    cursor: not-allowed;
   }
 
   &--disabled &-input {
     opacity: 0.45;
     filter: saturate(0.7);
     box-shadow: none;
+    cursor: not-allowed;
   }
 
   // ---- 尺寸 ----

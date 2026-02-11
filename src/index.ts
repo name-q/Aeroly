@@ -72,3 +72,9 @@ export type { InputNumberProps } from './InputNumber';
 
 export { default as Select } from './Select';
 export type { SelectProps, SelectOption, SelectGroupOption, SelectOptionType } from './Select';
+
+export { default as TreeSelect } from './TreeSelect';
+export type { TreeSelectProps, TreeSelectNodeData } from './TreeSelect';
+
+export { default as ColorPicker } from './ColorPicker';
+export type { ColorPickerProps } from './ColorPicker';

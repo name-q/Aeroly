@@ -36,7 +36,7 @@ export interface TagProps {
 const Tag: React.FC<TagProps> = ({
   children,
   type = 'default',
-  size = 'medium',
+  size = 'small',
   closable = false,
   onClose,
   visible,

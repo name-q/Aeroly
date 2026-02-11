@@ -351,11 +351,25 @@
     }
   }
 
+  // ---- 内容区域（日历 + 时间） ----
+  &-content {
+    display: flex;
+
+    &--with-time {
+      flex-direction: row;
+    }
+  }
+
+  &-calendar {
+    flex: 1;
+    min-width: 0;
+  }
+
   // ---- 时间选择区域 ----
   &-time {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    margin-top: 4px;
-    padding-top: 8px;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    padding-left: 8px;
+    margin-left: 4px;
 
     @{dark-selector} & {
       border-color: rgba(255, 255, 255, 0.06);
@@ -369,6 +383,7 @@
 
   &-time-column {
     width: 56px;
+    height: 283px;
     overflow-y: auto;
     scrollbar-width: none;
 
@@ -421,7 +436,7 @@
     position: absolute;
     left: 4px;
     right: 4px;
-    top: @cell-size * 3;
+    top: @cell-size * 4;
     height: @cell-size;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);

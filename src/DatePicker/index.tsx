@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Icon from '../Icon';
+import {
+  pad, getCalendarDays, parseDateTime, formatDisplay,
+  toDateString, toDateTimeString, WEEKDAYS, MONTHS,
+  hours24, minutes60, seconds60,
+} from './utils';
+import Column, { ITEM_HEIGHT, VISIBLE_COUNT } from './Column';
 import './index.less';
 
 export interface DatePickerProps {
@@ -30,290 +36,7 @@ export interface DatePickerProps {
   style?: React.CSSProperties;
 }
 
-// ---- 日期工具函数 ----
-
-function pad(n: number): string {
-  return n.toString().padStart(2, '0');
-}
-
-function getDaysInMonth(year: number, month: number): number {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-function getFirstDayOfMonth(year: number, month: number): number {
-  return new Date(year, month, 1).getDay();
-}
-
-interface CalendarDay {
-  year: number;
-  month: number;
-  day: number;
-  isCurrentMonth: boolean;
-  isToday: boolean;
-  isSelected: boolean;
-  isDisabled: boolean;
-}
-
-function getCalendarDays(
-  year: number,
-  month: number,
-  selectedYear: number,
-  selectedMonth: number,
-  selectedDay: number,
-  disabledDate?: (date: Date) => boolean,
-): CalendarDay[] {
-  const today = new Date();
-  const todayY = today.getFullYear();
-  const todayM = today.getMonth();
-  const todayD = today.getDate();
-
-  const firstDay = getFirstDayOfMonth(year, month);
-  const daysInMonth = getDaysInMonth(year, month);
-  const prevMonth = month === 0 ? 11 : month - 1;
-  const prevYear = month === 0 ? year - 1 : year;
-  const daysInPrevMonth = getDaysInMonth(prevYear, prevMonth);
-
-  const days: CalendarDay[] = [];
-
-  // 上月补齐
-  for (let i = firstDay - 1; i >= 0; i--) {
-    const d = daysInPrevMonth - i;
-    const date = new Date(prevYear, prevMonth, d);
-    days.push({
-      year: prevYear,
-      month: prevMonth,
-      day: d,
-      isCurrentMonth: false,
-      isToday: prevYear === todayY && prevMonth === todayM && d === todayD,
-      isSelected: prevYear === selectedYear && prevMonth === selectedMonth && d === selectedDay,
-      isDisabled: disabledDate ? disabledDate(date) : false,
-    });
-  }
-
-  // 当月
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(year, month, d);
-    days.push({
-      year,
-      month,
-      day: d,
-      isCurrentMonth: true,
-      isToday: year === todayY && month === todayM && d === todayD,
-      isSelected: year === selectedYear && month === selectedMonth && d === selectedDay,
-      isDisabled: disabledDate ? disabledDate(date) : false,
-    });
-  }
-
-  // 下月补齐到 42 格
-  const nextMonth = month === 11 ? 0 : month + 1;
-  const nextYear = month === 11 ? year + 1 : year;
-  const remaining = 42 - days.length;
-  for (let d = 1; d <= remaining; d++) {
-    const date = new Date(nextYear, nextMonth, d);
-    days.push({
-      year: nextYear,
-      month: nextMonth,
-      day: d,
-      isCurrentMonth: false,
-      isToday: nextYear === todayY && nextMonth === todayM && d === todayD,
-      isSelected: nextYear === selectedYear && nextMonth === selectedMonth && d === selectedDay,
-      isDisabled: disabledDate ? disabledDate(date) : false,
-    });
-  }
-
-  return days;
-}
-
-function parseDateTime(val: string): [number, number, number, number, number, number] {
-  const [datePart, timePart] = val.split(' ');
-  const dp = (datePart || '').split('-').map(Number);
-  const tp = (timePart || '').split(':').map(Number);
-  return [dp[0] || 0, (dp[1] || 1) - 1, dp[2] || 1, tp[0] || 0, tp[1] || 0, tp[2] || 0];
-}
-
-function formatDisplay(
-  year: number, month: number, day: number,
-  hour: number, minute: number, second: number,
-  fmt: string,
-): string {
-  return fmt
-    .replace('YYYY', String(year))
-    .replace('MM', pad(month + 1))
-    .replace('DD', pad(day))
-    .replace('HH', pad(hour))
-    .replace('mm', pad(minute))
-    .replace('ss', pad(second))
-    .replace('M', String(month + 1))
-    .replace('D', String(day))
-    .replace('H', String(hour))
-    .replace('m', String(minute))
-    .replace('s', String(second));
-}
-
-function toDateString(year: number, month: number, day: number): string {
-  return `${year}-${pad(month + 1)}-${pad(day)}`;
-}
-
-function toDateTimeString(
-  year: number, month: number, day: number,
-  hour: number, minute: number, second: number,
-  withSecond: boolean,
-): string {
-  const date = toDateString(year, month, day);
-  return withSecond
-    ? `${date} ${pad(hour)}:${pad(minute)}:${pad(second)}`
-    : `${date} ${pad(hour)}:${pad(minute)}`;
-}
-
-const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
-const MONTHS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-
 type ViewType = 'day' | 'month' | 'year';
-
-// ---- 无限滚动列（复制自 TimePicker） ----
-
-const ITEM_HEIGHT = 32;
-const VISIBLE_COUNT = 7;
-const REPEAT_COUNT = 100;
-const CENTER_OFFSET = Math.floor(VISIBLE_COUNT / 2) * ITEM_HEIGHT;
-const BUFFER = 10;
-
-interface ColumnProps {
-  items: number[];
-  selected: number;
-  onSelect: (val: number) => void;
-}
-
-const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
-  const listRef = useRef<HTMLDivElement>(null);
-  const snapTimer = useRef<number>(0);
-  const programmatic = useRef(false);
-  const count = items.length;
-  const midBase = Math.floor(REPEAT_COUNT / 2) * count;
-  const prevSelected = useRef(selected);
-  const mountedRef = useRef(false);
-  const [scrollTop, setScrollTop] = useState(0);
-
-  const totalHeight = count * REPEAT_COUNT * ITEM_HEIGHT;
-
-  const scrollTo = useCallback((top: number, smooth: boolean) => {
-    const el = listRef.current;
-    if (!el) return;
-    programmatic.current = true;
-    el.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
-    clearTimeout(snapTimer.current);
-    snapTimer.current = window.setTimeout(() => {
-      programmatic.current = false;
-    }, smooth ? 300 : 50);
-  }, []);
-
-  const getTopForValue = useCallback((val: number, nearCurrentScroll = false) => {
-    const idx = items.indexOf(val);
-    if (idx < 0) return 0;
-    if (!nearCurrentScroll) {
-      return (midBase + idx) * ITEM_HEIGHT - CENTER_OFFSET;
-    }
-    const el = listRef.current;
-    const currentTop = el ? el.scrollTop : 0;
-    const currentCenter = Math.round((currentTop + CENTER_OFFSET) / ITEM_HEIGHT);
-    const groupIdx = Math.round((currentCenter - idx) / count);
-    const nearestGlobal = groupIdx * count + idx;
-    return nearestGlobal * ITEM_HEIGHT - CENTER_OFFSET;
-  }, [items, midBase, count]);
-
-  useEffect(() => {
-    mountedRef.current = true;
-    const top = getTopForValue(selected);
-    setScrollTop(top);
-    scrollTo(top, false);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!mountedRef.current) return;
-    if (selected !== prevSelected.current) {
-      prevSelected.current = selected;
-      scrollTo(getTopForValue(selected, true), true);
-    }
-  }, [selected, scrollTo, getTopForValue]);
-
-  const handleScroll = useCallback(() => {
-    const el = listRef.current;
-    if (!el) return;
-
-    setScrollTop(el.scrollTop);
-
-    if (programmatic.current) return;
-
-    clearTimeout(snapTimer.current);
-    snapTimer.current = window.setTimeout(() => {
-      if (!el) return;
-
-      const centerScroll = el.scrollTop + CENTER_OFFSET;
-      const rawIdx = Math.round(centerScroll / ITEM_HEIGHT);
-      const itemIdx = ((rawIdx % count) + count) % count;
-      const val = items[itemIdx];
-
-      const snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
-      scrollTo(snapTop, true);
-
-      if (val !== prevSelected.current) {
-        prevSelected.current = val;
-        onSelect(val);
-      }
-    }, 100);
-  }, [count, items, onSelect, scrollTo]);
-
-  const handleClick = useCallback(
-    (val: number) => {
-      prevSelected.current = val;
-      onSelect(val);
-      scrollTo(getTopForValue(val, true), true);
-    },
-    [onSelect, scrollTo, getTopForValue],
-  );
-
-  const viewportHeight = VISIBLE_COUNT * ITEM_HEIGHT;
-  const startIdx = Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER);
-  const endIdx = Math.min(
-    count * REPEAT_COUNT,
-    Math.ceil((scrollTop + viewportHeight) / ITEM_HEIGHT) + BUFFER,
-  );
-
-  const cells: React.ReactNode[] = [];
-  for (let globalIdx = startIdx; globalIdx < endIdx; globalIdx++) {
-    const itemIdx = ((globalIdx % count) + count) % count;
-    const val = items[itemIdx];
-    cells.push(
-      <div
-        key={globalIdx}
-        className={`aero-date-picker-time-cell${val === selected ? ' aero-date-picker-time-cell--active' : ''}`}
-        style={{
-          position: 'absolute',
-          top: globalIdx * ITEM_HEIGHT,
-          left: 0,
-          right: 0,
-          height: ITEM_HEIGHT,
-        }}
-        onClick={() => handleClick(val)}
-      >
-        {pad(val)}
-      </div>,
-    );
-  }
-
-  return (
-    <div
-      className="aero-date-picker-time-column"
-      ref={listRef}
-      onScroll={handleScroll}
-      style={{ height: viewportHeight }}
-    >
-      <div style={{ height: totalHeight, position: 'relative' }}>
-        {cells}
-      </div>
-    </div>
-  );
-};
 
 // ---- DayView ----
 
@@ -340,10 +63,6 @@ interface DayViewProps {
   onNow: () => void;
   onConfirm: () => void;
 }
-
-const hours24 = Array.from({ length: 24 }, (_, i) => i);
-const minutes60 = Array.from({ length: 60 }, (_, i) => i);
-const seconds60 = Array.from({ length: 60 }, (_, i) => i);
 
 const DayView: React.FC<DayViewProps> = ({
   viewYear,
@@ -375,48 +94,50 @@ const DayView: React.FC<DayViewProps> = ({
 
   return (
     <>
-      <div className="aero-date-picker-header">
-        <button type="button" className="aero-date-picker-nav" onClick={onPrevMonth}>
-          <Icon icon={ChevronLeft} size={14} />
-        </button>
-        <button type="button" className="aero-date-picker-title" onClick={onTitleClick}>
-          {viewYear}年 {viewMonth + 1}月
-        </button>
-        <button type="button" className="aero-date-picker-nav" onClick={onNextMonth}>
-          <Icon icon={ChevronRight} size={14} />
-        </button>
-      </div>
-      <div className="aero-date-picker-weekdays">
-        {WEEKDAYS.map((w) => (
-          <span key={w} className="aero-date-picker-weekday">{w}</span>
-        ))}
-      </div>
-      <div className="aero-date-picker-body">
-        {days.map((d, i) => {
-          const cls = [
-            'aero-date-picker-cell',
-            d.isCurrentMonth ? '' : 'aero-date-picker-cell--outside',
-            d.isToday ? 'aero-date-picker-cell--today' : '',
-            d.isSelected ? 'aero-date-picker-cell--active' : '',
-            d.isDisabled ? 'aero-date-picker-cell--disabled' : '',
-          ]
-            .filter(Boolean)
-            .join(' ');
+      <div className={`aero-date-picker-content${showTime ? ' aero-date-picker-content--with-time' : ''}`}>
+        <div className="aero-date-picker-calendar">
+          <div className="aero-date-picker-header">
+            <button type="button" className="aero-date-picker-nav" onClick={onPrevMonth}>
+              <Icon icon={ChevronLeft} size={14} />
+            </button>
+            <button type="button" className="aero-date-picker-title" onClick={onTitleClick}>
+              {viewYear}年 {viewMonth + 1}月
+            </button>
+            <button type="button" className="aero-date-picker-nav" onClick={onNextMonth}>
+              <Icon icon={ChevronRight} size={14} />
+            </button>
+          </div>
+          <div className="aero-date-picker-weekdays">
+            {WEEKDAYS.map((w) => (
+              <span key={w} className="aero-date-picker-weekday">{w}</span>
+            ))}
+          </div>
+          <div className="aero-date-picker-body">
+            {days.map((d, i) => {
+              const cls = [
+                'aero-date-picker-cell',
+                d.isCurrentMonth ? '' : 'aero-date-picker-cell--outside',
+                d.isToday ? 'aero-date-picker-cell--today' : '',
+                d.isSelected ? 'aero-date-picker-cell--active' : '',
+                d.isDisabled ? 'aero-date-picker-cell--disabled' : '',
+              ]
+                .filter(Boolean)
+                .join(' ');
 
-          return (
-            <span
-              key={i}
-              className={cls}
-              onClick={d.isDisabled ? undefined : () => onSelect(d.year, d.month, d.day)}
-            >
-              {d.day}
-            </span>
-          );
-        })}
-      </div>
+              return (
+                <span
+                  key={i}
+                  className={cls}
+                  onClick={d.isDisabled ? undefined : () => onSelect(d.year, d.month, d.day)}
+                >
+                  {d.day}
+                </span>
+              );
+            })}
+          </div>
+        </div>
 
-      {showTime ? (
-        <>
+        {showTime && (
           <div className="aero-date-picker-time">
             <div className="aero-date-picker-time-panel">
               <Column items={hours24} selected={hour} onSelect={onHourChange} />
@@ -427,15 +148,18 @@ const DayView: React.FC<DayViewProps> = ({
               <div className="aero-date-picker-time-indicator" />
             </div>
           </div>
-          <div className="aero-date-picker-footer aero-date-picker-footer--showtime">
-            <button type="button" className="aero-date-picker-now" onClick={onNow}>
-              此刻
-            </button>
-            <button type="button" className="aero-date-picker-ok" onClick={onConfirm}>
-              确定
-            </button>
-          </div>
-        </>
+        )}
+      </div>
+
+      {showTime ? (
+        <div className="aero-date-picker-footer aero-date-picker-footer--showtime">
+          <button type="button" className="aero-date-picker-now" onClick={onNow}>
+            此刻
+          </button>
+          <button type="button" className="aero-date-picker-ok" onClick={onConfirm}>
+            确定
+          </button>
+        </div>
       ) : (
         <div className="aero-date-picker-footer">
           <button type="button" className="aero-date-picker-today" onClick={onToday}>
@@ -665,7 +389,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
   );
 
   const handleConfirm = useCallback(() => {
-    const next = toDateTimeString(tempYear, tempMonth, tempDay, tempHour, tempMinute, tempSecond, withSecond);
+    let y = tempYear, m = tempMonth, d = tempDay;
+    if (!y) {
+      const now = new Date();
+      y = now.getFullYear();
+      m = now.getMonth();
+      d = now.getDate();
+    }
+    const next = toDateTimeString(y, m, d, tempHour, tempMinute, tempSecond, withSecond);
     if (!isControlled) setInternalValue(next);
     onChange?.(next);
     setOpen(false);

@@ -38,7 +38,7 @@ nav:
 |------|------|------|--------|
 | children | 标签内容 | `ReactNode` | - |
 | type | 类型 | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'small'` |
 | closable | 是否可关闭 | `boolean` | `false` |
 | onClose | 关闭回调 | `() => void` | - |
 | visible | 是否显示（受控） | `boolean` | - |

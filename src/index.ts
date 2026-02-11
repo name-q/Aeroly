@@ -53,4 +53,7 @@ export { default as Tooltip } from './Tooltip';
 export type { TooltipProps, TooltipPlacement } from './Tooltip';
 
 export { default as Tree } from './Tree';
-export type { TreeProps, TreeNodeData } from './Tree';
+export type { TreeProps, TreeNodeData, DraggableTreeProps, DropInfo, DropPosition } from './Tree';
+
+export { default as notification } from './Notification';
+export type { NotificationConfig, NotificationType, NotificationPlacement } from './Notification';

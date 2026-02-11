@@ -36,6 +36,10 @@ nav:
 
 <code src="./demos/disabled.tsx"></code>
 
+## 拖拽排序
+
+<code src="./demos/draggable.tsx"></code>
+
 ## API
 
 ### Tree
@@ -71,3 +75,21 @@ nav:
 | disabled | 是否禁用 | `boolean` | `false` |
 | icon | 自定义图标 | `ReactNode` | - |
 | isLeaf | 是否为叶子节点 | `boolean` | - |
+
+### Tree.Draggable
+
+继承 Tree 的所有属性，额外支持：
+
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| onDrop | 拖拽完成回调 | `(info: DropInfo) => void` | - |
+| allowDrop | 控制是否允许放置 | `(info: { dragNode, dropNode, dropPosition }) => boolean` | - |
+
+### DropInfo
+
+| 属性 | 说明 | 类型 |
+|------|------|------|
+| dragNode | 被拖拽的节点 | `TreeNodeData` |
+| dropNode | 目标节点 | `TreeNodeData` |
+| dropPosition | 放置位置 | `'before' \| 'inside' \| 'after'` |
+| treeData | 移动后的新树数据 | `TreeNodeData[]` |

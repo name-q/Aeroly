@@ -88,99 +88,18 @@
 }
 
 // ============================================================
-//  勾选框
+//  勾选框（复用 Checkbox 组件）
 // ============================================================
 
-.aero-tree-checkbox {
+.aero-tree-checkbox-wrap {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
   margin-right: 2px;
-  cursor: pointer;
 
-  &--disabled {
-    cursor: not-allowed;
-  }
-}
-
-.aero-tree-checkbox-inner {
-  display: grid;
-  place-items: center;
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: background @transition-duration @transition-timing,
-              border-color @transition-duration @transition-timing,
-              box-shadow @transition-duration @transition-timing;
-
-  @{dark-selector} & {
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  // 勾号
-  &::after {
-    content: '';
-    width: 45%;
-    height: 25%;
-    border-left: 1.5px solid #fff;
-    border-bottom: 1.5px solid #fff;
-    transform: rotate(-45deg) scale(0);
-    opacity: 0;
-    transition: transform 120ms ease, opacity 120ms ease;
-  }
-}
-
-// 选中态
-.aero-tree-checkbox--checked .aero-tree-checkbox-inner {
-  background: @primary-color;
-  border-color: @primary-color;
-  box-shadow: 0 0 0 1px fade(@primary-color, 12%);
-
-  @{dark-selector} & {
-    background: fade(@primary-color, 70%);
-    border-color: fade(@primary-color, 50%);
-  }
-
-  &::after {
-    transform: rotate(-45deg) scale(1);
-    opacity: 1;
-  }
-}
-
-// 半选态
-.aero-tree-checkbox--half .aero-tree-checkbox-inner {
-  background: @primary-color;
-  border-color: @primary-color;
-
-  @{dark-selector} & {
-    background: fade(@primary-color, 70%);
-    border-color: fade(@primary-color, 50%);
-  }
-
-  &::after {
-    width: 50%;
-    height: 0;
-    border-left: none;
-    border-bottom: 1.5px solid #fff;
-    transform: none;
-    opacity: 1;
-  }
-}
-
-// hover
-.aero-tree-checkbox:not(.aero-tree-checkbox--checked):not(.aero-tree-checkbox--half):not(.aero-tree-checkbox--disabled):hover .aero-tree-checkbox-inner {
-  border-color: fade(@primary-color, 50%);
-
-  @{dark-selector} & {
-    border-color: fade(@primary-color, 40%);
+  // 阻止 Checkbox label 的默认间距
+  .aero-checkbox {
+    margin: 0;
   }
 }
 
@@ -248,5 +167,65 @@
   .aero-tree-node {
     opacity: 0.45;
     cursor: not-allowed;
+  }
+}
+
+// ============================================================
+//  拖拽
+// ============================================================
+
+.aero-tree--draggable .aero-tree-node {
+  cursor: grab;
+
+  &:active:not(.aero-tree-node--disabled) {
+    cursor: grabbing;
+  }
+}
+
+.aero-tree-node--dragging {
+  opacity: 0.35;
+}
+
+.aero-tree-node--drag-over-top {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: @primary-color;
+    border-radius: 1px;
+    z-index: 1;
+  }
+}
+
+.aero-tree-node--drag-over-bottom {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: @primary-color;
+    border-radius: 1px;
+    z-index: 1;
+  }
+}
+
+.aero-tree-node--drag-over-inner {
+  background: fade(@primary-color, 10%);
+  outline: 1.5px dashed fade(@primary-color, 50%);
+  outline-offset: -1.5px;
+  border-radius: 6px;
+
+  @{dark-selector} & {
+    background: fade(@primary-color, 12%);
+    outline-color: fade(@primary-color, 40%);
   }
 }

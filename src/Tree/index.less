@@ -1,0 +1,252 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ============================================================
+//  Tree 树形控件
+// ============================================================
+
+.aero-tree {
+  font-size: 14px;
+  color: var(--aero-text-color, #1a1a1a);
+  line-height: 1;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ============================================================
+//  节点行
+// ============================================================
+
+.aero-tree-node {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: background @transition-duration @transition-timing;
+
+  &:hover:not(&--disabled) {
+    background: rgba(0, 0, 0, 0.04);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &--selected {
+    background: fade(@primary-color, 10%);
+
+    @{dark-selector} & {
+      background: fade(@primary-color, 12%);
+    }
+
+    &:hover:not(.aero-tree-node--disabled) {
+      background: fade(@primary-color, 14%);
+
+      @{dark-selector} & {
+        background: fade(@primary-color, 16%);
+      }
+    }
+  }
+
+  &--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================
+//  展开箭头
+// ============================================================
+
+.aero-tree-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--aero-text-secondary, #999);
+  transition: transform @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &--open {
+    transform: rotate(90deg);
+  }
+
+  &--leaf {
+    visibility: hidden;
+  }
+}
+
+// ============================================================
+//  勾选框
+// ============================================================
+
+.aero-tree-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+.aero-tree-checkbox-inner {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background @transition-duration @transition-timing,
+              border-color @transition-duration @transition-timing,
+              box-shadow @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  // 勾号
+  &::after {
+    content: '';
+    width: 45%;
+    height: 25%;
+    border-left: 1.5px solid #fff;
+    border-bottom: 1.5px solid #fff;
+    transform: rotate(-45deg) scale(0);
+    opacity: 0;
+    transition: transform 120ms ease, opacity 120ms ease;
+  }
+}
+
+// 选中态
+.aero-tree-checkbox--checked .aero-tree-checkbox-inner {
+  background: @primary-color;
+  border-color: @primary-color;
+  box-shadow: 0 0 0 1px fade(@primary-color, 12%);
+
+  @{dark-selector} & {
+    background: fade(@primary-color, 70%);
+    border-color: fade(@primary-color, 50%);
+  }
+
+  &::after {
+    transform: rotate(-45deg) scale(1);
+    opacity: 1;
+  }
+}
+
+// 半选态
+.aero-tree-checkbox--half .aero-tree-checkbox-inner {
+  background: @primary-color;
+  border-color: @primary-color;
+
+  @{dark-selector} & {
+    background: fade(@primary-color, 70%);
+    border-color: fade(@primary-color, 50%);
+  }
+
+  &::after {
+    width: 50%;
+    height: 0;
+    border-left: none;
+    border-bottom: 1.5px solid #fff;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+// hover
+.aero-tree-checkbox:not(.aero-tree-checkbox--checked):not(.aero-tree-checkbox--half):not(.aero-tree-checkbox--disabled):hover .aero-tree-checkbox-inner {
+  border-color: fade(@primary-color, 50%);
+
+  @{dark-selector} & {
+    border-color: fade(@primary-color, 40%);
+  }
+}
+
+// ============================================================
+//  图标
+// ============================================================
+
+.aero-tree-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 4px;
+  color: var(--aero-text-secondary, #666);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ============================================================
+//  标题
+// ============================================================
+
+.aero-tree-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+// ============================================================
+//  子节点容器
+// ============================================================
+
+.aero-tree-children {
+  transition: opacity @transition-duration @transition-timing;
+
+  // 连接线
+  &--line {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--line-left, 9px);
+      top: 0;
+      bottom: 8px;
+      width: 1px;
+      background: rgba(0, 0, 0, 0.08);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+// ============================================================
+//  整体禁用
+// ============================================================
+
+.aero-tree--disabled {
+  .aero-tree-node {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}

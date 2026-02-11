@@ -7,6 +7,9 @@ export type { ButtonProps } from './Button';
 export { default as Divider } from './Divider';
 export type { DividerProps } from './Divider';
 
+export { default as Flex } from './Flex';
+export type { FlexProps } from './Flex';
+
 export { default as Segmented } from './Segmented';
 export type { SegmentedProps, SegmentedOption } from './Segmented';
 

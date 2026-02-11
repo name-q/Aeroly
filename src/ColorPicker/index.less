@@ -1,0 +1,297 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ─── 触发器 ───
+
+.aero-colorpicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  .glass-effect(rgba(255, 255, 255, 0.45));
+  .shadow-default();
+  .transition();
+  user-select: none;
+
+  &:hover {
+    .shadow-hover();
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  // 尺寸
+  &--small {
+    height: 28px;
+    padding: 2px 8px 2px 2px;
+    gap: 6px;
+    font-size: 12px;
+
+    .aero-colorpicker__swatch {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &--medium {
+    height: 36px;
+    font-size: 13px;
+
+    .aero-colorpicker__swatch {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  &--large {
+    height: 44px;
+    padding: 4px 16px 4px 4px;
+    gap: 10px;
+    font-size: 14px;
+
+    .aero-colorpicker__swatch {
+      width: 34px;
+      height: 34px;
+    }
+  }
+
+  // 禁用
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // 色块
+  &__swatch {
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
+  // 文本
+  &__text {
+    color: rgba(0, 0, 0, 0.75);
+    font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  // 暗色
+  @{dark-selector} & {
+    .glass-effect(rgba(255, 255, 255, 0.08));
+    border-color: rgba(255, 255, 255, 0.12);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .aero-colorpicker__text {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .aero-colorpicker__swatch {
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+// ─── 面板 ───
+
+.aero-colorpicker-panel {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// ─── 饱和度/明度面板 ───
+
+.aero-colorpicker-saturation {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-radius: @border-radius-base;
+  overflow: hidden;
+  cursor: crosshair;
+
+  &__white {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #fff, transparent);
+  }
+
+  &__black {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, #000);
+  }
+
+  &__cursor {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+// ─── 色相条 ───
+
+.aero-colorpicker-hue {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 67%,
+    #ff00ff 83%,
+    #ff0000 100%
+  );
+  cursor: pointer;
+
+  &__cursor {
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+// ─── 透明度条 ───
+
+.aero-colorpicker-alpha {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  // 棋盘格背景
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0.08) 25%,
+    transparent 25% 50%,
+    rgba(0, 0, 0, 0.08) 50% 75%,
+    transparent 75%
+  );
+  background-size: 8px 8px;
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+  }
+
+  &__cursor {
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+// ─── 输入区 ───
+
+.aero-colorpicker-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__hex {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .aero-input {
+      font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+      font-size: 12px;
+    }
+  }
+
+  &__rgb {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+
+    .aero-input-number {
+      font-size: 12px;
+    }
+  }
+
+  &__label {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    line-height: 1;
+  }
+
+  @{dark-selector} & {
+    &__label {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+}
+
+// ─── 预设 ───
+
+.aero-colorpicker-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+  &__item {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    .transition();
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  @{dark-selector} & {
+    border-top-color: rgba(255, 255, 255, 0.08);
+
+    &__item {
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+      &:hover {
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}

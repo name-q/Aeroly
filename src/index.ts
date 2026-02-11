@@ -46,3 +46,5 @@ export type { DateRangePickerProps } from './DateRangePicker';
 export { default as TextArea } from './TextArea';
 export type { TextAreaProps } from './TextArea';
 
+export { default as Popover } from './Popover';
+export type { PopoverProps, PopoverPlacement } from './Popover';

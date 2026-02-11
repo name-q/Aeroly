@@ -1,0 +1,108 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@popover-duration: 200ms;
+
+// ============================================================
+//  触发元素包裹
+// ============================================================
+
+.aero-popover-trigger {
+  display: inline-flex;
+}
+
+// ============================================================
+//  Popover 气泡卡片
+// ============================================================
+
+.aero-popover {
+  position: absolute;
+  z-index: 1050;
+  max-width: 360px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity @popover-duration @transition-timing,
+              transform @popover-duration @transition-timing;
+
+  // ---- 方向入场动画 ----
+  &--top {
+    transform: translateY(6px);
+  }
+
+  &--bottom {
+    transform: translateY(-6px);
+  }
+
+  &--left {
+    transform: translateX(6px);
+  }
+
+  &--right {
+    transform: translateX(-6px);
+  }
+
+  // ---- 打开态 ----
+  &--open {
+    opacity: 1;
+    transform: translate(0, 0);
+    pointer-events: auto;
+  }
+}
+
+// ============================================================
+//  内容容器 — 毛玻璃面板
+// ============================================================
+
+.aero-popover-inner {
+  position: relative;
+  border-radius: @border-radius-lg;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  .glass-effect(rgba(255, 255, 255, 0), 40px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12),
+              0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: visible;
+
+  @{dark-selector} & {
+    backdrop-filter: blur(40px) saturate(140%);
+    -webkit-backdrop-filter: blur(40px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// ============================================================
+//  标题
+// ============================================================
+
+.aero-popover-title {
+  padding: 12px 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--aero-text-color, #1a1a1a);
+  line-height: 1.4;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ============================================================
+//  内容
+// ============================================================
+
+.aero-popover-content {
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--aero-text-color, #1a1a1a);
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// 有标题时内容上间距缩小
+.aero-popover-title + .aero-popover-content {
+  padding-top: 8px;
+}

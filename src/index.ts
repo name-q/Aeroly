@@ -57,3 +57,6 @@ export type { TreeProps, TreeNodeData, DraggableTreeProps, DropInfo, DropPositio
 
 export { default as notification } from './Notification';
 export type { NotificationConfig, NotificationType, NotificationPlacement } from './Notification';
+
+export { default as Tag } from './Tag';
+export type { TagProps, TagType, TagSize } from './Tag';

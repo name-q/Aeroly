@@ -1,0 +1,144 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.aero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--aero-text-color, #1a1a1a);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  vertical-align: middle;
+  .transition();
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f0f0f0;
+  }
+
+  // ---- 尺寸 ----
+  &--small {
+    height: 22px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  &--medium {
+    height: 28px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  &--large {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  // ---- 胶囊 ----
+  &--round {
+    border-radius: 999px;
+  }
+
+  // ---- 无边框 ----
+  &--borderless {
+    border-color: transparent;
+  }
+
+  // ---- 可点击 ----
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.07);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.10);
+      }
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+
+  // ---- 类型 ----
+  &--info {
+    background: fade(@primary-color, 8%);
+    border-color: fade(@primary-color, 20%);
+    color: @primary-color;
+
+    @{dark-selector} & {
+      background: fade(@primary-color, 10%);
+      border-color: fade(@primary-color, 18%);
+      color: lighten(@primary-color, 12%);
+    }
+  }
+
+  &--success {
+    background: fade(@success-color, 8%);
+    border-color: fade(@success-color, 20%);
+    color: @success-color;
+
+    @{dark-selector} & {
+      background: fade(@success-color, 10%);
+      border-color: fade(@success-color, 18%);
+      color: lighten(@success-color, 12%);
+    }
+  }
+
+  &--warning {
+    background: fade(@warning-color, 8%);
+    border-color: fade(@warning-color, 20%);
+    color: darken(@warning-color, 6%);
+
+    @{dark-selector} & {
+      background: fade(@warning-color, 10%);
+      border-color: fade(@warning-color, 18%);
+      color: @warning-color;
+    }
+  }
+
+  &--error {
+    background: fade(@error-color, 8%);
+    border-color: fade(@error-color, 20%);
+    color: @error-color;
+
+    @{dark-selector} & {
+      background: fade(@error-color, 10%);
+      border-color: fade(@error-color, 18%);
+      color: lighten(@error-color, 12%);
+    }
+  }
+
+  // ---- 内容 ----
+  &-content {
+    line-height: 1;
+  }
+
+  // ---- 关闭按钮 ----
+  &-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.55;
+    .transition();
+
+    &:hover {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.06);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}

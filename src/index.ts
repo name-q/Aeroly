@@ -78,3 +78,6 @@ export type { TreeSelectProps, TreeSelectNodeData } from './TreeSelect';
 
 export { default as ColorPicker } from './ColorPicker';
 export type { ColorPickerProps } from './ColorPicker';
+
+export { default as Cascader } from './Cascader';
+export type { CascaderProps, CascaderOption, CascaderValueType } from './Cascader';

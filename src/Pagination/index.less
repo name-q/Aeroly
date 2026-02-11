@@ -39,35 +39,11 @@
       height: @pg-size-sm;
       font-size: @pg-font-sm;
     }
-
-    .aero-pagination-jumper-input,
-    .aero-pagination-simple-input {
-      width: 36px;
-      height: @pg-size-sm;
-      font-size: @pg-font-sm;
-    }
-
-    .aero-pagination-size-changer select {
-      height: @pg-size-sm;
-      font-size: @pg-font-sm;
-    }
   }
 
   &--medium {
     .aero-pagination-item {
       min-width: @pg-size-md;
-      height: @pg-size-md;
-      font-size: @pg-font-md;
-    }
-
-    .aero-pagination-jumper-input,
-    .aero-pagination-simple-input {
-      width: 40px;
-      height: @pg-size-md;
-      font-size: @pg-font-md;
-    }
-
-    .aero-pagination-size-changer select {
       height: @pg-size-md;
       font-size: @pg-font-md;
     }
@@ -79,18 +55,6 @@
 
     .aero-pagination-item {
       min-width: @pg-size-lg;
-      height: @pg-size-lg;
-      font-size: @pg-font-lg;
-    }
-
-    .aero-pagination-jumper-input,
-    .aero-pagination-simple-input {
-      width: 48px;
-      height: @pg-size-lg;
-      font-size: @pg-font-lg;
-    }
-
-    .aero-pagination-size-changer select {
       height: @pg-size-lg;
       font-size: @pg-font-lg;
     }
@@ -229,58 +193,15 @@
 }
 
 // ============================================================
-//  pageSize 切换器
+//  pageSize 切换器（使用 Select 组件）
 // ============================================================
 
 .aero-pagination-size-changer {
   margin-left: 4px;
-
-  select {
-    appearance: none;
-    -webkit-appearance: none;
-    padding: 0 28px 0 10px;
-    border-radius: @border-radius-base;
-    border: 1px solid rgba(0, 0, 0, 0.10);
-    background: rgba(255, 255, 255, 0.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    color: var(--aero-text-color, #1a1a1a);
-    font-family: inherit;
-    cursor: pointer;
-    outline: none;
-    transition: border-color @transition-duration @transition-timing,
-                box-shadow @transition-duration @transition-timing;
-
-    @{dark-selector} & {
-      border-color: rgba(255, 255, 255, 0.12);
-      background-color: rgba(255, 255, 255, 0.08);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      color: #f0f0f0;
-    }
-
-    &:hover {
-      border-color: rgba(0, 0, 0, 0.18);
-
-      @{dark-selector} & {
-        border-color: rgba(255, 255, 255, 0.20);
-      }
-    }
-
-    &:focus {
-      border-color: @primary-color;
-      box-shadow: 0 0 0 3px fade(@primary-color, 18%);
-
-      @{dark-selector} & {
-        border-color: fade(@primary-color, 60%);
-        box-shadow: 0 0 0 3px fade(@primary-color, 14%);
-      }
-    }
-  }
 }
 
 // ============================================================
-//  快速跳转
+//  快速跳转（使用 InputNumber 组件）
 // ============================================================
 
 .aero-pagination-jumper {
@@ -288,6 +209,10 @@
   align-items: center;
   gap: 6px;
   margin-left: 4px;
+
+  .aero-input-number-mirror {
+    min-width: 32px;
+  }
 }
 
 .aero-pagination-jumper-text {
@@ -299,37 +224,6 @@
   }
 }
 
-.aero-pagination-jumper-input {
-  text-align: center;
-  border-radius: @border-radius-base;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  color: var(--aero-text-color, #1a1a1a);
-  font-family: inherit;
-  outline: none;
-  transition: border-color @transition-duration @transition-timing,
-              box-shadow @transition-duration @transition-timing;
-
-  @{dark-selector} & {
-    border-color: rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.08);
-    color: #f0f0f0;
-  }
-
-  &:focus {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 3px fade(@primary-color, 18%);
-
-    @{dark-selector} & {
-      border-color: fade(@primary-color, 60%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 14%);
-    }
-  }
-}
-
 // ============================================================
 //  Simple 模式
 // ============================================================
@@ -338,36 +232,9 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-}
 
-.aero-pagination-simple-input {
-  text-align: center;
-  border-radius: @border-radius-base;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  color: var(--aero-text-color, #1a1a1a);
-  font-family: inherit;
-  outline: none;
-  transition: border-color @transition-duration @transition-timing,
-              box-shadow @transition-duration @transition-timing;
-
-  @{dark-selector} & {
-    border-color: rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.08);
-    color: #f0f0f0;
-  }
-
-  &:focus {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 3px fade(@primary-color, 18%);
-
-    @{dark-selector} & {
-      border-color: fade(@primary-color, 60%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 14%);
-    }
+  .aero-input-number-mirror {
+    min-width: 32px;
   }
 }
 

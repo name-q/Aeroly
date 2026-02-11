@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from 'lucide-react';
 import Icon from '../Icon';
+import InputNumber from '../InputNumber';
+import Select from '../Select';
 import './index.less';
 
 // ---- Types ----
@@ -264,22 +266,18 @@ const Pagination: React.FC<PaginationProps> = ({
 
       {/* pageSize 切换 */}
       {showSizeChanger && (
-        <span className="aero-pagination-size-changer">
-          <select
-            value={currentPageSize}
-            disabled={disabled}
-            onChange={(e) => {
-              const newSize = Number(e.target.value);
-              // 切换 pageSize 后保持当前数据可见
-              const newPage = Math.max(1, Math.ceil(rangeStart / newSize));
-              changePage(newPage, newSize);
-            }}
-          >
-            {pageSizeOptions.map((opt) => (
-              <option key={opt} value={opt}>{opt} 条/页</option>
-            ))}
-          </select>
-        </span>
+        <Select
+          className="aero-pagination-size-changer"
+          size={size}
+          disabled={disabled}
+          value={currentPageSize}
+          options={pageSizeOptions.map((opt) => ({ label: `${opt} 条/页`, value: opt }))}
+          onChange={(val) => {
+            const newSize = Number(val);
+            const newPage = Math.max(1, Math.ceil(rangeStart / newSize));
+            changePage(newPage, newSize);
+          }}
+        />
       )}
 
       {/* 快速跳转 */}
@@ -287,6 +285,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <QuickJumper
           disabled={disabled}
           totalPages={totalPages}
+          size={size}
           onChange={(page) => changePage(page)}
         />
       )}
@@ -299,31 +298,31 @@ const Pagination: React.FC<PaginationProps> = ({
 const QuickJumper: React.FC<{
   disabled?: boolean;
   totalPages: number;
+  size: 'small' | 'medium' | 'large';
   onChange: (page: number) => void;
-}> = ({ disabled, totalPages, onChange }) => {
-  const [value, setValue] = useState('');
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const page = parseInt(value, 10);
-      if (!isNaN(page) && page >= 1 && page <= totalPages) {
-        onChange(page);
+}> = ({ disabled, totalPages, size, onChange }) => {
+  const handleChange = useCallback(
+    (val: number | null) => {
+      if (val !== null && val >= 1 && val <= totalPages) {
+        onChange(val);
       }
-      setValue('');
-    }
-  };
+    },
+    [totalPages, onChange],
+  );
 
   return (
     <span className="aero-pagination-jumper">
       <span className="aero-pagination-jumper-text">跳至</span>
-      <input
+      <InputNumber
         className="aero-pagination-jumper-input"
-        type="text"
-        inputMode="numeric"
-        value={value}
+        size={size}
+        min={1}
+        max={totalPages}
         disabled={disabled}
-        onChange={(e) => setValue(e.target.value.replace(/\D/g, ''))}
-        onKeyDown={handleKeyDown}
+        controls={false}
+        placeholder=""
+        onPressEnter={() => {}}
+        onChange={handleChange}
       />
       <span className="aero-pagination-jumper-text">页</span>
     </span>
@@ -341,37 +340,7 @@ const SimplePagination: React.FC<{
   style?: React.CSSProperties;
   onChange: (page: number) => void;
 }> = ({ current, totalPages, size, disabled, className, style, onChange }) => {
-  const [inputValue, setInputValue] = useState(String(current));
   const iconSize = iconSizeMap[size];
-
-  // 同步外部 current 变化
-  const prevRef = React.useRef(current);
-  if (prevRef.current !== current) {
-    prevRef.current = current;
-    if (inputValue !== String(current)) {
-      setInputValue(String(current));
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const page = parseInt(inputValue, 10);
-      if (!isNaN(page) && page >= 1 && page <= totalPages) {
-        onChange(page);
-      } else {
-        setInputValue(String(current));
-      }
-    }
-  };
-
-  const handleBlur = () => {
-    const page = parseInt(inputValue, 10);
-    if (!isNaN(page) && page >= 1 && page <= totalPages) {
-      onChange(page);
-    } else {
-      setInputValue(String(current));
-    }
-  };
 
   const containerCls = [
     'aero-pagination',
@@ -398,15 +367,19 @@ const SimplePagination: React.FC<{
       </button>
 
       <span className="aero-pagination-simple-pager">
-        <input
+        <InputNumber
           className="aero-pagination-simple-input"
-          type="text"
-          inputMode="numeric"
-          value={inputValue}
+          size={size}
+          value={current}
+          min={1}
+          max={totalPages}
           disabled={disabled}
-          onChange={(e) => setInputValue(e.target.value.replace(/\D/g, ''))}
-          onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
+          controls={false}
+          onChange={(val) => {
+            if (val !== null && val >= 1 && val <= totalPages) {
+              onChange(val);
+            }
+          }}
         />
         <span className="aero-pagination-simple-separator">/</span>
         <span className="aero-pagination-simple-total">{totalPages}</span>

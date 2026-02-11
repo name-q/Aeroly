@@ -1,8 +1,9 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import Popover from '../Popover';
 import type { PopoverPlacement } from '../Popover';
 import Input from '../Input';
 import InputNumber from '../InputNumber';
+import { throttle } from '../utils';
 import './index.less';
 
 // ─── 颜色算法 ───
@@ -119,24 +120,28 @@ function useDrag(
   onDrag: (x: number, y: number, rect: DOMRect) => void,
 ) {
   const ref = useRef<HTMLDivElement>(null);
+  const onDragRef = useRef(onDrag);
+  onDragRef.current = onDrag;
 
   const handleStart = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    onDrag(e.clientX - rect.left, e.clientY - rect.top, rect);
+    // mousedown 立即响应，不节流
+    onDragRef.current(e.clientX - rect.left, e.clientY - rect.top, rect);
 
-    const onMove = (ev: MouseEvent) => {
-      onDrag(ev.clientX - rect.left, ev.clientY - rect.top, rect);
-    };
+    const onMove = throttle((ev: MouseEvent) => {
+      onDragRef.current(ev.clientX - rect.left, ev.clientY - rect.top, rect);
+    }, 16); // ~60fps
+
     const onUp = () => {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseup', onUp);
     };
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseup', onUp);
-  }, [onDrag]);
+  }, []);
 
   return { ref, onMouseDown: handleStart };
 }
@@ -191,10 +196,17 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
-  // 同步受控值
+  // 同步受控值（保留退化色的 hue/saturation）
   useEffect(() => {
     if (isControlled) {
-      setHsva(parseColor(value!));
+      const parsed = parseColor(value!);
+      setHsva(prev => {
+        // 纯黑(v=0)时 hue/sat 无意义，保留之前的
+        if (parsed.v === 0) return { ...prev, s: parsed.s || prev.s, v: 0, a: parsed.a };
+        // 灰色(s=0)时 hue 无意义，保留之前的
+        if (parsed.s === 0) return { h: prev.h, s: 0, v: parsed.v, a: parsed.a };
+        return parsed;
+      });
     }
   }, [value, isControlled]);
 

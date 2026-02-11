@@ -10,7 +10,7 @@ nav:
 
 # Popover 气泡卡片
 
-点击或鼠标移入元素，弹出气泡式的卡片浮层。毛玻璃面板，支持 12 个方向、自动翻转、自适应内容。
+点击或鼠标移入元素，弹出气泡式的卡片浮层。毛玻璃面板，支持 4 个方向、自动翻转、自适应内容。
 
 ## 基础用法
 
@@ -51,9 +51,5 @@ nav:
 ### PopoverPlacement
 
 ```ts
-type PopoverPlacement =
-  | 'top' | 'topLeft' | 'topRight'
-  | 'bottom' | 'bottomLeft' | 'bottomRight'
-  | 'left' | 'leftTop' | 'leftBottom'
-  | 'right' | 'rightTop' | 'rightBottom';
+type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 ```

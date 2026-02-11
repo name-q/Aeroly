@@ -3,11 +3,7 @@ import './index.less';
 
 // ---- Types ----
 
-export type PopoverPlacement =
-  | 'top' | 'topLeft' | 'topRight'
-  | 'bottom' | 'bottomLeft' | 'bottomRight'
-  | 'left' | 'leftTop' | 'leftBottom'
-  | 'right' | 'rightTop' | 'rightBottom';
+export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 export interface PopoverProps {
   /** 弹出内容 */
@@ -36,7 +32,7 @@ export interface PopoverProps {
 
 // ---- 位置计算 ----
 
-interface Pos { top: number; left: number; arrowTop: number; arrowLeft: number; actualPlacement: PopoverPlacement }
+interface Pos { top: number; left: number; actualPlacement: PopoverPlacement }
 
 function calcPosition(
   triggerRect: DOMRect,
@@ -49,61 +45,32 @@ function calcPosition(
   const scrollX = window.scrollX;
   const scrollY = window.scrollY;
 
-  // 触发元素中心
   const tCenterX = tLeft + scrollX + tW / 2;
   const tCenterY = tTop + scrollY + tH / 2;
 
   let top = 0;
   let left = 0;
-  let arrowTop = 0;
-  let arrowLeft = 0;
 
-  const base = placement.replace(/Left|Right|Top|Bottom$/, '') as 'top' | 'bottom' | 'left' | 'right';
-
-  // 主轴定位
-  switch (base) {
+  switch (placement) {
     case 'top':
       top = tTop + scrollY - pH - offset;
+      left = tCenterX - pW / 2;
       break;
     case 'bottom':
       top = tTop + scrollY + tH + offset;
+      left = tCenterX - pW / 2;
       break;
     case 'left':
+      top = tCenterY - pH / 2;
       left = tLeft + scrollX - pW - offset;
       break;
     case 'right':
+      top = tCenterY - pH / 2;
       left = tLeft + scrollX + tW + offset;
       break;
   }
 
-  // 交叉轴定位
-  if (base === 'top' || base === 'bottom') {
-    if (placement.endsWith('Left')) {
-      left = tLeft + scrollX;
-      arrowLeft = Math.min(tW / 2, pW - 20);
-    } else if (placement.endsWith('Right')) {
-      left = tLeft + scrollX + tW - pW;
-      arrowLeft = Math.max(pW - tW / 2, 20);
-    } else {
-      left = tCenterX - pW / 2;
-      arrowLeft = pW / 2;
-    }
-    arrowTop = base === 'top' ? pH : 0;
-  } else {
-    if (placement.endsWith('Top')) {
-      top = tTop + scrollY;
-      arrowTop = Math.min(tH / 2, pH - 16);
-    } else if (placement.endsWith('Bottom')) {
-      top = tTop + scrollY + tH - pH;
-      arrowTop = Math.max(pH - tH / 2, 16);
-    } else {
-      top = tCenterY - pH / 2;
-      arrowTop = pH / 2;
-    }
-    arrowLeft = base === 'left' ? pW : 0;
-  }
-
-  return { top, left, arrowTop, arrowLeft, actualPlacement: placement };
+  return { top, left, actualPlacement: placement };
 }
 
 // 边界翻转
@@ -119,20 +86,15 @@ function flipIfNeeded(
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
-  const base = placement.replace(/Left|Right|Top|Bottom$/, '') as string;
-  const suffix = placement.replace(/^(top|bottom|left|right)/, '');
+  let flipped: PopoverPlacement | null = null;
 
-  let flippedBase = base;
+  if (placement === 'top' && pos.top - scrollY < 0) flipped = 'bottom';
+  else if (placement === 'bottom' && pos.top - scrollY + popRect.height > vh) flipped = 'top';
+  else if (placement === 'left' && pos.left - scrollX < 0) flipped = 'right';
+  else if (placement === 'right' && pos.left - scrollX + popRect.width > vw) flipped = 'left';
 
-  // 检测是否溢出并翻转
-  if (base === 'top' && pos.top - scrollY < 0) flippedBase = 'bottom';
-  else if (base === 'bottom' && pos.top - scrollY + popRect.height > vh) flippedBase = 'top';
-  else if (base === 'left' && pos.left - scrollX < 0) flippedBase = 'right';
-  else if (base === 'right' && pos.left - scrollX + popRect.width > vw) flippedBase = 'left';
-
-  if (flippedBase !== base) {
-    const newPlacement = (flippedBase + suffix) as PopoverPlacement;
-    return calcPosition(triggerRect, popRect, newPlacement, offset);
+  if (flipped) {
+    return calcPosition(triggerRect, popRect, flipped, offset);
   }
 
   return pos;
@@ -225,7 +187,6 @@ const Popover: React.FC<PopoverProps> = ({
 
   // ---- 触发逻辑 ----
 
-  // hover
   const handleMouseEnter = () => {
     if (trigger !== 'hover') return;
     clearTimeout(hoverTimer.current);
@@ -237,7 +198,6 @@ const Popover: React.FC<PopoverProps> = ({
     hoverTimer.current = window.setTimeout(() => setOpen(false), 100);
   };
 
-  // click
   const handleClick = () => {
     if (trigger !== 'click') return;
     setOpen(!isOpen);
@@ -256,13 +216,12 @@ const Popover: React.FC<PopoverProps> = ({
     return () => document.removeEventListener('mousedown', handleDocClick);
   }, [trigger, isOpen, setOpen]);
 
-  // 箭头方向
-  const actualBase = pos?.actualPlacement.replace(/Left|Right|Top|Bottom$/, '') || 'top';
+  const actualPlacement = pos?.actualPlacement || 'top';
 
   const popClassNames = [
     'aero-popover',
     animating ? 'aero-popover--open' : '',
-    `aero-popover--${actualBase}`,
+    `aero-popover--${actualPlacement}`,
     className || '',
   ]
     .filter(Boolean)

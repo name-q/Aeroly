@@ -1,0 +1,300 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@menu-item-height: 40px;
+@menu-item-radius: 8px;
+@menu-collapsed-width: 56px;
+
+// ─── 基础 ───
+
+.aero-menu {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.78);
+  .transition();
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  // ─── 垂直模式 ───
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 220px;
+
+    // 收起模式：> 直接子级，不穿透弹出层
+    &.aero-menu--collapsed {
+      width: @menu-collapsed-width;
+      align-items: center;
+      overflow: visible;
+
+      > .aero-menu-item {
+        justify-content: center;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+
+      > .aero-menu-submenu > .aero-popover-trigger > .aero-menu-submenu__title {
+        justify-content: center;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+
+      > .aero-menu-group,
+      > .aero-menu-divider {
+        display: none;
+      }
+    }
+  }
+
+  // ─── 水平模式 ───
+  &--horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    width: auto;
+
+    > .aero-menu-item,
+    > .aero-menu-submenu > .aero-popover-trigger > .aero-menu-submenu__title {
+      height: 36px;
+      border-radius: 999px;
+      padding: 0 16px;
+      white-space: nowrap;
+    }
+
+    .aero-menu-divider {
+      width: 1px;
+      height: 20px;
+      margin: 0 4px;
+      background: rgba(0, 0, 0, 0.06);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+// ─── Popover 弹出的子菜单面板 ───
+
+.aero-menu-popup {
+  list-style: none;
+  margin: 0;
+  min-width: 160px;
+  width: max-content;
+  padding: 4px;
+  border-radius: @border-radius-lg;
+  .glass-effect(rgba(255, 255, 255, 0.72), 20px);
+  .shadow-default();
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.78);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  @{dark-selector} & {
+    .glass-effect(rgba(255, 255, 255, 0.08), 20px);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.82);
+  }
+}
+
+// ─── 菜单项 ───
+
+.aero-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: @menu-item-height;
+  padding: 0 16px;
+  border-radius: @menu-item-radius;
+  cursor: pointer;
+  .transition();
+  position: relative;
+  user-select: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    opacity: 0.6;
+    .transition();
+  }
+
+  &__label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // 选中态
+  &--active {
+    color: @primary-color;
+    background: fade(@primary-color, 8%);
+    font-weight: 500;
+
+    .aero-menu-item__icon {
+      opacity: 1;
+      color: @primary-color;
+    }
+
+    &:hover {
+      background: fade(@primary-color, 12%);
+    }
+
+    @{dark-selector} & {
+      background: fade(@primary-color, 12%);
+
+      &:hover {
+        background: fade(@primary-color, 18%);
+      }
+    }
+  }
+
+  // 禁用
+  &--disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ─── 子菜单 ───
+
+.aero-menu-submenu {
+  position: relative;
+
+  // Popover trigger 在 submenu 内需要 block 显示
+  > .aero-popover-trigger {
+    display: flex;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: @menu-item-height;
+    padding: 0 16px;
+    border-radius: @menu-item-radius;
+    cursor: pointer;
+    .transition();
+    user-select: none;
+    flex: 1;
+
+    .aero-menu-item__label {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.06);
+      }
+    }
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    margin-left: auto;
+    opacity: 0.35;
+    .transition(transform);
+    transform: rotate(0deg);
+  }
+
+  // 展开时箭头旋转
+  &--open > .aero-menu-submenu__title .aero-menu-submenu__arrow {
+    transform: rotate(90deg);
+  }
+
+  // 子菜单内容（inline 展开）
+  &__content {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: height 150ms @transition-timing, opacity 150ms @transition-timing;
+    opacity: 1;
+  }
+
+  &:not(.aero-menu-submenu--open) > .aero-menu-submenu__content {
+    opacity: 0;
+  }
+
+  // 子菜单有选中项时，标题高亮
+  &--child-active > .aero-menu-submenu__title,
+  &--child-active > .aero-popover-trigger > .aero-menu-submenu__title {
+    color: @primary-color;
+
+    .aero-menu-item__icon {
+      color: @primary-color;
+      opacity: 1;
+    }
+  }
+
+  // 禁用
+  &--disabled > .aero-menu-submenu__title,
+  &--disabled > .aero-popover-trigger > .aero-menu-submenu__title {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ─── 分割线 ───
+
+.aero-menu-divider {
+  height: 1px;
+  margin: 4px 12px;
+  background: rgba(0, 0, 0, 0.06);
+  list-style: none;
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// ─── 分组 ───
+
+.aero-menu-group {
+  list-style: none;
+
+  &__title {
+    padding: 8px 16px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    user-select: none;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}

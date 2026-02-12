@@ -10,6 +10,9 @@ export type { DividerProps } from './Divider';
 export { default as Flex } from './Flex';
 export type { FlexProps } from './Flex';
 
+export { Row, Col } from './Grid';
+export type { RowProps, ColProps } from './Grid';
+
 export { default as Segmented } from './Segmented';
 export type { SegmentedProps, SegmentedOption } from './Segmented';
 
@@ -84,3 +87,9 @@ export type { ColorPickerProps } from './ColorPicker';
 
 export { default as Cascader } from './Cascader';
 export type { CascaderProps, CascaderOption, CascaderValueType } from './Cascader';
+
+export { default as Menu } from './Menu';
+export type { MenuProps, MenuItemType } from './Menu';
+
+export { default as DemoBox } from './DemoBox';
+export type { DemoBoxProps } from './DemoBox';

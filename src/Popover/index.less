@@ -24,21 +24,54 @@
   transition: opacity @popover-duration @transition-timing,
               transform @popover-duration @transition-timing;
 
-  // ---- 方向入场动画 ----
+  // ---- 方向入场动画 + 间隙桥接（伪元素） ----
   &--top {
     transform: translateY(6px);
+    // 底部桥接区，连接 trigger
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 8px;
+    }
   }
 
   &--bottom {
     transform: translateY(-6px);
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -8px;
+      height: 8px;
+    }
   }
 
   &--left {
     transform: translateX(6px);
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -8px;
+      width: 8px;
+    }
   }
 
   &--right {
     transform: translateX(-6px);
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -8px;
+      width: 8px;
+    }
   }
 
   // ---- 打开态 ----
@@ -46,6 +79,11 @@
     opacity: 1;
     transform: translate(0, 0);
     pointer-events: auto;
+  }
+
+  // ---- raw 模式：不限宽 ----
+  &--raw {
+    max-width: none;
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import './index.less';
 
 // ---- Types ----
@@ -24,6 +25,10 @@ export interface PopoverProps {
   offset?: number;
   /** 触发元素 */
   children: React.ReactNode;
+  /** 裸模式：不包裹 inner/content，不限宽，不加 padding，直接渲染 content */
+  raw?: boolean;
+  /** 弹出层自定义类名 */
+  popupClassName?: string;
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -112,6 +117,8 @@ const Popover: React.FC<PopoverProps> = ({
   onOpenChange,
   offset = 8,
   children,
+  raw = false,
+  popupClassName,
   className,
   style,
 }) => {
@@ -220,12 +227,38 @@ const Popover: React.FC<PopoverProps> = ({
 
   const popClassNames = [
     'aero-popover',
+    raw ? 'aero-popover--raw' : '',
     animating ? 'aero-popover--open' : '',
     `aero-popover--${actualPlacement}`,
+    popupClassName || '',
     className || '',
   ]
     .filter(Boolean)
     .join(' ');
+
+  const popup = mounted ? (
+    <div
+      ref={popRef}
+      className={popClassNames}
+      style={{
+        ...style,
+        top: pos ? pos.top : -9999,
+        left: pos ? pos.left : -9999,
+      }}
+      onTransitionEnd={handleTransitionEnd}
+      onMouseEnter={trigger === 'hover' ? handleMouseEnter : undefined}
+      onMouseLeave={trigger === 'hover' ? handleMouseLeave : undefined}
+    >
+      {raw ? (
+        content
+      ) : (
+        <div className="aero-popover-inner">
+          {title && <div className="aero-popover-title">{title}</div>}
+          <div className="aero-popover-content">{content}</div>
+        </div>
+      )}
+    </div>
+  ) : null;
 
   return (
     <>
@@ -238,25 +271,7 @@ const Popover: React.FC<PopoverProps> = ({
       >
         {children}
       </span>
-      {mounted && (
-        <div
-          ref={popRef}
-          className={popClassNames}
-          style={{
-            ...style,
-            top: pos ? pos.top : -9999,
-            left: pos ? pos.left : -9999,
-          }}
-          onTransitionEnd={handleTransitionEnd}
-          onMouseEnter={trigger === 'hover' ? handleMouseEnter : undefined}
-          onMouseLeave={trigger === 'hover' ? handleMouseLeave : undefined}
-        >
-          <div className="aero-popover-inner">
-            {title && <div className="aero-popover-title">{title}</div>}
-            <div className="aero-popover-content">{content}</div>
-          </div>
-        </div>
-      )}
+      {popup && createPortal(popup, document.body)}
     </>
   );
 };

@@ -16,10 +16,10 @@ const bar: React.CSSProperties = {
 };
 
 export default () => (
-  <Layout style={{ height: 300, borderRadius: 8, overflow: 'hidden' }}>
+  <Layout style={{ height: 280, borderRadius: 8, overflow: 'hidden' }}>
     <Header style={{ ...bar, background: '#50b8e7' }}>Header</Header>
     <Content style={{ padding: 20, background: 'rgba(80,184,231,0.06)', fontSize: 13 }}>
-      Content 区域自动撑满剩余高度，内容超出时可滚动。
+      Content 自动撑满剩余高度
     </Content>
     <Footer style={{ ...bar, background: '#36a3d4', height: 40 }}>Footer</Footer>
   </Layout>

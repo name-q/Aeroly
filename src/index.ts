@@ -13,6 +13,9 @@ export type { FlexProps } from './Flex';
 export { Row, Col } from './Grid';
 export type { RowProps, ColProps } from './Grid';
 
+export { default as Layout } from './Layout';
+export type { LayoutProps, HeaderProps, FooterProps, ContentProps, SiderProps } from './Layout';
+
 export { default as Segmented } from './Segmented';
 export type { SegmentedProps, SegmentedOption } from './Segmented';
 

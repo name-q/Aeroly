@@ -1,0 +1,330 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- 尺寸 tokens ----
+@step-icon-size: 28px;
+@step-icon-size-sm: 22px;
+@step-tail-gap: 8px;
+
+// ---- 容器 ----
+.aero-steps {
+  display: flex;
+  width: 100%;
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+// ---- 单个步骤 ----
+.aero-steps-item {
+  position: relative;
+
+  .aero-steps--horizontal & {
+    flex: 1;
+
+    &--last {
+      flex: none;
+    }
+  }
+
+  // label-vertical 模式：纵向排列，所有 item 等宽（包括最后一项）
+  .aero-steps--label-vertical & {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--last {
+      flex: 1;
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+
+    &:hover .aero-steps-item-icon {
+      border-color: fade(@primary-color, 50%);
+      box-shadow: 0 0 0 3px fade(@primary-color, 10%);
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+}
+
+// ---- 内容容器（label-horizontal 和 vertical 模式用） ----
+.aero-steps-item-container {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+// ---- 图标行（label-vertical 专用，仅放图标，线用绝对定位） ----
+.aero-steps-item-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ---- 图标 ----
+.aero-steps-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: @step-icon-size;
+  height: @step-icon-size;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.35);
+  transition: all @transition-duration @transition-timing;
+  position: relative;
+  z-index: 1;
+
+  @{dark-selector} & {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .aero-steps--small & {
+    width: @step-icon-size-sm;
+    height: @step-icon-size-sm;
+    font-size: 11px;
+  }
+
+  &__number {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .aero-steps-item--process & {
+    background: linear-gradient(135deg, @primary-color, fade(@primary-color, 70%));
+    border-color: @primary-color;
+    color: #fff;
+    box-shadow: 0 2px 10px fade(@primary-color, 25%);
+
+    @{dark-selector} & {
+      background: linear-gradient(135deg, fade(@primary-color, 60%), fade(@primary-color, 35%));
+      border-color: fade(@primary-color, 45%);
+      box-shadow: 0 2px 10px fade(@primary-color, 20%);
+    }
+  }
+
+  .aero-steps-item--finish & {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: @primary-color;
+    color: @primary-color;
+    box-shadow: 0 2px 6px fade(@primary-color, 12%);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: fade(@primary-color, 50%);
+      color: @primary-color;
+    }
+  }
+
+  .aero-steps-item--error & {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: @error-color;
+    color: @error-color;
+    box-shadow: 0 2px 6px fade(@error-color, 12%);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: fade(@error-color, 50%);
+      color: @error-color;
+    }
+  }
+}
+
+// ---- 文本区域 ----
+.aero-steps-item-content {
+  margin-left: 10px;
+
+  .aero-steps--horizontal.aero-steps--label-horizontal & {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .aero-steps--small & {
+    margin-left: 8px;
+  }
+
+  .aero-steps--label-vertical & {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: center;
+  }
+}
+
+// ---- 标题 ----
+.aero-steps-item-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: @step-icon-size;
+  color: rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  transition: color @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .aero-steps--small & {
+    font-size: 13px;
+    line-height: @step-icon-size-sm;
+  }
+
+  .aero-steps--label-vertical & {
+    line-height: 1.4;
+    justify-content: center;
+  }
+
+  .aero-steps-item--process & {
+    color: var(--aero-text-color, #1a1a1a);
+    font-weight: 600;
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+
+  .aero-steps-item--finish & {
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  .aero-steps-item--error & {
+    color: @error-color;
+  }
+}
+
+// ---- 描述 ----
+.aero-steps-item-description {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 1.5;
+  margin-top: 2px;
+  transition: color @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .aero-steps-item--process & {
+    color: var(--aero-text-secondary, #666);
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.55);
+    }
+  }
+
+  .aero-steps-item--finish & {
+    color: var(--aero-text-secondary, #666);
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.45);
+    }
+  }
+
+  .aero-steps-item--error & {
+    color: fade(@error-color, 70%);
+  }
+}
+
+// ============================================================
+// 连接线公共颜色
+// ============================================================
+
+.tail-color() {
+  background: rgba(0, 0, 0, 0.08);
+  transition: background @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .aero-steps-item--finish & {
+    background: @primary-color;
+  }
+
+  .aero-steps-item--error & {
+    background: @error-color;
+  }
+}
+
+// ============================================================
+// inline tail（水平 label-horizontal 模式，标题文字后面）
+// ============================================================
+
+.aero-steps-item-tail-inline {
+  display: block;
+  flex: 1;
+  height: 1px;
+  margin: 0 @step-tail-gap;
+  .tail-color();
+}
+
+// ============================================================
+// 绝对定位 tail（label-vertical 和 vertical 模式共用）
+// ============================================================
+
+.aero-steps-item-tail {
+  position: absolute;
+  .tail-color();
+}
+
+// ---- label-vertical：从图标右侧水平延伸到 item 右边缘 ----
+.aero-steps--label-vertical .aero-steps-item-tail {
+  top: (@step-icon-size / 2);
+  height: 1px;
+  left: ~'calc(50% + @{step-icon-size} / 2 + @{step-tail-gap})';
+  right: ~'calc(-50% + @{step-icon-size} / 2 + @{step-tail-gap})';
+}
+
+.aero-steps--label-vertical.aero-steps--small .aero-steps-item-tail {
+  top: (@step-icon-size-sm / 2);
+  left: ~'calc(50% + @{step-icon-size-sm} / 2 + @{step-tail-gap})';
+  right: ~'calc(-50% + @{step-icon-size-sm} / 2 + @{step-tail-gap})';
+}
+
+// ---- vertical：从图标下方垂直延伸到下一个图标上方 ----
+.aero-steps--vertical .aero-steps-item-tail {
+  left: (@step-icon-size / 2);
+  top: (@step-icon-size + @step-tail-gap);
+  bottom: @step-tail-gap;
+  width: 1px;
+  height: auto;
+}
+
+.aero-steps--vertical.aero-steps--small .aero-steps-item-tail {
+  left: (@step-icon-size-sm / 2);
+  top: (@step-icon-size-sm + @step-tail-gap);
+}
+
+.aero-steps--vertical .aero-steps-item {
+  padding-bottom: 24px;
+
+  &--last {
+    padding-bottom: 0;
+  }
+}

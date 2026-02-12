@@ -7,6 +7,7 @@ interface RadioGroupContextValue {
   value: string | number | undefined;
   disabled: boolean;
   size: 'small' | 'medium' | 'large';
+  optionType: 'default' | 'button';
   onChange: (val: string | number) => void;
 }
 
@@ -48,6 +49,8 @@ export interface RadioGroupProps {
   size?: 'small' | 'medium' | 'large';
   /** 选项数据 */
   options?: (string | number | RadioOptionType)[];
+  /** 选项展示类型 */
+  optionType?: 'default' | 'button';
   /** 排列方向 */
   direction?: 'horizontal' | 'vertical';
   /** 子元素 */
@@ -85,6 +88,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   disabled = false,
   size = 'medium',
   options,
+  optionType = 'default',
   direction = 'horizontal',
   children,
   className,
@@ -108,12 +112,17 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
     value: currentValue,
     disabled,
     size,
+    optionType,
     onChange: handleChange,
   };
+
+  const isButton = optionType === 'button';
 
   const classNames = [
     'aero-radio-group',
     `aero-radio-group--${direction}`,
+    isButton ? 'aero-radio-group--button' : '',
+    isButton ? `aero-radio-group--button-${size}` : '',
     className || '',
   ]
     .filter(Boolean)
@@ -160,6 +169,7 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
 
   const isDisabled = groupContext ? (disabled || groupContext.disabled) : disabled;
   const mergedSize = groupContext ? groupContext.size : size;
+  const isButton = groupContext?.optionType === 'button';
 
   const handleChange = () => {
     if (isDisabled) return;
@@ -174,6 +184,33 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
     }
   };
 
+  // ---- Button 模式 ----
+  if (isButton) {
+    const btnCls = [
+      'aero-radio-button',
+      `aero-radio-button--${mergedSize}`,
+      isChecked ? 'aero-radio-button--checked' : '',
+      isDisabled ? 'aero-radio-button--disabled' : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    return (
+      <label className={btnCls} style={style}>
+        <input
+          type="radio"
+          className="aero-radio-input"
+          checked={isChecked}
+          disabled={isDisabled}
+          onChange={handleChange}
+        />
+        {children && <span className="aero-radio-button-label">{children}</span>}
+      </label>
+    );
+  }
+
+  // ---- 默认模式 ----
   const classNames = [
     'aero-radio',
     `aero-radio--${mergedSize}`,

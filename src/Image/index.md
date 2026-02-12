@@ -37,6 +37,10 @@ toc: content
 
 <code src="./demos/lazy.tsx"></code>
 
+## 独立预览
+
+<code src="./demos/standalone.tsx"></code>
+
 ## API
 
 ### Image
@@ -65,6 +69,16 @@ toc: content
 |------|------|------|--------|
 | children | 子元素 | `ReactNode` | - |
 | preview | 是否可预览 | `boolean` | `true` |
+
+### Image.Preview
+
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| open | 是否显示 | `boolean` | - |
+| onOpenChange | 显隐变化回调 | `(open: boolean) => void` | - |
+| src | 单图地址（与 images 二选一） | `string` | - |
+| images | 多图地址列表（与 src 二选一） | `string[]` | - |
+| defaultCurrent | 默认展示第几张（从 0 开始） | `number` | `0` |
 
 ### 键盘交互
 

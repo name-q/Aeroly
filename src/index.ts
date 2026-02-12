@@ -104,4 +104,4 @@ export { default as Rate } from './Rate';
 export type { RateProps } from './Rate';
 
 export { default as Image } from './Image';
-export type { ImageProps, PreviewGroupProps } from './Image';
+export type { ImageProps, PreviewGroupProps, ImagePreviewProps } from './Image';

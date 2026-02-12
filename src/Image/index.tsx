@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { X, ZoomIn, ZoomOut, RotateCcw, RotateCw, Maximize, ChevronLeft, ChevronRight, ImageOff, Eye } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, RotateCcw, RotateCw, Maximize, ChevronLeft, ChevronRight, ImageOff, Eye, FlipHorizontal2, FlipVertical2 } from 'lucide-react';
 import Icon from '../Icon';
 import './index.less';
 
@@ -49,6 +49,19 @@ export interface PreviewGroupProps {
   preview?: boolean;
 }
 
+export interface ImagePreviewProps {
+  /** 是否显示 */
+  open: boolean;
+  /** 显隐变化回调 */
+  onOpenChange: (open: boolean) => void;
+  /** 单图地址（与 images 二选一） */
+  src?: string;
+  /** 多图地址列表（与 src 二选一） */
+  images?: string[];
+  /** 默认展示第几张（从 0 开始） */
+  defaultCurrent?: number;
+}
+
 // ─── Context ───
 
 interface PreviewGroupContextValue {
@@ -78,6 +91,8 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
   const [animating, setAnimating] = useState(false);
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
+  const [flipX, setFlipX] = useState(false);
+  const [flipY, setFlipY] = useState(false);
 
   useEffect(() => {
     if (visible) {
@@ -95,6 +110,8 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
       setMounted(false);
       setScale(1);
       setRotate(0);
+      setFlipX(false);
+      setFlipY(false);
     }
   };
 
@@ -111,6 +128,8 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
   useEffect(() => {
     setScale(1);
     setRotate(0);
+    setFlipX(false);
+    setFlipY(false);
   }, [current]);
 
   // Keyboard
@@ -155,7 +174,7 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
         <img
           className="aero-image-preview-img"
           src={images[current]}
-          style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}
+          style={{ transform: `scale(${scale}) rotate(${rotate}deg) scaleX(${flipX ? -1 : 1}) scaleY(${flipY ? -1 : 1})` }}
           alt=""
           draggable={false}
         />
@@ -181,7 +200,14 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
           <Icon icon={RotateCw} size={18} />
         </button>
         <span className="aero-image-preview-toolbar-divider" />
-        <button type="button" onClick={() => { setScale(1); setRotate(0); }}>
+        <button type="button" onClick={() => setFlipX(f => !f)}>
+          <Icon icon={FlipHorizontal2} size={18} />
+        </button>
+        <button type="button" onClick={() => setFlipY(f => !f)}>
+          <Icon icon={FlipVertical2} size={18} />
+        </button>
+        <span className="aero-image-preview-toolbar-divider" />
+        <button type="button" onClick={() => { setScale(1); setRotate(0); setFlipX(false); setFlipY(false); }}>
           <Icon icon={Maximize} size={18} />
         </button>
       </div>
@@ -220,7 +246,10 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
 
 // ─── Image 主组件 ───
 
-const Image: React.FC<ImageProps> & { PreviewGroup: typeof PreviewGroup } = ({
+const Image: React.FC<ImageProps> & {
+  PreviewGroup: typeof PreviewGroup;
+  Preview: typeof StandalonePreview;
+} = ({
   src,
   alt,
   width,
@@ -392,5 +421,35 @@ const PreviewGroup: React.FC<PreviewGroupProps> = ({ children, preview = true })
 };
 
 Image.PreviewGroup = PreviewGroup;
+
+// ─── StandalonePreview 独立预览 ───
+
+const StandalonePreview: React.FC<ImagePreviewProps> = ({
+  open,
+  onOpenChange,
+  src,
+  images,
+  defaultCurrent = 0,
+}) => {
+  const list = images || (src ? [src] : []);
+  const [current, setCurrent] = useState(defaultCurrent);
+
+  // Reset to defaultCurrent when open
+  useEffect(() => {
+    if (open) setCurrent(defaultCurrent);
+  }, [open, defaultCurrent]);
+
+  return (
+    <Preview
+      visible={open}
+      images={list}
+      current={current}
+      onClose={() => onOpenChange(false)}
+      onChange={setCurrent}
+    />
+  );
+};
+
+Image.Preview = StandalonePreview;
 
 export default Image;

@@ -93,3 +93,6 @@ export type { MenuProps, MenuItemType } from './Menu';
 
 export { default as DemoBox } from './DemoBox';
 export type { DemoBoxProps } from './DemoBox';
+
+export { default as Breadcrumb } from './Breadcrumb';
+export type { BreadcrumbProps, BreadcrumbItemType } from './Breadcrumb';

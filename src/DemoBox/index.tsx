@@ -25,7 +25,8 @@ const DemoBox: React.FC<DemoBoxProps> = ({
       color: '#fff',
       fontSize: 12,
       fontWeight: 500,
-      flexShrink: 0,
+      boxSizing: 'border-box',
+      flexShrink: w === '100%' ? undefined : 0,
       padding: typeof w === 'string' ? '0 16px' : undefined,
     }}
   >

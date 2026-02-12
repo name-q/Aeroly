@@ -105,7 +105,15 @@ const Flex: React.FC<FlexProps> = ({
   if (full) s.width = '100%';
 
   // flex（作为子元素时）
-  if (flex !== undefined) s.flex = flex;
+  if (flex !== undefined) {
+    if (typeof flex === 'number') {
+      s.flex = `${flex} 1 0%`;
+    } else if (/^\d+(\.\d+)?(px|%)$/.test(flex)) {
+      s.flex = `0 0 ${flex}`;
+    } else {
+      s.flex = flex;
+    }
+  }
 
   // auto margin
   if (auto === true) {

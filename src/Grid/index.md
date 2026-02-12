@@ -54,7 +54,7 @@ nav:
 |------|------|------|--------|
 | span | 栅格占位格数（共 24 格），0 隐藏 | `number` | - |
 | offset | 左侧偏移格数 | `number` | - |
-| flex | CSS flex，设置后 span 失效 | `number \| string` | - |
+| flex | 弹性控制：数字为伸缩比例，`"100px"` 为固定宽度，也支持完整写法；设置后 span 失效 | `number \| string` | - |
 | xs | ≥0px 响应式 | `number \| { span, offset }` | - |
 | sm | ≥576px 响应式 | `number \| { span, offset }` | - |
 | md | ≥768px 响应式 | `number \| { span, offset }` | - |

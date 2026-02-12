@@ -52,7 +52,7 @@ nav:
 | center | 水平+垂直双向居中 | `boolean` | `false` |
 | full | 撑满父容器宽度 | `boolean` | `false` |
 | inline | 行内弹性盒 | `boolean` | `false` |
-| flex | CSS flex 属性 | `number \| string` | - |
+| flex | 弹性控制：数字为伸缩比例，`"100px"` 为固定宽度，也支持完整写法如 `"0 0 100px"` | `number \| string` | - |
 | auto | margin auto 抽象 | `boolean \| 'left' \| 'right' \| 'top' \| 'bottom'` | - |
 | component | 渲染的 HTML 标签 | `React.ElementType` | `'div'` |
 | children | 子元素 | `ReactNode` | - |

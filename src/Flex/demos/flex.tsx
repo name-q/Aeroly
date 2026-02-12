@@ -9,7 +9,7 @@ export default () => (
   <Flex gap="sm" full>
     <Flex
       center
-      flex="0 0 100px"
+      flex="100px"
       style={{ height: 80, borderRadius: 8, background: '#50b8e7', color: '#fff', fontSize: 12 }}
     >
       侧栏

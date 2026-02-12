@@ -105,3 +105,12 @@ export type { RateProps } from './Rate';
 
 export { default as Image } from './Image';
 export type { ImageProps, PreviewGroupProps, ImagePreviewProps } from './Image';
+
+export { default as Steps } from './Steps';
+export type { StepsProps, StepItem, StepStatus } from './Steps';
+
+export { default as Masonry } from './Masonry';
+export type { MasonryProps } from './Masonry';
+
+export { default as Tabs } from './Tabs';
+export type { TabsProps, TabItem, TabsVariant, TabsSize } from './Tabs';

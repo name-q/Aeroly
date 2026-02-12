@@ -69,6 +69,17 @@
     align-items: center;
     gap: 2px;
     width: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > .aero-menu-item,
+    > .aero-menu-submenu {
+      flex-shrink: 0;
+    }
 
     > .aero-menu-item,
     > .aero-menu-submenu > .aero-popover-trigger > .aero-menu-submenu__title {
@@ -82,6 +93,7 @@
       width: 1px;
       height: 20px;
       margin: 0 4px;
+      flex-shrink: 0;
       background: rgba(0, 0, 0, 0.06);
 
       @{dark-selector} & {

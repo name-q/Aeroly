@@ -6,6 +6,7 @@ group:
 nav:
   title: 组件
   path: /components
+toc: content
 ---
 
 # DatePicker 日期选择框

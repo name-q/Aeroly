@@ -6,6 +6,7 @@ group:
 nav:
   title: 组件
   path: /components
+toc: content
 ---
 
 # Message 全局提示

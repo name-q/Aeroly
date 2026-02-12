@@ -7,6 +7,7 @@ group:
 nav:
   title: 组件
   path: /components
+toc: content
 ---
 
 # Icon 图标

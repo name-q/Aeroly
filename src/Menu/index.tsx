@@ -104,13 +104,16 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
     ctx.onSelect(item.key);
   };
 
-  const indent = ctx.mode === 'vertical' && !ctx.collapsed ? ctx.level * 16 : 0;
+  // level 0 = 默认 padding 16px；level 1+ = 42px(对齐父级icon后文字) + (level-1)*16px
+  const indent = ctx.mode === 'vertical' && !ctx.collapsed && ctx.level > 0
+    ? 42 + (ctx.level - 1) * 16
+    : 0;
 
   return (
     <li
       className={cls}
       onClick={handleClick}
-      style={indent ? { paddingLeft: 16 + indent } : undefined}
+      style={indent ? { paddingLeft: indent } : undefined}
       role="menuitem"
       aria-disabled={item.disabled}
     >
@@ -146,7 +149,7 @@ const SubMenuInline: React.FC<{ item: MenuItemType }> = ({ item }) => {
     }
   }, [isOpen]);
 
-  const indent = ctx.level * 16;
+  const indent = ctx.level > 0 ? 42 + (ctx.level - 1) * 16 : 0;
 
   const cls = [
     'aero-menu-submenu',
@@ -165,7 +168,7 @@ const SubMenuInline: React.FC<{ item: MenuItemType }> = ({ item }) => {
       <div
         className="aero-menu-submenu__title"
         onClick={handleToggle}
-        style={indent ? { paddingLeft: 16 + indent } : undefined}
+        style={indent ? { paddingLeft: indent } : undefined}
         role="button"
         aria-expanded={isOpen}
       >

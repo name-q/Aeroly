@@ -25,6 +25,13 @@
     flex-direction: column;
     gap: 2px;
     width: 220px;
+    max-height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari
+    }
 
     // 收起模式：> 直接子级，不穿透弹出层
     &.aero-menu--collapsed {
@@ -101,6 +108,13 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @{dark-selector} & {
     .glass-effect(rgba(255, 255, 255, 0.08), 20px);
@@ -116,6 +130,8 @@
   align-items: center;
   gap: 10px;
   height: @menu-item-height;
+  min-height: @menu-item-height;
+  flex-shrink: 0;
   padding: 0 16px;
   border-radius: @menu-item-radius;
   cursor: pointer;
@@ -180,6 +196,7 @@
 
 .aero-menu-submenu {
   position: relative;
+  flex-shrink: 0;
 
   // Popover trigger 在 submenu 内需要 block 显示
   > .aero-popover-trigger {
@@ -191,6 +208,7 @@
     align-items: center;
     gap: 10px;
     height: @menu-item-height;
+    min-height: @menu-item-height;
     padding: 0 16px;
     border-radius: @menu-item-radius;
     cursor: pointer;

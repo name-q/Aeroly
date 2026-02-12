@@ -1,0 +1,271 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@preview-duration: 240ms;
+
+// ==================== Image 本体 ====================
+
+.aero-image {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.04);
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &--clickable {
+    cursor: pointer;
+
+    &:hover .aero-image-hover {
+      opacity: 1;
+    }
+  }
+
+  &-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    .transition(opacity);
+  }
+
+  // Hover preview hint
+  &-hover {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    opacity: 0;
+    .transition(opacity);
+  }
+
+  // Loading placeholder
+  &-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.15);
+    animation: aero-image-pulse 1.5s ease-in-out infinite;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  // Error fallback
+  &-error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+@keyframes aero-image-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+// ==================== Preview 浮层 ====================
+
+.aero-image-preview-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+
+  &--open {
+    pointer-events: auto;
+
+    .aero-image-preview-mask {
+      opacity: 1;
+    }
+
+    .aero-image-preview-body,
+    .aero-image-preview-toolbar,
+    .aero-image-preview-close,
+    .aero-image-preview-nav,
+    .aero-image-preview-counter {
+      opacity: 1;
+    }
+
+    .aero-image-preview-img {
+      transform: scale(1);
+    }
+  }
+}
+
+// Mask
+.aero-image-preview-mask {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  transition: opacity @preview-duration @transition-timing;
+}
+
+// Image area
+.aero-image-preview-body {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity @preview-duration @transition-timing;
+}
+
+.aero-image-preview-img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: @border-radius-base;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 200ms @transition-timing;
+  user-select: none;
+}
+
+// Glass control mixin
+.glass-control() {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity @preview-duration @transition-timing,
+              background @transition-duration @transition-timing;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &:disabled {
+    opacity: 0.2;
+    cursor: default;
+  }
+
+  @{dark-selector} & {
+    backdrop-filter: blur(40px) saturate(140%);
+    -webkit-backdrop-filter: blur(40px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Close button
+.aero-image-preview-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  .glass-control();
+}
+
+// Toolbar
+.aero-image-preview-toolbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  .glass-control();
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  // toolbar itself is always clickable, not disabled
+  &:disabled {
+    opacity: 1;
+    cursor: default;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    .transition();
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+
+  &-divider {
+    width: 1px;
+    height: 16px;
+    margin: 0 4px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+// Navigation arrows
+.aero-image-preview-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  .glass-control();
+
+  &--prev { left: 16px; }
+  &--next { right: 16px; }
+}
+
+// Counter
+.aero-image-preview-counter {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  .glass-control();
+  cursor: default;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0);
+  }
+}

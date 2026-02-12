@@ -1,0 +1,98 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.aero-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus-visible {
+    border-radius: @border-radius-base;
+    box-shadow: 0 0 0 3px fade(@primary-color, 25%);
+  }
+
+  // ---- 尺寸 ----
+  &--small {
+    gap: 1px;
+  }
+
+  &--large {
+    gap: 4px;
+  }
+
+  // ---- 禁用 ----
+  &--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+
+    .aero-rate-star {
+      cursor: not-allowed;
+    }
+  }
+
+  // ---- 只读 ----
+  &--readonly .aero-rate-star {
+    cursor: default;
+  }
+}
+
+// ---- 单颗星 ----
+.aero-rate-star {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  transition: transform 180ms @transition-timing;
+
+  // hover 弹跳
+  .aero-rate:not(.aero-rate--disabled):not(.aero-rate--readonly) &:hover {
+    transform: scale(1.2);
+  }
+
+  // 底层（灰色轮廓）
+  &-first {
+    display: flex;
+    color: rgba(0, 0, 0, 0.12);
+    transition: color @transition-duration @transition-timing;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  // 上层（选中色，叠在底层之上）
+  &-second {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    color: @warning-color;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 200ms @transition-timing,
+                color @transition-duration @transition-timing,
+                filter 200ms @transition-timing;
+
+    @{dark-selector} & {
+      color: #ffc53d;
+    }
+  }
+
+  // ---- 全选 ----
+  &--full &-second {
+    opacity: 1;
+    filter: drop-shadow(0 1px 4px fade(@warning-color, 35%));
+  }
+
+  // ---- 半选 ----
+  &--half &-second {
+    opacity: 1;
+    clip-path: inset(0 50% 0 0);
+    filter: drop-shadow(0 1px 4px fade(@warning-color, 35%));
+  }
+
+  // hover 高亮增强
+  .aero-rate:not(.aero-rate--disabled):not(.aero-rate--readonly) &--active:hover &-second {
+    filter: drop-shadow(0 2px 8px fade(@warning-color, 50%)) brightness(1.08);
+  }
+}

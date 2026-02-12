@@ -99,3 +99,9 @@ export type { DemoBoxProps } from './DemoBox';
 
 export { default as Breadcrumb } from './Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemType } from './Breadcrumb';
+
+export { default as Rate } from './Rate';
+export type { RateProps } from './Rate';
+
+export { default as Image } from './Image';
+export type { ImageProps, PreviewGroupProps } from './Image';

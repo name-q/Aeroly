@@ -1,0 +1,218 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- Tokens ----
+@desc-label-width: 120px;
+
+.aero-descriptions {
+  width: 100%;
+  font-size: 14px;
+  color: var(--aero-text-color, #1a1a1a);
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ---- Header ----
+.aero-descriptions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.aero-descriptions-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--aero-text-color, #1a1a1a);
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+.aero-descriptions-extra {
+  flex-shrink: 0;
+}
+
+// ---- Table ----
+.aero-descriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+// ---- Label ----
+.aero-descriptions-label {
+  font-weight: 400;
+  color: var(--aero-text-secondary, #666);
+  white-space: nowrap;
+  vertical-align: top;
+  text-align: left;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  &--right {
+    text-align: right;
+  }
+}
+
+.aero-descriptions-colon {
+  margin-right: 8px;
+  margin-left: 2px;
+}
+
+// ---- Content ----
+.aero-descriptions-content {
+  color: var(--aero-text-color, #1a1a1a);
+  vertical-align: top;
+  word-break: break-word;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ======== 无边框模式（默认） ========
+.aero-descriptions:not(.aero-descriptions--bordered) {
+  .aero-descriptions-label {
+    padding: 8px 0;
+  }
+
+  .aero-descriptions-content {
+    padding: 8px 16px 8px 0;
+  }
+
+  // 行之间用底部细线分隔
+  .aero-descriptions-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    @{dark-selector} & {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// ======== 有边框模式 ========
+.aero-descriptions--bordered {
+  .aero-descriptions-table {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: @border-radius-base;
+    overflow: hidden;
+
+    @{dark-selector} & {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .aero-descriptions-label {
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.02);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.03);
+      border-right-color: rgba(255, 255, 255, 0.06);
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .aero-descriptions-content {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+      border-right-color: rgba(255, 255, 255, 0.06);
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // 最后一行去掉底部边框
+  .aero-descriptions-row:last-child {
+    .aero-descriptions-label,
+    .aero-descriptions-content {
+      border-bottom: none;
+    }
+  }
+}
+
+// ======== 尺寸 ========
+.aero-descriptions--small {
+  font-size: 13px;
+
+  .aero-descriptions-header {
+    margin-bottom: 12px;
+  }
+
+  .aero-descriptions-title {
+    font-size: 14px;
+  }
+
+  &.aero-descriptions--bordered {
+    .aero-descriptions-label,
+    .aero-descriptions-content {
+      padding: 6px 10px;
+    }
+  }
+
+  &:not(.aero-descriptions--bordered) {
+    .aero-descriptions-label {
+      padding: 5px 0;
+    }
+
+    .aero-descriptions-content {
+      padding: 5px 12px 5px 0;
+    }
+  }
+}
+
+.aero-descriptions--large {
+  font-size: 15px;
+
+  .aero-descriptions-header {
+    margin-bottom: 20px;
+  }
+
+  .aero-descriptions-title {
+    font-size: 18px;
+  }
+
+  &.aero-descriptions--bordered {
+    .aero-descriptions-label,
+    .aero-descriptions-content {
+      padding: 14px 18px;
+    }
+  }
+
+  &:not(.aero-descriptions--bordered) {
+    .aero-descriptions-label {
+      padding: 12px 0;
+    }
+
+    .aero-descriptions-content {
+      padding: 12px 20px 12px 0;
+    }
+  }
+}
+
+// ======== vertical 布局微调 ========
+.aero-descriptions--vertical {
+  &:not(.aero-descriptions--bordered) {
+    .aero-descriptions-label {
+      padding-bottom: 2px;
+    }
+  }
+}

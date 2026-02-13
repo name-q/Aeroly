@@ -4,6 +4,8 @@ import './index.less';
 export interface DividerProps {
   /** 分割线方向 */
   direction?: 'horizontal' | 'vertical';
+  /** 线条样式 */
+  type?: 'solid' | 'dashed' | 'fade';
   /** 文字位置（仅水平方向有效） */
   orientation?: 'left' | 'center' | 'right';
   /** 分割线内嵌文字 */
@@ -16,6 +18,7 @@ export interface DividerProps {
 
 const Divider: React.FC<DividerProps> = ({
   direction = 'horizontal',
+  type = 'solid',
   orientation = 'center',
   children,
   className,
@@ -26,6 +29,7 @@ const Divider: React.FC<DividerProps> = ({
   const classNames = [
     'aero-divider',
     `aero-divider--${direction}`,
+    `aero-divider--${type}`,
     hasChildren ? `aero-divider--with-text` : '',
     hasChildren ? `aero-divider--text-${orientation}` : '',
     className || '',

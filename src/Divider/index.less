@@ -19,6 +19,44 @@
       content: '';
       flex: 1;
       height: 1px;
+    }
+  }
+
+  // ---- type: solid（默认） ----
+  &--solid&--horizontal {
+    &::before,
+    &::after {
+      background: var(--aero-border-color, rgba(0, 0, 0, 0.08));
+    }
+
+    @{dark-selector} & {
+      &::before,
+      &::after {
+        background: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+
+  // ---- type: dashed ----
+  &--dashed&--horizontal {
+    &::before,
+    &::after {
+      height: 0;
+      border-top: 1px dashed var(--aero-border-color, rgba(0, 0, 0, 0.08));
+    }
+
+    @{dark-selector} & {
+      &::before,
+      &::after {
+        border-top-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+
+  // ---- type: fade ----
+  &--fade&--horizontal {
+    &::before,
+    &::after {
       background: linear-gradient(
         90deg,
         transparent,
@@ -41,20 +79,6 @@
   }
 
   // ---- with text ----
-  &--with-text {
-    &::before,
-    &::after {
-      background: var(--aero-border-color, rgba(0, 0, 0, 0.08));
-    }
-
-    @{dark-selector} & {
-      &::before,
-      &::after {
-        background: rgba(255, 255, 255, 0.12);
-      }
-    }
-  }
-
   &--text-left::before {
     flex: 0 0 5%;
   }
@@ -76,10 +100,40 @@
     width: 1px;
     height: 0.9em;
     margin: 0 8px;
+  }
+
+  &--solid&--vertical {
     background: var(--aero-border-color, rgba(0, 0, 0, 0.08));
 
     @{dark-selector} & {
       background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  &--dashed&--vertical {
+    width: 0;
+    border-left: 1px dashed var(--aero-border-color, rgba(0, 0, 0, 0.08));
+
+    @{dark-selector} & {
+      border-left-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  &--fade&--vertical {
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--aero-border-color, rgba(0, 0, 0, 0.08)) 50%,
+      transparent
+    );
+
+    @{dark-selector} & {
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent
+      );
     }
   }
 }

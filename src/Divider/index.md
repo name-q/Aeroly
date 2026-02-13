@@ -30,6 +30,7 @@ toc: content
 | 属性 | 说明 | 类型 | 默认值 |
 |------|------|------|--------|
 | direction | 分割线方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| type | 线条样式 | `'solid' \| 'dashed' \| 'fade'` | `'solid'` |
 | orientation | 文字位置（仅水平有效） | `'left' \| 'center' \| 'right'` | `'center'` |
 | children | 嵌入文字 | `ReactNode` | - |
 | className | 自定义类名 | `string` | - |

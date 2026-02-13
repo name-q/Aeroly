@@ -27,10 +27,11 @@ const columns = [
   {
     title: '操作',
     key: 'action',
-    render: (_: any, record: any) => (
-      <Flex gap="xs">
-        <Button size="small">编辑</Button>
-        <Button size="small">删除</Button>
+    align: 'right',
+    render: () => (
+      <Flex gap="xs" inline>
+        <Button size="small" type="text">编辑</Button>
+        <Button size="small" type="text">删除</Button>
       </Flex>
     ),
   },

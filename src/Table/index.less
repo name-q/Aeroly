@@ -53,6 +53,7 @@
 .aero-table-cell {
   padding: 12px 16px;
   vertical-align: middle;
+  text-align: center;
   border-bottom: 1px solid @table-border-color;
   .transition(background);
 
@@ -60,6 +61,7 @@
     border-bottom-color: @table-border-color-dark;
   }
 
+  &--left { text-align: left; }
   &--center { text-align: center; }
   &--right { text-align: right; }
 
@@ -229,6 +231,58 @@
   40% { opacity: 1; transform: scale(1); }
 }
 
+// ---- 展开行 ----
+.aero-table-expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: var(--aero-text-secondary, #666);
+  transition: transform 120ms ease;
+  flex-shrink: 0;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  &--open {
+    transform: rotate(90deg);
+  }
+}
+
+.aero-table-expand-placeholder {
+  display: inline-block;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.aero-table-expand-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// 子行背景 + 左边框标识
+.aero-table-row--child > .aero-table-cell {
+  background: rgba(0, 0, 0, 0.02);
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+.aero-table-row--child > .aero-table-cell:first-child {
+  box-shadow: inset 3px 0 0 0 @primary-color;
+}
+
+.aero-table-row--child:hover > .aero-table-cell {
+  background: rgba(0, 0, 0, 0.04);
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
 // ======== 尺寸 ========
 .aero-table--small {
   font-size: 13px;
@@ -372,6 +426,23 @@
 
     @{dark-selector} & {
       background: @table-row-selected-hover-bg-dark;
+    }
+  }
+
+  // 子行覆盖（固定列需实色）
+  .aero-table-row--child > & {
+    background: #f8f8f8;
+
+    @{dark-selector} & {
+      background: #1e1e1e;
+    }
+  }
+
+  .aero-table-row--child:hover > & {
+    background: #f3f3f3;
+
+    @{dark-selector} & {
+      background: #252525;
     }
   }
 

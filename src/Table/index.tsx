@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
+import { ChevronRight } from 'lucide-react';
 import Checkbox from '../Checkbox';
 import Pagination from '../Pagination';
 import Empty from '../Empty';
@@ -85,6 +86,12 @@ export interface TableProps<T = any> {
   sticky?: boolean;
   /** 纵向滚动高度 */
   scroll?: { y?: number | string };
+  /** 默认展开的行 key（非受控） */
+  defaultExpandedRowKeys?: (string | number)[];
+  /** 展开的行 key（受控） */
+  expandedRowKeys?: (string | number)[];
+  /** 展开行变化回调 */
+  onExpandedRowsChange?: (keys: (string | number)[]) => void;
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -106,6 +113,35 @@ function getFieldValue(record: any, dataIndex?: string): any {
 
 function getColumnKey<T>(col: ColumnType<T>, index: number): string {
   return (col.key ?? col.dataIndex ?? String(index)) as string;
+}
+
+// ---- 展开行工具 ----
+
+interface FlatRow<T> {
+  record: T;
+  level: number;
+  key: string | number;
+  hasChildren: boolean;
+}
+
+function flattenData<T>(
+  data: T[],
+  rowKey: RowKey<T>,
+  expandedKeys: Set<string | number>,
+  level = 0,
+  parentIndex = 0,
+): FlatRow<T>[] {
+  const result: FlatRow<T>[] = [];
+  data.forEach((record, i) => {
+    const key = getRowKeyValue(record, rowKey, parentIndex + i);
+    const children = (record as any).children as T[] | undefined;
+    const hasChildren = Array.isArray(children) && children.length > 0;
+    result.push({ record, level, key, hasChildren });
+    if (hasChildren && expandedKeys.has(key)) {
+      result.push(...flattenData(children!, rowKey, expandedKeys, level + 1, 0));
+    }
+  });
+  return result;
 }
 
 // ---- 排序图标 ----
@@ -147,9 +183,28 @@ function Table<T = any>({
   onRow,
   sticky = false,
   scroll,
+  defaultExpandedRowKeys,
+  expandedRowKeys: expandedRowKeysProp,
+  onExpandedRowsChange,
   className,
   style,
 }: TableProps<T>) {
+  // ---- 展开行 ----
+  const [innerExpandedKeys, setInnerExpandedKeys] = useState<(string | number)[]>(defaultExpandedRowKeys ?? []);
+  const expandedKeys = expandedRowKeysProp ?? innerExpandedKeys;
+  const expandedSet = useMemo(() => new Set(expandedKeys), [expandedKeys]);
+
+  const hasTreeData = useMemo(() =>
+    dataSource.some((r) => Array.isArray((r as any).children) && (r as any).children.length > 0),
+  [dataSource]);
+
+  const handleToggleExpand = useCallback((key: string | number) => {
+    const next = expandedSet.has(key)
+      ? expandedKeys.filter((k) => k !== key)
+      : [...expandedKeys, key];
+    if (expandedRowKeysProp === undefined) setInnerExpandedKeys(next);
+    onExpandedRowsChange?.(next);
+  }, [expandedKeys, expandedSet, expandedRowKeysProp, onExpandedRowsChange]);
   // ---- 排序 ----
   const defaultSort = useMemo(() => {
     for (let i = 0; i < columns.length; i++) {
@@ -360,6 +415,20 @@ function Table<T = any>({
     ? { maxHeight: scroll.y, overflowY: 'auto' }
     : undefined;
 
+  // ---- 展平树形数据（排序后、分页后） ----
+  const flatRows = useMemo<FlatRow<T>[]>(() => {
+    if (!hasTreeData) return pagedData.map((record, i) => ({
+      record,
+      level: 0,
+      key: getRowKeyValue(record, rowKey, i),
+      hasChildren: false,
+    }));
+    return flattenData(pagedData, rowKey, expandedSet);
+  }, [pagedData, rowKey, expandedSet, hasTreeData]);
+
+  // 找到第一个数据列的 index（用于放展开图标）
+  const firstDataColIndex = 0;
+
   return (
     <div className={cls} style={style}>
       <div className="aero-table-container" ref={scrollRef} style={scrollStyle}>
@@ -412,15 +481,14 @@ function Table<T = any>({
             </tr>
           </thead>
           <tbody className="aero-table-tbody">
-            {pagedData.length === 0 ? (
+            {flatRows.length === 0 ? (
               <tr>
                 <td colSpan={columns.length + (selectable ? 1 : 0)} className="aero-table-cell aero-table-cell-empty">
                   {emptyText ?? <Empty preset="noData" style={{ padding: '24px 16px' }} />}
                 </td>
               </tr>
             ) : (
-              pagedData.map((record, ri) => {
-                const key = getRowKeyValue(record, rowKey, ri);
+              flatRows.map(({ record, level, key, hasChildren }, ri) => {
                 const isSelected = selectedKeys.includes(key);
                 const checkboxProps = rowSelection?.getCheckboxProps?.(record);
                 const rowEvents = onRow?.(record, ri);
@@ -430,6 +498,7 @@ function Table<T = any>({
                     className={[
                       'aero-table-row',
                       isSelected ? 'aero-table-row--selected' : '',
+                      level > 0 ? 'aero-table-row--child' : '',
                     ].filter(Boolean).join(' ')}
                     onClick={rowEvents?.onClick}
                   >
@@ -446,6 +515,7 @@ function Table<T = any>({
                     {columns.map((col, ci) => {
                       const colKey = getColumnKey(col, ci);
                       const val = getFieldValue(record, col.dataIndex);
+                      const isExpandCol = hasTreeData && ci === firstDataColIndex;
                       return (
                         <td
                           key={colKey}
@@ -458,7 +528,23 @@ function Table<T = any>({
                           ].filter(Boolean).join(' ')}
                           style={getFixedStyle(colKey, col.fixed)}
                         >
-                          {col.render ? col.render(val, record, ri) : val}
+                          {isExpandCol ? (
+                            <span className="aero-table-expand-cell">
+                              {hasChildren ? (
+                                <span
+                                  className={`aero-table-expand-icon${expandedSet.has(key) ? ' aero-table-expand-icon--open' : ''}`}
+                                  onClick={(e) => { e.stopPropagation(); handleToggleExpand(key); }}
+                                >
+                                  <ChevronRight size={14} />
+                                </span>
+                              ) : (
+                                <span className="aero-table-expand-placeholder" />
+                              )}
+                              {col.render ? col.render(val, record, ri) : val}
+                            </span>
+                          ) : (
+                            col.render ? col.render(val, record, ri) : val
+                          )}
                         </td>
                       );
                     })}

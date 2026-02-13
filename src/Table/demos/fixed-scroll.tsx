@@ -37,8 +37,8 @@ const columns = [
     fixed: 'right' as const,
     render: () => (
       <Flex gap="xs">
-        <Button size="small">编辑</Button>
-        <Button size="small">删除</Button>
+        <Button size="small" type="text">编辑</Button>
+        <Button size="small" type="text">删除</Button>
       </Flex>
     ),
   },
@@ -63,7 +63,7 @@ export default () => (
     sticky
     pagination={{
       defaultPageSize: 50,
-      showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
+      showTotal: (total: number, range: [number, number]) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
     }}
   />
 );

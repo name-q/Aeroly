@@ -45,6 +45,10 @@ toc: content
 
 <code src="./demos/fixed-scroll.tsx"></code>
 
+## 可展开行
+
+<code src="./demos/expandable.tsx"></code>
+
 ## API
 
 ### Table
@@ -64,6 +68,9 @@ toc: content
 | onRow | 行事件 | `(record, index) => { onClick? }` | - |
 | sticky | 表头吸顶 | `boolean` | `false` |
 | scroll | 纵向滚动 | `{ y?: number \| string }` | - |
+| defaultExpandedRowKeys | 默认展开的行 key | `(string \| number)[]` | - |
+| expandedRowKeys | 展开的行 key（受控） | `(string \| number)[]` | - |
+| onExpandedRowsChange | 展开行变化回调 | `(keys: (string \| number)[]) => void` | - |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |
 
@@ -75,7 +82,7 @@ toc: content
 | dataIndex | 数据字段名 | `string` | - |
 | key | 唯一标识 | `string` | `dataIndex` |
 | width | 列宽 | `number \| string` | - |
-| align | 对齐方式 | `'left' \| 'center' \| 'right'` | `'left'` |
+| align | 对齐方式 | `'left' \| 'center' \| 'right'` | `'center'` |
 | fixed | 固定列 | `'left' \| 'right'` | - |
 | render | 自定义渲染 | `(value, record, index) => ReactNode` | - |
 | sorter | 排序函数 | `(a, b) => number` | - |

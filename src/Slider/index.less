@@ -1,0 +1,336 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- Tokens ----
+@slider-height: 4px;
+@slider-handle-size: 16px;
+@slider-handle-size-active: 20px;
+
+// ---- 容器 ----
+.aero-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 32px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+
+  &--vertical {
+    width: 32px;
+    height: 100%;
+    min-height: 120px;
+    flex-direction: column;
+  }
+
+  &--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+
+    .aero-slider-handle {
+      cursor: not-allowed;
+    }
+  }
+
+  &--readonly {
+    cursor: default;
+
+    .aero-slider-handle {
+      cursor: default;
+    }
+  }
+}
+
+// ---- 轨道 ----
+.aero-slider-rail {
+  position: relative;
+  flex: 1;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  transition: background @transition-duration @transition-timing;
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .aero-slider:not(.aero-slider--vertical) & {
+    height: @slider-height;
+  }
+
+  .aero-slider--vertical & {
+    width: @slider-height;
+    height: 100%;
+  }
+}
+
+// ---- 已选区间 ----
+.aero-slider-track {
+  position: absolute;
+  border-radius: 999px;
+  background: @primary-color;
+  transition: background @transition-duration @transition-timing;
+  overflow: hidden;
+
+  .aero-slider:not(.aero-slider--vertical) & {
+    height: 100%;
+  }
+
+  .aero-slider--vertical & {
+    width: 100%;
+  }
+
+  @{dark-selector} & {
+    background: fade(@primary-color, 70%);
+  }
+
+  // ---- shimmer 光泽层 ----
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 255, 255, 0.35) 45%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.35) 55%,
+      transparent 65%,
+      transparent 100%
+    );
+    animation: aero-slider-shimmer 4s ease-in-out infinite;
+    pointer-events: none;
+
+    @{dark-selector} & {
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.08) 45%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.08) 55%,
+        transparent 65%,
+        transparent 100%
+      );
+    }
+  }
+}
+
+@keyframes aero-slider-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// ---- 滑块 ----
+.aero-slider-handle {
+  position: absolute;
+  width: @slider-handle-size;
+  height: @slider-handle-size;
+  border-radius: 50%;
+  border: 2px solid @primary-color;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 150ms @transition-timing,
+              width 150ms @transition-timing,
+              height 150ms @transition-timing,
+              box-shadow 150ms @transition-timing,
+              border-color @transition-duration @transition-timing;
+  z-index: 1;
+  outline: none;
+
+  // 鼠标移入容器 或 拖拽中 显示
+  .aero-slider:hover &,
+  .aero-slider--dragging & {
+    opacity: 1;
+  }
+
+  // 水平模式定位
+  .aero-slider:not(.aero-slider--vertical) & {
+    top: 50%;
+  }
+
+  // 垂直模式定位
+  .aero-slider--vertical & {
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+
+  @{dark-selector} & {
+    border-color: @primary-color;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover:not(.aero-slider--disabled &) {
+    border-color: lighten(@primary-color, 8%);
+    box-shadow: 0 0 0 4px fade(@primary-color, 12%),
+                0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  &--active {
+    width: @slider-handle-size-active;
+    height: @slider-handle-size-active;
+    box-shadow: 0 0 0 5px fade(@primary-color, 16%),
+                0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    box-shadow: 0 0 0 4px fade(@primary-color, 25%),
+                0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .aero-slider--dragging & {
+    cursor: grabbing;
+  }
+}
+
+// ---- Tooltip ----
+.aero-slider-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  animation: aero-slider-tooltip-in 120ms @transition-timing;
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    color: #f0f0f0;
+  }
+
+  // 垂直模式 tooltip 在右侧
+  .aero-slider--vertical & {
+    bottom: auto;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes aero-slider-tooltip-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// ---- 刻度点 ----
+.aero-slider-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+
+  .aero-slider:not(.aero-slider--vertical) & {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .aero-slider--vertical & {
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+
+  @{dark-selector} & {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  &--active {
+    border-color: @primary-color;
+
+    @{dark-selector} & {
+      border-color: @primary-color;
+    }
+  }
+}
+
+// ---- 刻度文字 ----
+.aero-slider-mark {
+  position: absolute;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  white-space: nowrap;
+  transition: color @transition-duration @transition-timing;
+
+  .aero-slider:not(.aero-slider--vertical) & {
+    top: calc(50% + @slider-height / 2 + 10px);
+    transform: translateX(-50%);
+  }
+
+  .aero-slider--vertical & {
+    left: calc(50% + @slider-height / 2 + 10px);
+    transform: translateY(50%);
+  }
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &--active {
+    color: rgba(0, 0, 0, 0.65);
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// ---- 关闭动画 ----
+.aero-slider--no-animate {
+  .aero-slider-handle {
+    transition: none;
+  }
+
+  .aero-slider-tooltip {
+    animation: none;
+  }
+
+  .aero-slider-track::after {
+    animation: none;
+    display: none;
+  }
+}
+
+// 有 marks 时给容器留出下方空间
+.aero-slider:not(.aero-slider--vertical) {
+  &:has(.aero-slider-mark) {
+    margin-bottom: 20px;
+  }
+}
+
+.aero-slider--vertical {
+  &:has(.aero-slider-mark) {
+    margin-right: 32px;
+  }
+}

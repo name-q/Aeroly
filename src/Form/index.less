@@ -1,0 +1,242 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- Form ----
+
+.aero-form {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.85);
+
+  // inline 布局
+  &--inline {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px 16px;
+    align-items: end;
+
+    .aero-form-item {
+      margin-bottom: 0;
+    }
+
+    // 没有 label 的 item（纯按钮）独占一行
+    .aero-form-item--no-label {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+// ---- Form Item ----
+
+.aero-form-item {
+  margin-bottom: 20px;
+
+  &--hidden {
+    display: none !important;
+  }
+
+  // vertical 布局（默认）
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  // horizontal 布局
+  &--horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: nowrap;
+
+    .aero-form-item-label {
+      flex-shrink: 0;
+      line-height: 36px;
+      white-space: normal;
+      word-break: break-all;
+      max-width: 33%;
+    }
+
+    .aero-form-item-control {
+      flex: 1;
+      min-width: 0;
+    }
+
+    // 矮控件（Rate、Switch 等）让 control 区域有最小高度，与 label 对齐
+    .aero-form-item-control-input {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // inline 布局
+  &--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+
+    .aero-form-item-label {
+      flex-shrink: 0;
+      line-height: 36px;
+    }
+
+    .aero-form-item-control {
+      flex: 1;
+      min-width: 0;
+    }
+
+    // 矮控件对齐
+    .aero-form-item-control-input {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// ---- Label ----
+
+.aero-form-item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.75);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.aero-form-item-required {
+  color: @error-color;
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+.aero-form-item-label-text {
+  // 默认样式
+}
+
+.aero-form-item-optional {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+// ---- Control ----
+
+.aero-form-item-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aero-form-item-control-input {
+  // 子控件容器
+}
+
+// ---- Error / Warning 动画 ----
+
+.aero-form-item-error,
+.aero-form-item-warning {
+  overflow: hidden;
+  animation: aero-form-slide-down @transition-duration @transition-timing forwards;
+}
+
+.aero-form-item-error-message {
+  font-size: 12px;
+  line-height: 1.5;
+  color: @error-color;
+}
+
+.aero-form-item-warning-message {
+  font-size: 12px;
+  line-height: 1.5;
+  color: @warning-color;
+}
+
+// ---- Help / Extra ----
+
+.aero-form-item-help {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.aero-form-item-extra {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+// ---- 动画 ----
+
+@keyframes aero-form-slide-down {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    max-height: 60px;
+    transform: translateY(0);
+  }
+}
+
+// ---- 尺寸 ----
+
+.aero-form--small {
+  font-size: 12px;
+
+  .aero-form-item-label {
+    font-size: 12px;
+  }
+
+  .aero-form-item--horizontal .aero-form-item-label {
+    line-height: 28px;
+  }
+
+  .aero-form-item--horizontal .aero-form-item-control-input,
+  .aero-form-item--inline .aero-form-item-control-input {
+    min-height: 28px;
+  }
+}
+
+.aero-form--large {
+  .aero-form-item-label {
+    font-size: 15px;
+  }
+
+  .aero-form-item--horizontal .aero-form-item-label {
+    line-height: 44px;
+  }
+
+  .aero-form-item--horizontal .aero-form-item-control-input,
+  .aero-form-item--inline .aero-form-item-control-input {
+    min-height: 44px;
+  }
+}
+
+// ---- 暗色模式 ----
+
+@{dark-selector} {
+  .aero-form {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .aero-form-item-label {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .aero-form-item-optional {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .aero-form-item-help,
+  .aero-form-item-extra {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}

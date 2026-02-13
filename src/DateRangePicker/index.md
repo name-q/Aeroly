@@ -48,6 +48,7 @@ toc: content
 | disabled | 是否禁用 | `boolean` | `false` |
 | allowClear | 是否允许清除 | `boolean` | `true` |
 | size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | 状态 | `'error' \| 'warning'` | - |
 | format | 显示格式 | `string` | `'YYYY-MM-DD'` |
 | disabledDate | 禁用日期判断 | `(date: Date) => boolean` | - |
 | showTime | 是否显示时间选择 | `boolean \| { showSecond?: boolean }` | - |

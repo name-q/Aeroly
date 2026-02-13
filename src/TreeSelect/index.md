@@ -52,6 +52,7 @@ toc: content
 | multiple | 是否多选（勾选框模式） | `boolean` | `false` |
 | maxTagCount | 多选时最多显示的标签数 | `number` | - |
 | size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | 状态 | `'error' \| 'warning'` | - |
 | notFoundContent | 无数据时的提示 | `ReactNode` | - |
 | defaultExpandAll | 默认展开所有节点 | `boolean` | `false` |
 | defaultExpandedKeys | 默认展开的节点 key | `string[]` | `[]` |

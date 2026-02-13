@@ -211,5 +211,6 @@ const Checkbox: React.FC<CheckboxProps> & { Group: typeof CheckboxGroup } = ({
 };
 
 Checkbox.Group = CheckboxGroup;
+(Checkbox as any).__AERO_CHECKABLE = true;
 
 export default Checkbox;

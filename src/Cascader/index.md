@@ -57,6 +57,7 @@ toc: content
 | changeOnSelect | 选择任意层级即触发 onChange | `boolean` | `false` |
 | displaySeparator | 显示文本的分隔符 | `string` | `' / '` |
 | size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | 状态 | `'error' \| 'warning'` | - |
 | notFoundContent | 无数据时的提示 | `ReactNode` | - |
 | open | 下拉面板是否显示（受控） | `boolean` | - |
 | onOpenChange | 下拉面板显隐变化回调 | `(open: boolean) => void` | - |

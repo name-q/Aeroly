@@ -9,6 +9,7 @@
 .aero-time-picker {
   position: relative;
   display: inline-flex;
+  width: 100%;
 
   // ---- 输入框 ----
   &-input {
@@ -280,6 +281,24 @@
     filter: saturate(0.7);
     box-shadow: none;
     cursor: not-allowed;
+  }
+
+  // ---- Status ----
+  &--error &-input {
+    border-color: @error-color;
+    @{dark-selector} & { border-color: fade(@error-color, 70%); }
+  }
+  &--error&--open &-input {
+    box-shadow: 0 0 0 3px fade(@error-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
+    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@error-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
+  }
+  &--warning &-input {
+    border-color: @warning-color;
+    @{dark-selector} & { border-color: fade(@warning-color, 70%); }
+  }
+  &--warning&--open &-input {
+    box-shadow: 0 0 0 3px fade(@warning-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
+    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@warning-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
   }
 
   // ---- 尺寸 ----

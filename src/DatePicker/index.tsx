@@ -30,6 +30,8 @@ export interface DatePickerProps {
   disabledDate?: (date: Date) => boolean;
   /** 是否显示时间选择 */
   showTime?: boolean | { showSecond?: boolean };
+  /** 状态 */
+  status?: 'error' | 'warning';
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -277,6 +279,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   format: formatProp,
   disabledDate,
   showTime,
+  status,
   className,
   style,
 }) => {
@@ -438,6 +441,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     `aero-date-picker--${size}`,
     open ? 'aero-date-picker--open' : '',
     disabled ? 'aero-date-picker--disabled' : '',
+    status ? `aero-date-picker--${status}` : '',
     className || '',
   ]
     .filter(Boolean)

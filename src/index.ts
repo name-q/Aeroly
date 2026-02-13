@@ -138,3 +138,9 @@ export type { TableProps, ColumnType, RowSelection, SortOrder, TableSize } from 
 
 export { default as Tour } from './Tour';
 export type { TourProps, TourStepConfig, TourPlacement } from './Tour';
+
+export { default as Form } from './Form';
+export type { FormProps, FormInstance, FormItemProps, FormListProps, FormListField, FormListOperation, FormListMeta, Rule, NamePath, FieldError, FieldState } from './Form';
+
+export { default as Spin } from './Spin';
+export type { SpinProps } from './Spin';

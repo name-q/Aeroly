@@ -20,6 +20,8 @@ export interface DateRangePickerProps {
   format?: string;
   disabledDate?: (date: Date) => boolean;
   showTime?: boolean | { showSecond?: boolean };
+  /** 状态 */
+  status?: 'error' | 'warning';
   className?: string;
   style?: React.CSSProperties;
 }
@@ -80,6 +82,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   format: formatProp,
   disabledDate,
   showTime,
+  status,
   className,
   style,
 }) => {
@@ -315,6 +318,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     `${PREFIX}--${size}`,
     open ? `${PREFIX}--open` : '',
     disabled ? `${PREFIX}--disabled` : '',
+    status ? `${PREFIX}--${status}` : '',
     className || '',
   ].filter(Boolean).join(' ');
 

@@ -58,6 +58,8 @@ export interface TreeSelectProps {
   open?: boolean;
   /** 下拉面板显隐变化回调 */
   onOpenChange?: (open: boolean) => void;
+  /** 状态 */
+  status?: 'error' | 'warning';
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -204,6 +206,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   treeLeafOnly = false,
   open: openProp,
   onOpenChange,
+  status,
   className,
   style,
 }) => {
@@ -418,6 +421,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     isOpen ? 'aero-tree-select--open' : '',
     disabled ? 'aero-tree-select--disabled' : '',
     multiple ? 'aero-tree-select--multiple' : '',
+    status ? `aero-tree-select--${status}` : '',
     className || '',
   ]
     .filter(Boolean)

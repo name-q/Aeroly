@@ -58,6 +58,8 @@ export interface CascaderProps {
   open?: boolean;
   /** 下拉面板显隐变化回调 */
   onOpenChange?: (open: boolean) => void;
+  /** 状态 */
+  status?: 'error' | 'warning';
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -148,6 +150,7 @@ const Cascader: React.FC<CascaderProps> = ({
   notFoundContent,
   open: openProp,
   onOpenChange,
+  status,
   className,
   style,
 }) => {
@@ -390,6 +393,7 @@ const Cascader: React.FC<CascaderProps> = ({
     isOpen ? 'aero-cascader--open' : '',
     disabled ? 'aero-cascader--disabled' : '',
     multiple ? 'aero-cascader--multiple' : '',
+    status ? `aero-cascader--${status}` : '',
     className || '',
   ]
     .filter(Boolean)

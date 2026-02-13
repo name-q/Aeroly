@@ -52,5 +52,6 @@ toc: content
 | minuteStep | 分钟步长 | `number` | `1` |
 | secondStep | 秒步长 | `number` | `1` |
 | size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | 状态 | `'error' \| 'warning'` | - |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |

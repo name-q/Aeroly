@@ -26,6 +26,8 @@ export interface TimePickerProps {
   secondStep?: number;
   /** 尺寸 */
   size?: 'small' | 'medium' | 'large';
+  /** 状态 */
+  status?: 'error' | 'warning';
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -218,6 +220,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
   minuteStep = 1,
   secondStep = 1,
   size = 'medium',
+  status,
   className,
   style,
 }) => {
@@ -289,6 +292,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
     `aero-time-picker--${size}`,
     open ? 'aero-time-picker--open' : '',
     disabled ? 'aero-time-picker--disabled' : '',
+    status ? `aero-time-picker--${status}` : '',
     className || '',
   ]
     .filter(Boolean)

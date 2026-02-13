@@ -56,6 +56,7 @@ toc: content
 | multiple | 是否多选 | `boolean` | `false` |
 | maxTagCount | 多选时最多显示的标签数 | `number` | - |
 | size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | 状态 | `'error' \| 'warning'` | - |
 | notFoundContent | 无数据时的提示 | `ReactNode` | - |
 | open | 下拉面板是否显示（受控） | `boolean` | - |
 | onOpenChange | 下拉面板显隐变化回调 | `(open: boolean) => void` | - |

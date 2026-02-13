@@ -121,6 +121,8 @@ const Modal: React.FC<ModalProps> & {
       try {
         await result;
         onOpenChange(false);
+      } catch {
+        // onOk 返回 rejected promise 时不关闭弹窗
       } finally {
         setOkLoading(false);
       }

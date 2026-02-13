@@ -59,6 +59,8 @@ export interface SelectProps {
   open?: boolean;
   /** 下拉面板显隐变化回调 */
   onOpenChange?: (open: boolean) => void;
+  /** 状态 */
+  status?: 'error' | 'warning';
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -108,6 +110,7 @@ const Select: React.FC<SelectProps> = ({
   notFoundContent,
   open: openProp,
   onOpenChange,
+  status,
   className,
   style,
 }) => {
@@ -338,6 +341,7 @@ const Select: React.FC<SelectProps> = ({
     isOpen ? 'aero-select--open' : '',
     disabled ? 'aero-select--disabled' : '',
     multiple ? 'aero-select--multiple' : '',
+    status ? `aero-select--${status}` : '',
     className || '',
   ]
     .filter(Boolean)

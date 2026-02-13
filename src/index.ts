@@ -114,3 +114,9 @@ export type { MasonryProps } from './Masonry';
 
 export { default as Tabs } from './Tabs';
 export type { TabsProps, TabItem, TabsVariant, TabsSize } from './Tabs';
+
+export { default as Slider } from './Slider';
+export type { SliderProps, SliderMarks } from './Slider';
+
+export { default as Upload } from './Upload';
+export type { UploadProps, UploadFile, UploadStatus, CustomRequestOptions } from './Upload';

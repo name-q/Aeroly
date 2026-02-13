@@ -120,3 +120,9 @@ export type { SliderProps, SliderMarks } from './Slider';
 
 export { default as Upload } from './Upload';
 export type { UploadProps, UploadFile, UploadStatus, CustomRequestOptions } from './Upload';
+
+export { default as Descriptions } from './Descriptions';
+export type { DescriptionsProps, DescriptionsItem } from './Descriptions';
+
+export { default as Carousel } from './Carousel';
+export type { CarouselProps, CarouselItem, CarouselEffect, CarouselDirection, CarouselRef } from './Carousel';

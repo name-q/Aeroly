@@ -1,0 +1,266 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@carousel-arrow-size: 36px;
+@carousel-dot-size: 8px;
+@carousel-dot-active-width: 20px;
+@carousel-duration: 400ms;
+
+.aero-carousel {
+  position: relative;
+  outline: none;
+  touch-action: pan-y;
+
+  &--vertical {
+    touch-action: pan-x;
+  }
+
+  // ==================== Viewport ====================
+  &__viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: @border-radius-lg;
+  }
+
+  // ==================== Slide Track ====================
+  &__track {
+    display: flex;
+    will-change: transform;
+  }
+
+  &__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &--vertical &__track {
+    height: 100%;
+  }
+
+  &--vertical &__slide {
+    flex: 0 0 100%;
+    height: 100%;
+    width: 100%;
+  }
+
+  // ==================== Fade ====================
+  &__fade-container {
+    position: relative;
+  }
+
+  &__slide--fade {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity @carousel-duration @transition-timing;
+    pointer-events: none;
+
+    &:first-child {
+      position: relative;
+    }
+
+    &.aero-carousel__slide--active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // ==================== Arrows ====================
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: @carousel-arrow-size;
+    height: @carousel-arrow-size;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+    transition: opacity 240ms @transition-timing,
+                background @transition-duration @transition-timing;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    &:disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
+
+    &--prev {
+      left: 12px;
+    }
+
+    &--next {
+      right: 12px;
+    }
+
+    @{dark-selector} & {
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      background: rgba(0, 0, 0, 0.15);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // Vertical arrows
+  &--vertical &__arrow {
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--vertical &__arrow--prev {
+    top: 12px;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--vertical &__arrow--next {
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  // Arrow visibility modes
+  &.aero-carousel__arrows--hover &__arrow {
+    opacity: 0;
+  }
+
+  &.aero-carousel__arrows--hover:hover &__arrow {
+    opacity: 1;
+
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+
+  &.aero-carousel__arrows--always &__arrow {
+    opacity: 1;
+  }
+
+  &.aero-carousel__arrows--hidden &__arrow {
+    display: none;
+  }
+
+  // ==================== Dots ====================
+  &__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+
+    &--vertical {
+      flex-direction: column;
+      padding: 0 12px;
+    }
+  }
+
+  &__dot {
+    width: @carousel-dot-size;
+    height: @carousel-dot-size;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    padding: 0;
+    transition: width 300ms @transition-timing,
+                height 300ms @transition-timing,
+                background 300ms @transition-timing,
+                box-shadow 300ms @transition-timing;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    &--active {
+      width: @carousel-dot-active-width;
+      background: @primary-color;
+      box-shadow: 0 0 8px fade(@primary-color, 40%);
+
+      &:hover {
+        background: @primary-color;
+      }
+    }
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      &--active {
+        background: @primary-color;
+
+        &:hover {
+          background: @primary-color;
+        }
+      }
+    }
+  }
+
+  // Vertical dots active → expand height instead of width
+  &__dots--vertical &__dot--active {
+    width: @carousel-dot-size;
+    height: @carousel-dot-active-width;
+  }
+
+  // ==================== Dots Position ====================
+  // Bottom (default) — dots below viewport
+  &--dots-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Top — dots above viewport
+  &--dots-top {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  // Left — dots on left side
+  &--dots-left {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  // Right — dots on right side
+  &--dots-right {
+    display: flex;
+    flex-direction: row;
+  }
+
+  // Inner — dots overlay on bottom of viewport
+  &--dots-inner {
+    display: flex;
+    flex-direction: column;
+
+    .aero-carousel__viewport {
+      position: relative;
+    }
+
+    .aero-carousel__dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 0;
+    }
+  }
+}

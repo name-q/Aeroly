@@ -126,3 +126,9 @@ export type { DescriptionsProps, DescriptionsItem } from './Descriptions';
 
 export { default as Carousel } from './Carousel';
 export type { CarouselProps, CarouselItem, CarouselEffect, CarouselDirection, CarouselRef } from './Carousel';
+
+export { default as Empty } from './Empty';
+export type { EmptyProps, EmptyPreset } from './Empty';
+
+export { default as Statistic } from './Statistic';
+export type { StatisticProps, CountdownProps, StatisticStatus } from './Statistic';

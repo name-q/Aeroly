@@ -1,0 +1,101 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- 容器 ----
+.aero-statistic {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+// ---- 标题 ----
+.aero-statistic-title {
+  font-size: 13px;
+  color: var(--aero-text-secondary, #666);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+// ---- 数值行 ----
+.aero-statistic-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--aero-text-color, #1a1a1a);
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ---- 前缀 / 后缀 ----
+.aero-statistic-prefix,
+.aero-statistic-suffix {
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+}
+
+// ---- 数字 ----
+.aero-statistic-number {
+  display: inline-block;
+}
+
+// ---- 骨架屏（loading） ----
+.aero-statistic-skeleton {
+  display: inline-block;
+  width: 80px;
+  height: 1em;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: aero-statistic-shimmer 1.5s ease-in-out infinite;
+
+  @{dark-selector} & {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 25%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.06) 75%
+    );
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes aero-statistic-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ---- loading 状态标题也降低 ----
+.aero-statistic--loading {
+  .aero-statistic-prefix,
+  .aero-statistic-suffix {
+    opacity: 0.4;
+  }
+}
+
+// ---- 状态色 ----
+.aero-statistic--success .aero-statistic-value {
+  color: @success-color;
+}
+
+.aero-statistic--warning .aero-statistic-value {
+  color: @warning-color;
+}
+
+.aero-statistic--error .aero-statistic-value {
+  color: @error-color;
+}

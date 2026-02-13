@@ -90,8 +90,8 @@ const Flex: React.FC<FlexProps> = ({
   }
 
   // justify / align 显式覆盖
-  if (justify) s.justifyContent = justifyMap[justify];
-  if (align) s.alignItems = alignMap[align];
+  if (justify) s.justifyContent = justifyMap[justify] || justify;
+  if (align) s.alignItems = alignMap[align] || align;
 
   // gap
   if (gap !== undefined) {

@@ -1,0 +1,465 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+// ---- Tokens ----
+// 全部使用实色，避免 sticky 定位时内容透底
+@table-border-color: rgba(0, 0, 0, 0.06);
+@table-border-color-dark: rgba(255, 255, 255, 0.08);
+@table-header-bg: #fafafa;
+@table-header-bg-dark: #222;
+@table-row-bg: #fff;
+@table-row-bg-dark: #1a1a1a;
+@table-row-hover-bg: #f5f5f5;
+@table-row-hover-bg-dark: #252525;
+@table-row-selected-bg: #e8f4fc;
+@table-row-selected-bg-dark: #1a2e3a;
+@table-row-selected-hover-bg: #dceef8;
+@table-row-selected-hover-bg-dark: #1f3544;
+@table-stripe-bg: #fafafa;
+@table-stripe-bg-dark: #1e1e1e;
+
+// ---- Wrapper ----
+.aero-table-wrapper {
+  position: relative;
+  width: 100%;
+  font-size: 14px;
+  color: var(--aero-text-color, #1a1a1a);
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+// ---- Container（滚动容器） ----
+.aero-table-container {
+  position: relative;
+  overflow-x: auto;
+}
+
+// ---- Table ----
+.aero-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+// ---- 选择列宽 ----
+.aero-table-col-selection {
+  width: 48px;
+}
+
+// ---- Cell 通用 ----
+.aero-table-cell {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid @table-border-color;
+  .transition(background);
+
+  @{dark-selector} & {
+    border-bottom-color: @table-border-color-dark;
+  }
+
+  &--center { text-align: center; }
+  &--right { text-align: right; }
+
+  &--ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// ---- Checkbox 单元格 ----
+.aero-table-cell-checkbox {
+  width: 48px;
+  text-align: center;
+  padding-left: 12px;
+  padding-right: 4px;
+
+  .aero-checkbox {
+    padding: 0;
+  }
+}
+
+// ---- Header ----
+.aero-table-thead {
+  .aero-table-cell {
+    font-weight: 500;
+    color: var(--aero-text-secondary, #666);
+    background: @table-header-bg;
+    white-space: nowrap;
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.55);
+      background: @table-header-bg-dark;
+    }
+  }
+}
+
+.aero-table-cell-header {
+  user-select: none;
+}
+
+.aero-table-cell-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// ---- 排序 ----
+.aero-table-cell--sortable {
+  cursor: pointer;
+
+  &:hover {
+    background: #f0f0f0;
+
+    @{dark-selector} & {
+      background: #2a2a2a;
+    }
+  }
+}
+
+.aero-table-cell--sorted {
+  background: #f2f2f2;
+
+  @{dark-selector} & {
+    background: #272727;
+  }
+}
+
+.aero-table-sorter {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 2px;
+}
+
+.aero-table-sorter-icon {
+  color: rgba(0, 0, 0, 0.2);
+  .transition(color);
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  &--active {
+    color: @primary-color;
+  }
+}
+
+// ---- Body 行 ----
+.aero-table-row {
+  .transition(background);
+
+  &:hover > .aero-table-cell {
+    background: @table-row-hover-bg;
+
+    @{dark-selector} & {
+      background: @table-row-hover-bg-dark;
+    }
+  }
+
+  &--selected > .aero-table-cell {
+    background: @table-row-selected-bg;
+
+    @{dark-selector} & {
+      background: @table-row-selected-bg-dark;
+    }
+  }
+
+  &--selected:hover > .aero-table-cell {
+    background: @table-row-selected-hover-bg;
+
+    @{dark-selector} & {
+      background: @table-row-selected-hover-bg-dark;
+    }
+  }
+}
+
+// ---- 空状态 ----
+.aero-table-cell-empty {
+  text-align: center;
+  border-bottom: none;
+}
+
+// ---- 分页 ----
+.aero-table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 0 0;
+}
+
+// ---- Loading ----
+.aero-table-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: @border-radius-base;
+
+  @{dark-selector} & {
+    background: rgba(0, 0, 0, 0.35);
+  }
+}
+
+.aero-table-loading-spinner {
+  display: flex;
+  gap: 4px;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: @primary-color;
+    animation: aero-table-bounce 1s ease-in-out infinite;
+
+    &:nth-child(2) { animation-delay: 0.15s; }
+    &:nth-child(3) { animation-delay: 0.3s; }
+  }
+}
+
+@keyframes aero-table-bounce {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+// ======== 尺寸 ========
+.aero-table--small {
+  font-size: 13px;
+
+  .aero-table-cell {
+    padding: 8px 12px;
+  }
+
+  .aero-table-cell-checkbox {
+    padding-left: 8px;
+    padding-right: 4px;
+  }
+
+  .aero-table-col-selection {
+    width: 40px;
+  }
+
+  .aero-table-pagination {
+    padding-top: 8px;
+  }
+}
+
+.aero-table--large {
+  font-size: 15px;
+
+  .aero-table-cell {
+    padding: 16px 20px;
+  }
+
+  .aero-table-cell-checkbox {
+    padding-left: 16px;
+    padding-right: 4px;
+  }
+
+  .aero-table-pagination {
+    padding-top: 16px;
+  }
+}
+
+// ======== 边框 ========
+.aero-table--bordered {
+  .aero-table-container {
+    border: 1px solid @table-border-color;
+    border-radius: @border-radius-base;
+    overflow: hidden;
+
+    @{dark-selector} & {
+      border-color: @table-border-color-dark;
+    }
+  }
+
+  .aero-table-cell {
+    border-right: 1px solid @table-border-color;
+
+    @{dark-selector} & {
+      border-right-color: @table-border-color-dark;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // 选择列右边框
+  .aero-table-cell-checkbox {
+    border-right: 1px solid @table-border-color;
+
+    @{dark-selector} & {
+      border-right-color: @table-border-color-dark;
+    }
+  }
+}
+
+// ======== 斑马纹 ========
+.aero-table--striped {
+  .aero-table-tbody .aero-table-row:nth-child(even) > .aero-table-cell {
+    background: @table-stripe-bg;
+
+    @{dark-selector} & {
+      background: @table-stripe-bg-dark;
+    }
+  }
+}
+
+// ======== 表头吸顶 ========
+.aero-table--sticky {
+  .aero-table-thead .aero-table-cell {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  // 吸顶 + 固定列表头：最高层级
+  .aero-table-thead .aero-table-cell--fixed-left,
+  .aero-table-thead .aero-table-cell--fixed-right {
+    z-index: 5;
+  }
+
+  .aero-table-thead .aero-table-cell--fixed-left-boundary,
+  .aero-table-thead .aero-table-cell--fixed-right-boundary {
+    z-index: 6;
+  }
+}
+
+// ======== 固定列 ========
+.aero-table-cell--fixed-left,
+.aero-table-cell--fixed-right {
+  position: sticky;
+  z-index: 2;
+
+  // body 行需要实色背景，否则滚动时内容透出
+  .aero-table-tbody & {
+    background: @table-row-bg;
+
+    @{dark-selector} & {
+      background: @table-row-bg-dark;
+    }
+  }
+
+  // hover 行覆盖
+  .aero-table-row:hover > & {
+    background: @table-row-hover-bg;
+
+    @{dark-selector} & {
+      background: @table-row-hover-bg-dark;
+    }
+  }
+
+  // 选中行覆盖
+  .aero-table-row--selected > & {
+    background: @table-row-selected-bg;
+
+    @{dark-selector} & {
+      background: @table-row-selected-bg-dark;
+    }
+  }
+
+  // 选中行 hover 覆盖
+  .aero-table-row--selected:hover > & {
+    background: @table-row-selected-hover-bg;
+
+    @{dark-selector} & {
+      background: @table-row-selected-hover-bg-dark;
+    }
+  }
+
+  // 斑马纹覆盖
+  .aero-table--striped .aero-table-tbody .aero-table-row:nth-child(even) > & {
+    background: @table-stripe-bg;
+
+    @{dark-selector} & {
+      background: @table-stripe-bg-dark;
+    }
+  }
+
+  // 表头固定列：最高层级
+  .aero-table-thead & {
+    position: sticky;
+    background: @table-header-bg;
+    z-index: 4;
+
+    @{dark-selector} & {
+      background: @table-header-bg-dark;
+    }
+  }
+}
+
+.aero-table-cell--fixed-left {
+  left: 0; // fallback, inline style overrides
+}
+
+.aero-table-cell--fixed-right {
+  right: 0; // fallback, inline style overrides
+}
+
+// 边界固定列 z-index 比其他固定列高，确保阴影伪元素不被相邻固定列遮盖
+.aero-table-cell--fixed-left-boundary {
+  z-index: 3;
+
+  .aero-table-thead & {
+    z-index: 5;
+  }
+}
+
+.aero-table-cell--fixed-right-boundary {
+  z-index: 3;
+
+  .aero-table-thead & {
+    z-index: 5;
+  }
+}
+
+// 固定列阴影 —— 只在边界列上显示
+.aero-table--scroll-left {
+  .aero-table-cell--fixed-left-boundary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.04), transparent);
+    pointer-events: none;
+
+    @{dark-selector} & {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.15), transparent);
+    }
+  }
+}
+
+.aero-table--scroll-right {
+  .aero-table-cell--fixed-right-boundary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.04), transparent);
+    pointer-events: none;
+
+    @{dark-selector} & {
+      background: linear-gradient(to left, rgba(0, 0, 0, 0.15), transparent);
+    }
+  }
+}
+
+// ======== Loading 状态降低内容对比度 ========
+.aero-table--loading {
+  .aero-table {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}

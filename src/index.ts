@@ -132,3 +132,9 @@ export type { EmptyProps, EmptyPreset } from './Empty';
 
 export { default as Statistic } from './Statistic';
 export type { StatisticProps, CountdownProps, StatisticStatus } from './Statistic';
+
+export { default as Table } from './Table';
+export type { TableProps, ColumnType, RowSelection, SortOrder, TableSize } from './Table';
+
+export { default as Tour } from './Tour';
+export type { TourProps, TourStepConfig, TourPlacement } from './Tour';

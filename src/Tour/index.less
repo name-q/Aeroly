@@ -1,0 +1,250 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@tour-duration: 240ms;
+@tour-z: 1060;
+
+// ==================== Root ====================
+.aero-tour-root {
+  position: fixed;
+  inset: 0;
+  z-index: @tour-z;
+  pointer-events: none;
+
+  &--open {
+    pointer-events: auto;
+
+    .aero-tour-mask {
+      opacity: 1;
+    }
+
+    .aero-tour-popover {
+      pointer-events: auto;
+    }
+  }
+}
+
+// ==================== Mask (backdrop-filter blur with clip-path cutout) ====================
+.aero-tour-mask {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  transition: opacity @tour-duration @transition-timing;
+  // clip-path is set inline for spotlight cutout
+}
+
+// ==================== Spotlight border ====================
+// 高亮区域边框提示（叠在 mask 上方）
+.aero-tour-spotlight {
+  position: fixed;
+  border-radius: @border-radius-base;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18),
+              0 0 24px 2px rgba(0, 0, 0, 0.06);
+  transition: top @tour-duration @transition-timing,
+              left @tour-duration @transition-timing,
+              width @tour-duration @transition-timing,
+              height @tour-duration @transition-timing;
+  pointer-events: none;
+
+  @{dark-selector} & {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 24px 2px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ==================== Popover ====================
+.aero-tour-popover {
+  position: absolute;
+  z-index: @tour-z + 1;
+  width: 320px;
+  padding: 16px;
+  border-radius: @border-radius-lg;
+  .glass-effect(rgba(255, 255, 255, 0), 40px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12),
+              0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity @tour-duration @transition-timing,
+              transform @tour-duration @transition-timing;
+
+  @{dark-selector} & {
+    backdrop-filter: blur(40px) saturate(140%);
+    -webkit-backdrop-filter: blur(40px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  // 方向入场
+  &--top {
+    transform: translateY(8px);
+  }
+  &--bottom {
+    transform: translateY(-8px);
+  }
+  &--left {
+    transform: translateX(8px);
+  }
+  &--right {
+    transform: translateX(-8px);
+  }
+
+  &--open {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// ==================== Close ====================
+.aero-tour-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--aero-text-secondary, #999);
+  cursor: pointer;
+  .transition();
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--aero-text-color, #1a1a1a);
+  }
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.4);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f0f0f0;
+    }
+  }
+}
+
+// ==================== Content ====================
+.aero-tour-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--aero-text-color, #1a1a1a);
+  line-height: 1.4;
+  padding-right: 20px;
+
+  @{dark-selector} & {
+    color: #f0f0f0;
+  }
+}
+
+.aero-tour-description {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--aero-text-secondary, #666);
+  line-height: 1.6;
+
+  @{dark-selector} & {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.aero-tour-custom {
+  padding-right: 20px;
+}
+
+// ==================== Footer ====================
+.aero-tour-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  gap: 12px;
+}
+
+// ==================== Indicators ====================
+.aero-tour-indicators {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.aero-tour-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.12);
+  transition: width 250ms @transition-timing,
+              background 250ms @transition-timing;
+
+  &--active {
+    width: 16px;
+    border-radius: 999px;
+    background: @primary-color;
+  }
+
+  @{dark-selector} & {
+    background: rgba(255, 255, 255, 0.15);
+
+    &--active {
+      background: @primary-color;
+    }
+  }
+}
+
+// ==================== Buttons ====================
+.aero-tour-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.aero-tour-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  .transition();
+
+  &--prev {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--aero-text-color, #1a1a1a);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f0f0f0;
+      border-color: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  &--next {
+    background: @primary-color;
+    color: #fff;
+
+    &:hover {
+      background: lighten(@primary-color, 6%);
+    }
+  }
+}

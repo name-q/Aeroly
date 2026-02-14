@@ -8,5 +8,5 @@ const items = [
 ];
 
 export default () => (
-  <Carousel items={items} direction="vertical" dotsPosition="right" height={240} />
+  <Carousel items={items} direction="vertical" dotsPosition="inner" height={240} />
 );

@@ -315,7 +315,7 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
           ? 'aero-carousel__arrows--always'
           : 'aero-carousel__arrows--hidden';
 
-    const dotsVertical = dotsPosition === 'left' || dotsPosition === 'right';
+    const dotsVertical = dotsPosition === 'left' || dotsPosition === 'right' || (dotsPosition === 'inner' && isVertical);
     const dotsInner = dotsPosition === 'inner';
 
     const dotsNode = dots && total > 1 && (

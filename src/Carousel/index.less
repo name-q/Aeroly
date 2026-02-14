@@ -2,8 +2,9 @@
 @import '../styles/mixins.less';
 
 @carousel-arrow-size: 36px;
-@carousel-dot-size: 8px;
-@carousel-dot-active-width: 20px;
+@carousel-dot-size: 4px;
+@carousel-dot-hover-size: 8px;
+@carousel-dot-active-width: 16px;
 @carousel-duration: 400ms;
 
 .aero-carousel {
@@ -161,13 +162,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 0;
+    gap: 6px;
+    padding: 10px 0;
 
     &--vertical {
       flex-direction: column;
-      padding: 0 12px;
+      padding: 0 10px;
     }
+  }
+
+  // 默认极小，hover dots 区域时放大
+  &__dots:hover &__dot {
+    width: @carousel-dot-hover-size;
+    height: @carousel-dot-hover-size;
+  }
+
+  &__dots:hover &__dot--active {
+    width: @carousel-dot-active-width;
+    height: @carousel-dot-hover-size;
+  }
+
+  &__dots--vertical:hover &__dot {
+    width: @carousel-dot-hover-size;
+    height: @carousel-dot-hover-size;
+  }
+
+  &__dots--vertical:hover &__dot--active {
+    width: @carousel-dot-hover-size;
+    height: @carousel-dot-active-width;
   }
 
   &__dot {
@@ -175,22 +197,19 @@
     height: @carousel-dot-size;
     border: none;
     border-radius: 999px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.10);
     cursor: pointer;
     padding: 0;
-    transition: width 300ms @transition-timing,
-                height 300ms @transition-timing,
-                background 300ms @transition-timing,
-                box-shadow 300ms @transition-timing;
+    transition: width 240ms @transition-timing,
+                height 240ms @transition-timing,
+                background 240ms @transition-timing;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.25);
     }
 
     &--active {
-      width: @carousel-dot-active-width;
       background: @primary-color;
-      box-shadow: 0 0 8px fade(@primary-color, 40%);
 
       &:hover {
         background: @primary-color;
@@ -198,10 +217,10 @@
     }
 
     @{dark-selector} & {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.12);
 
       &:hover {
-        background: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.3);
       }
 
       &--active {
@@ -214,9 +233,9 @@
     }
   }
 
-  // Vertical dots active → expand height instead of width
-  &__dots--vertical &__dot--active {
-    width: @carousel-dot-size;
+  // Vertical dots: hover 时 active 展开高度而非宽度
+  &__dots--vertical:hover &__dot--active {
+    width: @carousel-dot-hover-size;
     height: @carousel-dot-active-width;
   }
 
@@ -245,7 +264,7 @@
     flex-direction: row;
   }
 
-  // Inner — dots overlay on bottom of viewport
+  // Inner — dots overlay inside viewport
   &--dots-inner {
     display: flex;
     flex-direction: column;
@@ -254,13 +273,39 @@
       position: relative;
     }
 
+    // 水平：底部居中
     .aero-carousel__dots {
       position: absolute;
-      bottom: 12px;
+      bottom: 8px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
       padding: 0;
+    }
+
+    // 垂直：右侧居中
+    .aero-carousel__dots--vertical {
+      bottom: auto;
+      left: auto;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .aero-carousel__dot {
+      background: rgba(255, 255, 255, 0.35);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      &--active {
+        background: rgba(255, 255, 255, 0.85);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.85);
+        }
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import {
   hours24, minutes60, seconds60,
 } from './utils';
 import Column, { ITEM_HEIGHT, VISIBLE_COUNT } from './Column';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 export interface DatePickerProps {
@@ -300,6 +301,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const [animating, setAnimating] = useState(false);
   const [view, setView] = useState<ViewType>('day');
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // 解析选中值（含时间部分）
   const [selY, selM, selD, selH, selMi, selS] = currentValue ? parseDateTime(currentValue) : [0, -1, 0, 0, 0, 0];
@@ -466,7 +469,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       {mounted && (
         <div
-          className={`aero-date-picker-dropdown${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+          ref={dropdownRef}
+          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           {view === 'day' && (

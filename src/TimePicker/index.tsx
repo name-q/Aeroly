@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Clock, X } from 'lucide-react';
 import Icon from '../Icon';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 export interface TimePickerProps {
@@ -232,6 +233,8 @@ const TimePicker: React.FC<TimePickerProps> = ({
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   const [h, m, s] = currentValue ? parseTime(currentValue) : [0, 0, 0];
 
@@ -317,7 +320,8 @@ const TimePicker: React.FC<TimePickerProps> = ({
 
       {mounted && (
         <div
-          className={`aero-time-picker-dropdown${animating ? ' aero-time-picker-dropdown--open' : ''}`}
+          ref={dropdownRef}
+          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment}${animating ? ' aero-time-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <div className="aero-time-picker-panel">

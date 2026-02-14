@@ -7,6 +7,7 @@ import {
   hours24, minutes60, seconds60, CalendarDay,
 } from '../DatePicker/utils';
 import Column from '../DatePicker/Column';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -101,6 +102,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // 左面板年月
   const [viewYear, setViewYear] = useState(() => new Date().getFullYear());
@@ -434,7 +437,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
       {mounted && (
         <div
-          className={`${PREFIX}-dropdown${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+          ref={dropdownRef}
+          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <div className={`${PREFIX}-panels`}>

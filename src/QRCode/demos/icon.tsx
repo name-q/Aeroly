@@ -9,13 +9,12 @@ export default () => (
   <div style={{ display: 'flex', gap: 24 }}>
     <QRCode
       value="https://github.com"
-      icon="https://github.githubassets.com/favicons/favicon-dark.svg"
+      icon="https://picsum.photos/64"
     />
     <QRCode
       value="https://github.com"
-      icon="https://github.githubassets.com/favicons/favicon-dark.svg"
+      icon="https://picsum.photos/80"
       iconSize={40}
-      size={200}
     />
   </div>
 );

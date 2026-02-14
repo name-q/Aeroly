@@ -33,6 +33,10 @@ toc: content
 
 <code src="./demos/complex.tsx"></code>
 
+## 上传图片校验
+
+<code src="./demos/upload.tsx"></code>
+
 ## Modal 中的表单
 
 <code src="./demos/modal.tsx"></code>

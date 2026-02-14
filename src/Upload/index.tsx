@@ -136,9 +136,9 @@ const Upload: React.FC<UploadProps> = ({
   style,
   onProcess,
 }) => {
-  const isControlled = controlledFileList !== undefined;
+  const isControlled = controlledFileList !== undefined && Array.isArray(controlledFileList);
   const [internalFileList, setInternalFileList] = useState<UploadFile[]>(defaultFileList || []);
-  const fileList = isControlled ? controlledFileList! : internalFileList;
+  const fileList = isControlled ? controlledFileList : internalFileList;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);

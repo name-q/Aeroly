@@ -144,3 +144,6 @@ export type { FormProps, FormInstance, FormItemProps, FormListProps, FormListFie
 
 export { default as Spin } from './Spin';
 export type { SpinProps } from './Spin';
+
+export { default as Skeleton } from './Skeleton';
+export type { SkeletonProps, SkeletonBlockProps, SkeletonCircleProps, SkeletonTextProps } from './Skeleton';

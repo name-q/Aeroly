@@ -1,0 +1,128 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@skeleton-bg: rgba(0, 0, 0, 0.06);
+@skeleton-bg-dark: rgba(255, 255, 255, 0.08);
+@skeleton-radius: @border-radius-base;
+
+// ---- 容器 ----
+.aero-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+// ---- 矩形块 ----
+.aero-skeleton-block {
+  background: @skeleton-bg;
+  flex-shrink: 0;
+
+  @{dark-selector} & {
+    background: @skeleton-bg-dark;
+  }
+
+  &--active {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.35) 45%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.35) 55%,
+        transparent 65%,
+        transparent 100%
+      );
+      animation: aero-skeleton-shimmer 1.8s ease-in-out infinite;
+      pointer-events: none;
+
+      @{dark-selector} & {
+        background: linear-gradient(
+          105deg,
+          transparent 0%,
+          transparent 35%,
+          rgba(255, 255, 255, 0.08) 45%,
+          rgba(255, 255, 255, 0.14) 50%,
+          rgba(255, 255, 255, 0.08) 55%,
+          transparent 65%,
+          transparent 100%
+        );
+      }
+    }
+  }
+}
+
+// ---- 圆形 ----
+.aero-skeleton-circle {
+  border-radius: 50%;
+  background: @skeleton-bg;
+  flex-shrink: 0;
+
+  @{dark-selector} & {
+    background: @skeleton-bg-dark;
+  }
+
+  &--active {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.35) 45%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.35) 55%,
+        transparent 65%,
+        transparent 100%
+      );
+      animation: aero-skeleton-shimmer 1.8s ease-in-out infinite;
+      pointer-events: none;
+
+      @{dark-selector} & {
+        background: linear-gradient(
+          105deg,
+          transparent 0%,
+          transparent 35%,
+          rgba(255, 255, 255, 0.08) 45%,
+          rgba(255, 255, 255, 0.14) 50%,
+          rgba(255, 255, 255, 0.08) 55%,
+          transparent 65%,
+          transparent 100%
+        );
+      }
+    }
+  }
+}
+
+// ---- 文本行组 ----
+.aero-skeleton-text {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+}
+
+// ---- 动画 ----
+@keyframes aero-skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

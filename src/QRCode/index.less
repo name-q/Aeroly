@@ -1,0 +1,136 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.aero-qrcode {
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: @border-radius-lg;
+  .transition();
+
+  &--bordered {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    .glass-effect(rgba(255, 255, 255, 0.18), 14px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 12px;
+
+    @{dark-selector} & {
+      border-color: rgba(255, 255, 255, 0.10);
+      .glass-effect(rgba(255, 255, 255, 0.06), 14px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.20);
+    }
+  }
+
+  // ---- 主体 ----
+  &-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    canvas {
+      display: block;
+    }
+  }
+
+  // ---- 状态覆盖层 ----
+  &-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 4px;
+
+    @{dark-selector} & {
+      background: rgba(30, 30, 30, 0.88);
+    }
+  }
+
+  &-overlay-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+  }
+
+  &-overlay-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 999px;
+    background: @primary-color;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    .transition();
+
+    &:hover {
+      background: lighten(@primary-color, 6%);
+    }
+  }
+
+  // ---- 底部操作栏 ----
+  &-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: none;
+    color: var(--aero-text-secondary, #666);
+    cursor: pointer;
+    .transition();
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--aero-text-color, #1a1a1a);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.08);
+        color: #f0f0f0;
+      }
+    }
+
+    @{dark-selector} & {
+      color: rgba(255, 255, 255, 0.45);
+    }
+  }
+
+  // ---- 状态修饰 ----
+  &--expired &-body canvas,
+  &--scanned &-body canvas {
+    filter: blur(2px);
+    opacity: 0.4;
+  }
+
+  &--loading &-body canvas {
+    opacity: 0.15;
+  }
+}

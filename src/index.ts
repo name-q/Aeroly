@@ -150,3 +150,6 @@ export type { SkeletonProps, SkeletonBlockProps, SkeletonCircleProps, SkeletonTe
 
 export { default as Watermark } from './Watermark';
 export type { WatermarkProps } from './Watermark';
+
+export { default as QRCode } from './QRCode';
+export type { QRCodeProps, QRCodeStatus } from './QRCode';

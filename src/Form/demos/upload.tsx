@@ -93,7 +93,7 @@ export default () => {
           accept="image/*"
           multiple
           maxCount={2}
-          listType="picture"
+          listType="picture-card"
           customRequest={realRequest}
           onPreview={handlePreview}
           tip="请上传 2 张图片（JPG / PNG），连接 localhost:3001"

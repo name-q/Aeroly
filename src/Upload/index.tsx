@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { Upload as UploadIcon, X, File as FileIcon, Image, FileText, FileAudio, FileVideo, FileArchive, Loader, RotateCcw, Sparkles } from 'lucide-react';
+import { Upload as UploadIcon, X, Plus, File as FileIcon, Image, FileText, FileAudio, FileVideo, FileArchive, Loader, RotateCcw, Sparkles, Eye } from 'lucide-react';
 import Icon from '../Icon';
 import type { LucideIcon } from 'lucide-react';
 import './index.less';
@@ -57,7 +57,7 @@ export interface UploadProps {
   /** 拖拽模式 */
   drag?: boolean;
   /** 展示方式 */
-  listType?: 'text' | 'picture';
+  listType?: 'text' | 'picture' | 'picture-card';
   /** 是否禁用 */
   disabled?: boolean;
   /** 拖拽区域自定义内容 */
@@ -264,7 +264,7 @@ const Upload: React.FC<UploadProps> = ({
         };
 
         // 图片预览缩略图
-        if (isImageType(file.type) && listType === 'picture') {
+        if (isImageType(file.type) && (listType === 'picture' || listType === 'picture-card')) {
           uploadItem.thumbUrl = await readAsDataURL(file);
         }
 
@@ -393,6 +393,8 @@ const Upload: React.FC<UploadProps> = ({
   const validFileCount = fileList.filter((f) => f.status !== 'error').length;
   const reachedMax = maxCount ? validFileCount >= maxCount : false;
 
+  const isPictureCard = listType === 'picture-card';
+
   return (
     <div className={rootCls} style={style}>
       <input
@@ -404,113 +406,190 @@ const Upload: React.FC<UploadProps> = ({
         className="aero-upload-input"
       />
 
-      {!reachedMax && (
-        <div
-          className={triggerCls}
-          onClick={handleTriggerClick}
-          onDragOver={drag ? handleDragOver : undefined}
-          onDragLeave={drag ? handleDragLeave : undefined}
-          onDrop={drag ? handleDrop : undefined}
-        >
-          {children || (
-            <div className="aero-upload-trigger__default">
-              <Icon icon={UploadIcon} size={drag ? 32 : 16} />
-              <span>{drag ? '拖拽文件到此处，或点击上传' : '上传文件'}</span>
-            </div>
-          )}
-        </div>
-      )}
-
-      {fileList.length > 0 && (
-        <div className="aero-upload-list">
+      {isPictureCard ? (
+        // picture-card 模式：卡片和触发按钮在同一行
+        <div className="aero-upload-card-list">
           {fileList.map((file) => {
             const isSuccess = file.status === 'success';
-            const hasUrl = !!(file.url || file.thumbUrl);
-            const isImage = isImageType(file.type);
-            const canClick = isSuccess && hasUrl && !!onPreview;
+            const isUploading = file.status === 'uploading';
+            const isError = file.status === 'error';
+            const thumbSrc = file.thumbUrl || (isSuccess && file.url) || undefined;
 
             return (
               <div
                 key={file.uid}
                 className={[
-                  'aero-upload-file',
-                  `aero-upload-file--${file.status}`,
-                  canClick ? 'aero-upload-file--clickable' : '',
+                  'aero-upload-card',
+                  isError ? 'aero-upload-card--error' : '',
+                  isSuccess ? 'aero-upload-card--success' : '',
                 ]
                   .filter(Boolean)
                   .join(' ')}
-                onClick={canClick ? () => onPreview!(file) : undefined}
               >
-                {/* 缩略图或图标 */}
-                <div className="aero-upload-file__icon">
-                  {listType === 'picture' && (file.thumbUrl || (isSuccess && file.url && isImage)) ? (
-                    <img src={file.thumbUrl || file.url} alt={file.name} />
-                  ) : (
-                    <Icon icon={getFileIcon(file.type)} size={20} />
-                  )}
-                </div>
+                {thumbSrc ? (
+                  <img src={thumbSrc} alt={file.name} className="aero-upload-card__img" />
+                ) : (
+                  <div className="aero-upload-card__placeholder">
+                    <Icon icon={isError ? X : getFileIcon(file.type)} size={24} />
+                  </div>
+                )}
 
-                {/* 文件信息 */}
-                <div className="aero-upload-file__info">
-                  <div className="aero-upload-file__name">
-                    <span>{file.name}</span>
-                    {file.aiMeta && (
-                      <span className="aero-upload-file__ai-tag">
-                        <Icon icon={Sparkles} size={12} />
+                {/* 上传中遮罩 */}
+                {isUploading && (
+                  <div className="aero-upload-card__mask">
+                    <Icon icon={Loader} size={20} spin />
+                    <span>{Math.round(file.percent || 0)}%</span>
+                  </div>
+                )}
+
+                {/* hover 操作层 */}
+                {!isUploading && (
+                  <div className="aero-upload-card__actions">
+                    {isSuccess && onPreview && (
+                      <span
+                        className="aero-upload-card__action"
+                        onClick={() => onPreview(file)}
+                      >
+                        <Icon icon={Eye} size={16} />
                       </span>
                     )}
-                  </div>
-                  {file.status === 'uploading' && (
-                    <div className="aero-upload-file__progress">
-                      <div
-                        className="aero-upload-file__progress-bar"
-                        style={{ width: `${file.percent || 0}%` }}
-                      />
-                    </div>
-                  )}
-                  {file.status === 'error' && file.error && (
-                    <div className="aero-upload-file__error">{file.error}</div>
-                  )}
-                  {file.aiMeta?.description && (
-                    <div className="aero-upload-file__ai-desc">{file.aiMeta.description}</div>
-                  )}
-                  {file.status !== 'uploading' && !file.aiMeta?.description && file.size != null && (
-                    <div className="aero-upload-file__size">{formatSize(file.size)}</div>
-                  )}
-                </div>
-
-                {/* 操作 */}
-                <div className="aero-upload-file__actions">
-                  {file.status === 'uploading' && (
-                    <span className="aero-upload-file__loading">
-                      <Icon icon={Loader} size={14} spin />
-                    </span>
-                  )}
-                  {file.status === 'error' && file.originFile && (
+                    {isError && file.originFile && (
+                      <span
+                        className="aero-upload-card__action"
+                        onClick={() => handleRetry(file)}
+                      >
+                        <Icon icon={RotateCcw} size={16} />
+                      </span>
+                    )}
                     <span
-                      className="aero-upload-file__action"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRetry(file);
-                      }}
+                      className="aero-upload-card__action aero-upload-card__action--delete"
+                      onClick={() => handleRemove(file)}
                     >
-                      <Icon icon={RotateCcw} size={14} />
+                      <Icon icon={X} size={16} />
                     </span>
-                  )}
-                  <span
-                    className="aero-upload-file__action aero-upload-file__remove"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemove(file);
-                    }}
-                  >
-                    <Icon icon={X} size={14} />
-                  </span>
-                </div>
+                  </div>
+                )}
               </div>
             );
           })}
+
+          {!reachedMax && (
+            <div className="aero-upload-card aero-upload-card--trigger" onClick={handleTriggerClick}>
+              <Icon icon={Plus} size={24} />
+            </div>
+          )}
         </div>
+      ) : (
+        <>
+          {!reachedMax && (
+            <div
+              className={triggerCls}
+              onClick={handleTriggerClick}
+              onDragOver={drag ? handleDragOver : undefined}
+              onDragLeave={drag ? handleDragLeave : undefined}
+              onDrop={drag ? handleDrop : undefined}
+            >
+              {children || (
+                <div className="aero-upload-trigger__default">
+                  <Icon icon={UploadIcon} size={drag ? 32 : 16} />
+                  <span>{drag ? '拖拽文件到此处，或点击上传' : '上传文件'}</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {fileList.length > 0 && (
+            <div className="aero-upload-list">
+              {fileList.map((file) => {
+                const isSuccess = file.status === 'success';
+                const hasUrl = !!(file.url || file.thumbUrl);
+                const isImage = isImageType(file.type);
+                const canClick = isSuccess && hasUrl && !!onPreview;
+
+                return (
+                  <div
+                    key={file.uid}
+                    className={[
+                      'aero-upload-file',
+                      `aero-upload-file--${file.status}`,
+                      canClick ? 'aero-upload-file--clickable' : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    onClick={canClick ? () => onPreview!(file) : undefined}
+                  >
+                    {/* 缩略图或图标 */}
+                    <div className="aero-upload-file__icon">
+                      {listType === 'picture' && (file.thumbUrl || (isSuccess && file.url && isImage)) ? (
+                        <img src={file.thumbUrl || file.url} alt={file.name} />
+                      ) : (
+                        <Icon icon={getFileIcon(file.type)} size={20} />
+                      )}
+                    </div>
+
+                    {/* 文件信息 */}
+                    <div className="aero-upload-file__info">
+                      <div className="aero-upload-file__name">
+                        <span>{file.name}</span>
+                        {file.aiMeta && (
+                          <span className="aero-upload-file__ai-tag">
+                            <Icon icon={Sparkles} size={12} />
+                          </span>
+                        )}
+                      </div>
+                      {file.status === 'uploading' && (
+                        <div className="aero-upload-file__progress">
+                          <div
+                            className="aero-upload-file__progress-bar"
+                            style={{ width: `${file.percent || 0}%` }}
+                          />
+                        </div>
+                      )}
+                      {file.status === 'error' && file.error && (
+                        <div className="aero-upload-file__error">{file.error}</div>
+                      )}
+                      {file.aiMeta?.description && (
+                        <div className="aero-upload-file__ai-desc">{file.aiMeta.description}</div>
+                      )}
+                      {file.status !== 'uploading' && !file.aiMeta?.description && file.size != null && (
+                        <div className="aero-upload-file__size">{formatSize(file.size)}</div>
+                      )}
+                    </div>
+
+                    {/* 操作 */}
+                    <div className="aero-upload-file__actions">
+                      {file.status === 'uploading' && (
+                        <span className="aero-upload-file__loading">
+                          <Icon icon={Loader} size={14} spin />
+                        </span>
+                      )}
+                      {file.status === 'error' && file.originFile && (
+                        <span
+                          className="aero-upload-file__action"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRetry(file);
+                          }}
+                        >
+                          <Icon icon={RotateCcw} size={14} />
+                        </span>
+                      )}
+                      <span
+                        className="aero-upload-file__action aero-upload-file__remove"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemove(file);
+                        }}
+                      >
+                        <Icon icon={X} size={14} />
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
       )}
 
       {tip && <div className="aero-upload-tip">{tip}</div>}

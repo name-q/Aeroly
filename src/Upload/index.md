@@ -58,11 +58,19 @@ toc: content
 | onRemove | `(file: UploadFile) => boolean \| Promise \| void` | - | 移除回调 |
 | onPreview | `(file: UploadFile) => void` | - | 点击文件回调 |
 | drag | `boolean` | `false` | 拖拽模式 |
-| listType | `'text' \| 'picture'` | `'text'` | 展示方式 |
+| listType | `'text' \| 'picture' \| 'picture-card'` | `'text'` | 展示方式，见下方说明 |
 | disabled | `boolean` | `false` | 禁用 |
 | children | `ReactNode` | - | 自定义触发区域 |
 | tip | `ReactNode` | - | 提示文字 |
 | onProcess | `(file, originFile) => Promise<Partial<UploadFile>> \| void` | - | AI 处理钩子 |
+
+### listType 展示方式
+
+| 值 | 表现 | 适用场景 |
+|------|------|------|
+| `text` | 纵向文件列表，显示文件名、大小、图标、进度条 | 文档、附件等通用文件上传 |
+| `picture` | 纵向文件列表，左侧显示缩略图预览，其余同 `text` | 需要预览但空间充裕的图片上传 |
+| `picture-card` | 横向排列的正方形缩略图卡片（80×80），触发按钮为同尺寸的 `+` 卡片排在末尾，hover 显示预览/删除操作层，上传中显示进度遮罩 | Form inline 模式、头像上传、紧凑型图片选择 |
 
 ### UploadFile
 

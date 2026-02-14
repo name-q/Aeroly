@@ -9,7 +9,7 @@ export default () => {
   const [value, setValue] = useState<[string, string]>(['2025-06-01', '2025-06-15']);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 380 }}>
       <DateRangePicker value={value} onChange={setValue} />
       <span style={{ fontSize: 13, color: '#888' }}>
         当前值：{value[0] || '空'} ~ {value[1] || '空'}

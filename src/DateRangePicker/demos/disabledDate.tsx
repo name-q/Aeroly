@@ -12,5 +12,7 @@ const disabledDate = (date: Date) => {
 };
 
 export default () => (
-  <DateRangePicker disabledDate={disabledDate} onChange={(val) => console.log('onChange', val)} />
+  <div style={{ maxWidth: 380 }}>
+    <DateRangePicker disabledDate={disabledDate} onChange={(val) => console.log('onChange', val)} />
+  </div>
 );

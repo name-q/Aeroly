@@ -6,5 +6,7 @@ import React from 'react';
 import { DateRangePicker } from 'aero-ui';
 
 export default () => (
-  <DateRangePicker showTime onChange={(val) => console.log('onChange', val)} />
+  <div style={{ maxWidth: 380 }}>
+    <DateRangePicker showTime onChange={(val) => console.log('onChange', val)} />
+  </div>
 );

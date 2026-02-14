@@ -6,9 +6,11 @@ import React from 'react';
 import { DatePicker } from 'aero-ui';
 
 export default () => (
-  <DatePicker
-    showTime={{ showSecond: false }}
-    placeholder="请选择日期时间"
-    onChange={(val) => console.log('选择:', val)}
-  />
+  <div style={{ maxWidth: 280 }}>
+    <DatePicker
+      showTime={{ showSecond: false }}
+      placeholder="请选择日期时间"
+      onChange={(val) => console.log('选择:', val)}
+    />
+  </div>
 );

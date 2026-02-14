@@ -6,7 +6,7 @@ import React from 'react';
 import { DateRangePicker } from 'aero-ui';
 
 export default () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 380 }}>
     <DateRangePicker size="small" />
     <DateRangePicker size="medium" />
     <DateRangePicker size="large" />

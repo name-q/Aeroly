@@ -9,7 +9,7 @@ export default () => {
   const [value, setValue] = useState('');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 280 }}>
       <DatePicker format="YYYY/MM/DD" placeholder="YYYY/MM/DD" onChange={setValue} />
       <DatePicker format="YYYY年M月D日" placeholder="YYYY年M月D日" onChange={setValue} />
       {value && (

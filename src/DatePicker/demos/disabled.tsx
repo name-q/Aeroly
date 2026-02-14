@@ -6,5 +6,7 @@ import React from 'react';
 import { DatePicker } from 'aero-ui';
 
 export default () => (
-  <DatePicker defaultValue="2025-01-01" disabled />
+  <div style={{ maxWidth: 280 }}>
+    <DatePicker defaultValue="2025-01-01" disabled />
+  </div>
 );

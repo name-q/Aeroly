@@ -18,7 +18,7 @@ export default () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 280 }}>
       <DatePicker placeholder="禁用过去日期" disabledDate={disablePast} />
       <DatePicker placeholder="禁用周末" disabledDate={disableWeekend} />
     </div>

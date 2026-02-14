@@ -6,5 +6,7 @@ import React from 'react';
 import { DatePicker } from 'aero-ui';
 
 export default () => (
-  <DatePicker onChange={(val) => console.log('选择:', val)} />
+  <div style={{ maxWidth: 280 }}>
+    <DatePicker onChange={(val) => console.log('选择:', val)} />
+  </div>
 );

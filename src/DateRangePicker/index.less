@@ -105,6 +105,10 @@
 
   // ---- 清除按钮 ----
   &-clear {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -113,6 +117,7 @@
     border-radius: 50%;
     color: var(--aero-text-secondary, #999);
     opacity: 0;
+    pointer-events: none;
     .transition();
 
     &:hover {
@@ -132,6 +137,7 @@
 
   &:hover &-clear {
     opacity: 1;
+    pointer-events: auto;
   }
 
   // ---- 下拉面板 ----

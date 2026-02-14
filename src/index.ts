@@ -153,3 +153,6 @@ export type { WatermarkProps } from './Watermark';
 
 export { default as QRCode } from './QRCode';
 export type { QRCodeProps, QRCodeStatus } from './QRCode';
+
+export { default as Affix } from './Affix';
+export type { AffixProps } from './Affix';

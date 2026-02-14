@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { ChevronDown, ChevronRight, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 // ---- Types ----
@@ -182,7 +183,9 @@ const Cascader: React.FC<CascaderProps> = ({
   const [activePath, setActivePath] = useState<CascaderValueType>([]);
 
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // ---- 搜索 ----
   const allPaths = useMemo(() => flattenPaths(options), [options]);
@@ -550,7 +553,8 @@ const Cascader: React.FC<CascaderProps> = ({
 
       {mounted && (
         <div
-          className={`aero-cascader-dropdown${animating ? ' aero-cascader-dropdown--open' : ''}`}
+          ref={dropdownRef}
+          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment}${animating ? ' aero-cascader-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           {showSearch && (

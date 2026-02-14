@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { ChevronDown, ChevronRight, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 // ---- Types ----
@@ -235,7 +236,9 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   const [searchText, setSearchText] = useState('');
 
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // ---- 展开状态 ----
   const allKeys = useMemo(() => collectAllKeys(treeData), [treeData]);
@@ -585,7 +588,8 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
 
       {mounted && (
         <div
-          className={`aero-tree-select-dropdown${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          ref={dropdownRef}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           {showSearch && (

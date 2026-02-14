@@ -12,6 +12,7 @@ import {
   DatePicker,
   DateRangePicker,
   Cascader,
+  TreeSelect,
   Rate,
   Slider,
   Switch,
@@ -44,6 +45,25 @@ const categoryOptions = [
     children: [
       { label: 'Node.js', value: 'node' },
       { label: 'Go', value: 'go' },
+    ],
+  },
+];
+
+const treeData = [
+  {
+    key: 'dev',
+    title: '研发部',
+    children: [
+      { key: 'fe', title: '前端组' },
+      { key: 'be', title: '后端组' },
+    ],
+  },
+  {
+    key: 'design',
+    title: '设计部',
+    children: [
+      { key: 'ui', title: 'UI 组' },
+      { key: 'ux', title: 'UX 组' },
     ],
   },
 ];
@@ -86,16 +106,20 @@ export default () => {
           <DatePicker placeholder="选择日期" />
         </Form.Item>
 
-        <Form.Item name="time" label="时间" rules={[{ required: true }]} hidden={isInline && !expanded}>
+        <Form.Item name="time" label="时间" rules={[{ required: true }]}>
           <TimePicker placeholder="选择时间" />
         </Form.Item>
 
-        <Form.Item name="dateRange" label="日期范围" rules={[{ required: true }]} hidden={isInline && !expanded}>
+        <Form.Item name="dateRange" label="日期范围" rules={[{ required: true }]}>
           <DateRangePicker />
         </Form.Item>
 
-        <Form.Item name="category" label="分类" rules={[{ required: true }]} hidden={isInline && !expanded}>
+        <Form.Item name="category" label="分类" rules={[{ required: true }]}>
           <Cascader options={categoryOptions} placeholder="请选择分类" />
+        </Form.Item>
+
+        <Form.Item name="dept" label="部门" rules={[{ required: true }]}>
+          <TreeSelect treeData={treeData} placeholder="请选择部门" />
         </Form.Item>
 
         <Form.Item name="age" label="年龄" rules={[{ required: true }]} hidden={isInline && !expanded}>

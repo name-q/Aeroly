@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { ChevronDown, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
+import { useDropdownPosition } from '../utils';
 import './index.less';
 
 // ---- Types ----
@@ -140,8 +141,10 @@ const Select: React.FC<SelectProps> = ({
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // ---- 展平选项 ----
   const flatOptions = useMemo(() => flattenOptions(options), [options]);
@@ -495,7 +498,8 @@ const Select: React.FC<SelectProps> = ({
 
       {mounted && (
         <div
-          className={`aero-select-dropdown${animating ? ' aero-select-dropdown--open' : ''}`}
+          ref={dropdownRef}
+          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment}${animating ? ' aero-select-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           {showSearch && (

@@ -70,6 +70,7 @@ export default () => {
 
       <Form
         layout={layout}
+        labelWidth={70}
         style={{ maxWidth: isInline ? undefined : 520 }}
         onFinish={(values: any) => console.log(values)}
       >

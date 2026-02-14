@@ -147,3 +147,6 @@ export type { SpinProps } from './Spin';
 
 export { default as Skeleton } from './Skeleton';
 export type { SkeletonProps, SkeletonBlockProps, SkeletonCircleProps, SkeletonTextProps } from './Skeleton';
+
+export { default as Watermark } from './Watermark';
+export type { WatermarkProps } from './Watermark';

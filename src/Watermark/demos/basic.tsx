@@ -1,0 +1,12 @@
+/**
+ * title: " "
+ * description: 最简用法，传入 `content` 即可生成文字水印。
+ */
+import React from 'react';
+import { Watermark } from 'aero-ui';
+
+export default () => (
+  <Watermark content="AeroUI">
+    <div style={{ height: 300 }} />
+  </Watermark>
+);

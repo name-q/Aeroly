@@ -1,0 +1,18 @@
+/**
+ * title: " "
+ * description: 传入字符串数组实现多行水印，可自定义字体大小、颜色、旋转角度等。
+ */
+import React from 'react';
+import { Watermark } from 'aero-ui';
+
+export default () => (
+  <Watermark
+    content={['AeroUI', '2026-02-14']}
+    fontSize={16}
+    fontColor="rgba(0,0,0,0.06)"
+    rotate={-30}
+    gap={[120, 120]}
+  >
+    <div style={{ height: 300 }} />
+  </Watermark>
+);

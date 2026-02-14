@@ -2,6 +2,9 @@
  * AeroUI 公共工具函数
  */
 
+export { useDropdownPosition } from './useDropdownPosition';
+export type { Placement, Alignment } from './useDropdownPosition';
+
 /**
  * 节流：在 delay 时间窗口内最多执行一次
  * 适用于拖拽、滚动等高频事件

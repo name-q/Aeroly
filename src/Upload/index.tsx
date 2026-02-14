@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Upload as UploadIcon, X, Plus, File as FileIcon, Image, FileText, FileAudio, FileVideo, FileArchive, Loader, RotateCcw, Sparkles, Eye } from 'lucide-react';
 import Icon from '../Icon';
+import Tooltip from '../Tooltip';
 import type { LucideIcon } from 'lucide-react';
 import './index.less';
 
@@ -415,17 +416,21 @@ const Upload: React.FC<UploadProps> = ({
             const isError = file.status === 'error';
             const thumbSrc = file.thumbUrl || (isSuccess && file.url) || undefined;
 
+            const tipContent = isError && file.error
+              ? <>{file.name}{file.size != null && ` (${formatSize(file.size)})`}<br />{file.error}</>
+              : file.name;
+
             return (
-              <div
-                key={file.uid}
-                className={[
-                  'aero-upload-card',
-                  isError ? 'aero-upload-card--error' : '',
-                  isSuccess ? 'aero-upload-card--success' : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-              >
+              <Tooltip key={file.uid} title={tipContent} placement="top">
+                <div
+                  className={[
+                    'aero-upload-card',
+                    isError ? 'aero-upload-card--error' : '',
+                    isSuccess ? 'aero-upload-card--success' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
                 {thumbSrc ? (
                   <img src={thumbSrc} alt={file.name} className="aero-upload-card__img" />
                 ) : (
@@ -470,6 +475,7 @@ const Upload: React.FC<UploadProps> = ({
                   </div>
                 )}
               </div>
+              </Tooltip>
             );
           })}
 

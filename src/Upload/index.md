@@ -24,6 +24,10 @@ toc: content
 
 <code src="./demos/picture.tsx" description="listType='picture' 展示缩略图预览。"></code>
 
+## 图片卡片模式
+
+<code src="./demos/picture-card.tsx" description="listType='picture-card' 横向卡片布局，hover 显示文件名和错误信息，适合 Form inline 等紧凑场景。"></code>
+
 ## 数量与大小限制
 
 <code src="./demos/limit.tsx" description="maxCount 限制文件数量，maxSize 限制单文件大小。达到上限后触发区域自动隐藏。"></code>

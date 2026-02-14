@@ -2,6 +2,7 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const { koaBody } = require('koa-body');
 const serve = require('koa-static');
+const mount = require('koa-mount');
 const cors = require('@koa/cors');
 const path = require('path');
 const fs = require('fs');
@@ -20,7 +21,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 app.use(cors());
 
 // 静态文件服务（访问已上传的文件）
-app.use(serve(UPLOAD_DIR, { prefix: '/uploads' }));
+app.use(mount('/uploads', serve(UPLOAD_DIR)));
 
 // 文件上传
 router.post('/api/upload', koaBody({

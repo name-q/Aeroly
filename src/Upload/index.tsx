@@ -213,36 +213,16 @@ const Upload: React.FC<UploadProps> = ({
     async (files: File[]) => {
       if (disabled) return;
 
-      // maxCount 限制（只计算有效文件）
+      // maxCount 限制（只计算有效文件，超出部分直接丢弃）
       let incoming = files;
-      const overflowFiles: File[] = [];
       if (maxCount) {
         const validCount = fileListRef.current.filter((f) => f.status !== 'error').length;
         const remaining = maxCount - validCount;
-        if (remaining <= 0) {
-          incoming = [];
-          overflowFiles.push(...files);
-        } else {
-          incoming = files.slice(0, remaining);
-          overflowFiles.push(...files.slice(remaining));
-        }
+        incoming = remaining <= 0 ? [] : files.slice(0, remaining);
       }
 
       const newUploadFiles: UploadFile[] = [];
       const errorFiles: UploadFile[] = [];
-
-      // 超出数量限制的文件标记为 error
-      for (const file of overflowFiles) {
-        errorFiles.push({
-          uid: genUid(),
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          status: 'error',
-          percent: 0,
-          error: `超出数量限制（最多 ${maxCount} 个）`,
-        });
-      }
 
       for (const file of incoming) {
         // maxSize 校验 — 超限文件标记为 error 并提示
@@ -441,8 +421,6 @@ const Upload: React.FC<UploadProps> = ({
         </div>
       )}
 
-      {tip && <div className="aero-upload-tip">{tip}</div>}
-
       {fileList.length > 0 && (
         <div className="aero-upload-list">
           {fileList.map((file) => {
@@ -534,6 +512,8 @@ const Upload: React.FC<UploadProps> = ({
           })}
         </div>
       )}
+
+      {tip && <div className="aero-upload-tip">{tip}</div>}
     </div>
   );
 };

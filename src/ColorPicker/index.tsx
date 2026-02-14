@@ -239,7 +239,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 
   // ─── 色相条 ───
   const hueDrag = useDrag(useCallback((x: number, _y: number, rect: DOMRect) => {
-    const h = clamp(Math.round(x / rect.width * 360), 0, 360);
+    const h = clamp(Math.round(x / rect.width * 359), 0, 359);
     const next = { ...hsvaRef.current, h };
     if (!isControlled) setHsva(next);
     onChangeRef.current?.(formatColor(next, showAlpha));

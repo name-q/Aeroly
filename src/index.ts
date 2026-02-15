@@ -156,3 +156,9 @@ export type { QRCodeProps, QRCodeStatus } from './QRCode';
 
 export { default as Affix } from './Affix';
 export type { AffixProps } from './Affix';
+
+export { default as Dropdown } from './Dropdown';
+export type { DropdownProps, DropdownItem } from './Dropdown';
+
+export { default as AutoComplete } from './AutoComplete';
+export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';

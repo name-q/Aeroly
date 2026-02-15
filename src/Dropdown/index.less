@@ -1,0 +1,118 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.aero-dropdown {
+  &-menu {
+    min-width: 140px;
+    padding: 4px;
+    border-radius: @border-radius-lg;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    .glass-effect(rgba(255, 255, 255, 0), 40px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12),
+                0 2px 8px rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      backdrop-filter: blur(40px) saturate(140%);
+      -webkit-backdrop-filter: blur(40px) saturate(140%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                  0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--aero-text-color, #1a1a1a);
+    cursor: pointer;
+    .transition();
+
+    @{dark-selector} & {
+      color: #f0f0f0;
+    }
+
+    &:hover:not(&--disabled) {
+      background: rgba(0, 0, 0, 0.04);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.06);
+      }
+    }
+
+    &--selected {
+      color: @primary-color;
+      font-weight: 500;
+
+      @{dark-selector} & {
+        color: lighten(@primary-color, 10%);
+      }
+    }
+
+    &--selected:hover:not(&--disabled) {
+      background: fade(@primary-color, 8%);
+
+      @{dark-selector} & {
+        background: fade(@primary-color, 12%);
+      }
+    }
+
+    &--danger {
+      color: @error-color;
+
+      @{dark-selector} & {
+        color: lighten(@error-color, 10%);
+      }
+
+      &:hover:not(.aero-dropdown-item--disabled) {
+        background: fade(@error-color, 6%);
+
+        @{dark-selector} & {
+          background: fade(@error-color, 10%);
+        }
+      }
+    }
+
+    &--disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    &--submenu {
+      padding-right: 6px;
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    &-label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    &-arrow {
+      flex-shrink: 0;
+      opacity: 0.4;
+    }
+
+    &-check {
+      flex-shrink: 0;
+      color: @primary-color;
+    }
+  }
+
+  &-divider {
+    height: 1px;
+    margin: 4px 8px;
+    background: rgba(0, 0, 0, 0.06);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+}

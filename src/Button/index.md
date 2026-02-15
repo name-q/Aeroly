@@ -36,6 +36,7 @@ toc: content
 |------|------|------|--------|
 | type | 按钮类型 | `'primary' \| 'default' \| 'text'` | `'default'` |
 | size | 按钮尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| pill | 是否保持胶囊圆角，默认跟随全局圆角 | `boolean` | `false` |
 | disabled | 是否禁用 | `boolean` | `false` |
 | loading | 是否加载中 | `boolean` | `false` |
 | icon | 图标（Lucide 图标组件） | `LucideIcon` | - |

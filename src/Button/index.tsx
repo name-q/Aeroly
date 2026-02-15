@@ -12,6 +12,8 @@ export interface ButtonProps {
   type?: 'primary' | 'default' | 'text';
   /** 按钮尺寸 */
   size?: 'small' | 'medium' | 'large';
+  /** 是否保持胶囊圆角（默认跟随全局圆角） */
+  pill?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
   /** 是否加载中 */
@@ -32,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   type = 'default',
   size: sizeProp,
+  pill = false,
   disabled = false,
   loading = false,
   icon,
@@ -47,6 +50,7 @@ const Button: React.FC<ButtonProps> = ({
     'aero-button',
     `aero-button--${type}`,
     `aero-button--${size}`,
+    pill ? 'aero-button--pill' : '',
     isDisabled ? 'aero-button--disabled' : '',
     loading ? 'aero-button--loading' : '',
     icon && !children ? 'aero-button--icon-only' : '',

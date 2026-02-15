@@ -125,10 +125,12 @@ export default () => {
   const [radius, setRadius] = useState(8);
   const [radiusLg, setRadiusLg] = useState(12);
   const [size, setSize] = useState<SizeType>('medium');
+  const [preset, setPreset] = useState<PresetKey>('default');
   const [sliderVal, setSliderVal] = useState(40);
   const [copied, setCopied] = useState(false);
 
   const applyPreset = (key: PresetKey) => {
+    setPreset(key);
     const p = presets[key];
     setPrimary(p['primary-color']);
     setSuccess(p['success-color']);
@@ -177,9 +179,9 @@ export default () => {
           <Flex gap={8} align="center">
             <span style={labelStyle}>预设</span>
             <Segmented
-              value="custom"
+              value={preset}
               onChange={(v: string) => {
-                if (v !== 'custom') applyPreset(v as PresetKey);
+                applyPreset(v as PresetKey);
               }}
               options={[
                 { label: '默认', value: 'default' },
@@ -193,19 +195,19 @@ export default () => {
           <Flex gap={12} wrap align="center">
             <Flex gap={6} align="center">
               <span style={labelStyle}>主色</span>
-              <ColorPicker value={primary} onChange={setPrimary} size="small" />
+              <ColorPicker value={primary} onChange={(v: string) => { setPrimary(v); setPreset('' as PresetKey); }} size="small" />
             </Flex>
             <Flex gap={6} align="center">
               <span style={labelStyle}>成功</span>
-              <ColorPicker value={success} onChange={setSuccess} size="small" />
+              <ColorPicker value={success} onChange={(v: string) => { setSuccess(v); setPreset('' as PresetKey); }} size="small" />
             </Flex>
             <Flex gap={6} align="center">
               <span style={labelStyle}>警告</span>
-              <ColorPicker value={warning} onChange={setWarning} size="small" />
+              <ColorPicker value={warning} onChange={(v: string) => { setWarning(v); setPreset('' as PresetKey); }} size="small" />
             </Flex>
             <Flex gap={6} align="center">
               <span style={labelStyle}>错误</span>
-              <ColorPicker value={error} onChange={setError} size="small" />
+              <ColorPicker value={error} onChange={(v: string) => { setError(v); setPreset('' as PresetKey); }} size="small" />
             </Flex>
           </Flex>
         </Flex>
@@ -270,6 +272,7 @@ export default () => {
           {/* Button */}
           <Flex gap={12} wrap align="center">
             <Button type="primary">主色按钮</Button>
+            <Button type="primary" pill>胶囊按钮</Button>
             <Button>默认按钮</Button>
             <Button type="text">文本按钮</Button>
             <Button type="primary" loading>加载中</Button>

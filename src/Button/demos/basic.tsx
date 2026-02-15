@@ -1,6 +1,6 @@
 /**
  * title: " "
- * description: 三种按钮类型：默认（毛玻璃）、主色、文本。
+ * description: 三种按钮类型：默认、主色、文本。
  */
 import React from 'react';
 import { Button } from 'aero-ui';

@@ -1,6 +1,6 @@
 /**
  * title: " "
- * description: 点击图片打开毛玻璃预览浮层，支持缩放、旋转，按 Esc 关闭。
+ * description: 点击图片打开预览浮层，支持缩放、旋转，按 Esc 关闭。
  */
 import React from 'react';
 import { Image } from 'aero-ui';

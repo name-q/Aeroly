@@ -7,7 +7,7 @@ import { Masonry } from 'aero-ui';
 
 const cards = [
   { title: '设计系统', desc: '统一的设计语言和组件库，让产品体验一致。' },
-  { title: '毛玻璃效果', desc: '使用 backdrop-filter 实现现代化的磨砂玻璃视觉效果，层次分明，质感通透。' },
+  { title: '磨砂效果', desc: '实现现代化的磨砂视觉效果，层次分明，质感通透。' },
   { title: '响应式布局', desc: '自适应不同屏幕尺寸。' },
   { title: '暗色模式', desc: '内置亮色和暗色两套主题，自动跟随系统偏好切换，也支持手动控制。' },
   { title: '无障碍', desc: '遵循 WAI-ARIA 规范，支持键盘导航和屏幕阅读器。' },

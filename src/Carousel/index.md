@@ -7,6 +7,7 @@ group:
   order: 3
 title: Carousel 走马灯
 order: 8
+toc: content
 ---
 
 # Carousel 走马灯

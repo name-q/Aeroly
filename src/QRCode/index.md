@@ -7,6 +7,7 @@ group:
   order: 3
 title: QRCode 二维码
 order: 15
+toc: content
 ---
 
 # QRCode 二维码

@@ -7,6 +7,7 @@ group:
   order: 4
 title: Tour 漫游式引导
 order: 6
+toc: content
 ---
 
 # Tour 漫游式引导

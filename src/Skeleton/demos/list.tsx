@@ -14,7 +14,7 @@ interface Item {
 const mockData: Item[] = [
   { id: 1, title: '深入理解 React Hooks', desc: '从 useState 到自定义 Hook，全面掌握 Hooks 的设计哲学与最佳实践。' },
   { id: 2, title: 'TypeScript 类型体操指南', desc: '通过实战案例学习高级类型推导，让类型系统成为你的开发利器。' },
-  { id: 3, title: 'CSS 毛玻璃效果实现', desc: '使用 backdrop-filter 打造现代化的 Aero 风格界面，兼容性方案全解析。' },
+  { id: 3, title: 'CSS 效果实现', desc: '打造现代化的 Aero 风格界面，兼容性方案全解析。' },
 ];
 
 const ListItem: React.FC<{ item: Item }> = ({ item }) => (

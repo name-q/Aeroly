@@ -6,6 +6,7 @@ group:
 nav:
   title: 组件
   path: /components
+toc: content
 ---
 
 # Skeleton 骨架屏

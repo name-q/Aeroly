@@ -7,6 +7,7 @@ group:
   order: 4
 title: Spin 加载中
 order: 3
+toc: content
 ---
 
 # Spin 加载中

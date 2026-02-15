@@ -1,6 +1,6 @@
 /**
  * title: " "
- * description: 滚动页面，按钮固定在距顶部 0px 处，固定时自动叠加毛玻璃效果。
+ * description: 滚动页面，按钮固定在距顶部 0px 处。
  */
 import React, { useState } from 'react';
 import { Affix, Button, Flex } from 'aero-ui';

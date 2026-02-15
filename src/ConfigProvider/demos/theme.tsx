@@ -115,6 +115,7 @@ export default () => {
   const [warning, setWarning] = useState('#faad14');
   const [error, setError] = useState('#f5222d');
   const [sliderVal, setSliderVal] = useState(40);
+  const [copied, setCopied] = useState(false);
 
   const applyPreset = (key: PresetKey) => {
     const p = presets[key];
@@ -129,6 +130,24 @@ export default () => {
     'success-color': success,
     'warning-color': warning,
     'error-color': error,
+  };
+
+  const codeStr = `<ConfigProvider theme={{
+  'primary-color': '${primary}',
+  'success-color': '${success}',
+  'warning-color': '${warning}',
+  'error-color': '${error}',
+}}>`;
+
+  const handleCopy = () => {
+    const ta = document.createElement('textarea');
+    ta.value = codeStr;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (
@@ -180,6 +199,32 @@ export default () => {
           </Flex>
         </Flex>
       </Flex>
+
+      {/* 代码预览 */}
+      <div style={{ position: 'relative' }}>
+        <pre
+          style={{
+            margin: 0,
+            padding: '12px 16px',
+            borderRadius: 10,
+            background: 'rgba(0,0,0,0.03)',
+            border: '1px solid rgba(0,0,0,0.06)',
+            fontSize: 12,
+            lineHeight: 1.6,
+            overflow: 'auto',
+            color: 'var(--aero-text-color, #1a1a1a)',
+          }}
+        >
+          <code>{codeStr}</code>
+        </pre>
+        <Button
+          size="small"
+          onClick={handleCopy}
+          style={{ position: 'absolute', top: 8, right: 8 }}
+        >
+          {copied ? '已复制' : '复制'}
+        </Button>
+      </div>
 
       {/* 组件展示区 */}
       <ConfigProvider theme={theme}>

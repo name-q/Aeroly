@@ -91,9 +91,3 @@ const jaJP: Locale = {
   <Modal okText="好的" />
 </ConfigProvider>
 ```
-
-## 受影响的组件
-
-locale：Modal、Empty、Tour、Upload、DatePicker、DateRangePicker、TimePicker、Pagination、QRCode、FloatButton.BackTop
-
-theme：所有使用 `--aero-*` CSS Variables 的组件

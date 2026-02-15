@@ -162,3 +162,6 @@ export type { DropdownProps, DropdownItem } from './Dropdown';
 
 export { default as AutoComplete } from './AutoComplete';
 export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';
+
+export { default as FloatButton } from './FloatButton';
+export type { FloatButtonProps, FloatButtonGroupProps, BackTopProps } from './FloatButton';

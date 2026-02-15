@@ -1,0 +1,192 @@
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+@float-btn-size: 48px;
+@float-btn-size-square: 44px;
+@float-duration: 240ms;
+
+// ============================================================
+//  单个悬浮按钮
+// ============================================================
+
+.aero-float-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: @float-btn-size;
+  height: @float-btn-size;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  text-decoration: none;
+  transition: transform @float-duration @transition-timing,
+              box-shadow @float-duration @transition-timing,
+              background @float-duration @transition-timing,
+              backdrop-filter @float-duration @transition-timing;
+
+  // ---- shape ----
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--square {
+    width: @float-btn-size-square;
+    height: @float-btn-size-square;
+    border-radius: @border-radius-lg;
+  }
+
+  // ---- type: default — 毛玻璃 ----
+  &--default {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10),
+                0 1px 4px rgba(0, 0, 0, 0.06);
+    color: var(--aero-text-color, #1a1a1a);
+
+    @{dark-selector} & {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.10);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+                  0 1px 4px rgba(0, 0, 0, 0.15);
+      color: #f0f0f0;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.30);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14),
+                  0 2px 6px rgba(0, 0, 0, 0.08);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.10);
+        border-color: rgba(255, 255, 255, 0.16);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4),
+                    0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &:active {
+      transform: translateY(1px) scale(0.96);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(16px) saturate(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(120%);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  // ---- type: primary ----
+  &--primary {
+    background: @primary-color;
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: 0 4px 20px fade(@primary-color, 30%),
+                0 1px 4px rgba(0, 0, 0, 0.06);
+
+    &:hover {
+      background: lighten(@primary-color, 6%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px fade(@primary-color, 40%),
+                  0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    &:active {
+      transform: translateY(1px) scale(0.96);
+      background: darken(@primary-color, 6%);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // ---- 有描述文字时缩小间距 ----
+  &--has-desc {
+    gap: 1px;
+  }
+
+  // ---- 内部元素 ----
+  &-icon {
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  &-desc {
+    font-size: 10px;
+    line-height: 1.2;
+    max-width: 38px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // ---- trigger 按钮（Group 用） ----
+  &--trigger {
+    position: relative;
+    z-index: 1;
+  }
+
+  &--trigger-open &-trigger-icon,
+  &--trigger-open .aero-float-btn-trigger-icon {
+    // closeIcon 不存在时，旋转 icon 45° 变成关闭态
+  }
+
+  &-trigger-icon {
+    transition: transform @float-duration @transition-timing;
+  }
+
+  &--trigger-open .aero-float-btn-trigger-icon {
+    transform: rotate(45deg);
+  }
+}
+
+// ============================================================
+//  Group 按钮组
+// ============================================================
+
+.aero-float-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &-item {
+    opacity: 0;
+    transform: translateY(12px) scale(0.6);
+    pointer-events: none;
+    transition: opacity @float-duration @transition-timing,
+                transform @float-duration @transition-timing;
+  }
+
+  &--open &-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+}
+
+// ============================================================
+//  BackTop 回到顶部
+// ============================================================
+
+.aero-float-btn-backtop {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  transition: opacity @float-duration @transition-timing,
+              transform @float-duration @transition-timing;
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+}

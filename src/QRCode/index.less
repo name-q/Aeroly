@@ -4,7 +4,7 @@
 .aero-qrcode {
   display: inline-flex;
   flex-direction: column;
-  border-radius: @border-radius-lg;
+  border-radius: var(--aero-border-radius-lg, @border-radius-lg);
   .transition();
 
   &--bordered {

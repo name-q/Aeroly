@@ -11,7 +11,7 @@
   align-items: center;
   gap: 10px;
   padding: 6px 8px;
-  border-radius: @border-radius-base;
+  border-radius: var(--aero-border-radius, @border-radius-base);
   cursor: pointer;
   user-select: none;
   line-height: 1;
@@ -268,7 +268,7 @@
   &--large {
     gap: 12px;
     padding: 8px 10px;
-    border-radius: @border-radius-base;
+    border-radius: var(--aero-border-radius, @border-radius-base);
   }
 
   &--large &-indicator {

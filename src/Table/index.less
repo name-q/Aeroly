@@ -203,7 +203,7 @@
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  border-radius: @border-radius-base;
+  border-radius: var(--aero-border-radius, @border-radius-base);
 
   @{dark-selector} & {
     background: rgba(0, 0, 0, 0.35);
@@ -326,7 +326,7 @@
 .aero-table--bordered {
   .aero-table-container {
     border: 1px solid @table-border-color;
-    border-radius: @border-radius-base;
+    border-radius: var(--aero-border-radius, @border-radius-base);
     overflow: hidden;
 
     @{dark-selector} & {

@@ -1,6 +1,6 @@
 /**
  * title: " "
- * description: 通过 `theme` 属性覆盖 CSS Variables，实现局部主题定制。使用颜色选择器自由调整主色和状态色，所有组件实时响应。
+ * description: 通过 `theme` 属性覆盖 CSS Variables，实现局部主题定制。使用颜色选择器自由调整主色和状态色，拖动滑块调整圆角，切换全局尺寸，所有组件实时响应。
  */
 import React, { useState } from 'react';
 import {
@@ -35,6 +35,7 @@ import {
   Statistic,
   ColorPicker,
 } from 'aero-ui';
+import type { SizeType } from 'aero-ui';
 
 const presets = {
   default: {
@@ -109,11 +110,21 @@ const labelStyle: React.CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
+const panelStyle: React.CSSProperties = {
+  padding: '12px 16px',
+  borderRadius: 10,
+  background: 'rgba(0,0,0,0.02)',
+  border: '1px solid rgba(0,0,0,0.06)',
+};
+
 export default () => {
   const [primary, setPrimary] = useState('#50b8e7');
   const [success, setSuccess] = useState('#52c41a');
   const [warning, setWarning] = useState('#faad14');
   const [error, setError] = useState('#f5222d');
+  const [radius, setRadius] = useState(8);
+  const [radiusLg, setRadiusLg] = useState(12);
+  const [size, setSize] = useState<SizeType>('medium');
   const [sliderVal, setSliderVal] = useState(40);
   const [copied, setCopied] = useState(false);
 
@@ -130,14 +141,21 @@ export default () => {
     'success-color': success,
     'warning-color': warning,
     'error-color': error,
+    'border-radius': `${radius}px`,
+    'border-radius-lg': `${radiusLg}px`,
   };
 
-  const codeStr = `<ConfigProvider theme={{
-  'primary-color': '${primary}',
-  'success-color': '${success}',
-  'warning-color': '${warning}',
-  'error-color': '${error}',
-}}>`;
+  const codeStr = `<ConfigProvider
+  size="${size}"
+  theme={{
+    'primary-color': '${primary}',
+    'success-color': '${success}',
+    'warning-color': '${warning}',
+    'error-color': '${error}',
+    'border-radius': '${radius}px',
+    'border-radius-lg': '${radiusLg}px',
+  }}
+>`;
 
   const handleCopy = () => {
     const ta = document.createElement('textarea');
@@ -151,51 +169,71 @@ export default () => {
   };
 
   return (
-    <Flex direction="column" gap={20}>
-      {/* 颜色控制面板 */}
-      <Flex
-        gap={16}
-        wrap
-        align="center"
-        style={{
-          padding: '12px 16px',
-          borderRadius: 10,
-          background: 'rgba(0,0,0,0.02)',
-          border: '1px solid rgba(0,0,0,0.06)',
-        }}
-      >
-        <Flex gap={8} align="center">
-          <span style={labelStyle}>预设</span>
-          <Segmented
-            value="custom"
-            onChange={(v: string) => {
-              if (v !== 'custom') applyPreset(v as PresetKey);
-            }}
-            options={[
-              { label: '默认', value: 'default' },
-              { label: '橙色', value: 'orange' },
-              { label: '紫色', value: 'purple' },
-              { label: '绿色', value: 'green' },
-            ]}
-            size="small"
-          />
+    <Flex direction="column" gap={16}>
+      {/* 控制面板 */}
+      <Flex direction="column" gap={12} style={panelStyle}>
+        {/* 预设 + 颜色 */}
+        <Flex gap={16} wrap align="center">
+          <Flex gap={8} align="center">
+            <span style={labelStyle}>预设</span>
+            <Segmented
+              value="custom"
+              onChange={(v: string) => {
+                if (v !== 'custom') applyPreset(v as PresetKey);
+              }}
+              options={[
+                { label: '默认', value: 'default' },
+                { label: '橙色', value: 'orange' },
+                { label: '紫色', value: 'purple' },
+                { label: '绿色', value: 'green' },
+              ]}
+              size="small"
+            />
+          </Flex>
+          <Flex gap={12} wrap align="center">
+            <Flex gap={6} align="center">
+              <span style={labelStyle}>主色</span>
+              <ColorPicker value={primary} onChange={setPrimary} size="small" />
+            </Flex>
+            <Flex gap={6} align="center">
+              <span style={labelStyle}>成功</span>
+              <ColorPicker value={success} onChange={setSuccess} size="small" />
+            </Flex>
+            <Flex gap={6} align="center">
+              <span style={labelStyle}>警告</span>
+              <ColorPicker value={warning} onChange={setWarning} size="small" />
+            </Flex>
+            <Flex gap={6} align="center">
+              <span style={labelStyle}>错误</span>
+              <ColorPicker value={error} onChange={setError} size="small" />
+            </Flex>
+          </Flex>
         </Flex>
-        <Flex gap={12} wrap align="center">
-          <Flex gap={6} align="center">
-            <span style={labelStyle}>主色</span>
-            <ColorPicker value={primary} onChange={setPrimary} size="small" />
+
+        {/* 尺寸 + 圆角 */}
+        <Flex gap={16} wrap align="center">
+          <Flex gap={8} align="center">
+            <span style={labelStyle}>尺寸</span>
+            <Segmented
+              value={size}
+              onChange={(v: string) => setSize(v as SizeType)}
+              options={[
+                { label: 'S', value: 'small' },
+                { label: 'M', value: 'medium' },
+                { label: 'L', value: 'large' },
+              ]}
+              size="small"
+            />
           </Flex>
-          <Flex gap={6} align="center">
-            <span style={labelStyle}>成功</span>
-            <ColorPicker value={success} onChange={setSuccess} size="small" />
+          <Flex gap={8} align="center" style={{ minWidth: 180 }}>
+            <span style={labelStyle}>圆角</span>
+            <Slider value={radius} onChange={setRadius} min={0} max={20} style={{ width: 100 }} />
+            <span style={{ ...labelStyle, width: 32, textAlign: 'right' }}>{radius}px</span>
           </Flex>
-          <Flex gap={6} align="center">
-            <span style={labelStyle}>警告</span>
-            <ColorPicker value={warning} onChange={setWarning} size="small" />
-          </Flex>
-          <Flex gap={6} align="center">
-            <span style={labelStyle}>错误</span>
-            <ColorPicker value={error} onChange={setError} size="small" />
+          <Flex gap={8} align="center" style={{ minWidth: 180 }}>
+            <span style={labelStyle}>大圆角</span>
+            <Slider value={radiusLg} onChange={setRadiusLg} min={0} max={24} style={{ width: 100 }} />
+            <span style={{ ...labelStyle, width: 32, textAlign: 'right' }}>{radiusLg}px</span>
           </Flex>
         </Flex>
       </Flex>
@@ -227,7 +265,7 @@ export default () => {
       </div>
 
       {/* 组件展示区 */}
-      <ConfigProvider theme={theme}>
+      <ConfigProvider theme={theme} size={size}>
         <Flex direction="column" gap={20}>
           {/* Button */}
           <Flex gap={12} wrap align="center">

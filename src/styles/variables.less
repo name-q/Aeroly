@@ -93,6 +93,10 @@
 
   // 阴影
   --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  // 圆角
+  --aero-border-radius: @border-radius-base;
+  --aero-border-radius-lg: @border-radius-lg;
 }
 
 [data-theme='dark'],
@@ -137,4 +141,8 @@
 
   // 阴影
   --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  // 圆角（暗色模式同值，但允许 ConfigProvider 覆盖）
+  --aero-border-radius: @border-radius-base;
+  --aero-border-radius-lg: @border-radius-lg;
 }

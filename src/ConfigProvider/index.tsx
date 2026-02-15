@@ -86,7 +86,7 @@ function hslToRgb([h, s, l]: [number, number, number]): [number, number, number]
 /** 颜色变量 → 需要自动派生的 key 列表 */
 const COLOR_KEYS = ['primary-color', 'success-color', 'warning-color', 'error-color'];
 
-/** primary-color 的派生色映射（与 variables.less / themes.less 对齐） */
+/** primary-color 的派生色映射（与 variables.less 对齐） */
 const PRIMARY_DERIVATIVES: [string, (rgb: [number, number, number]) => [number, number, number]][] = [
   ['primary-color-hover', rgb => lighten(rgb, 6)],
   ['primary-color-active', rgb => darken(rgb, 6)],
@@ -95,6 +95,21 @@ const PRIMARY_DERIVATIVES: [string, (rgb: [number, number, number]) => [number, 
   ['primary-color-light-3', rgb => lighten(rgb, 10)],
   ['primary-color-light-4', rgb => lighten(rgb, 12)],
 ];
+
+/** 各状态色的派生色映射 */
+const COLOR_DERIVATIVES: Record<string, [string, (rgb: [number, number, number]) => [number, number, number]][]> = {
+  'primary-color': PRIMARY_DERIVATIVES,
+  'success-color': [
+    ['success-color-light', rgb => lighten(rgb, 12)],
+  ],
+  'warning-color': [
+    ['warning-color-dark', rgb => darken(rgb, 6)],
+  ],
+  'error-color': [
+    ['error-color-light-1', rgb => lighten(rgb, 10)],
+    ['error-color-light-2', rgb => lighten(rgb, 12)],
+  ],
+};
 
 function buildThemeStyle(theme?: ThemeConfig): React.CSSProperties | undefined {
   if (!theme) return undefined;
@@ -107,9 +122,10 @@ function buildThemeStyle(theme?: ThemeConfig): React.CSSProperties | undefined {
     if (COLOR_KEYS.includes(key)) {
       style[`--aero-${key}-rgb`] = toRGBStr(rgb);
     }
-    // primary-color → 自动派生 hover/active/light-1~4（用户未手动指定时）
-    if (key === 'primary-color') {
-      for (const [suffix, fn] of PRIMARY_DERIVATIVES) {
+    // 自动派生 hover/active/light 等（用户未手动指定时）
+    const derivatives = COLOR_DERIVATIVES[key];
+    if (derivatives) {
+      for (const [suffix, fn] of derivatives) {
         if (!(suffix in theme)) {
           style[`--aero-${suffix}`] = toHex(fn(rgb));
         }

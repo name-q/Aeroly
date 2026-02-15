@@ -71,11 +71,18 @@ const treeData = [
 
 const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
 
+const EmailAutoComplete: React.FC<{ form: any; [key: string]: any }> = ({ form, ...rest }) => {
+  const emailVal = Form.useWatch('email', form) || '';
+  const options = emailVal && !emailVal.includes('@')
+    ? emailSuffixes.map((s) => ({ value: emailVal + s }))
+    : [];
+  return <AutoComplete options={options} filterOption={false} {...rest} />;
+};
+
 export default () => {
   const [form] = Form.useForm();
   const [layout, setLayout] = useState<'vertical' | 'horizontal' | 'inline'>('inline');
   const [expanded, setExpanded] = useState(false);
-  const emailVal = Form.useWatch('email', form) || '';
 
   const isInline = layout === 'inline';
 
@@ -133,15 +140,7 @@ export default () => {
         </Form.Item>
 
         <Form.Item name="email" label="邮箱" rules={[{ required: true, message: '请输入邮箱' }, { type: 'email', message: '邮箱格式不正确' }]} hidden={isInline && !expanded}>
-          <AutoComplete
-            placeholder="请输入邮箱"
-            options={
-              emailVal && !emailVal.includes('@')
-                ? emailSuffixes.map((s) => ({ value: emailVal + s }))
-                : []
-            }
-            filterOption={false}
-          />
+          <EmailAutoComplete form={form} placeholder="请输入邮箱" />
         </Form.Item>
 
         <Form.Item name="score" label="评分" hidden={isInline && !expanded}>

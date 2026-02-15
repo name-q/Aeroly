@@ -71,6 +71,14 @@ const treeData = [
 
 const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
 
+const EmailAutoComplete: React.FC<{ form: any; [key: string]: any }> = ({ form, ...rest }) => {
+  const emailVal = Form.useWatch('email', form) || '';
+  const options = emailVal && !emailVal.includes('@')
+    ? emailSuffixes.map((s) => ({ value: emailVal + s }))
+    : [];
+  return <AutoComplete options={options} filterOption={false} {...rest} />;
+};
+
 // 模拟后端返回的数据 — 用户 A
 const dataA = {
   keyword: 'AeroUI',
@@ -142,7 +150,6 @@ export default () => {
   const [current, setCurrent] = useState<'A' | 'B'>('A');
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewIndex, setPreviewIndex] = useState(0);
-  const emailVal = Form.useWatch('email', form) || '';
 
   const switchData = (key: 'A' | 'B') => {
     setCurrent(key);
@@ -215,15 +222,7 @@ export default () => {
             { type: 'email', message: '邮箱格式不正确' },
           ]}
         >
-          <AutoComplete
-            placeholder="请输入邮箱"
-            options={
-              emailVal && !emailVal.includes('@')
-                ? emailSuffixes.map((s) => ({ value: emailVal + s }))
-                : []
-            }
-            filterOption={false}
-          />
+          <EmailAutoComplete form={form} placeholder="请输入邮箱" />
         </Form.Item>
 
         <Form.Item name="score" label="评分">

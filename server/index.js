@@ -74,6 +74,30 @@ router.delete('/api/upload/:filename', async (ctx) => {
   ctx.body = { success: true };
 });
 
+// ---- AutoComplete 搜索 API ----
+
+const CITIES = [
+  '北京', '上海', '广州', '深圳', '杭州', '南京', '成都', '重庆', '武汉', '西安',
+  '苏州', '天津', '长沙', '郑州', '东莞', '青岛', '沈阳', '宁波', '昆明', '大连',
+  '厦门', '合肥', '佛山', '福州', '哈尔滨', '济南', '温州', '长春', '石家庄', '常州',
+  '泉州', '南宁', '贵阳', '南昌', '太原', '烟台', '嘉兴', '南通', '金华', '珠海',
+  '惠州', '徐州', '海口', '乌鲁木齐', '绍兴', '中山', '台州', '兰州', '潍坊', '保定',
+];
+
+router.get('/api/search/cities', async (ctx) => {
+  const keyword = (ctx.query.keyword || '').toString().trim();
+  // 模拟网络延迟 200-500ms
+  await new Promise((r) => setTimeout(r, 200 + Math.random() * 300));
+
+  if (!keyword) {
+    ctx.body = { success: true, data: CITIES.slice(0, 10) };
+    return;
+  }
+
+  const results = CITIES.filter((c) => c.includes(keyword));
+  ctx.body = { success: true, data: results };
+});
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 

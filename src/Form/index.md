@@ -37,6 +37,10 @@ toc: content
 
 <code src="./demos/upload.tsx"></code>
 
+## 数据回显
+
+<code src="./demos/prefill.tsx"></code>
+
 ## Modal 中的表单
 
 <code src="./demos/modal.tsx"></code>
@@ -125,3 +129,17 @@ toc: content
 | resetFields | 重置字段 | `(names?: NamePath[]) => void` |
 | submit | 触发提交 | `() => void` |
 | isFieldTouched | 字段是否被操作过 | `(name: NamePath) => boolean` |
+
+### Form.useWatch
+
+订阅指定字段的实时值，字段变化时自动触发组件重渲染。适合根据某个字段值动态生成其他内容（如邮箱后缀补全）。
+
+```tsx | pure
+const email = Form.useWatch('email', form);
+```
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| name | `NamePath` | 要监听的字段名 |
+| form | `FormInstance` | 表单实例 |
+| 返回值 | `any` | 字段当前值 |

@@ -219,17 +219,33 @@
     border-color: @error-color;
     @{dark-selector} & { border-color: fade(@error-color, 70%); }
   }
+  &--error:hover:not(&--disabled) &-input {
+    border-color: @error-color;
+    @{dark-selector} & { border-color: fade(@error-color, 70%); }
+  }
   &--error&--open &-input {
+    border-color: @error-color;
     box-shadow: 0 0 0 3px fade(@error-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
-    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@error-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
+    @{dark-selector} & {
+      border-color: fade(@error-color, 70%);
+      box-shadow: 0 0 0 3px fade(@error-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20);
+    }
   }
   &--warning &-input {
     border-color: @warning-color;
     @{dark-selector} & { border-color: fade(@warning-color, 70%); }
   }
+  &--warning:hover:not(&--disabled) &-input {
+    border-color: @warning-color;
+    @{dark-selector} & { border-color: fade(@warning-color, 70%); }
+  }
   &--warning&--open &-input {
+    border-color: @warning-color;
     box-shadow: 0 0 0 3px fade(@warning-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
-    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@warning-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
+    @{dark-selector} & {
+      border-color: fade(@warning-color, 70%);
+      box-shadow: 0 0 0 3px fade(@warning-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20);
+    }
   }
 
   // ---- Disabled ----

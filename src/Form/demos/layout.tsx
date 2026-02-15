@@ -13,6 +13,7 @@ import {
   DateRangePicker,
   Cascader,
   TreeSelect,
+  AutoComplete,
   Rate,
   Slider,
   Switch,
@@ -68,9 +69,13 @@ const treeData = [
   },
 ];
 
+const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
+
 export default () => {
+  const [form] = Form.useForm();
   const [layout, setLayout] = useState<'vertical' | 'horizontal' | 'inline'>('inline');
   const [expanded, setExpanded] = useState(false);
+  const emailVal = Form.useWatch('email', form) || '';
 
   const isInline = layout === 'inline';
 
@@ -89,6 +94,7 @@ export default () => {
       />
 
       <Form
+        form={form}
         layout={layout}
         labelWidth={70}
         style={{ maxWidth: isInline ? undefined : 520 }}
@@ -126,8 +132,16 @@ export default () => {
           <InputNumber placeholder="请输入" style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item name="email" label="邮箱" rules={[{ required: true }]} hidden={isInline && !expanded}>
-          <Input placeholder="请输入邮箱" />
+        <Form.Item name="email" label="邮箱" rules={[{ required: true, message: '请输入邮箱' }, { type: 'email', message: '邮箱格式不正确' }]} hidden={isInline && !expanded}>
+          <AutoComplete
+            placeholder="请输入邮箱"
+            options={
+              emailVal && !emailVal.includes('@')
+                ? emailSuffixes.map((s) => ({ value: emailVal + s }))
+                : []
+            }
+            filterOption={false}
+          />
         </Form.Item>
 
         <Form.Item name="score" label="评分" hidden={isInline && !expanded}>

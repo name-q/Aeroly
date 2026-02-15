@@ -1,14 +1,19 @@
 /**
  * title: " "
- * description: 在 Form 中使用 AutoComplete，输入邮箱前缀后自动补全常用后缀。
+ * description: 在 Form 中使用 AutoComplete，通过 `Form.useWatch` 获取实时值动态生成邮箱后缀建议。
  */
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Form, AutoComplete, Button, Flex } from 'aero-ui';
 
 const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
 
 export default () => {
   const [form] = Form.useForm();
+  const email = Form.useWatch('email', form) || '';
+
+  const options = email && !email.includes('@')
+    ? emailSuffixes.map((s) => ({ value: email + s }))
+    : [];
 
   return (
     <Form
@@ -24,25 +29,11 @@ export default () => {
           { type: 'email', message: '邮箱格式不正确' },
         ]}
       >
-        {(fieldState) => {
-          const current = fieldState.value || '';
-          const options = current && !current.includes('@')
-            ? emailSuffixes.map((s) => ({
-                value: current + s,
-                label: current + s,
-              }))
-            : [];
-
-          return (
-            <AutoComplete
-              value={current}
-              onChange={(val) => form.setFieldValue('email', val)}
-              options={options}
-              filterOption={false}
-              placeholder="请输入邮箱"
-            />
-          );
-        }}
+        <AutoComplete
+          placeholder="请输入邮箱"
+          options={options}
+          filterOption={false}
+        />
       </Form.Item>
 
       <Form.Item>

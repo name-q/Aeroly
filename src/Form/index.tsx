@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo, useCallback, useImperativeHandle, forwardRef } from 'react';
 import { FormContext } from './FormContext';
 import type { FormContextValue } from './FormContext';
-import { useForm } from './useForm';
+import { useForm, useWatch } from './useForm';
 import FormItem from './FormItem';
 import FormList from './FormList';
 import type { FormInstance } from './FormStore';
@@ -169,12 +169,14 @@ type FormType = typeof InternalForm & {
   Item: typeof FormItem;
   List: typeof FormList;
   useForm: typeof useForm;
+  useWatch: typeof useWatch;
 };
 
 const Form = InternalForm as FormType;
 Form.Item = FormItem;
 Form.List = FormList;
 Form.useForm = useForm;
+Form.useWatch = useWatch;
 
 export default Form;
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -53,7 +54,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   placeholder,
   disabled = false,
   readOnly = false,
-  size = 'medium',
+  size: sizeProp,
   status,
   maxLength,
   showCount = false,
@@ -67,6 +68,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
   const currentValue = isControlled ? value! : internalValue;

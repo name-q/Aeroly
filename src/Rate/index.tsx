@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Star } from 'lucide-react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface RateProps {
@@ -43,7 +44,7 @@ const Rate: React.FC<RateProps> = ({
   allowClear = true,
   disabled = false,
   readOnly = false,
-  size = 'medium',
+  size: sizeProp,
   color,
   icon,
   onChange,
@@ -51,6 +52,7 @@ const Rate: React.FC<RateProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
   // null = 没有 hover，number = hover 中的值（含 0）

@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext, useCallback } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Context ----
@@ -85,13 +86,14 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   defaultValue = [],
   onChange,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   options,
   direction = 'horizontal',
   children,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<(string | number)[]>(defaultValue);
   const currentValue = isControlled ? value! : internalValue;
@@ -147,13 +149,14 @@ const Checkbox: React.FC<CheckboxProps> & { Group: typeof CheckboxGroup } = ({
   defaultChecked = false,
   indeterminate = false,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   value,
   onChange,
   children,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const groupContext = useContext(CheckboxGroupContext);
 
   const isControlled = checked !== undefined;

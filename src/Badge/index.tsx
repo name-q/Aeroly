@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface BadgeProps {
@@ -20,6 +21,8 @@ export interface BadgeProps {
   status?: 'default' | 'processing' | 'success' | 'warning' | 'error';
   /** 状态点旁的文本 */
   statusText?: React.ReactNode;
+  /** 尺寸 */
+  size?: 'small' | 'medium' | 'large';
   /** 偏移 [right, top] */
   offset?: [number, number];
   /** 包裹的子元素 */
@@ -40,16 +43,18 @@ const Badge: React.FC<BadgeProps> = ({
   text,
   status,
   statusText,
+  size: sizeProp,
   offset,
   children,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   // 状态点模式（独立使用）
   if (status && !children) {
     return (
       <span
-        className={['aero-badge-status', className].filter(Boolean).join(' ')}
+        className={['aero-badge-status', `aero-badge-status--${size}`, className].filter(Boolean).join(' ')}
         style={style}
       >
         <span
@@ -86,6 +91,7 @@ const Badge: React.FC<BadgeProps> = ({
 
   const cls = [
     'aero-badge',
+    `aero-badge--${size}`,
     className || '',
   ].filter(Boolean).join(' ');
 

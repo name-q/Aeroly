@@ -3,6 +3,7 @@ import { ChevronDown, ChevronRight, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 import { useDropdownPosition } from '../utils';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -200,7 +201,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   searchPlaceholder,
   multiple = false,
   maxTagCount,
-  size = 'medium',
+  size: sizeProp,
   notFoundContent,
   defaultExpandAll = false,
   defaultExpandedKeys,
@@ -211,6 +212,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   // ---- 受控/非受控值 ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | string[]>(

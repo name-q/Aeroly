@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext, useCallback } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Context ----
@@ -86,7 +87,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   defaultValue,
   onChange,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   options,
   optionType = 'default',
   direction = 'horizontal',
@@ -94,6 +95,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | number | undefined>(defaultValue);
   const currentValue = isControlled ? value : internalValue;
@@ -149,13 +151,14 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
   checked,
   defaultChecked = false,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   value,
   onChange,
   children,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const groupContext = useContext(RadioGroupContext);
 
   const isControlled = checked !== undefined;

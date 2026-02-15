@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react';
 import Checkbox from '../Checkbox';
 import Pagination from '../Pagination';
 import Empty from '../Empty';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -175,7 +176,7 @@ function Table<T = any>({
   rowKey = 'id' as RowKey<T>,
   rowSelection,
   pagination,
-  size = 'medium',
+  size: sizeProp = 'medium',
   bordered = false,
   striped = false,
   loading = false,
@@ -189,6 +190,7 @@ function Table<T = any>({
   className,
   style,
 }: TableProps<T>) {
+  const size = useSize(sizeProp);
   // ---- 展开行 ----
   const [innerExpandedKeys, setInnerExpandedKeys] = useState<(string | number)[]>(defaultExpandedRowKeys ?? []);
   const expandedKeys = expandedRowKeysProp ?? innerExpandedKeys;

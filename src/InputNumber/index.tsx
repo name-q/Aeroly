@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import Icon from '../Icon';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -94,7 +95,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
   precision: precisionProp,
   disabled = false,
   readOnly = false,
-  size = 'medium',
+  size: sizeProp,
   status,
   placeholder,
   controls = true,
@@ -107,6 +108,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number | null>(defaultValue);
   const currentValue = isControlled ? value! : internalValue;

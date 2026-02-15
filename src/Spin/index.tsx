@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SpinProps {
@@ -20,7 +21,7 @@ export interface SpinProps {
 
 const Spin: React.FC<SpinProps> = ({
   spinning = true,
-  size = 'medium',
+  size: sizeProp,
   tip,
   delay,
   indicator,
@@ -28,6 +29,7 @@ const Spin: React.FC<SpinProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const [show, setShow] = useState(() => (delay && delay > 0 ? false : spinning));
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
 

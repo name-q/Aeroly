@@ -40,6 +40,7 @@ toc: content
 | onClose | 关闭回调 | `() => void` | - |
 | icon | 自定义图标 | `LucideIcon` | - |
 | showIcon | 是否显示图标 | `boolean` | `true` |
+| size | 尺寸，影响内边距、字号和图标大小 | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | shimmer | 是否开启文字光影掠过效果 | `boolean` | `true` |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |

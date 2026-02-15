@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -88,12 +89,13 @@ const Descriptions: React.FC<DescriptionsProps> = ({
   column = 3,
   layout = 'horizontal',
   bordered = false,
-  size = 'medium',
+  size: sizeProp,
   labelAlign = 'left',
   colon = true,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const rows = buildRows(items, column);
 
   const cls = [

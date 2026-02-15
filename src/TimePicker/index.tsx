@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Clock, X } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
-import { useLocale } from '../ConfigProvider/useConfig';
+import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface TimePickerProps {
@@ -221,11 +221,12 @@ const TimePicker: React.FC<TimePickerProps> = ({
   hourStep = 1,
   minuteStep = 1,
   secondStep = 1,
-  size = 'medium',
+  size: sizeProp,
   status,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const localeTime = useLocale('TimePicker');
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue || '');

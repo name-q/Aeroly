@@ -4,6 +4,7 @@ import type { PopoverPlacement } from '../Popover';
 import Input from '../Input';
 import InputNumber from '../InputNumber';
 import { throttle } from '../utils';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ─── 颜色算法 ───
@@ -179,12 +180,13 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   onChange,
   showAlpha = false,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   presets,
   placement = 'bottom',
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [hsva, setHsva] = useState<HSVA>(() => parseColor(isControlled ? value! : defaultValue));
   const [open, setOpen] = useState(false);

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SegmentedOption {
@@ -46,10 +47,11 @@ const Segmented: React.FC<SegmentedProps> = ({
   onChange,
   block = false,
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | number>(
     defaultValue ?? normalizeOption(options[0]).value,

@@ -50,6 +50,7 @@ toc: content
 | text | 自定义显示内容 | `ReactNode` | - |
 | status | 状态点（独立使用） | `'default' \| 'processing' \| 'success' \| 'warning' \| 'error'` | - |
 | statusText | 状态点旁的文本 | `ReactNode` | - |
+| size | 尺寸，影响徽标数和小红点大小 | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | offset | 偏移 [right, top] | `[number, number]` | - |
 | children | 包裹的子元素 | `ReactNode` | - |
 | className | 自定义类名 | `string` | - |

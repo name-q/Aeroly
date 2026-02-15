@@ -16,6 +16,39 @@
   display: inline-flex;
   vertical-align: middle;
 
+  // ---- 尺寸 ----
+  &--small &-count {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  &--small &-count--dot {
+    min-width: 6px;
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  &--large &-count {
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  &--large &-count--dot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
   // ---- 徽标数 ----
   &-count {
     position: absolute;
@@ -90,6 +123,18 @@
     align-items: center;
     gap: 6px;
     line-height: 1;
+
+    &--small {
+      gap: 4px;
+      .aero-badge-status-dot { width: 5px; height: 5px; }
+      .aero-badge-status-text { font-size: 12px; }
+    }
+
+    &--large {
+      gap: 8px;
+      .aero-badge-status-dot { width: 9px; height: 9px; }
+      .aero-badge-status-text { font-size: 14px; }
+    }
   }
 
   &-status-dot {

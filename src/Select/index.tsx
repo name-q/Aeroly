@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { ChevronDown, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -107,7 +108,7 @@ const Select: React.FC<SelectProps> = ({
   searchPlaceholder,
   multiple = false,
   maxTagCount,
-  size = 'medium',
+  size: sizeProp,
   notFoundContent,
   open: openProp,
   onOpenChange,
@@ -115,6 +116,7 @@ const Select: React.FC<SelectProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   // ---- 受控/非受控值 ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | number | (string | number)[]>(

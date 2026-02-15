@@ -7,6 +7,7 @@ import FormList from './FormList';
 import type { FormInstance } from './FormStore';
 import type { FormItemProps } from './FormItem';
 import type { FormListProps, FormListField, FormListOperation, FormListMeta } from './FormList';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -74,7 +75,7 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
   labelWidth,
   labelAlign = 'left',
   disabled = false,
-  size = 'medium',
+  size: sizeProp,
   requiredMark = true,
   validateTrigger = 'onChange',
   scrollToFirstError = true,
@@ -85,6 +86,7 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
   className,
   style,
 }, ref) => {
+  const size = useSize(sizeProp);
   const [form] = useForm(formProp);
   const { __INTERNAL__: internal } = form;
   const initializedRef = useRef(false);

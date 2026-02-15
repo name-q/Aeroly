@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from
 import Icon from '../Icon';
 import InputNumber from '../InputNumber';
 import Select from '../Select';
-import { useLocale } from '../ConfigProvider/useConfig';
+import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -119,7 +119,7 @@ const Pagination: React.FC<PaginationProps> = ({
   pageSize,
   defaultPageSize = 10,
   onChange,
-  size = 'medium',
+  size: sizeProp,
   disabled = false,
   showQuickJumper = false,
   showSizeChanger = false,
@@ -129,6 +129,7 @@ const Pagination: React.FC<PaginationProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const localePag = useLocale('Pagination');
   // ---- pageSize 状态 ----
   const isPageSizeControlled = pageSize !== undefined;

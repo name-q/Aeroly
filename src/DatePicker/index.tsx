@@ -8,7 +8,7 @@ import {
 } from './utils';
 import Column from './Column';
 import { useDropdownPosition } from '../utils';
-import { useLocale } from '../ConfigProvider/useConfig';
+import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface DatePickerProps {
@@ -292,7 +292,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   placeholder,
   disabled = false,
   allowClear = true,
-  size = 'medium',
+  size: sizeProp,
   format: formatProp,
   disabledDate,
   showTime,
@@ -300,6 +300,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const localeDatePicker = useLocale('DatePicker');
   const finalPlaceholder = placeholder ?? localeDatePicker.placeholder;
   const hasTime = !!showTime;

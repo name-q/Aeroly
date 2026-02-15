@@ -83,11 +83,25 @@ const jaJP: Locale = {
 
 ## 优先级
 
-组件自身的 prop 优先级高于 ConfigProvider 的 locale 配置：
+ConfigProvider 提供的 `locale`、`size`、`theme` 均遵循相同的优先级规则：
+
+> **组件自身 prop > 最近的 ConfigProvider > 上层 ConfigProvider > 默认值**
+
+即组件上直接传入的 prop 始终最优先，ConfigProvider 只在组件未指定时生效。多层嵌套时，就近原则。
 
 ```tsx | pure
-<ConfigProvider locale={enUS}>
-  {/* 按钮文案为 "好的"，而非 enUS 的 "OK" */}
-  <Modal okText="好的" />
+<ConfigProvider size="large">
+  {/* 全局 large，Button 跟随 → large */}
+  <Button type="primary">大按钮</Button>
+
+  {/* 组件自身指定 small，覆盖全局 → small */}
+  <Input size="small" placeholder="小输入框" />
+
+  {/* 嵌套 ConfigProvider，内层覆盖外层 → small */}
+  <ConfigProvider size="small">
+    <Select options={[]} placeholder="小选择器" />
+  </ConfigProvider>
 </ConfigProvider>
 ```
+
+`size` 未指定时的最终默认值为 `'medium'`。

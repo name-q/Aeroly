@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { ChevronDown, ChevronRight, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -147,7 +148,7 @@ const Cascader: React.FC<CascaderProps> = ({
   maxTagCount,
   changeOnSelect = false,
   displaySeparator = ' / ',
-  size = 'medium',
+  size: sizeProp,
   notFoundContent,
   open: openProp,
   onOpenChange,
@@ -155,6 +156,7 @@ const Cascader: React.FC<CascaderProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   // ---- 受控/非受控值 ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<CascaderValueType | CascaderValueType[]>(

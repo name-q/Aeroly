@@ -2,6 +2,7 @@ import React from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { Check, X } from 'lucide-react';
 import Icon from '../Icon';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -61,13 +62,14 @@ const Steps: React.FC<StepsProps> = ({
   current = 1,
   status = 'process',
   direction = 'horizontal',
-  size = 'medium',
+  size: sizeProp,
   labelPlacement = 'horizontal',
   clickable = false,
   onChange,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp) as 'small' | 'medium';
   const currentIndex = current - 1;
   const isLabelVertical = direction === 'horizontal' && labelPlacement === 'vertical';
 

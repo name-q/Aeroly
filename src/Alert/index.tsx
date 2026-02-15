@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { CircleCheck, CircleAlert, CircleX, Info, X } from 'lucide-react';
 import Icon from '../Icon';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export type AlertType = 'info' | 'success' | 'warning' | 'error';
@@ -21,6 +22,8 @@ export interface AlertProps {
   icon?: LucideIcon;
   /** 是否显示图标 */
   showIcon?: boolean;
+  /** 尺寸 */
+  size?: 'small' | 'medium' | 'large';
   /** 是否开启文字光影掠过效果 */
   shimmer?: boolean;
   /** 自定义类名 */
@@ -44,10 +47,12 @@ const Alert: React.FC<AlertProps> = ({
   onClose,
   icon,
   showIcon = true,
+  size: sizeProp,
   shimmer = true,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const [visible, setVisible] = useState(true);
   const [closing, setClosing] = useState(false);
 
@@ -65,10 +70,14 @@ const Alert: React.FC<AlertProps> = ({
   };
 
   const IconComp = icon || iconMap[type];
+  const iconSize = size === 'small' ? 14 : size === 'large' ? 20 : 16;
+  const descIconSize = size === 'small' ? 16 : size === 'large' ? 24 : 20;
+  const closeIconSize = size === 'small' ? 12 : size === 'large' ? 16 : 14;
 
   const classNames = [
     'aero-alert',
     `aero-alert--${type}`,
+    `aero-alert--${size}`,
     shimmer ? 'aero-alert--shimmer' : '',
     description ? 'aero-alert--with-description' : '',
     closing ? 'aero-alert--closing' : '',
@@ -86,7 +95,7 @@ const Alert: React.FC<AlertProps> = ({
     >
       {showIcon && (
         <span className="aero-alert-icon">
-          <Icon icon={IconComp} size={description ? 20 : 16} />
+          <Icon icon={IconComp} size={description ? descIconSize : iconSize} />
         </span>
       )}
       <div className="aero-alert-body">
@@ -99,7 +108,7 @@ const Alert: React.FC<AlertProps> = ({
       </div>
       {closable && (
         <button type="button" className="aero-alert-close" onClick={handleClose}>
-          <Icon icon={X} size={14} />
+          <Icon icon={X} size={closeIconSize} />
         </button>
       )}
     </div>

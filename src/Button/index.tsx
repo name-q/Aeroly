@@ -2,6 +2,7 @@ import React from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { Loader } from 'lucide-react';
 import Icon from '../Icon';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface ButtonProps {
@@ -30,7 +31,7 @@ export interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   type = 'default',
-  size = 'medium',
+  size: sizeProp,
   disabled = false,
   loading = false,
   icon,
@@ -39,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isDisabled = disabled || loading;
 
   const classNames = [

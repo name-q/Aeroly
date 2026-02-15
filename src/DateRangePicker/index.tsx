@@ -8,7 +8,7 @@ import {
 } from '../DatePicker/utils';
 import Column from '../DatePicker/Column';
 import { useDropdownPosition } from '../utils';
-import { useLocale } from '../ConfigProvider/useConfig';
+import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -80,7 +80,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   placeholder,
   disabled = false,
   allowClear = true,
-  size = 'medium',
+  size: sizeProp,
   format: formatProp,
   disabledDate,
   showTime,
@@ -88,6 +88,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const localeDP = useLocale('DatePicker');
   const localeDRP = useLocale('DateRangePicker');
   const finalPlaceholder: [string, string] = placeholder ?? [localeDRP.startPlaceholder, localeDRP.endPlaceholder];

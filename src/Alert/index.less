@@ -24,6 +24,26 @@
   overflow: hidden;
   .transition();
 
+  // ---- 尺寸 ----
+  &--small {
+    gap: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+
+    .aero-alert-icon { height: 18px; }
+    .aero-alert-close { width: 18px; height: 18px; }
+  }
+
+  &--large {
+    gap: 10px;
+    padding: 14px 18px;
+    font-size: 15px;
+
+    .aero-alert-icon { height: 23px; }
+    .aero-alert-close { width: 26px; height: 26px; }
+    .aero-alert-description { font-size: 14px; }
+  }
+
   // 关闭动画
   opacity: 1;
   max-height: 200px;

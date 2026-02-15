@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SwitchProps {
@@ -29,13 +30,14 @@ const Switch: React.FC<SwitchProps> = ({
   defaultChecked = false,
   disabled = false,
   loading = false,
-  size = 'medium',
+  size: sizeProp,
   checkedText,
   uncheckedText,
   onChange,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = checked !== undefined;
   const [internalChecked, setInternalChecked] = useState(defaultChecked);
   const isChecked = isControlled ? checked! : internalChecked;

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 import type { LucideIcon } from 'lucide-react';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export type TabsVariant = 'line' | 'card' | 'pill';
@@ -53,13 +54,14 @@ const Tabs: React.FC<TabsProps> = ({
   defaultActiveKey,
   onChange,
   variant = 'line',
-  size = 'medium',
+  size: sizeProp,
   centered = false,
   onClose,
   extra,
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = activeKey !== undefined;
   const [internalKey, setInternalKey] = useState<string>(
     defaultActiveKey ?? items[0]?.key ?? '',

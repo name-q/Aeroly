@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Search, Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -75,7 +76,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   loading = false,
   notFoundContent,
   filterOption = true,
-  size = 'medium',
+  size: sizeProp,
   status,
   prefix,
   className,
@@ -83,6 +84,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   onBlur,
   onFocus,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
   const currentValue = isControlled ? value! : internalValue;

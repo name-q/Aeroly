@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { Eye, EyeOff, X, Loader } from 'lucide-react';
 import Icon from '../Icon';
+import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -71,7 +72,7 @@ const Input: React.FC<InputProps> = ({
   disabled = false,
   readOnly = false,
   loading = false,
-  size = 'medium',
+  size: sizeProp,
   status,
   type = 'text',
   prefixIcon,
@@ -91,6 +92,7 @@ const Input: React.FC<InputProps> = ({
   className,
   style,
 }) => {
+  const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
   const currentValue = isControlled ? value! : internalValue;

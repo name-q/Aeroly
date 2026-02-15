@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import './index.less';
 
 export interface WatermarkProps {
@@ -34,6 +34,29 @@ export interface WatermarkProps {
 }
 
 const PREFIX = 'aero-watermark';
+
+const LIGHT_COLOR = 'rgba(0,0,0,0.08)';
+const DARK_COLOR = 'rgba(255,255,255,0.12)';
+
+function isDarkMode() {
+  const el = document.documentElement;
+  return el.getAttribute('data-theme') === 'dark' || el.getAttribute('data-prefers-color') === 'dark';
+}
+
+function useDarkMode() {
+  const [dark, setDark] = useState(isDarkMode);
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => setDark(isDarkMode()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'data-prefers-color'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return dark;
+}
 
 function toLines(content: string | string[]): string[] {
   return Array.isArray(content) ? content : [content];
@@ -125,7 +148,7 @@ const Watermark: React.FC<WatermarkProps> = ({
   imageWidth = 120,
   imageHeight = 64,
   fontSize = 14,
-  fontColor = 'rgba(0,0,0,0.08)',
+  fontColor,
   fontWeight = 'normal',
   fontFamily = 'sans-serif',
   rotate = -22,
@@ -137,6 +160,9 @@ const Watermark: React.FC<WatermarkProps> = ({
   className,
   style,
 }) => {
+  const dark = useDarkMode();
+  const resolvedColor = fontColor || (dark ? DARK_COLOR : LIGHT_COLOR);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const watermarkRef = useRef<HTMLDivElement | null>(null);
   const observerRef = useRef<MutationObserver | null>(null);
@@ -180,7 +206,7 @@ const Watermark: React.FC<WatermarkProps> = ({
     drawWatermark(
       {
         content, image, imageWidth, imageHeight,
-        fontSize, fontColor, fontWeight, fontFamily,
+        fontSize, fontColor: resolvedColor, fontWeight, fontFamily,
         rotate, gap, offset,
       },
       (url, w, h) => {
@@ -208,7 +234,7 @@ const Watermark: React.FC<WatermarkProps> = ({
         startObserving();
       },
     );
-  }, [content, image, imageWidth, imageHeight, fontSize, fontColor, fontWeight, fontFamily, rotate, gap, offset, zIndex, fullscreen, startObserving]);
+  }, [content, image, imageWidth, imageHeight, fontSize, resolvedColor, fontWeight, fontFamily, rotate, gap, offset, zIndex, fullscreen, startObserving]);
 
   // 保持 renderRef 指向最新的 renderWatermark
   renderRef.current = renderWatermark;

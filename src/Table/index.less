@@ -146,7 +146,7 @@
   }
 
   &--active {
-    color: @primary-color;
+    color: var(--aero-primary-color, @primary-color);
   }
 }
 
@@ -218,7 +218,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: @primary-color;
+    background: var(--aero-primary-color, @primary-color);
     animation: aero-table-bounce 1s ease-in-out infinite;
 
     &:nth-child(2) { animation-delay: 0.15s; }
@@ -273,7 +273,7 @@
 }
 
 .aero-table-row--child > .aero-table-cell:first-child {
-  box-shadow: inset 3px 0 0 0 @primary-color;
+  box-shadow: inset 3px 0 0 0 var(--aero-primary-color, @primary-color);
 }
 
 .aero-table-row--child:hover > .aero-table-cell {

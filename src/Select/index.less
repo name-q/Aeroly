@@ -43,27 +43,27 @@
 
   // ---- Focus（键盘 tab） ----
   &:focus-visible &-selector {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 3px fade(@primary-color, 18%),
+    border-color: var(--aero-primary-color, @primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.18),
                 0 2px 8px rgba(0, 0, 0, 0.06);
 
     @{dark-selector} & {
-      border-color: fade(@primary-color, 60%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 14%),
+      border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.6);
+      box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.14),
                   0 2px 8px rgba(0, 0, 0, 0.20);
     }
   }
 
   // ---- Open ----
   &--open &-selector {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 3px fade(@primary-color, 18%),
+    border-color: var(--aero-primary-color, @primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.18),
                 0 2px 8px rgba(0, 0, 0, 0.06);
     background: rgba(255, 255, 255, 0.25);
 
     @{dark-selector} & {
-      border-color: fade(@primary-color, 60%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 14%),
+      border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.6);
+      box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.14),
                   0 2px 8px rgba(0, 0, 0, 0.20);
       background: rgba(255, 255, 255, 0.12);
     }
@@ -357,20 +357,20 @@
     }
 
     &--selected {
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
       font-weight: 500;
 
       @{dark-selector} & {
-        color: lighten(@primary-color, 10%);
+        color: var(--aero-primary-color-light-3, @primary-color-light-3);
       }
     }
 
     &--selected&--active:not(&--disabled),
     &--selected:hover:not(&--disabled) {
-      background: fade(@primary-color, 8%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.08);
 
       @{dark-selector} & {
-        background: fade(@primary-color, 12%);
+        background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.12);
       }
     }
 
@@ -382,7 +382,7 @@
 
   &-option-check {
     flex-shrink: 0;
-    color: @primary-color;
+    color: var(--aero-primary-color, @primary-color);
   }
 
   // ---- 空状态 ----
@@ -411,20 +411,20 @@
 
   // ---- Status ----
   &--error &-selector {
-    border-color: @error-color;
-    @{dark-selector} & { border-color: fade(@error-color, 70%); }
+    border-color: var(--aero-error-color, @error-color);
+    @{dark-selector} & { border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.7); }
   }
   &--error&--open &-selector {
-    box-shadow: 0 0 0 3px fade(@error-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
-    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@error-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
+    box-shadow: 0 0 0 3px rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+    @{dark-selector} & { box-shadow: 0 0 0 3px rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.12), 0 2px 8px rgba(0, 0, 0, 0.20); }
   }
   &--warning &-selector {
-    border-color: @warning-color;
-    @{dark-selector} & { border-color: fade(@warning-color, 70%); }
+    border-color: var(--aero-warning-color, @warning-color);
+    @{dark-selector} & { border-color: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.7); }
   }
   &--warning&--open &-selector {
-    box-shadow: 0 0 0 3px fade(@warning-color, 16%), 0 2px 8px rgba(0, 0, 0, 0.06);
-    @{dark-selector} & { box-shadow: 0 0 0 3px fade(@warning-color, 12%), 0 2px 8px rgba(0, 0, 0, 0.20); }
+    box-shadow: 0 0 0 3px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+    @{dark-selector} & { box-shadow: 0 0 0 3px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.12), 0 2px 8px rgba(0, 0, 0, 0.20); }
   }
 
   // ---- 尺寸 ----

@@ -3,6 +3,7 @@ import { Upload as UploadIcon, X, Plus, File as FileIcon, Image, FileText, FileA
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import type { LucideIcon } from 'lucide-react';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export type UploadStatus = 'pending' | 'uploading' | 'success' | 'error';
@@ -137,6 +138,7 @@ const Upload: React.FC<UploadProps> = ({
   style,
   onProcess,
 }) => {
+  const localeUpload = useLocale('Upload');
   const isControlled = controlledFileList !== undefined && Array.isArray(controlledFileList);
   const [internalFileList, setInternalFileList] = useState<UploadFile[]>(defaultFileList || []);
   const fileList = isControlled ? controlledFileList : internalFileList;
@@ -235,7 +237,7 @@ const Upload: React.FC<UploadProps> = ({
             type: file.type,
             status: 'error',
             percent: 0,
-            error: `文件大小超过限制（最大 ${formatSize(maxSize)}）`,
+            error: localeUpload.sizeExceed.replace('{maxSize}', formatSize(maxSize)),
           });
           continue;
         }
@@ -498,7 +500,7 @@ const Upload: React.FC<UploadProps> = ({
               {children || (
                 <div className="aero-upload-trigger__default">
                   <Icon icon={UploadIcon} size={drag ? 32 : 16} />
-                  <span>{drag ? '拖拽文件到此处，或点击上传' : '上传文件'}</span>
+                  <span>{drag ? localeUpload.dragText : localeUpload.uploadText}</span>
                 </div>
               )}
             </div>

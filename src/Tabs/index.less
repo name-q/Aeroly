@@ -42,8 +42,8 @@
     left: 0;
     height: 2px;
     border-radius: 1px;
-    background: @primary-color;
-    box-shadow: 0 1px 8px fade(@primary-color, 40%);
+    background: var(--aero-primary-color, @primary-color);
+    box-shadow: 0 1px 8px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.4);
     transition: transform @transition-duration @transition-timing,
                 width @transition-duration @transition-timing;
     pointer-events: none;
@@ -177,10 +177,10 @@
 
   // line 变体 active 颜色
   &--line &-tab--active {
-    color: @primary-color;
+    color: var(--aero-primary-color, @primary-color);
 
     @{dark-selector} & {
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
     }
   }
 

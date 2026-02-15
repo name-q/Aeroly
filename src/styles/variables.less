@@ -6,6 +6,25 @@
 @warning-color: #faad14;
 @error-color: #f5222d;
 
+// 主题色 RGB 通道值（用于 fade 替代：rgba(var(--aero-xxx-rgb), alpha)）
+@primary-color-rgb: 80, 184, 231;
+@success-color-rgb: 82, 196, 26;
+@warning-color-rgb: 250, 173, 20;
+@error-color-rgb: 245, 34, 45;
+
+// 派生色 — lighten / darken 预计算（CSS 无法运行时计算）
+@primary-color-hover: lighten(@primary-color, 6%);
+@primary-color-active: darken(@primary-color, 6%);
+@primary-color-light-1: lighten(@primary-color, 4%);
+@primary-color-light-2: lighten(@primary-color, 8%);
+@primary-color-light-3: lighten(@primary-color, 10%);
+@primary-color-light-4: lighten(@primary-color, 12%);
+
+@success-color-light: lighten(@success-color, 12%);
+@warning-color-dark: darken(@warning-color, 6%);
+@error-color-light-1: lighten(@error-color, 10%);
+@error-color-light-2: lighten(@error-color, 12%);
+
 // 圆角
 @border-radius-base: 8px;
 @border-radius-lg: 12px;
@@ -25,3 +44,97 @@
 
 // 暗色模式选择器（兼容 data-theme 和 dumi 的 data-prefers-color）
 @dark-selector: ~'[data-theme="dark"], [data-prefers-color="dark"]';
+
+// ============================================================
+//  CSS Variables 主题定义
+//  组件 less 中通过 var(--aero-xxx, @less-fallback) 引用
+//  ConfigProvider 运行时覆盖这些变量实现主题切换
+// ============================================================
+
+:root,
+[data-theme='light'] {
+  // 主色
+  --aero-primary-color: @primary-color;
+  --aero-success-color: @success-color;
+  --aero-warning-color: @warning-color;
+  --aero-error-color: @error-color;
+
+  // RGB 通道值（用于任意透明度：rgba(var(--aero-xxx-rgb), alpha)）
+  --aero-primary-color-rgb: @primary-color-rgb;
+  --aero-success-color-rgb: @success-color-rgb;
+  --aero-warning-color-rgb: @warning-color-rgb;
+  --aero-error-color-rgb: @error-color-rgb;
+
+  // 派生色 — lighten / darken
+  --aero-primary-color-hover: @primary-color-hover;
+  --aero-primary-color-active: @primary-color-active;
+  --aero-primary-color-light-1: @primary-color-light-1;
+  --aero-primary-color-light-2: @primary-color-light-2;
+  --aero-primary-color-light-3: @primary-color-light-3;
+  --aero-primary-color-light-4: @primary-color-light-4;
+
+  --aero-success-color-light: @success-color-light;
+  --aero-warning-color-dark: @warning-color-dark;
+  --aero-error-color-light-1: @error-color-light-1;
+  --aero-error-color-light-2: @error-color-light-2;
+
+  // 文本
+  --aero-text-color: #1a1a1a;
+  --aero-text-secondary: #666666;
+
+  // 边框
+  --aero-border-color: rgba(0, 0, 0, 0.08);
+
+  // 背景
+  --aero-bg-color: #ffffff;
+
+  // 毛玻璃
+  --aero-glass-bg: rgba(255, 255, 255, 0.3);
+
+  // 阴影
+  --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'],
+[data-prefers-color='dark'] {
+  // 主色（暗色模式可微调）
+  --aero-primary-color: #6cc8f0;
+  --aero-success-color: #73d13d;
+  --aero-warning-color: #ffc53d;
+  --aero-error-color: #ff4d4f;
+
+  // RGB 通道值
+  --aero-primary-color-rgb: 108, 200, 240;
+  --aero-success-color-rgb: 115, 209, 61;
+  --aero-warning-color-rgb: 255, 197, 61;
+  --aero-error-color-rgb: 255, 77, 79;
+
+  // 派生色
+  --aero-primary-color-hover: lighten(#6cc8f0, 6%);
+  --aero-primary-color-active: darken(#6cc8f0, 6%);
+  --aero-primary-color-light-1: lighten(#6cc8f0, 4%);
+  --aero-primary-color-light-2: lighten(#6cc8f0, 8%);
+  --aero-primary-color-light-3: lighten(#6cc8f0, 10%);
+  --aero-primary-color-light-4: lighten(#6cc8f0, 12%);
+
+  --aero-success-color-light: lighten(#73d13d, 12%);
+  --aero-warning-color-dark: darken(#ffc53d, 6%);
+  --aero-error-color-light-1: lighten(#ff4d4f, 10%);
+  --aero-error-color-light-2: lighten(#ff4d4f, 12%);
+
+  // 文本
+  --aero-text-color: #f0f0f0;
+  --aero-text-secondary: #999999;
+
+  // 边框
+  --aero-border-color: rgba(255, 255, 255, 0.1);
+
+  // 背景
+  --aero-bg-color: #1a1a1a;
+
+  // 毛玻璃
+  --aero-glass-bg: rgba(0, 0, 0, 0.3);
+
+  // 阴影
+  --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}

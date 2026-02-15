@@ -89,13 +89,13 @@
 
 // ---- 状态色 ----
 .aero-statistic--success .aero-statistic-value {
-  color: @success-color;
+  color: var(--aero-success-color, @success-color);
 }
 
 .aero-statistic--warning .aero-statistic-value {
-  color: @warning-color;
+  color: var(--aero-warning-color, @warning-color);
 }
 
 .aero-statistic--error .aero-statistic-value {
-  color: @error-color;
+  color: var(--aero-error-color, @error-color);
 }

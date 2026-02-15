@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Clock, X } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface TimePickerProps {
@@ -225,6 +226,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
   className,
   style,
 }) => {
+  const localeTime = useLocale('TimePicker');
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue || '');
   const currentValue = isControlled ? value! : internalValue;
@@ -309,7 +311,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
       >
         <Icon icon={Clock} size={14} className="aero-time-picker-icon" />
         <span className={`aero-time-picker-value${!currentValue ? ' aero-time-picker-value--placeholder' : ''}`}>
-          {currentValue || placeholder || '请选择时间'}
+          {currentValue || placeholder || localeTime.placeholder}
         </span>
         {allowClear && currentValue && !disabled && (
           <span className="aero-time-picker-clear" onClick={handleClear}>
@@ -341,14 +343,14 @@ const TimePicker: React.FC<TimePickerProps> = ({
                 updateValue(now.getHours(), now.getMinutes(), now.getSeconds());
               }}
             >
-              此刻
+              {localeTime.now}
             </button>
             <button
               type="button"
               className="aero-time-picker-ok"
               onClick={() => setOpen(false)}
             >
-              确定
+              {localeTime.confirm}
             </button>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import { RefreshCw, Download, Copy, Check } from 'lucide-react';
 import { QrCode, QrSegment, Ecc } from './qrcodegen';
 import Spin from '../Spin';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export type QRCodeStatus = 'active' | 'expired' | 'loading' | 'scanned';
@@ -69,6 +70,7 @@ const QRCode: React.FC<QRCodeProps> = ({
   className,
   style,
 }) => {
+  const localeQR = useLocale('QRCode');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [copied, setCopied] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -245,11 +247,11 @@ const QRCode: React.FC<QRCodeProps> = ({
     if (status === 'expired') {
       return (
         <div className={`${PREFIX}-overlay`}>
-          <div className={`${PREFIX}-overlay-text`}>二维码已过期</div>
+          <div className={`${PREFIX}-overlay-text`}>{localeQR.expired}</div>
           {onRefresh && (
             <button className={`${PREFIX}-overlay-btn`} onClick={onRefresh}>
               <RefreshCw size={14} />
-              <span>点击刷新</span>
+              <span>{localeQR.refresh}</span>
             </button>
           )}
         </div>
@@ -259,7 +261,7 @@ const QRCode: React.FC<QRCodeProps> = ({
     if (status === 'scanned') {
       return (
         <div className={`${PREFIX}-overlay`}>
-          <div className={`${PREFIX}-overlay-text`}>已扫描</div>
+          <div className={`${PREFIX}-overlay-text`}>{localeQR.scanned}</div>
         </div>
       );
     }
@@ -285,14 +287,14 @@ const QRCode: React.FC<QRCodeProps> = ({
           <button
             className={`${PREFIX}-action`}
             onClick={handleDownload}
-            title="下载"
+            title={localeQR.download}
           >
             <Download size={14} />
           </button>
           <button
             className={`${PREFIX}-action`}
             onClick={handleCopy}
-            title="复制"
+            title={localeQR.copy}
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
           </button>

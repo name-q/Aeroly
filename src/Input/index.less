@@ -54,14 +54,14 @@
 
   // ---- Focus ----
   &--focused {
-    border-color: @primary-color;
-    box-shadow: 0 0 0 3px fade(@primary-color, 18%),
+    border-color: var(--aero-primary-color, @primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.18),
                 0 2px 8px rgba(0, 0, 0, 0.06);
     background: rgba(255, 255, 255, 0.25);
 
     @{dark-selector} & {
-      border-color: fade(@primary-color, 60%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 14%),
+      border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.6);
+      box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.14),
                   0 2px 8px rgba(0, 0, 0, 0.20);
       background: rgba(255, 255, 255, 0.12);
     }
@@ -81,38 +81,38 @@
 
   // ---- Status: error ----
   &--error {
-    border-color: @error-color;
+    border-color: var(--aero-error-color, @error-color);
 
     @{dark-selector} & {
-      border-color: fade(@error-color, 70%);
+      border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.7);
     }
   }
 
   &--error&--focused {
-    box-shadow: 0 0 0 3px fade(@error-color, 16%),
+    box-shadow: 0 0 0 3px rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.16),
                 0 2px 8px rgba(0, 0, 0, 0.06);
 
     @{dark-selector} & {
-      box-shadow: 0 0 0 3px fade(@error-color, 12%),
+      box-shadow: 0 0 0 3px rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.12),
                   0 2px 8px rgba(0, 0, 0, 0.20);
     }
   }
 
   // ---- Status: warning ----
   &--warning {
-    border-color: @warning-color;
+    border-color: var(--aero-warning-color, @warning-color);
 
     @{dark-selector} & {
-      border-color: fade(@warning-color, 70%);
+      border-color: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.7);
     }
   }
 
   &--warning&--focused {
-    box-shadow: 0 0 0 3px fade(@warning-color, 16%),
+    box-shadow: 0 0 0 3px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.16),
                 0 2px 8px rgba(0, 0, 0, 0.06);
 
     @{dark-selector} & {
-      box-shadow: 0 0 0 3px fade(@warning-color, 12%),
+      box-shadow: 0 0 0 3px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.12),
                   0 2px 8px rgba(0, 0, 0, 0.20);
     }
   }

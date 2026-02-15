@@ -5,6 +5,7 @@ import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import Badge from '../Badge';
 import { throttle } from '../utils';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -279,11 +280,13 @@ const BackTop: React.FC<BackTopProps> = ({
   target,
   shape = 'circle',
   icon = ArrowUp,
-  tooltip = '回到顶部',
+  tooltip,
   onClick,
   className,
   style,
 }) => {
+  const localeFloat = useLocale('FloatButton');
+  const finalTooltip = tooltip ?? localeFloat.backToTop;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -324,7 +327,7 @@ const BackTop: React.FC<BackTopProps> = ({
 
   return (
     <div className={cls} style={style}>
-      <FloatButton icon={icon} tooltip={tooltip} shape={shape} onClick={handleClick} />
+      <FloatButton icon={icon} tooltip={finalTooltip} shape={shape} onClick={handleClick} />
     </div>
   );
 };

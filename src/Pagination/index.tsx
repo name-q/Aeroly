@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from
 import Icon from '../Icon';
 import InputNumber from '../InputNumber';
 import Select from '../Select';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -128,6 +129,7 @@ const Pagination: React.FC<PaginationProps> = ({
   className,
   style,
 }) => {
+  const localePag = useLocale('Pagination');
   // ---- pageSize 状态 ----
   const isPageSizeControlled = pageSize !== undefined;
   const [internalPageSize, setInternalPageSize] = useState(defaultPageSize);
@@ -203,7 +205,7 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={disabled || safeCurrent <= 1}
         onClick={() => changePage(safeCurrent - 1)}
         type="button"
-        aria-label="上一页"
+        aria-label={localePag.prevPage}
       >
         <Icon icon={ChevronLeft} size={iconSize} />
       </button>
@@ -259,7 +261,7 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={disabled || safeCurrent >= totalPages}
         onClick={() => changePage(safeCurrent + 1)}
         type="button"
-        aria-label="下一页"
+        aria-label={localePag.nextPage}
       >
         <Icon icon={ChevronRight} size={iconSize} />
       </button>
@@ -271,7 +273,7 @@ const Pagination: React.FC<PaginationProps> = ({
           size={size}
           disabled={disabled}
           value={currentPageSize}
-          options={pageSizeOptions.map((opt) => ({ label: `${opt} 条/页`, value: opt }))}
+          options={pageSizeOptions.map((opt) => ({ label: localePag.itemsPerPage.replace('{size}', String(opt)), value: opt }))}
           onChange={(val) => {
             const newSize = Number(val);
             const newPage = Math.max(1, Math.ceil(rangeStart / newSize));
@@ -301,6 +303,7 @@ const QuickJumper: React.FC<{
   size: 'small' | 'medium' | 'large';
   onChange: (page: number) => void;
 }> = ({ disabled, totalPages, size, onChange }) => {
+  const localePag = useLocale('Pagination');
   const handleChange = useCallback(
     (val: number | null) => {
       if (val !== null && val >= 1 && val <= totalPages) {
@@ -312,7 +315,7 @@ const QuickJumper: React.FC<{
 
   return (
     <span className="aero-pagination-jumper">
-      <span className="aero-pagination-jumper-text">跳至</span>
+      <span className="aero-pagination-jumper-text">{localePag.jumpTo}</span>
       <InputNumber
         className="aero-pagination-jumper-input"
         size={size}
@@ -324,7 +327,7 @@ const QuickJumper: React.FC<{
         onPressEnter={() => {}}
         onChange={handleChange}
       />
-      <span className="aero-pagination-jumper-text">页</span>
+      <span className="aero-pagination-jumper-text">{localePag.page}</span>
     </span>
   );
 };
@@ -340,6 +343,7 @@ const SimplePagination: React.FC<{
   style?: React.CSSProperties;
   onChange: (page: number) => void;
 }> = ({ current, totalPages, size, disabled, className, style, onChange }) => {
+  const localePag = useLocale('Pagination');
   const iconSize = iconSizeMap[size];
 
   const containerCls = [
@@ -361,7 +365,7 @@ const SimplePagination: React.FC<{
         disabled={disabled || current <= 1}
         onClick={() => onChange(current - 1)}
         type="button"
-        aria-label="上一页"
+        aria-label={localePag.prevPage}
       >
         <Icon icon={ChevronLeft} size={iconSize} />
       </button>
@@ -394,7 +398,7 @@ const SimplePagination: React.FC<{
         disabled={disabled || current >= totalPages}
         onClick={() => onChange(current + 1)}
         type="button"
-        aria-label="下一页"
+        aria-label={localePag.nextPage}
       >
         <Icon icon={ChevronRight} size={iconSize} />
       </button>

@@ -130,24 +130,24 @@
 // ---- 选中态 ----
 .aero-radio--checked .aero-radio-indicator {
   background:
-    linear-gradient(135deg, @primary-color, fade(@primary-color, 65%)),
+    linear-gradient(135deg, var(--aero-primary-color, @primary-color), rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.65)),
     rgba(255, 255, 255, 0.10);
-  border-color: @primary-color;
+  border-color: var(--aero-primary-color, @primary-color);
   filter: brightness(1.05);
   box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.12),
-    0 0 0 1px fade(@primary-color, 12%),
-    0 0 16px fade(@primary-color, 16%);
+    0 0 0 1px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.12),
+    0 0 16px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.16);
 
   @{dark-selector} & {
     background:
-      linear-gradient(135deg, fade(@primary-color, 50%), fade(@primary-color, 30%)),
+      linear-gradient(135deg, rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.5), rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.3)),
       rgba(255, 255, 255, 0.08);
-    border-color: fade(@primary-color, 40%);
+    border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.4);
     box-shadow:
       0 2px 10px rgba(0, 0, 0, 0.25),
-      0 0 0 1px fade(@primary-color, 10%),
-      0 0 16px fade(@primary-color, 20%);
+      0 0 0 1px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.1),
+      0 0 16px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.2);
   }
 
   // 选中后高光减弱 → 更实
@@ -167,18 +167,18 @@
   filter: brightness(1.1);
   box-shadow:
     0 3px 12px rgba(0, 0, 0, 0.15),
-    0 0 0 1px fade(@primary-color, 16%),
-    0 0 20px fade(@primary-color, 22%);
+    0 0 0 1px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.16),
+    0 0 20px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.22);
 }
 
 // ---- 键盘焦点 ----
 .aero-radio-input:focus-visible ~ .aero-radio-indicator {
-  box-shadow: 0 0 0 3px fade(@primary-color, 25%),
+  box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.25),
               0 2px 8px rgba(0, 0, 0, 0.10);
-  border-color: fade(@primary-color, 40%);
+  border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.4);
 
   @{dark-selector} & {
-    box-shadow: 0 0 0 3px fade(@primary-color, 20%),
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.2),
                 0 2px 8px rgba(0, 0, 0, 0.20);
   }
 }
@@ -347,18 +347,18 @@
 
   // ---- 选中 ----
   &--checked {
-    background: @primary-color;
+    background: var(--aero-primary-color, @primary-color);
     color: #fff;
-    box-shadow: 0 2px 8px fade(@primary-color, 30%);
+    box-shadow: 0 2px 8px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.3);
 
     @{dark-selector} & {
       color: #fff;
-      box-shadow: 0 2px 10px fade(@primary-color, 25%);
+      box-shadow: 0 2px 10px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.25);
     }
 
     &:hover:not(.aero-radio-button--disabled) {
-      background: lighten(@primary-color, 4%);
-      box-shadow: 0 3px 12px fade(@primary-color, 35%);
+      background: var(--aero-primary-color-light-1, @primary-color-light-1);
+      box-shadow: 0 3px 12px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.35);
     }
   }
 
@@ -370,7 +370,7 @@
 
   // ---- 焦点 ----
   .aero-radio-input:focus-visible ~ .aero-radio-button-label {
-    box-shadow: 0 0 0 3px fade(@primary-color, 25%);
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.25);
     border-radius: 999px;
   }
 

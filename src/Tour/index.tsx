@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export type TourPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -135,20 +136,22 @@ function getTargetElement(target?: React.RefObject<HTMLElement | null> | string 
 
 // ---- Tour 组件 ----
 
-const Tour: React.FC<TourProps> = ({
-  open,
-  onOpenChange,
-  steps,
-  current: controlledCurrent,
-  onChange,
-  onFinish,
-  mask = true,
-  maskClosable = false,
-  keyboard = true,
-  spotlightPadding = 6,
-  offset = 12,
-  className,
-}) => {
+const Tour: React.FC<TourProps> = (props) => {
+  const localeTour = useLocale('Tour');
+  const {
+    open,
+    onOpenChange,
+    steps,
+    current: controlledCurrent,
+    onChange,
+    onFinish,
+    mask = true,
+    maskClosable = false,
+    keyboard = true,
+    spotlightPadding = 6,
+    offset = 12,
+    className,
+  } = props;
   const isControlled = controlledCurrent !== undefined;
   const [internalCurrent, setInternalCurrent] = useState(0);
   const activeCurrent = isControlled ? controlledCurrent! : internalCurrent;
@@ -414,11 +417,11 @@ const Tour: React.FC<TourProps> = ({
           <div className="aero-tour-actions">
             {!isFirst && (
               <button className="aero-tour-btn aero-tour-btn--prev" onClick={handlePrev}>
-                上一步
+                {localeTour.prevStep}
               </button>
             )}
             <button className="aero-tour-btn aero-tour-btn--next" onClick={handleNext}>
-              {isLast ? '完成' : '下一步'}
+              {isLast ? localeTour.finish : localeTour.nextStep}
             </button>
           </div>
         </div>

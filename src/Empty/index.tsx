@@ -9,6 +9,7 @@ import {
   PackageOpen,
 } from 'lucide-react';
 import Icon from '../Icon';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 /** 内置场景预设 */
@@ -47,41 +48,15 @@ export interface EmptyProps {
 
 interface PresetConfig {
   icon: LucideIcon;
-  title: string;
-  description: string;
 }
 
-const presetMap: Record<EmptyPreset, PresetConfig> = {
-  default: {
-    icon: Inbox,
-    title: '暂无数据',
-    description: '当前没有可显示的内容',
-  },
-  search: {
-    icon: Search,
-    title: '未找到结果',
-    description: '试试调整搜索条件或关键词',
-  },
-  noData: {
-    icon: PackageOpen,
-    title: '暂无数据',
-    description: '数据为空，请稍后再试',
-  },
-  noPermission: {
-    icon: ShieldX,
-    title: '无访问权限',
-    description: '你没有权限查看此内容',
-  },
-  networkError: {
-    icon: WifiOff,
-    title: '网络异常',
-    description: '请检查网络连接后重试',
-  },
-  noContent: {
-    icon: FileX2,
-    title: '暂无内容',
-    description: '还没有创建任何内容',
-  },
+const presetIconMap: Record<EmptyPreset, LucideIcon> = {
+  default: Inbox,
+  search: Search,
+  noData: PackageOpen,
+  noPermission: ShieldX,
+  networkError: WifiOff,
+  noContent: FileX2,
 };
 
 const Empty: React.FC<EmptyProps> = ({
@@ -97,11 +72,13 @@ const Empty: React.FC<EmptyProps> = ({
   style,
   children,
 }) => {
-  const config = presetMap[preset];
+  const localeEmpty = useLocale('Empty');
+  const presetLocale = localeEmpty[preset];
+  const presetIcon = presetIconMap[preset];
 
   // 最终显示的文案
-  const finalTitle = title ?? config.title;
-  const finalDesc = description ?? config.description;
+  const finalTitle = title ?? presetLocale.title;
+  const finalDesc = description ?? presetLocale.description;
 
   // 图片/图标区域
   const renderVisual = () => {
@@ -135,7 +112,7 @@ const Empty: React.FC<EmptyProps> = ({
     // preset 默认
     return (
       <div className="aero-empty__icon">
-        <Icon icon={config.icon} size={iconSize} />
+        <Icon icon={presetIcon} size={iconSize} />
       </div>
     );
   };

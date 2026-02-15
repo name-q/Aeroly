@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Icon from '../Icon';
 import {
-  pad, getCalendarDays, parseDateTime, formatDisplay,
-  toDateString, toDateTimeString, WEEKDAYS, MONTHS,
+  getCalendarDays, parseDateTime, formatDisplay,
+  toDateString, toDateTimeString,
   hours24, minutes60, seconds60,
 } from './utils';
-import Column, { ITEM_HEIGHT, VISIBLE_COUNT } from './Column';
+import Column from './Column';
 import { useDropdownPosition } from '../utils';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface DatePickerProps {
@@ -65,6 +66,12 @@ interface DayViewProps {
   onSecondChange: (v: number) => void;
   onNow: () => void;
   onConfirm: () => void;
+  weekdays: string[];
+  yearLabel: string;
+  monthLabel: string;
+  todayText: string;
+  nowText: string;
+  confirmText: string;
 }
 
 const DayView: React.FC<DayViewProps> = ({
@@ -89,6 +96,12 @@ const DayView: React.FC<DayViewProps> = ({
   onSecondChange,
   onNow,
   onConfirm,
+  weekdays,
+  yearLabel,
+  monthLabel,
+  todayText,
+  nowText,
+  confirmText,
 }) => {
   const days = useMemo(
     () => getCalendarDays(viewYear, viewMonth, selectedYear, selectedMonth, selectedDay, disabledDate),
@@ -104,14 +117,14 @@ const DayView: React.FC<DayViewProps> = ({
               <Icon icon={ChevronLeft} size={14} />
             </button>
             <button type="button" className="aero-date-picker-title" onClick={onTitleClick}>
-              {viewYear}年 {viewMonth + 1}月
+              {yearLabel} {monthLabel}
             </button>
             <button type="button" className="aero-date-picker-nav" onClick={onNextMonth}>
               <Icon icon={ChevronRight} size={14} />
             </button>
           </div>
           <div className="aero-date-picker-weekdays">
-            {WEEKDAYS.map((w) => (
+            {weekdays.map((w) => (
               <span key={w} className="aero-date-picker-weekday">{w}</span>
             ))}
           </div>
@@ -157,16 +170,16 @@ const DayView: React.FC<DayViewProps> = ({
       {showTime ? (
         <div className="aero-date-picker-footer aero-date-picker-footer--showtime">
           <button type="button" className="aero-date-picker-now" onClick={onNow}>
-            此刻
+            {nowText}
           </button>
           <button type="button" className="aero-date-picker-ok" onClick={onConfirm}>
-            确定
+            {confirmText}
           </button>
         </div>
       ) : (
         <div className="aero-date-picker-footer">
           <button type="button" className="aero-date-picker-today" onClick={onToday}>
-            今天
+            {todayText}
           </button>
         </div>
       )}
@@ -182,14 +195,17 @@ interface MonthViewProps {
   onPrevYear: () => void;
   onNextYear: () => void;
   onTitleClick: () => void;
+  yearLabel: string;
+  months: string[];
 }
 
 const MonthView: React.FC<MonthViewProps> = ({
-  viewYear,
   onSelect,
   onPrevYear,
   onNextYear,
   onTitleClick,
+  yearLabel,
+  months,
 }) => (
   <>
     <div className="aero-date-picker-header">
@@ -197,14 +213,14 @@ const MonthView: React.FC<MonthViewProps> = ({
         <Icon icon={ChevronLeft} size={14} />
       </button>
       <button type="button" className="aero-date-picker-title" onClick={onTitleClick}>
-        {viewYear}年
+        {yearLabel}
       </button>
       <button type="button" className="aero-date-picker-nav" onClick={onNextYear}>
         <Icon icon={ChevronRight} size={14} />
       </button>
     </div>
     <div className="aero-date-picker-grid">
-      {MONTHS.map((label, i) => (
+      {months.map((label, i) => (
         <span
           key={i}
           className="aero-date-picker-grid-cell"
@@ -273,7 +289,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   value,
   defaultValue,
   onChange,
-  placeholder = '请选择日期',
+  placeholder,
   disabled = false,
   allowClear = true,
   size = 'medium',
@@ -284,6 +300,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   className,
   style,
 }) => {
+  const localeDatePicker = useLocale('DatePicker');
+  const finalPlaceholder = placeholder ?? localeDatePicker.placeholder;
   const hasTime = !!showTime;
   const withSecond = hasTime && (showTime === true || (showTime as { showSecond?: boolean }).showSecond !== false);
 
@@ -458,7 +476,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       >
         <Icon icon={Calendar} size={14} className="aero-date-picker-icon" />
         <span className={`aero-date-picker-value${!currentValue ? ' aero-date-picker-value--placeholder' : ''}`}>
-          {displayText || placeholder}
+          {displayText || finalPlaceholder}
         </span>
         {allowClear && currentValue && !disabled && (
           <span className="aero-date-picker-clear" onClick={handleClear}>
@@ -510,6 +528,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
               onSecondChange={setTempSecond}
               onNow={handleNow}
               onConfirm={handleConfirm}
+              weekdays={localeDatePicker.weekdays}
+              yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
+              monthLabel={localeDatePicker.monthFormat.replace('{month}', String(viewMonth + 1))}
+              todayText={localeDatePicker.today}
+              nowText={localeDatePicker.now}
+              confirmText={localeDatePicker.confirm}
             />
           )}
 
@@ -523,6 +547,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
               onPrevYear={() => setViewYear((y) => y - 1)}
               onNextYear={() => setViewYear((y) => y + 1)}
               onTitleClick={() => setView('year')}
+              yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
+              months={localeDatePicker.months}
             />
           )}
 

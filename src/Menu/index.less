@@ -174,24 +174,24 @@
 
   // 选中态
   &--active {
-    color: @primary-color;
-    background: fade(@primary-color, 8%);
+    color: var(--aero-primary-color, @primary-color);
+    background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.08);
     font-weight: 500;
 
     .aero-menu-item__icon {
       opacity: 1;
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
     }
 
     &:hover {
-      background: fade(@primary-color, 12%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.12);
     }
 
     @{dark-selector} & {
-      background: fade(@primary-color, 12%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.12);
 
       &:hover {
-        background: fade(@primary-color, 18%);
+        background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.18);
       }
     }
   }
@@ -273,10 +273,10 @@
   // 子菜单有选中项时，标题高亮
   &--child-active > .aero-menu-submenu__title,
   &--child-active > .aero-popover-trigger > .aero-menu-submenu__title {
-    color: @primary-color;
+    color: var(--aero-primary-color, @primary-color);
 
     .aero-menu-item__icon {
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
       opacity: 1;
     }
   }

@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Icon from '../Icon';
 import {
-  pad, getCalendarDays, parseDateTime, formatDisplay,
-  toDateString, toDateTimeString, WEEKDAYS,
+  getCalendarDays, parseDateTime, formatDisplay,
+  toDateString, toDateTimeString,
   hours24, minutes60, seconds60, CalendarDay,
 } from '../DatePicker/utils';
 import Column from '../DatePicker/Column';
 import { useDropdownPosition } from '../utils';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -76,7 +77,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   value,
   defaultValue,
   onChange,
-  placeholder = ['开始日期', '结束日期'],
+  placeholder,
   disabled = false,
   allowClear = true,
   size = 'medium',
@@ -87,6 +88,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   className,
   style,
 }) => {
+  const localeDP = useLocale('DatePicker');
+  const localeDRP = useLocale('DateRangePicker');
+  const finalPlaceholder: [string, string] = placeholder ?? [localeDRP.startPlaceholder, localeDRP.endPlaceholder];
   const hasTime = !!showTime;
   const withSecond = hasTime && (showTime === true || (showTime as { showSecond?: boolean }).showSecond !== false);
   const defaultFormat = hasTime
@@ -341,7 +345,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               </button>
             ) : <span className={`${PREFIX}-nav-placeholder`} />}
             <span className={`${PREFIX}-title`}>
-              {panelYear}年 {panelMonth + 1}月
+              {localeDP.yearFormat.replace('{year}', String(panelYear))} {localeDP.monthFormat.replace('{month}', String(panelMonth + 1))}
             </span>
             {side === 'right' ? (
               <button type="button" className={`${PREFIX}-nav`} onClick={nextMonth}>
@@ -350,7 +354,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             ) : <span className={`${PREFIX}-nav-placeholder`} />}
           </div>
           <div className={`${PREFIX}-weekdays`}>
-            {WEEKDAYS.map((w) => (
+            {localeDP.weekdays.map((w) => (
               <span key={w} className={`${PREFIX}-weekday`}>{w}</span>
             ))}
           </div>
@@ -422,11 +426,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       >
         <Icon icon={Calendar} size={14} className={`${PREFIX}-icon`} />
         <span className={`${PREFIX}-start${!startText ? ` ${PREFIX}-start--placeholder` : ''}`}>
-          {startText || placeholder[0]}
+          {startText || finalPlaceholder[0]}
         </span>
         <span className={`${PREFIX}-separator`}>~</span>
         <span className={`${PREFIX}-end${!endText ? ` ${PREFIX}-end--placeholder` : ''}`}>
-          {endText || placeholder[1]}
+          {endText || finalPlaceholder[1]}
         </span>
         {allowClear && (currentValue[0] || currentValue[1]) && !disabled && (
           <span className={`${PREFIX}-clear`} onClick={handleClear}>
@@ -450,10 +454,10 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           {hasTime ? (
             <div className={`${PREFIX}-footer ${PREFIX}-footer--showtime`}>
               <button type="button" className={`${PREFIX}-now`} onClick={handleNow}>
-                此刻
+                {localeDRP.now}
               </button>
               <button type="button" className={`${PREFIX}-ok`} onClick={handleConfirm}>
-                确定
+                {localeDRP.confirm}
               </button>
             </div>
           ) : null}

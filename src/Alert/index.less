@@ -74,50 +74,50 @@
 
   // ---- 类型样式 ----
   &--info {
-    background: fade(@primary-color, 8%);
-    border-color: fade(@primary-color, 20%);
+    background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.08);
+    border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.2);
 
-    .aero-alert-icon { color: @primary-color; }
+    .aero-alert-icon { color: var(--aero-primary-color, @primary-color); }
 
     @{dark-selector} & {
-      background: fade(@primary-color, 10%);
-      border-color: fade(@primary-color, 18%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.1);
+      border-color: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.18);
     }
   }
 
   &--success {
-    background: fade(@success-color, 8%);
-    border-color: fade(@success-color, 20%);
+    background: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.08);
+    border-color: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.2);
 
-    .aero-alert-icon { color: @success-color; }
+    .aero-alert-icon { color: var(--aero-success-color, @success-color); }
 
     @{dark-selector} & {
-      background: fade(@success-color, 10%);
-      border-color: fade(@success-color, 18%);
+      background: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.1);
+      border-color: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.18);
     }
   }
 
   &--warning {
-    background: fade(@warning-color, 8%);
-    border-color: fade(@warning-color, 20%);
+    background: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.08);
+    border-color: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.2);
 
-    .aero-alert-icon { color: @warning-color; }
+    .aero-alert-icon { color: var(--aero-warning-color, @warning-color); }
 
     @{dark-selector} & {
-      background: fade(@warning-color, 10%);
-      border-color: fade(@warning-color, 18%);
+      background: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.1);
+      border-color: rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.18);
     }
   }
 
   &--error {
-    background: fade(@error-color, 8%);
-    border-color: fade(@error-color, 20%);
+    background: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.08);
+    border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.2);
 
-    .aero-alert-icon { color: @error-color; }
+    .aero-alert-icon { color: var(--aero-error-color, @error-color); }
 
     @{dark-selector} & {
-      background: fade(@error-color, 10%);
-      border-color: fade(@error-color, 18%);
+      background: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.1);
+      border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.18);
     }
   }
 

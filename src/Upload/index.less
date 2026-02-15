@@ -32,9 +32,9 @@
     }
 
     &:hover {
-      border-color: @primary-color;
-      color: @primary-color;
-      background: fade(@primary-color, 4%);
+      border-color: var(--aero-primary-color, @primary-color);
+      color: var(--aero-primary-color, @primary-color);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.04);
     }
 
     // 拖拽区域
@@ -59,10 +59,10 @@
     }
 
     &--dragover {
-      border-color: @primary-color;
+      border-color: var(--aero-primary-color, @primary-color);
       border-style: solid;
-      background: fade(@primary-color, 6%);
-      box-shadow: 0 0 0 3px fade(@primary-color, 12%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.06);
+      box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.12);
     }
 
     // 自定义子组件时，完全透明，不干扰内部样式
@@ -85,7 +85,7 @@
 
     // 自定义 + dragover：只加一层淡色背景提示，不加边框
     &--custom&--dragover {
-      background: fade(@primary-color, 6%);
+      background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.06);
       border-radius: @border-radius-lg;
     }
 
@@ -157,18 +157,18 @@
 
     // 状态
     &--error {
-      border-color: fade(@error-color, 30%);
+      border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.3);
 
       @{dark-selector} & {
-        border-color: fade(@error-color, 25%);
+        border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.25);
       }
     }
 
     &--success {
-      border-color: fade(@success-color, 20%);
+      border-color: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.2);
 
       @{dark-selector} & {
-        border-color: fade(@success-color, 15%);
+        border-color: rgba(var(--aero-success-color-rgb, @success-color-rgb), 0.15);
       }
     }
 
@@ -177,7 +177,7 @@
 
       .aero-upload-file__name > span:first-child {
         &:hover {
-          color: @primary-color;
+          color: var(--aero-primary-color, @primary-color);
         }
       }
     }
@@ -240,20 +240,20 @@
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
       animation: aeroUploadPulse 2s ease-in-out infinite;
     }
 
     &__ai-desc {
       font-size: 11px;
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
       display: flex;
       align-items: center;
       gap: 4px;
       line-height: 1.4;
 
       @{dark-selector} & {
-        color: lighten(@primary-color, 10%);
+        color: var(--aero-primary-color-light-3, @primary-color-light-3);
       }
     }
 
@@ -268,7 +268,7 @@
 
     &__error {
       font-size: 11px;
-      color: @error-color;
+      color: var(--aero-error-color, @error-color);
     }
 
     // ---- progress ----
@@ -287,7 +287,7 @@
     &__progress-bar {
       height: 100%;
       border-radius: 2px;
-      background: @primary-color;
+      background: var(--aero-primary-color, @primary-color);
       transition: width 200ms ease;
     }
 
@@ -329,7 +329,7 @@
     &__loading {
       display: inline-flex;
       align-items: center;
-      color: @primary-color;
+      color: var(--aero-primary-color, @primary-color);
     }
 
     // hover 显示操作按钮
@@ -343,7 +343,7 @@
     }
 
     &__remove:hover {
-      color: @error-color !important;
+      color: var(--aero-error-color, @error-color) !important;
     }
   }
 
@@ -440,13 +440,13 @@
       }
 
       &--delete:hover {
-        color: @error-color;
+        color: var(--aero-error-color, @error-color);
       }
     }
 
     // 错误状态
     &--error {
-      border-color: fade(@error-color, 40%);
+      border-color: rgba(var(--aero-error-color-rgb, @error-color-rgb), 0.4);
     }
 
     // 触发按钮卡片
@@ -463,9 +463,9 @@
       }
 
       &:hover {
-        border-color: @primary-color;
-        color: @primary-color;
-        background: fade(@primary-color, 4%);
+        border-color: var(--aero-primary-color, @primary-color);
+        color: var(--aero-primary-color, @primary-color);
+        background: rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.04);
       }
     }
   }

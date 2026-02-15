@@ -10,7 +10,7 @@
 
   &:focus-visible {
     border-radius: @border-radius-base;
-    box-shadow: 0 0 0 3px fade(@primary-color, 25%);
+    box-shadow: 0 0 0 3px rgba(var(--aero-primary-color-rgb, @primary-color-rgb), 0.25);
   }
 
   // ---- 尺寸 ----
@@ -66,7 +66,7 @@
     position: absolute;
     inset: 0;
     display: flex;
-    color: @warning-color;
+    color: var(--aero-warning-color, @warning-color);
     opacity: 0;
     overflow: hidden;
     transition: opacity 200ms @transition-timing,
@@ -81,18 +81,18 @@
   // ---- 全选 ----
   &--full &-second {
     opacity: 1;
-    filter: drop-shadow(0 1px 4px fade(@warning-color, 35%));
+    filter: drop-shadow(0 1px 4px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.35));
   }
 
   // ---- 半选 ----
   &--half &-second {
     opacity: 1;
     clip-path: inset(0 50% 0 0);
-    filter: drop-shadow(0 1px 4px fade(@warning-color, 35%));
+    filter: drop-shadow(0 1px 4px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.35));
   }
 
   // hover 高亮增强
   .aero-rate:not(.aero-rate--disabled):not(.aero-rate--readonly) &--active:hover &-second {
-    filter: drop-shadow(0 2px 8px fade(@warning-color, 50%)) brightness(1.08);
+    filter: drop-shadow(0 2px 8px rgba(var(--aero-warning-color-rgb, @warning-color-rgb), 0.5)) brightness(1.08);
   }
 }

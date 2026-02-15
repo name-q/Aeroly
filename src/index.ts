@@ -1,3 +1,9 @@
+export { default as ConfigProvider } from './ConfigProvider';
+export type { ConfigProviderProps, SizeType, ThemeConfig } from './ConfigProvider';
+export { default as zhCN } from './locale/zh_CN';
+export { default as enUS } from './locale/en_US';
+export type { Locale } from './locale/types';
+
 export { default as Icon } from './Icon';
 export type { IconProps } from './Icon';
 

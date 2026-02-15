@@ -69,14 +69,14 @@
     padding: 4px 12px;
     border: none;
     border-radius: 999px;
-    background: @primary-color;
+    background: var(--aero-primary-color, @primary-color);
     color: #fff;
     font-size: 13px;
     cursor: pointer;
     .transition();
 
     &:hover {
-      background: lighten(@primary-color, 6%);
+      background: var(--aero-primary-color-hover, @primary-color-hover);
     }
   }
 

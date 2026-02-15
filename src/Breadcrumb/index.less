@@ -139,7 +139,7 @@
 
       &:hover {
         background: rgba(0, 0, 0, 0.04);
-        color: @primary-color;
+        color: var(--aero-primary-color, @primary-color);
       }
 
       @{dark-selector} & {
@@ -147,7 +147,7 @@
 
         &:hover {
           background: rgba(255, 255, 255, 0.06);
-          color: @primary-color;
+          color: var(--aero-primary-color, @primary-color);
         }
       }
     }

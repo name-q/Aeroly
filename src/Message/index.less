@@ -47,19 +47,19 @@
 
   // ---- 类型图标颜色 ----
   &--info &-icon {
-    color: @primary-color;
+    color: var(--aero-primary-color, @primary-color);
   }
 
   &--success &-icon {
-    color: @success-color;
+    color: var(--aero-success-color, @success-color);
   }
 
   &--warning &-icon {
-    color: @warning-color;
+    color: var(--aero-warning-color, @warning-color);
   }
 
   &--error &-icon {
-    color: @error-color;
+    color: var(--aero-error-color, @error-color);
   }
 
   // ---- 内部元素 ----

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import type { LucideIcon } from 'lucide-react';
 import { X, Info, CircleCheck, CircleAlert, CircleX } from 'lucide-react';
 import Icon from '../Icon';
+import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface ModalProps {
@@ -54,8 +55,8 @@ const Modal: React.FC<ModalProps> & {
   title,
   children,
   footer,
-  okText = '确定',
-  cancelText = '取消',
+  okText,
+  cancelText,
   onOk,
   onCancel,
   width = 420,
@@ -67,6 +68,9 @@ const Modal: React.FC<ModalProps> & {
   className,
   style,
 }) => {
+  const localeModal = useLocale('Modal');
+  const finalOkText = okText ?? localeModal.okText;
+  const finalCancelText = cancelText ?? localeModal.cancelText;
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [okLoading, setOkLoading] = useState(false);
@@ -161,7 +165,7 @@ const Modal: React.FC<ModalProps> & {
     return (
       <div className="aero-modal-footer">
         <button type="button" className="aero-modal-btn aero-modal-btn--cancel" onClick={handleCancel}>
-          {cancelText}
+          {finalCancelText}
         </button>
         <button
           type="button"
@@ -170,7 +174,7 @@ const Modal: React.FC<ModalProps> & {
           disabled={okLoading}
         >
           {okLoading && <span className="aero-modal-btn-spinner" />}
-          {okText}
+          {finalOkText}
         </button>
       </div>
     );
@@ -248,6 +252,7 @@ function openConfirm(config: ConfirmConfig) {
   const showCancel = type === 'confirm';
 
   const ConfirmModal = () => {
+    const localeModal = useLocale('Modal');
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
     const [mounted, setMounted] = useState(true);
@@ -313,7 +318,7 @@ function openConfirm(config: ConfirmConfig) {
             <div className="aero-modal-footer">
               {showCancel && (
                 <button type="button" className="aero-modal-btn aero-modal-btn--cancel" onClick={handleCancel}>
-                  {config.cancelText || '取消'}
+                  {config.cancelText || localeModal.cancelText}
                 </button>
               )}
               <button
@@ -323,7 +328,7 @@ function openConfirm(config: ConfirmConfig) {
                 disabled={loading}
               >
                 {loading && <span className="aero-modal-btn-spinner" />}
-                {config.okText || '确定'}
+                {config.okText || localeModal.okText}
               </button>
             </div>
           </div>

@@ -120,7 +120,7 @@
   // ---- Sizes ----
   &--small {
     height: @input-height-sm;
-    border-radius: 6px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
 
     .aero-input {
       padding: 0 @input-padding-h-sm;
@@ -160,7 +160,7 @@
 
   &--large {
     height: @input-height-lg;
-    border-radius: 10px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
 
     .aero-input {
       padding: 0 @input-padding-h-lg;
@@ -370,20 +370,20 @@
   .aero-input-addon {
     padding: 0 8px;
     font-size: 12px;
-    border-radius: 6px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
   }
 
-  .aero-input-addon--before { border-radius: 6px 0 0 6px; }
-  .aero-input-addon--after { border-radius: 0 6px 6px 0; }
+  .aero-input-addon--before { border-radius: var(--aero-border-radius, @border-radius-base) 0 0 var(--aero-border-radius, @border-radius-base); }
+  .aero-input-addon--after { border-radius: 0 var(--aero-border-radius, @border-radius-base) var(--aero-border-radius, @border-radius-base) 0; }
 }
 
 .aero-input-group--large {
   .aero-input-addon {
     padding: 0 16px;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
   }
 
-  .aero-input-addon--before { border-radius: 10px 0 0 10px; }
-  .aero-input-addon--after { border-radius: 0 10px 10px 0; }
+  .aero-input-addon--before { border-radius: var(--aero-border-radius, @border-radius-base) 0 0 var(--aero-border-radius, @border-radius-base); }
+  .aero-input-addon--after { border-radius: 0 var(--aero-border-radius, @border-radius-base) var(--aero-border-radius, @border-radius-base) 0; }
 }

@@ -432,7 +432,7 @@
     height: 28px;
     padding: 0 8px;
     font-size: 12px;
-    border-radius: 6px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
   }
 
   &--small&--multiple &-selector {
@@ -457,7 +457,7 @@
     height: 44px;
     padding: 0 14px;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
   }
 
   &--large&--multiple &-selector {

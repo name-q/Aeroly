@@ -107,7 +107,7 @@
 
   // ---- Sizes ----
   &--small {
-    border-radius: 6px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
 
     .aero-textarea {
       padding: 6px 10px;
@@ -131,7 +131,7 @@
   }
 
   &--large {
-    border-radius: 10px;
+    border-radius: var(--aero-border-radius, @border-radius-base);
 
     .aero-textarea {
       padding: 10px 18px;

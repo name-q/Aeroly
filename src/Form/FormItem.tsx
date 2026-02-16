@@ -149,8 +149,14 @@ const FormItem: React.FC<FormItemProps> = ({
 
     const injectedProps: Record<string, any> = {
       [isCheckable ? 'checked' : valuePropName]: controlledValue,
-      [trigger]: handleChange,
-      onBlur: handleBlur,
+      [trigger]: (...args: any[]) => {
+        handleChange(...args);
+        child.props[trigger]?.(...args);
+      },
+      onBlur: (...args: any[]) => {
+        handleBlur();
+        child.props.onBlur?.(...args);
+      },
       disabled: child.props.disabled ?? disabled,
     };
 

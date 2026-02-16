@@ -32,7 +32,7 @@ export interface StepsProps {
   /** 排列方向 */
   direction?: 'horizontal' | 'vertical';
   /** 尺寸 */
-  size?: 'small' | 'medium';
+  size?: 'small' | 'medium' | 'large';
   /** 标签位置（仅水平方向生效） */
   labelPlacement?: 'horizontal' | 'vertical';
   /** 是否可点击切换 */
@@ -69,7 +69,7 @@ const Steps: React.FC<StepsProps> = ({
   className,
   style,
 }) => {
-  const size = useSize(sizeProp) as 'small' | 'medium';
+  const size = useSize(sizeProp);
   const currentIndex = current - 1;
   const isLabelVertical = direction === 'horizontal' && labelPlacement === 'vertical';
 
@@ -107,11 +107,11 @@ const Steps: React.FC<StepsProps> = ({
 
         let iconContent: React.ReactNode;
         if (item.icon) {
-          iconContent = <Icon icon={item.icon} size={size === 'small' ? 14 : 16} />;
+          iconContent = <Icon icon={item.icon} size={size === 'small' ? 14 : size === 'large' ? 20 : 16} />;
         } else if (stepStatus === 'finish') {
-          iconContent = <Icon icon={Check} size={size === 'small' ? 12 : 14} />;
+          iconContent = <Icon icon={Check} size={size === 'small' ? 12 : size === 'large' ? 18 : 14} />;
         } else if (stepStatus === 'error') {
-          iconContent = <Icon icon={X} size={size === 'small' ? 12 : 14} />;
+          iconContent = <Icon icon={X} size={size === 'small' ? 12 : size === 'large' ? 18 : 14} />;
         } else {
           iconContent = <span className="aero-steps-item-icon__number">{index + 1}</span>;
         }

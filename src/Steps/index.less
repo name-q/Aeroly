@@ -4,6 +4,7 @@
 // ---- 尺寸 tokens ----
 @step-icon-size: 28px;
 @step-icon-size-sm: 22px;
+@step-icon-size-lg: 36px;
 @step-tail-gap: 8px;
 
 // ---- 容器 ----
@@ -107,6 +108,12 @@
     font-size: 11px;
   }
 
+  .aero-steps--large & {
+    width: @step-icon-size-lg;
+    height: @step-icon-size-lg;
+    font-size: 16px;
+  }
+
   &__number {
     font-variant-numeric: tabular-nums;
   }
@@ -164,6 +171,10 @@
     margin-left: 8px;
   }
 
+  .aero-steps--large & {
+    margin-left: 12px;
+  }
+
   .aero-steps--label-vertical & {
     margin-left: 0;
     margin-top: 8px;
@@ -189,6 +200,11 @@
   .aero-steps--small & {
     font-size: 13px;
     line-height: @step-icon-size-sm;
+  }
+
+  .aero-steps--large & {
+    font-size: 16px;
+    line-height: @step-icon-size-lg;
   }
 
   .aero-steps--label-vertical & {
@@ -307,6 +323,12 @@
   right: ~'calc(-50% + @{step-icon-size-sm} / 2 + @{step-tail-gap})';
 }
 
+.aero-steps--label-vertical.aero-steps--large .aero-steps-item-tail {
+  top: (@step-icon-size-lg / 2);
+  left: ~'calc(50% + @{step-icon-size-lg} / 2 + @{step-tail-gap})';
+  right: ~'calc(-50% + @{step-icon-size-lg} / 2 + @{step-tail-gap})';
+}
+
 // ---- vertical：从图标下方垂直延伸到下一个图标上方 ----
 .aero-steps--vertical .aero-steps-item-tail {
   left: (@step-icon-size / 2);
@@ -319,6 +341,11 @@
 .aero-steps--vertical.aero-steps--small .aero-steps-item-tail {
   left: (@step-icon-size-sm / 2);
   top: (@step-icon-size-sm + @step-tail-gap);
+}
+
+.aero-steps--vertical.aero-steps--large .aero-steps-item-tail {
+  left: (@step-icon-size-lg / 2);
+  top: (@step-icon-size-lg + @step-tail-gap);
 }
 
 .aero-steps--vertical .aero-steps-item {

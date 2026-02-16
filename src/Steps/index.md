@@ -51,7 +51,7 @@ toc: content
 | current | 当前步骤（从 1 开始） | `number` | `1` |
 | status | 当前步骤的状态 | `'wait' \| 'process' \| 'finish' \| 'error'` | `'process'` |
 | direction | 排列方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
-| size | 尺寸 | `'small' \| 'medium'` | `'medium'` |
+| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | labelPlacement | 标签位置（仅水平方向） | `'horizontal' \| 'vertical'` | `'horizontal'` |
 | clickable | 是否可点击切换 | `boolean` | `false` |
 | onChange | 点击步骤回调 | `(current: number) => void` | - |

@@ -349,7 +349,12 @@ const TimePicker: React.FC<TimePickerProps> = ({
             <button
               type="button"
               className="aero-time-picker-ok"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                if (!currentValue) {
+                  updateValue(h, m, s);
+                }
+                setOpen(false);
+              }}
             >
               {localeTime.confirm}
             </button>

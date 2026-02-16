@@ -5054,7 +5054,6 @@
               "x": 112,
               "y": -6,
               "name": "sliderThumb",
-              "fill": "#FFFFFF",
               "width": 16,
               "height": 16,
               "stroke": {

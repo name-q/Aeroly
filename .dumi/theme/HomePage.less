@@ -1,0 +1,179 @@
+/* AeroUI Homepage Styles */
+
+.aero-home {
+  min-height: 100vh;
+  background-color: #060810;
+  color: #f0f0f0;
+  overflow-x: hidden;
+}
+
+/* ==================== Hero Section ==================== */
+.aero-home-hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 24px 12vh;
+}
+
+.aero-home-hero-content {
+  text-align: center;
+  max-width: 720px;
+  transition: opacity 0.1s linear;
+}
+
+.aero-home-hero-tagline {
+  font-size: 18px;
+  color: rgba(240, 240, 240, 0.45);
+  line-height: 1.6;
+  margin: 0 0 36px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== Buttons ==================== */
+.aero-home-hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.aero-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.aero-home-btn--primary {
+  background: #50b8e7;
+  color: #060810;
+
+  &:hover {
+    background: #6cc8f0;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(80, 184, 231, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.aero-home-btn--ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(240, 240, 240, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #f0f0f0;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* ==================== Features Section ==================== */
+.aero-home-features {
+  position: relative;
+  z-index: 1;
+  padding: 100px 24px 120px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.aero-home-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.aero-home-feature-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(80, 184, 231, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 14px 0 8px;
+    color: #f0f0f0;
+  }
+
+  p {
+    font-size: 13.5px;
+    color: rgba(240, 240, 240, 0.45);
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+.aero-home-feature-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+/* ==================== Footer ==================== */
+.aero-home-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 48px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(240, 240, 240, 0.25);
+  }
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+  .aero-home-hero {
+    padding-bottom: 8vh;
+  }
+
+  .aero-home-hero-tagline {
+    font-size: 15px;
+  }
+
+  .aero-home-hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .aero-home-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .aero-home-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

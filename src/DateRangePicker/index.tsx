@@ -101,7 +101,26 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<[string, string]>(defaultValue || ['', '']);
-  const currentValue = isControlled ? value! : internalValue;
+
+  const normalizedValue = useMemo<[string, string]>(() => {
+    if (!isControlled) return internalValue;
+    if (!value || !Array.isArray(value)) return ['', ''];
+    return [value[0] ?? '', value[1] ?? ''];
+  }, [isControlled, value, internalValue]);
+
+  // 受控值残缺时（如 ['2025-06-01']），回写规范化后的值让 Form 存储保持一致
+  useEffect(() => {
+    if (!isControlled || !value) return;
+    if (
+      !Array.isArray(value) || value.length !== 2
+      || (value[0] ?? '') !== normalizedValue[0]
+      || (value[1] ?? '') !== normalizedValue[1]
+    ) {
+      onChange?.(normalizedValue);
+    }
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const currentValue = normalizedValue;
 
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);

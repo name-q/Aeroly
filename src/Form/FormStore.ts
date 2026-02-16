@@ -233,7 +233,10 @@ export class FormStore {
       try {
         // required
         if (rule.required) {
-          if (value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
+          if (
+            value === undefined || value === null || value === ''
+            || (Array.isArray(value) && (value.length === 0 || value.some((v: any) => v === undefined || v === null || v === '')))
+          ) {
             throw new Error(rule.message || '此项为必填项');
           }
         }

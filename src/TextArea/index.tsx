@@ -131,10 +131,10 @@ const TextArea: React.FC<TextAreaProps> = ({
     el.style.height = `${scrollH + borderY}px`;
   }, [autoSize]);
 
-  // useLayoutEffect 避免闪烁
+  // useLayoutEffect 避免闪烁；size 变化时也需要重算（padding/font-size 影响 scrollHeight）
   useLayoutEffect(() => {
     adjustHeight();
-  }, [currentValue, adjustHeight]);
+  }, [currentValue, adjustHeight, size]);
 
   const classNames = [
     'aero-textarea-wrapper',

@@ -45,6 +45,10 @@ export interface InputNumberProps {
   onStep?: (value: number, info: { offset: number; type: 'up' | 'down' }) => void;
   /** 回车回调 */
   onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  /** 聚焦回调 */
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  /** 失焦回调 */
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -105,6 +109,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
   keyboard = true,
   onStep,
   onPressEnter,
+  onFocus: onFocusProp,
+  onBlur: onBlurProp,
   className,
   style,
 }) => {
@@ -196,15 +202,29 @@ const InputNumber: React.FC<InputNumberProps> = ({
 
   useEffect(() => stopLongPress, [stopLongPress]);
 
-  // 输入处理
+  // 输入处理 — 实时解析并通知 Form，让校验能即时响应
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDisplayValue(e.target.value);
+    const text = e.target.value;
+    setDisplayValue(text);
+
+    const trimmed = text.trim();
+    if (trimmed === '') {
+      triggerChange(null);
+    } else {
+      const parsed = parseInput(trimmed);
+      if (!isNaN(parsed)) {
+        triggerChange(safeClamp(toFixed(parsed, precision), min, max));
+      }
+    }
   };
 
   const commitValue = useCallback(() => {
     const text = displayValue.trim();
     if (text === '') {
-      triggerChange(null);
+      // 仅当值确实有变化时才通知（避免聚焦不输入直接 blur 触发校验）
+      if (currentValue !== null && currentValue !== undefined && currentValue !== '') {
+        triggerChange(null);
+      }
       setDisplayValue('');
       return;
     }
@@ -219,17 +239,19 @@ const InputNumber: React.FC<InputNumberProps> = ({
     setDisplayValue(formatValue(clamped));
   }, [displayValue, parseInput, precision, min, max, triggerChange, formatValue, currentValue]);
 
-  const handleFocus = () => {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setFocused(true);
     // 聚焦时如果有 formatter，显示纯数字方便编辑
     if (formatter && currentValue !== null && currentValue !== undefined) {
       setDisplayValue(numberToString(currentValue, precision));
     }
+    onFocusProp?.(e);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setFocused(false);
     commitValue();
+    onBlurProp?.(e);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

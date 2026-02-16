@@ -58,5 +58,7 @@ toc: content
 | keyboard | 是否支持键盘上下键 | `boolean` | `true` |
 | onStep | 步进回调 | `(value: number, info) => void` | - |
 | onPressEnter | 回车回调 | `(e) => void` | - |
+| onFocus | 聚焦回调 | `(e) => void` | - |
+| onBlur | 失焦回调 | `(e) => void` | - |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `CSSProperties` | - |

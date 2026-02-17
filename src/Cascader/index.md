@@ -15,27 +15,27 @@ A multi-column cascading selector that expands submenus level by level, supporti
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Multiple Selection
 
-<code src="./en/demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx" id="multiple-en"></code>
 
 ## Search
 
-<code src="./en/demos/search.tsx"></code>
+<code src="./en/demos/search.tsx" id="search-en"></code>
 
 ## Select Any Level
 
-<code src="./en/demos/trigger.tsx"></code>
+<code src="./en/demos/trigger.tsx" id="trigger-en"></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

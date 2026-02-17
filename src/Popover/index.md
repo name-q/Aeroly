@@ -15,23 +15,23 @@ Click or hover on an element to display a floating card. Supports 4 directions, 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Click Trigger
 
-<code src="./en/demos/click.tsx"></code>
+<code src="./en/demos/click.tsx" id="click-en"></code>
 
 ## Placement
 
-<code src="./en/demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx" id="placement-en"></code>
 
 ## Custom Content
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## API
 

@@ -15,23 +15,23 @@ Small labels for marking and categorizing. Supports multiple types, sizes, closa
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Closable
 
-<code src="./en/demos/closable.tsx"></code>
+<code src="./en/demos/closable.tsx" id="closable-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Custom Color / Round / Borderless
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## Clickable Tags
 
-<code src="./en/demos/clickable.tsx"></code>
+<code src="./en/demos/clickable.tsx" id="clickable-en"></code>
 
 ## API
 

@@ -15,23 +15,23 @@ Enter a number via mouse or keyboard. Supports stepping, range limits, precision
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Step & Precision
 
-<code src="./en/demos/step.tsx"></code>
+<code src="./en/demos/step.tsx" id="step-en"></code>
 
 ## Formatter
 
-<code src="./en/demos/formatter.tsx"></code>
+<code src="./en/demos/formatter.tsx" id="formatter-en"></code>
 
 ## Disabled & ReadOnly
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

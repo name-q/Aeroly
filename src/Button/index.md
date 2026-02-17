@@ -16,19 +16,19 @@ Interactive element for triggering actions. Provides three styles: pill, primary
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Icon Button
 
-<code src="./en/demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx" id="icon-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Loading & Disabled
 
-<code src="./en/demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx" id="loading-en"></code>
 
 ## API
 

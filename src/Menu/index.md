@@ -14,23 +14,23 @@ A navigation menu list for pages or features, supporting vertical, horizontal, m
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="The simplest vertical menu, passing menu data via items."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="The simplest vertical menu, passing menu data via items."></code>
 
 ## Multi-level Submenu
 
-<code src="./en/demos/submenu.tsx" description="Submenus can be nested infinitely, with animated expand/collapse transitions."></code>
+<code src="./en/demos/submenu.tsx" id="submenu-en" description="Submenus can be nested infinitely, with animated expand/collapse transitions."></code>
 
 ## Horizontal Mode
 
-<code src="./en/demos/horizontal.tsx" description="Set mode='horizontal' to switch to a horizontal navigation bar, submenus pop up as overlays."></code>
+<code src="./en/demos/horizontal.tsx" id="horizontal-en" description="Set mode='horizontal' to switch to a horizontal navigation bar, submenus pop up as overlays."></code>
 
 ## Collapsed Mode
 
-<code src="./en/demos/collapsed.tsx" description="When the sidebar is collapsed, only icons are shown, and submenus pop up as overlays."></code>
+<code src="./en/demos/collapsed.tsx" id="collapsed-en" description="When the sidebar is collapsed, only icons are shown, and submenus pop up as overlays."></code>
 
 ## Groups and Dividers
 
-<code src="./en/demos/group.tsx" description="Use type='group' to group menu items, type='divider' to add dividers. Supports disabled state."></code>
+<code src="./en/demos/group.tsx" id="group-en" description="Use type='group' to group menu items, type='divider' to add dividers. Supports disabled state."></code>
 
 ## API
 

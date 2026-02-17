@@ -15,27 +15,27 @@ toc: content
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Gutter
 
-<code src="./en/demos/gutter.tsx"></code>
+<code src="./en/demos/gutter.tsx" id="gutter-en"></code>
 
 ## Offset
 
-<code src="./en/demos/offset.tsx"></code>
+<code src="./en/demos/offset.tsx" id="offset-en"></code>
 
 ## Alignment
 
-<code src="./en/demos/align.tsx"></code>
+<code src="./en/demos/align.tsx" id="align-en"></code>
 
 ## Flex Layout
 
-<code src="./en/demos/flex.tsx"></code>
+<code src="./en/demos/flex.tsx" id="flex-en"></code>
 
 ## Responsive
 
-<code src="./en/demos/responsive.tsx"></code>
+<code src="./en/demos/responsive.tsx" id="responsive-en"></code>
 
 ## API
 

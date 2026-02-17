@@ -15,27 +15,27 @@ Used for selecting multiple items from a set of options, providing clear selecti
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Checkbox Group
 
-<code src="./en/demos/group.tsx"></code>
+<code src="./en/demos/group.tsx" id="group-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Check All & Indeterminate
 
-<code src="./en/demos/indeterminate.tsx"></code>
+<code src="./en/demos/indeterminate.tsx" id="indeterminate-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

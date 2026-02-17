@@ -15,23 +15,23 @@ A tree-structured dropdown selector supporting single selection, multiple select
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Multiple Selection
 
-<code src="./en/demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx" id="multiple-en"></code>
 
 ## Search
 
-<code src="./en/demos/search.tsx"></code>
+<code src="./en/demos/search.tsx" id="search-en"></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

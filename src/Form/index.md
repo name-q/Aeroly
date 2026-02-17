@@ -15,35 +15,35 @@ High-performance form component with built-in data management, validation, and l
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Layout Modes
 
-<code src="./en/demos/layout.tsx"></code>
+<code src="./en/demos/layout.tsx" id="layout-en"></code>
 
 ## Validation Rules
 
-<code src="./en/demos/validation.tsx"></code>
+<code src="./en/demos/validation.tsx" id="validation-en"></code>
 
 ## Dynamic Form Items
 
-<code src="./en/demos/dynamic.tsx"></code>
+<code src="./en/demos/dynamic.tsx" id="dynamic-en"></code>
 
 ## Comprehensive Example
 
-<code src="./en/demos/complex.tsx"></code>
+<code src="./en/demos/complex.tsx" id="complex-en"></code>
 
 ## Upload Image Validation
 
-<code src="./en/demos/upload.tsx"></code>
+<code src="./en/demos/upload.tsx" id="upload-en"></code>
 
 ## Data Prefill
 
-<code src="./en/demos/prefill.tsx"></code>
+<code src="./en/demos/prefill.tsx" id="prefill-en"></code>
 
 ## Form in Modal
 
-<code src="./en/demos/modal.tsx"></code>
+<code src="./en/demos/modal.tsx" id="modal-en"></code>
 
 ## API
 

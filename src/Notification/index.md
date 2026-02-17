@@ -15,23 +15,23 @@ Display global notification messages that slide in from the screen edge. Support
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Different Types
 
-<code src="./en/demos/types.tsx"></code>
+<code src="./en/demos/types.tsx" id="types-en"></code>
 
 ## Custom Duration
 
-<code src="./en/demos/duration.tsx"></code>
+<code src="./en/demos/duration.tsx" id="duration-en"></code>
 
 ## Placement
 
-<code src="./en/demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx" id="placement-en"></code>
 
 ## With Action Buttons
 
-<code src="./en/demos/footer.tsx"></code>
+<code src="./en/demos/footer.tsx" id="footer-en"></code>
 
 ## API
 

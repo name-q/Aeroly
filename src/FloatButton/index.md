@@ -14,15 +14,15 @@ A shortcut action entry fixed at the edge of the page. Supports single button, e
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Button Group
 
-<code src="./en/demos/group.tsx"></code>
+<code src="./en/demos/group.tsx" id="group-en"></code>
 
 ## Back to Top
 
-<code src="./en/demos/backtop.tsx"></code>
+<code src="./en/demos/backtop.tsx" id="backtop-en"></code>
 
 ## API
 

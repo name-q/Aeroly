@@ -15,27 +15,27 @@ A circular badge number at the top-right corner of an icon or text, used for mes
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Dot
 
-<code src="./en/demos/dot.tsx"></code>
+<code src="./en/demos/dot.tsx" id="dot-en"></code>
 
 ## Overflow Count
 
-<code src="./en/demos/overflow.tsx"></code>
+<code src="./en/demos/overflow.tsx" id="overflow-en"></code>
 
 ## Shimmer Animation
 
-<code src="./en/demos/shimmer.tsx"></code>
+<code src="./en/demos/shimmer.tsx" id="shimmer-en"></code>
 
 ## Custom Color & Content
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## Status Dot
 
-<code src="./en/demos/status.tsx"></code>
+<code src="./en/demos/status.tsx" id="status-en"></code>
 
 ## API
 

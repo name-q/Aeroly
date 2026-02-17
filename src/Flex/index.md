@@ -15,31 +15,31 @@ Intent-driven flex layout component. Defaults to horizontal direction with verti
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Vertical Direction
 
-<code src="./en/demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
 ## Main Axis Distribution
 
-<code src="./en/demos/justify.tsx"></code>
+<code src="./en/demos/justify.tsx" id="justify-en"></code>
 
 ## Centering
 
-<code src="./en/demos/center.tsx"></code>
+<code src="./en/demos/center.tsx" id="center-en"></code>
 
 ## Wrapping
 
-<code src="./en/demos/wrap.tsx"></code>
+<code src="./en/demos/wrap.tsx" id="wrap-en"></code>
 
 ## Flex Ratio
 
-<code src="./en/demos/flex.tsx"></code>
+<code src="./en/demos/flex.tsx" id="flex-en"></code>
 
 ## Auto Spacing
 
-<code src="./en/demos/auto.tsx"></code>
+<code src="./en/demos/auto.tsx" id="auto-en"></code>
 
 ## API
 

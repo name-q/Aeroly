@@ -15,19 +15,19 @@ Global message notifications for operation feedback. Displayed at the top center
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Different Types
 
-<code src="./en/demos/types.tsx"></code>
+<code src="./en/demos/types.tsx" id="types-en"></code>
 
 ## Custom Duration
 
-<code src="./en/demos/duration.tsx"></code>
+<code src="./en/demos/duration.tsx" id="duration-en"></code>
 
 ## Custom Icon
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## API
 

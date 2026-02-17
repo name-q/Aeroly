@@ -15,35 +15,35 @@ Multi-line text input that auto-resizes to fit content by default. Grows natural
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Row Range Limit
 
-<code src="./en/demos/autosize.tsx"></code>
+<code src="./en/demos/autosize.tsx" id="autosize-en"></code>
 
 ## Fixed Rows
 
-<code src="./en/demos/fixed.tsx"></code>
+<code src="./en/demos/fixed.tsx" id="fixed-en"></code>
 
 ## Character Count
 
-<code src="./en/demos/count.tsx"></code>
+<code src="./en/demos/count.tsx" id="count-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Validation Status
 
-<code src="./en/demos/status.tsx"></code>
+<code src="./en/demos/status.tsx" id="status-en"></code>
 
 ## Disabled & ReadOnly
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

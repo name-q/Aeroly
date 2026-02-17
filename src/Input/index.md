@@ -15,43 +15,43 @@ Text input with clear interaction feedback. Supports prefix/suffix, clearable, p
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Prefix & Suffix
 
-<code src="./en/demos/prefix-suffix.tsx"></code>
+<code src="./en/demos/prefix-suffix.tsx" id="prefix-suffix-en"></code>
 
 ## Clearable
 
-<code src="./en/demos/clear.tsx"></code>
+<code src="./en/demos/clear.tsx" id="clear-en"></code>
 
 ## Password Input
 
-<code src="./en/demos/password.tsx"></code>
+<code src="./en/demos/password.tsx" id="password-en"></code>
 
 ## Character Count
 
-<code src="./en/demos/count.tsx"></code>
+<code src="./en/demos/count.tsx" id="count-en"></code>
 
 ## Addon Before & After
 
-<code src="./en/demos/addon.tsx"></code>
+<code src="./en/demos/addon.tsx" id="addon-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Validation Status
 
-<code src="./en/demos/status.tsx"></code>
+<code src="./en/demos/status.tsx" id="status-en"></code>
 
 ## Disabled & ReadOnly
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

@@ -15,27 +15,27 @@ Select a time value. The dropdown panel features scrollable columns for an intui
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Hide Seconds
 
-<code src="./en/demos/hideSecond.tsx"></code>
+<code src="./en/demos/hideSecond.tsx" id="hideSecond-en"></code>
 
 ## Step
 
-<code src="./en/demos/step.tsx"></code>
+<code src="./en/demos/step.tsx" id="step-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

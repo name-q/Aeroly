@@ -15,27 +15,27 @@ Split long lists into pages when dealing with large amounts of data, loading one
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## More Pages
 
-<code src="./en/demos/more.tsx"></code>
+<code src="./en/demos/more.tsx" id="more-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Simple Mode
 
-<code src="./en/demos/simple.tsx"></code>
+<code src="./en/demos/simple.tsx" id="simple-en"></code>
 
 ## Total & Quick Jumper & Page Size Changer
 
-<code src="./en/demos/jumper.tsx"></code>
+<code src="./en/demos/jumper.tsx" id="jumper-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

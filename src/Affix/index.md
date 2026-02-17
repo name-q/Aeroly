@@ -16,15 +16,15 @@ Automatically detects the nearest scrollable ancestor container. Multiple instan
 
 ## Stick to Top
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Stick to Bottom
 
-<code src="./en/demos/bottom.tsx"></code>
+<code src="./en/demos/bottom.tsx" id="bottom-en"></code>
 
 ## Multiple Instances & Containers
 
-<code src="./en/demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx" id="multiple-en"></code>
 
 ## API
 

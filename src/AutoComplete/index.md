@@ -14,15 +14,15 @@ Input with auto-completion, supporting local filtering and async search. Unlike 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Async Search
 
-<code src="./en/demos/async.tsx"></code>
+<code src="./en/demos/async.tsx" id="async-en"></code>
 
 ## Usage in Form
 
-<code src="./en/demos/form.tsx"></code>
+<code src="./en/demos/form.tsx" id="form-en"></code>
 
 ## API
 

@@ -15,23 +15,23 @@ A modal dialog that opens a floating layer on the current page for confirmations
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Async Close
 
-<code src="./en/demos/async.tsx"></code>
+<code src="./en/demos/async.tsx" id="async-en"></code>
 
 ## Custom Footer
 
-<code src="./en/demos/footer.tsx"></code>
+<code src="./en/demos/footer.tsx" id="footer-en"></code>
 
 ## Centered
 
-<code src="./en/demos/centered.tsx"></code>
+<code src="./en/demos/centered.tsx" id="centered-en"></code>
 
 ## Imperative API
 
-<code src="./en/demos/confirm.tsx"></code>
+<code src="./en/demos/confirm.tsx" id="confirm-en"></code>
 
 ## API
 

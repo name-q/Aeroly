@@ -15,27 +15,27 @@ Displays multiple options and allows the user to select one. Commonly used for v
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Block Mode
 
-<code src="./en/demos/block.tsx"></code>
+<code src="./en/demos/block.tsx" id="block-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Custom Rendering
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

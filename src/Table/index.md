@@ -15,39 +15,39 @@ Display row and column data with support for sorting, selection, pagination, and
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Bordered & Striped
 
-<code src="./en/demos/bordered.tsx"></code>
+<code src="./en/demos/bordered.tsx" id="bordered-en"></code>
 
 ## Custom Render
 
-<code src="./en/demos/custom-render.tsx"></code>
+<code src="./en/demos/custom-render.tsx" id="custom-render-en"></code>
 
 ## Sorting
 
-<code src="./en/demos/sorter.tsx"></code>
+<code src="./en/demos/sorter.tsx" id="sorter-en"></code>
 
 ## Row Selection
 
-<code src="./en/demos/selection.tsx"></code>
+<code src="./en/demos/selection.tsx" id="selection-en"></code>
 
 ## Pagination
 
-<code src="./en/demos/pagination.tsx"></code>
+<code src="./en/demos/pagination.tsx" id="pagination-en"></code>
 
 ## Loading State
 
-<code src="./en/demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx" id="loading-en"></code>
 
 ## Fixed Columns & Scroll
 
-<code src="./en/demos/fixed-scroll.tsx"></code>
+<code src="./en/demos/fixed-scroll.tsx" id="fixed-scroll-en"></code>
 
 ## Expandable Rows
 
-<code src="./en/demos/expandable.tsx"></code>
+<code src="./en/demos/expandable.tsx" id="expandable-en"></code>
 
 ## API
 

@@ -15,23 +15,23 @@ A simple text popup tip triggered on hover. Built on Popover, supports 12 direct
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Placement
 
-<code src="./en/demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx" id="placement-en"></code>
 
 ## Rich Content
 
-<code src="./en/demos/richContent.tsx"></code>
+<code src="./en/demos/richContent.tsx" id="richContent-en"></code>
 
 ## Empty Title Not Shown
 
-<code src="./en/demos/empty.tsx"></code>
+<code src="./en/demos/empty.tsx" id="empty-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## API
 

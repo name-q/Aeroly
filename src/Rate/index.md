@@ -15,35 +15,35 @@ Used for quick rating of items, supporting full and half star selection with a s
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Half Star
 
-<code src="./en/demos/half.tsx"></code>
+<code src="./en/demos/half.tsx" id="half-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Custom Count
 
-<code src="./en/demos/count.tsx"></code>
+<code src="./en/demos/count.tsx" id="count-en"></code>
 
 ## Custom Icon
 
-<code src="./en/demos/custom-icon.tsx"></code>
+<code src="./en/demos/custom-icon.tsx" id="custom-icon-en"></code>
 
 ## Custom Color
 
-<code src="./en/demos/color.tsx"></code>
+<code src="./en/demos/color.tsx" id="color-en"></code>
 
 ## Disabled and Read Only
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

@@ -16,23 +16,23 @@ Cycles through a set of content, supporting both slide and fade transition effec
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="Horizontal slide transition. Arrows appear on hover, click dots to jump."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="Horizontal slide transition. Arrows appear on hover, click dots to jump."></code>
 
 ## Autoplay
 
-<code src="./en/demos/autoplay.tsx" description="Enable autoplay for automatic rotation. Pauses on hover, resumes on leave."></code>
+<code src="./en/demos/autoplay.tsx" id="autoplay-en" description="Enable autoplay for automatic rotation. Pauses on hover, resumes on leave."></code>
 
 ## Fade Effect
 
-<code src="./en/demos/fade.tsx" description="effect='fade' for smooth fade-in/fade-out transitions."></code>
+<code src="./en/demos/fade.tsx" id="fade-en" description="effect='fade' for smooth fade-in/fade-out transitions."></code>
 
 ## Vertical Direction
 
-<code src="./en/demos/vertical.tsx" description="direction='vertical' for vertical sliding, with dots on the right side."></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en" description="direction='vertical' for vertical sliding, with dots on the right side."></code>
 
 ## External Control
 
-<code src="./en/demos/custom.tsx" description="Use ref to access next / prev / goTo methods for external button control."></code>
+<code src="./en/demos/custom.tsx" id="custom-en" description="Use ref to access next / prev / goTo methods for external button control."></code>
 
 ## API
 

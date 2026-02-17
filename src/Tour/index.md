@@ -16,19 +16,19 @@ Step-by-step guide to help users understand product features, with support for t
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="Bind target elements via ref, automatically highlight and show guide cards."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="Bind target elements via ref, automatically highlight and show guide cards."></code>
 
 ## Placement
 
-<code src="./en/demos/placement.tsx" description="Control the popup direction for each step via placement, with auto-flip support."></code>
+<code src="./en/demos/placement.tsx" id="placement-en" description="Control the popup direction for each step via placement, with auto-flip support."></code>
 
 ## CSS Selector Targeting
 
-<code src="./en/demos/selector.tsx" description="target supports CSS selector strings, no ref needed for positioning."></code>
+<code src="./en/demos/selector.tsx" id="selector-en" description="target supports CSS selector strings, no ref needed for positioning."></code>
 
 ## Custom Content
 
-<code src="./en/demos/custom.tsx" description="Fully customize step content via content. Centered display when no target is set."></code>
+<code src="./en/demos/custom.tsx" id="custom-en" description="Fully customize step content via content. Centered display when no target is set."></code>
 
 ## API
 

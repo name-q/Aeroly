@@ -16,23 +16,23 @@ Encode text, links, and other information into QR codes. Supports Logo, status c
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Center Logo
 
-<code src="./en/demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx" id="icon-en"></code>
 
 ## Custom Style
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## Status Control
 
-<code src="./en/demos/status.tsx"></code>
+<code src="./en/demos/status.tsx" id="status-en"></code>
 
 ## Borderless
 
-<code src="./en/demos/borderless.tsx"></code>
+<code src="./en/demos/borderless.tsx" id="borderless-en"></code>
 
 ## API
 

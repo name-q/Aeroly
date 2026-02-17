@@ -15,19 +15,19 @@ A floating panel that slides in from the edge of the screen, used for temporary 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Placement
 
-<code src="./en/demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx" id="placement-en"></code>
 
 ## Footer Actions
 
-<code src="./en/demos/footer.tsx"></code>
+<code src="./en/demos/footer.tsx" id="footer-en"></code>
 
 ## Custom Size
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## API
 

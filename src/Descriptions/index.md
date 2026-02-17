@@ -15,23 +15,23 @@ Display multiple read-only fields in groups, commonly used on detail pages.
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Bordered
 
-<code src="./en/demos/bordered.tsx"></code>
+<code src="./en/demos/bordered.tsx" id="bordered-en"></code>
 
 ## With Actions
 
-<code src="./en/demos/extra.tsx"></code>
+<code src="./en/demos/extra.tsx" id="extra-en"></code>
 
 ## Vertical Layout
 
-<code src="./en/demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## API
 

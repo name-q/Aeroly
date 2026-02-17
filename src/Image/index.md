@@ -15,31 +15,31 @@ An image container supporting loading placeholders, error fallbacks, preview ove
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Object Fit
 
-<code src="./en/demos/fit.tsx"></code>
+<code src="./en/demos/fit.tsx" id="fit-en"></code>
 
 ## Load Failure
 
-<code src="./en/demos/fallback.tsx"></code>
+<code src="./en/demos/fallback.tsx" id="fallback-en"></code>
 
 ## Image Preview
 
-<code src="./en/demos/preview.tsx"></code>
+<code src="./en/demos/preview.tsx" id="preview-en"></code>
 
 ## Multi-image Preview
 
-<code src="./en/demos/preview-group.tsx"></code>
+<code src="./en/demos/preview-group.tsx" id="preview-group-en"></code>
 
 ## Lazy Loading
 
-<code src="./en/demos/lazy.tsx"></code>
+<code src="./en/demos/lazy.tsx" id="lazy-en"></code>
 
 ## Standalone Preview
 
-<code src="./en/demos/standalone.tsx"></code>
+<code src="./en/demos/standalone.tsx" id="standalone-en"></code>
 
 ## API
 

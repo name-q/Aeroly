@@ -14,23 +14,23 @@ A color picker supporting Hex, RGB input and opacity adjustment.
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="Click the trigger to open the color panel, drag or type to modify the color."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="Click the trigger to open the color panel, drag or type to modify the color."></code>
 
 ## Opacity
 
-<code src="./en/demos/alpha.tsx" description="Enable showAlpha for opacity selection, outputs rgba format."></code>
+<code src="./en/demos/alpha.tsx" id="alpha-en" description="Enable showAlpha for opacity selection, outputs rgba format."></code>
 
 ## Preset Colors
 
-<code src="./en/demos/presets.tsx" description="Provide commonly used colors for quick selection via presets."></code>
+<code src="./en/demos/presets.tsx" id="presets-en" description="Provide commonly used colors for quick selection via presets."></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx" description="Three sizes: small / medium / large."></code>
+<code src="./en/demos/size.tsx" id="size-en" description="Three sizes: small / medium / large."></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx" description="Disabled state."></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en" description="Disabled state."></code>
 
 ## API
 

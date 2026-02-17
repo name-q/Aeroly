@@ -16,23 +16,23 @@ Loading indicator for pages and sections, supporting both standalone and wrapper
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Tip Text
 
-<code src="./en/demos/tip.tsx"></code>
+<code src="./en/demos/tip.tsx" id="tip-en"></code>
 
 ## Wrapper Mode
 
-<code src="./en/demos/wrapper.tsx"></code>
+<code src="./en/demos/wrapper.tsx" id="wrapper-en"></code>
 
 ## Delayed Display
 
-<code src="./en/demos/delay.tsx"></code>
+<code src="./en/demos/delay.tsx" id="delay-en"></code>
 
 ## Custom Indicator
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## API
 

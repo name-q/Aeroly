@@ -15,23 +15,23 @@ Toggle between two states. A track with a solid thumb provides clear on/off perc
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Text Labels
 
-<code src="./en/demos/text.tsx"></code>
+<code src="./en/demos/text.tsx" id="text-en"></code>
 
 ## Loading
 
-<code src="./en/demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx" id="loading-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

@@ -15,19 +15,19 @@ Static alert messages within a page that do not interrupt user workflow. The tit
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## With Description
 
-<code src="./en/demos/description.tsx"></code>
+<code src="./en/demos/description.tsx" id="description-en"></code>
 
 ## Closable
 
-<code src="./en/demos/closable.tsx"></code>
+<code src="./en/demos/closable.tsx" id="closable-en"></code>
 
 ## Custom
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## API
 

@@ -15,19 +15,19 @@ A masonry layout component based on CSS multi-column layout, suitable for image 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Custom Columns
 
-<code src="./en/demos/columns.tsx"></code>
+<code src="./en/demos/columns.tsx" id="columns-en"></code>
 
 ## Responsive Columns
 
-<code src="./en/demos/responsive.tsx"></code>
+<code src="./en/demos/responsive.tsx" id="responsive-en"></code>
 
 ## Custom Content
 
-<code src="./en/demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx" id="custom-en"></code>
 
 ## API
 

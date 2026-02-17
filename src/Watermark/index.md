@@ -15,15 +15,15 @@ Overlay watermarks on pages or containers to identify copyright, sensitive infor
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Multi-line Watermark
 
-<code src="./en/demos/multiline.tsx"></code>
+<code src="./en/demos/multiline.tsx" id="multiline-en"></code>
 
 ## Image Watermark
 
-<code src="./en/demos/image.tsx"></code>
+<code src="./en/demos/image.tsx" id="image-en"></code>
 
 ## API
 

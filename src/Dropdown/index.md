@@ -14,15 +14,15 @@ A dropdown action menu based on Popover positioning, supporting submenu nesting,
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Submenu
 
-<code src="./en/demos/submenu.tsx"></code>
+<code src="./en/demos/submenu.tsx" id="submenu-en"></code>
 
 ## Click Trigger & Selected State
 
-<code src="./en/demos/click.tsx"></code>
+<code src="./en/demos/click.tsx" id="click-en"></code>
 
 ## API
 

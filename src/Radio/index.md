@@ -15,35 +15,35 @@ Used for selecting a single option from a set of mutually exclusive choices, pro
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Radio.Group
 
-<code src="./en/demos/group.tsx"></code>
+<code src="./en/demos/group.tsx" id="group-en"></code>
 
 ## Radio.Group Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Radio.Group Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Radio.Group Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## Radio.Group Button Mode
 
-<code src="./en/demos/button.tsx"></code>
+<code src="./en/demos/button.tsx" id="button-en"></code>
 
 ## Radio.Group Button Sizes
 
-<code src="./en/demos/button-size.tsx"></code>
+<code src="./en/demos/button-size.tsx" id="button-size-en"></code>
 
 ## Radio.Group Button Disabled
 
-<code src="./en/demos/button-disabled.tsx"></code>
+<code src="./en/demos/button-disabled.tsx" id="button-disabled-en"></code>
 
 ## API
 

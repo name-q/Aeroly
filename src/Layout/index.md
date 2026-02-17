@@ -15,15 +15,15 @@ Page-level layout container based on Flex, implementing classic top-bottom-left-
 
 ## Top-Middle-Bottom Structure
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Sidebar Navigation
 
-<code src="./en/demos/sider.tsx"></code>
+<code src="./en/demos/sider.tsx" id="sider-en"></code>
 
 ## Collapsible Sidebar
 
-<code src="./en/demos/collapsed.tsx"></code>
+<code src="./en/demos/collapsed.tsx" id="collapsed-en"></code>
 
 ## API
 

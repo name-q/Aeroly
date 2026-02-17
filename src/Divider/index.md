@@ -15,15 +15,15 @@ A divider line to separate content. Supports horizontal and vertical directions;
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## With Text
 
-<code src="./en/demos/text.tsx"></code>
+<code src="./en/demos/text.tsx" id="text-en"></code>
 
 ## Vertical Divider
 
-<code src="./en/demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
 ## API
 

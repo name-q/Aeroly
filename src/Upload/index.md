@@ -14,35 +14,35 @@ A file upload component supporting click, drag-and-drop, image preview, progress
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="Click the button to select files for upload, with progress bar and status feedback."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="Click the button to select files for upload, with progress bar and status feedback."></code>
 
 ## Drag Upload
 
-<code src="./en/demos/drag.tsx" description="Enable drag to activate the drag area, supporting file upload by dragging."></code>
+<code src="./en/demos/drag.tsx" id="drag-en" description="Enable drag to activate the drag area, supporting file upload by dragging."></code>
 
 ## Picture Mode
 
-<code src="./en/demos/picture.tsx" description="listType='picture' displays thumbnail previews."></code>
+<code src="./en/demos/picture.tsx" id="picture-en" description="listType='picture' displays thumbnail previews."></code>
 
 ## Picture Card Mode
 
-<code src="./en/demos/picture-card.tsx" description="listType='picture-card' horizontal card layout, hover shows filename and error info, suitable for compact scenarios like Form inline."></code>
+<code src="./en/demos/picture-card.tsx" id="picture-card-en" description="listType='picture-card' horizontal card layout, hover shows filename and error info, suitable for compact scenarios like Form inline."></code>
 
 ## Count and Size Limits
 
-<code src="./en/demos/limit.tsx" description="maxCount limits the number of files, maxSize limits single file size. The trigger area automatically hides when the limit is reached."></code>
+<code src="./en/demos/limit.tsx" id="limit-en" description="maxCount limits the number of files, maxSize limits single file size. The trigger area automatically hides when the limit is reached."></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx" description="Fully control the file list via fileList + onChange, supports preset files and error retry."></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en" description="Fully control the file list via fileList + onChange, supports preset files and error retry."></code>
 
 ## AI Processing
 
-<code src="./en/demos/ai.tsx" description="Use the onProcess hook to perform AI analysis on files before upload, results are written to the aiMeta field."></code>
+<code src="./en/demos/ai.tsx" id="ai-en" description="Use the onProcess hook to perform AI analysis on files before upload, results are written to the aiMeta field."></code>
 
 ## Real-world Integration
 
-<code src="./en/demos/real.tsx"></code>
+<code src="./en/demos/real.tsx" id="real-en"></code>
 
 ## API
 

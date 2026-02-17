@@ -13,19 +13,19 @@ Provides unified global configuration for components, including locale (i18n), t
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Switch Language
 
-<code src="./en/demos/locale.tsx"></code>
+<code src="./en/demos/locale.tsx" id="locale-en"></code>
 
 ## Theme Customization
 
-<code src="./en/demos/theme.tsx"></code>
+<code src="./en/demos/theme.tsx" id="theme-en"></code>
 
 ## Nested Override
 
-<code src="./en/demos/nested.tsx"></code>
+<code src="./en/demos/nested.tsx" id="nested-en"></code>
 
 ## API
 

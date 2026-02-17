@@ -14,23 +14,23 @@ Displays the current page's position in the system hierarchy and allows navigati
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="The simplest breadcrumb, with the last item being the current page."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="The simplest breadcrumb, with the last item being the current page."></code>
 
 ## With Icons
 
-<code src="./en/demos/icon.tsx" description="Each item can be configured with a Lucide icon."></code>
+<code src="./en/demos/icon.tsx" id="icon-en" description="Each item can be configured with a Lucide icon."></code>
 
 ## Custom Separator
 
-<code src="./en/demos/separator.tsx" description="Customize the separator via the separator prop, supports string or ReactNode."></code>
+<code src="./en/demos/separator.tsx" id="separator-en" description="Customize the separator via the separator prop, supports string or ReactNode."></code>
 
 ## Dropdown Menu
 
-<code src="./en/demos/menu.tsx" description="Add a dropdown selection to an item via menu, shown on hover."></code>
+<code src="./en/demos/menu.tsx" id="menu-en" description="Add a dropdown selection to an item via menu, shown on hover."></code>
 
 ## Collapse
 
-<code src="./en/demos/collapse.tsx" description="When maxItems is set, excess middle items collapse into an ellipsis, expanding on hover."></code>
+<code src="./en/demos/collapse.tsx" id="collapse-en" description="When maxItems is set, excess middle items collapse into an ellipsis, expanding on hover."></code>
 
 ## API
 

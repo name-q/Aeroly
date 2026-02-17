@@ -15,39 +15,39 @@ Select a value within a range by dragging a slider, supporting single value and 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Range Selection
 
-<code src="./en/demos/range.tsx"></code>
+<code src="./en/demos/range.tsx" id="range-en"></code>
 
 ## Step
 
-<code src="./en/demos/step.tsx"></code>
+<code src="./en/demos/step.tsx" id="step-en"></code>
 
 ## Marks
 
-<code src="./en/demos/marks.tsx"></code>
+<code src="./en/demos/marks.tsx" id="marks-en"></code>
 
 ## Tooltip
 
-<code src="./en/demos/tooltip.tsx"></code>
+<code src="./en/demos/tooltip.tsx" id="tooltip-en"></code>
 
 ## Animation
 
-<code src="./en/demos/animated.tsx"></code>
+<code src="./en/demos/animated.tsx" id="animated-en"></code>
 
 ## Vertical Mode
 
-<code src="./en/demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

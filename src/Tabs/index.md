@@ -14,27 +14,27 @@ Switch between different content panels within the same area. Supports three sty
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="The simplest usage, default line style."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="The simplest usage, default line style."></code>
 
 ## Style Variants
 
-<code src="./en/demos/variant.tsx" description="Three styles: line (underline), card, and pill."></code>
+<code src="./en/demos/variant.tsx" id="variant-en" description="Three styles: line (underline), card, and pill."></code>
 
 ## Icon Tabs
 
-<code src="./en/demos/icon.tsx" description="Add Lucide icons before tab labels."></code>
+<code src="./en/demos/icon.tsx" id="icon-en" description="Add Lucide icons before tab labels."></code>
 
 ## Size
 
-<code src="./en/demos/size.tsx" description="Three sizes: small / medium / large."></code>
+<code src="./en/demos/size.tsx" id="size-en" description="Three sizes: small / medium / large."></code>
 
 ## Closable Tabs
 
-<code src="./en/demos/closable.tsx" description="Dynamically add and remove tabs, automatically selects an adjacent tab after closing."></code>
+<code src="./en/demos/closable.tsx" id="closable-en" description="Dynamically add and remove tabs, automatically selects an adjacent tab after closing."></code>
 
 ## Extra Content
 
-<code src="./en/demos/extra.tsx" description="Place extra actions on the right side of the tab bar."></code>
+<code src="./en/demos/extra.tsx" id="extra-en" description="Place extra actions on the right side of the tab bar."></code>
 
 ## API
 

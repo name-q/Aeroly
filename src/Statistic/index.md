@@ -15,23 +15,23 @@ Display statistic numbers or data with descriptions prominently.
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Prefix & Suffix
 
-<code src="./en/demos/prefix.tsx"></code>
+<code src="./en/demos/prefix.tsx" id="prefix-en"></code>
 
 ## Animated Value
 
-<code src="./en/demos/animated.tsx"></code>
+<code src="./en/demos/animated.tsx" id="animated-en"></code>
 
 ## Loading State
 
-<code src="./en/demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx" id="loading-en"></code>
 
 ## Countdown
 
-<code src="./en/demos/countdown.tsx"></code>
+<code src="./en/demos/countdown.tsx" id="countdown-en"></code>
 
 ## API
 

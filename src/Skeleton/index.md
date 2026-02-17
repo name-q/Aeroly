@@ -17,19 +17,19 @@ Provides three atomic shapes: `Block`, `Circle`, and `Text`, which can be freely
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Loading Toggle
 
-<code src="./en/demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx" id="loading-en"></code>
 
 ## Shimmer Animation
 
-<code src="./en/demos/active.tsx"></code>
+<code src="./en/demos/active.tsx" id="active-en"></code>
 
 ## List Loading
 
-<code src="./en/demos/list.tsx"></code>
+<code src="./en/demos/list.tsx" id="list-en"></code>
 
 ## API
 

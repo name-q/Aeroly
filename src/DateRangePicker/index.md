@@ -15,27 +15,27 @@ Select a date range with side-by-side dual calendar panels. Supports time select
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Date & Time Range
 
-<code src="./en/demos/showTime.tsx"></code>
+<code src="./en/demos/showTime.tsx" id="showTime-en"></code>
 
 ## Disabled Dates
 
-<code src="./en/demos/disabledDate.tsx"></code>
+<code src="./en/demos/disabledDate.tsx" id="disabledDate-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## API
 

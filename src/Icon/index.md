@@ -16,7 +16,7 @@ Icon wrapper component based on Lucide React, providing unified size, rotation, 
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Rotation Angle
 
@@ -83,4 +83,4 @@ export default () => (
 
 ## Icon Gallery
 
-<code src="./en/demos/gallery.tsx" inline></code>
+<code src="./en/demos/gallery.tsx" id="gallery-en" inline></code>

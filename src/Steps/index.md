@@ -15,31 +15,31 @@ Guides users through a workflow step by step, clearly showing the current step a
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Small Size
 
-<code src="./en/demos/small.tsx"></code>
+<code src="./en/demos/small.tsx" id="small-en"></code>
 
 ## Custom Icons
 
-<code src="./en/demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx" id="icon-en"></code>
 
 ## Clickable
 
-<code src="./en/demos/clickable.tsx"></code>
+<code src="./en/demos/clickable.tsx" id="clickable-en"></code>
 
 ## Vertical Label Placement
 
-<code src="./en/demos/label-vertical.tsx"></code>
+<code src="./en/demos/label-vertical.tsx" id="label-vertical-en"></code>
 
 ## Vertical Steps
 
-<code src="./en/demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
 ## Error Status
 
-<code src="./en/demos/error.tsx"></code>
+<code src="./en/demos/error.tsx" id="error-en"></code>
 
 ## API
 

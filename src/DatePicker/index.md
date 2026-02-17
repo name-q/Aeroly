@@ -15,35 +15,35 @@ Select or input a date. Supports day, month, and year view switching.
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Custom Format
 
-<code src="./en/demos/format.tsx"></code>
+<code src="./en/demos/format.tsx" id="format-en"></code>
 
 ## Disabled Dates
 
-<code src="./en/demos/disabledDate.tsx"></code>
+<code src="./en/demos/disabledDate.tsx" id="disabledDate-en"></code>
 
 ## Sizes
 
-<code src="./en/demos/size.tsx"></code>
+<code src="./en/demos/size.tsx" id="size-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## Date & Time Selection
 
-<code src="./en/demos/showTime.tsx"></code>
+<code src="./en/demos/showTime.tsx" id="showTime-en"></code>
 
 ## Date & Time (Hide Seconds)
 
-<code src="./en/demos/showTimeNoSecond.tsx"></code>
+<code src="./en/demos/showTimeNoSecond.tsx" id="showTimeNoSecond-en"></code>
 
 ## API
 

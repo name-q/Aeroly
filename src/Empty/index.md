@@ -16,19 +16,19 @@ Placeholder prompt when data is empty, with 6 built-in scene presets ready to us
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx" description="Zero configuration needed. Displays 'No Data' by default."></code>
+<code src="./en/demos/basic.tsx" id="basic-en" description="Zero configuration needed. Displays 'No Data' by default."></code>
 
 ## Scene Presets
 
-<code src="./en/demos/presets.tsx" description="Quickly switch scenes via preset, automatically matching icons and text."></code>
+<code src="./en/demos/presets.tsx" id="presets-en" description="Quickly switch scenes via preset, automatically matching icons and text."></code>
 
 ## With Action Button
 
-<code src="./en/demos/action.tsx" description="Add an action area via extra to guide users to the next step."></code>
+<code src="./en/demos/action.tsx" id="action-en" description="Add an action area via extra to guide users to the next step."></code>
 
 ## Custom Icon
 
-<code src="./en/demos/custom.tsx" description="Pass a Lucide icon or any ReactNode to customize the visual."></code>
+<code src="./en/demos/custom.tsx" id="custom-en" description="Pass a Lucide icon or any ReactNode to customize the visual."></code>
 
 ## API
 

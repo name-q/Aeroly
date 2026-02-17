@@ -15,31 +15,31 @@ A hierarchical tree structure. Supports expand/collapse, selection, checkboxes (
 
 ## Basic Usage
 
-<code src="./en/demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx" id="basic-en"></code>
 
 ## Checkable
 
-<code src="./en/demos/checkable.tsx"></code>
+<code src="./en/demos/checkable.tsx" id="checkable-en"></code>
 
 ## Connecting Lines
 
-<code src="./en/demos/line.tsx"></code>
+<code src="./en/demos/line.tsx" id="line-en"></code>
 
 ## Custom Icons
 
-<code src="./en/demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx" id="icon-en"></code>
 
 ## Controlled Mode
 
-<code src="./en/demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx" id="controlled-en"></code>
 
 ## Disabled
 
-<code src="./en/demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx" id="disabled-en"></code>
 
 ## Drag & Drop
 
-<code src="./en/demos/draggable.tsx"></code>
+<code src="./en/demos/draggable.tsx" id="draggable-en"></code>
 
 ## API
 

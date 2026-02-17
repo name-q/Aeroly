@@ -305,8 +305,10 @@ export default () => {
             <TreeSelect treeData={treeData} placeholder="树选择" style={{ width: 150 }} />
             <Cascader options={cascaderOptions} placeholder="级联选择" style={{ width: 160 }} />
             <DatePicker placeholder="日期选择" style={{ width: 160 }} />
+            <DatePicker placeholder="日期时间" showTime style={{ width: 200 }} />
             <TimePicker placeholder="时间选择" style={{ width: 140 }} />
             <DateRangePicker style={{ width: 260 }} />
+            <DateRangePicker showTime style={{ width: 380 }} />
           </Flex>
 
           {/* 开关 / 勾选 */}

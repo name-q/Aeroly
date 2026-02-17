@@ -6,33 +6,33 @@ import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface TimePickerProps {
-  /** 当前值（受控，"HH:mm:ss" 或 "HH:mm"） */
+  /** Current value (controlled, "HH:mm:ss" or "HH:mm") */
   value?: string;
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: string;
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (value: string) => void;
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否允许清除 */
+  /** Whether to allow clearing */
   allowClear?: boolean;
-  /** 是否显示秒 */
+  /** Whether to show seconds */
   showSecond?: boolean;
-  /** 小时步长 */
+  /** Hour step */
   hourStep?: number;
-  /** 分钟步长 */
+  /** Minute step */
   minuteStep?: number;
-  /** 秒步长 */
+  /** Second step */
   secondStep?: number;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -51,7 +51,7 @@ function parseTime(val: string): [number, number, number] {
   return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
 }
 
-// ---- 无限滚动列 ----
+// ---- Infinite scroll column ----
 
 const ITEM_HEIGHT = 32;
 const VISIBLE_COUNT = 7;
@@ -64,7 +64,7 @@ interface ColumnProps {
   onSelect: (val: number) => void;
 }
 
-const BUFFER = 10; // 视口上下各多渲染的条目数
+const BUFFER = 10; // Extra items rendered above and below viewport
 
 const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -78,7 +78,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
 
   const totalHeight = count * REPEAT_COUNT * ITEM_HEIGHT;
 
-  // 程序化滚动：设标记，滚动完成后清除
+  // Programmatic scroll: set flag, clear after scroll completes
   const scrollTo = useCallback((top: number, smooth: boolean) => {
     const el = listRef.current;
     if (!el) return;
@@ -90,24 +90,24 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     }, smooth ? 300 : 50);
   }, []);
 
-  // 根据值计算滚动位置（基于当前视口附近，避免跳回中间）
+  // Calculate scroll position from value (based on current viewport, avoid jumping back to center)
   const getTopForValue = useCallback((val: number, nearCurrentScroll = false) => {
     const idx = items.indexOf(val);
     if (idx < 0) return 0;
     if (!nearCurrentScroll) {
       return (midBase + idx) * ITEM_HEIGHT - CENTER_OFFSET;
     }
-    // 找到当前 scrollTop 附近最近的该值出现位置
+    // Find nearest occurrence of value near current scrollTop
     const el = listRef.current;
     const currentTop = el ? el.scrollTop : 0;
     const currentCenter = Math.round((currentTop + CENTER_OFFSET) / ITEM_HEIGHT);
-    // 当前中心对应的组号
+    // Group number corresponding to current center
     const groupIdx = Math.round((currentCenter - idx) / count);
     const nearestGlobal = groupIdx * count + idx;
     return nearestGlobal * ITEM_HEIGHT - CENTER_OFFSET;
   }, [items, midBase, count]);
 
-  // 首次挂载：立即定位
+  // First mount: position immediately
   useEffect(() => {
     mountedRef.current = true;
     const top = getTopForValue(selected);
@@ -115,7 +115,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     scrollTo(top, false);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 外部 selected 变化（如点击"此刻"）
+  // External selected change (e.g. clicking "Now")
   useEffect(() => {
     if (!mountedRef.current) return;
     if (selected !== prevSelected.current) {
@@ -124,7 +124,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     }
   }, [selected, scrollTo, getTopForValue]);
 
-  // 用户滚动停止后：吸附 + 选中
+  // After user scroll stops: snap + select
   const handleScroll = useCallback(() => {
     const el = listRef.current;
     if (!el) return;
@@ -142,11 +142,11 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
       const itemIdx = ((rawIdx % count) + count) % count;
       const val = items[itemIdx];
 
-      // 吸附
+      // Snap
       const snapTop = rawIdx * ITEM_HEIGHT - CENTER_OFFSET;
       scrollTo(snapTop, true);
 
-      // 选中
+      // Select
       if (val !== prevSelected.current) {
         prevSelected.current = val;
         onSelect(val);
@@ -154,7 +154,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     }, 100);
   }, [count, items, onSelect, scrollTo]);
 
-  // 点击选中（就近吸附，不跳回中间）
+  // Click to select (snap to nearest, no jump to center)
   const handleClick = useCallback(
     (val: number) => {
       prevSelected.current = val;
@@ -164,7 +164,7 @@ const Column: React.FC<ColumnProps> = ({ items, selected, onSelect }) => {
     [onSelect, scrollTo, getTopForValue],
   );
 
-  // 基于 scrollTop 动态计算渲染窗口
+  // Dynamically calculate render window based on scrollTop
   const viewportHeight = VISIBLE_COUNT * ITEM_HEIGHT;
   const startIdx = Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER);
   const endIdx = Math.min(
@@ -252,7 +252,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
     [isControlled, onChange, showSecond],
   );
 
-  // 打开/关闭动画
+  // Open/close animation
   useEffect(() => {
     if (open) {
       setMounted(true);
@@ -270,7 +270,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
     }
   };
 
-  // 点击外部关闭
+  // Click outside to close
   useEffect(() => {
     if (!open) return;
     const handleClick = (e: MouseEvent) => {

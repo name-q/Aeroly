@@ -1,70 +1,70 @@
 ---
-title: TextArea 文本域
+title: TextArea
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# TextArea 文本域
+# TextArea
 
-多行文本输入，默认自适应内容高度。输入多少撑多高，体验自然流畅。
+Multi-line text input that auto-resizes to fit content by default. Grows naturally as you type.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 限制行数范围
+## Row Range Limit
 
-<code src="./demos/autosize.tsx"></code>
+<code src="./en/demos/autosize.tsx"></code>
 
-## 固定行数
+## Fixed Rows
 
-<code src="./demos/fixed.tsx"></code>
+<code src="./en/demos/fixed.tsx"></code>
 
-## 字数统计
+## Character Count
 
-<code src="./demos/count.tsx"></code>
+<code src="./en/demos/count.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 校验状态
+## Validation Status
 
-<code src="./demos/status.tsx"></code>
+<code src="./en/demos/status.tsx"></code>
 
-## 禁用与只读
+## Disabled & ReadOnly
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 输入值（受控） | `string` | - |
-| defaultValue | 默认值（非受控） | `string` | `''` |
-| onChange | 值变化回调 | `(value: string) => void` | - |
-| placeholder | 占位文本 | `string` | - |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 校验状态 | `'error' \| 'warning'` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| readOnly | 是否只读 | `boolean` | `false` |
-| autoSize | 自适应高度 | `boolean \| { minRows?: number; maxRows?: number }` | `true` |
-| rows | 固定行数（`autoSize` 关闭时生效） | `number` | `3` |
-| resize | 是否允许手动拖拽调整高度（`autoSize` 关闭时生效） | `boolean` | `false` |
-| maxLength | 最大长度 | `number` | - |
-| showCount | 是否显示字数统计 | `boolean` | `false` |
-| autoFocus | 自动聚焦 | `boolean` | `false` |
-| onFocus | 聚焦回调 | `(e: FocusEvent) => void` | - |
-| onBlur | 失焦回调 | `(e: FocusEvent) => void` | - |
-| onKeyDown | 按键回调 | `(e: KeyboardEvent) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Input value (controlled) | `string` | - |
+| defaultValue | Default value (uncontrolled) | `string` | `''` |
+| onChange | Callback when value changes | `(value: string) => void` | - |
+| placeholder | Placeholder text | `string` | - |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Validation status | `'error' \| 'warning'` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| readOnly | Whether read-only | `boolean` | `false` |
+| autoSize | Auto-resize height | `boolean \| { minRows?: number; maxRows?: number }` | `true` |
+| rows | Fixed rows (effective when `autoSize` is off) | `number` | `3` |
+| resize | Whether to allow manual drag resizing (effective when `autoSize` is off) | `boolean` | `false` |
+| maxLength | Maximum length | `number` | - |
+| showCount | Whether to show character count | `boolean` | `false` |
+| autoFocus | Auto focus | `boolean` | `false` |
+| onFocus | Callback when focused | `(e: FocusEvent) => void` | - |
+| onBlur | Callback when blurred | `(e: FocusEvent) => void` | - |
+| onKeyDown | Callback when key is pressed | `(e: KeyboardEvent) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

@@ -17,57 +17,57 @@ const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
 // ---- Types ----
 
 export interface RadioProps {
-  /** 是否选中（受控，单独使用时） */
+  /** Whether selected (controlled, standalone) */
   checked?: boolean;
-  /** 默认是否选中（非受控，单独使用时） */
+  /** Default whether selected (uncontrolled, standalone) */
   defaultChecked?: boolean;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 在 Group 中使用时的标识值 */
+  /** Identifier value when used in Group */
   value?: string | number;
-  /** 选中状态变化回调（单独使用时） */
+  /** Selection state change callback (standalone) */
   onChange?: (checked: boolean) => void;
-  /** 标签内容 */
+  /** Label content */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface RadioGroupProps {
-  /** 当前选中值（受控） */
+  /** Current selected value (controlled) */
   value?: string | number;
-  /** 默认选中值（非受控） */
+  /** Default selected value (uncontrolled) */
   defaultValue?: string | number;
-  /** 选中变化回调 */
+  /** Selection change callback */
   onChange?: (value: string | number) => void;
-  /** 是否整体禁用 */
+  /** Whether to disable all */
   disabled?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 选项数据 */
+  /** Options data */
   options?: (string | number | RadioOptionType)[];
-  /** 选项展示类型 */
+  /** Option display type */
   optionType?: 'default' | 'button';
-  /** 排列方向 */
+  /** Direction */
   direction?: 'horizontal' | 'vertical';
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface RadioOptionType {
-  /** 选项值 */
+  /** Option value */
   value: string | number;
-  /** 显示内容 */
+  /** Display content */
   label: React.ReactNode;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
 }
 
@@ -187,7 +187,7 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
     }
   };
 
-  // ---- Button 模式 ----
+  // ---- Button Mode ----
   if (isButton) {
     const btnCls = [
       'aero-radio-button',
@@ -213,7 +213,7 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
     );
   }
 
-  // ---- 默认模式 ----
+  // ---- DefaultMode ----
   const classNames = [
     'aero-radio',
     `aero-radio--${mergedSize}`,

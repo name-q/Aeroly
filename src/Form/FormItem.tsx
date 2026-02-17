@@ -49,29 +49,29 @@ const FormItem: React.FC<FormItemProps> = ({
     throw new Error('Form.Item must be used inside a Form');
   }
 
-  const { form, layout, labelWidth, labelAlign, disabled, size, requiredMark, validateTrigger: formValidateTrigger } = ctx;
+  const { form, layout, labelWidth, labelAlign, disabled, size, requiredMark, validateTrigger: formValidateTrigger, optionalText } = ctx;
   const { __INTERNAL__: internal } = form;
 
   const nameKey = name !== undefined ? toNameKey(name) : undefined;
 
-  // 合并校验时机
+  // Merge validation trigger
   const mergedTrigger = itemValidateTrigger || formValidateTrigger || 'onChange';
   const triggerList = Array.isArray(mergedTrigger) ? mergedTrigger : [mergedTrigger];
 
-  // 判断是否必填（视觉标记）
+  // Determine if required (visual mark)
   const isRequired = required !== undefined ? required : rules?.some((r) => r.required) || false;
 
-  // 用 ref 保存最新的 props，避免 useCallback 依赖变化导致不必要的重渲染
+  // Save latest props in ref to avoid unnecessary re-renders from useCallback dependency changes
   const latestRef = useRef({ nameKey, name, form, getValueFromEvent, triggerList });
   latestRef.current = { nameKey, name, form, getValueFromEvent, triggerList };
 
-  // 注册字段
+  // Register field
   useEffect(() => {
     if (!nameKey) return;
     return internal.registerField(nameKey, rules || []);
   }, [nameKey, rules, internal]);
 
-  // 订阅字段状态（useSyncExternalStore）
+  // Subscribe to field state (useSyncExternalStore)
   const subscribe = useCallback(
     (onStoreChange: () => void) => {
       if (!nameKey) return () => {};
@@ -87,7 +87,7 @@ const FormItem: React.FC<FormItemProps> = ({
 
   const fieldState = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
-  // 依赖字段变化时重新校验
+  // Re-validate when dependent fields change
   useEffect(() => {
     if (!dependencies || !nameKey) return;
     const unsubs = dependencies.map((dep) => {
@@ -99,7 +99,7 @@ const FormItem: React.FC<FormItemProps> = ({
     return () => unsubs.forEach((fn) => fn());
   }, [dependencies, nameKey, internal, form, name]);
 
-  // 值变化处理 — 使用稳定引用，通过 ref 读取最新 props
+  // Handle value change — use stable reference, read latest props via ref
   const handleChange = useCallback(
     (...args: any[]) => {
       const { nameKey: nk, name: n, form: f, getValueFromEvent: gve, triggerList: tl } = latestRef.current;
@@ -113,7 +113,7 @@ const FormItem: React.FC<FormItemProps> = ({
         });
       }
     },
-    [], // 稳定引用
+    [], // Stable reference
   );
 
   const handleBlur = useCallback(() => {
@@ -124,24 +124,24 @@ const FormItem: React.FC<FormItemProps> = ({
     }
   }, []);
 
-  // 渲染子元素
+  // Render children
   const renderChild = () => {
     // render props
     if (typeof children === 'function') {
       return children(fieldState);
     }
 
-    // 无 name 时不注入 props
+    // Do not inject props when name is undefined
     if (!nameKey) return children;
 
     const child = React.Children.only(children) as React.ReactElement<any>;
     if (!React.isValidElement(child)) return children;
 
-    // 检测 checkable 组件
+    // Detect checkable component
     const childType = child.type as any;
     const isCheckable = childType?.__AERO_CHECKABLE === true;
 
-    // 确保注入的值始终是 defined，避免子控件回退到非受控模式
+    // Ensure injected value is always defined to prevent child falling back to uncontrolled mode
     const rawValue = fieldState.value;
     const controlledValue = isCheckable
       ? (rawValue ?? false)
@@ -160,14 +160,14 @@ const FormItem: React.FC<FormItemProps> = ({
       disabled: child.props.disabled ?? disabled,
     };
 
-    // 注入 status
+    // Inject status
     if (fieldState.errors.length > 0) {
       injectedProps.status = 'error';
     } else if (fieldState.warnings.length > 0) {
       injectedProps.status = 'warning';
     }
 
-    // 注入 size
+    // Inject size
     if (size && child.props.size === undefined) {
       injectedProps.size = size;
     }
@@ -175,7 +175,7 @@ const FormItem: React.FC<FormItemProps> = ({
     return React.cloneElement(child, injectedProps);
   };
 
-  // 错误/警告信息
+  // Error / warning messages
   const displayErrors = help !== undefined ? null : fieldState.errors;
   const displayWarnings = help !== undefined ? null : fieldState.warnings;
 
@@ -207,7 +207,7 @@ const FormItem: React.FC<FormItemProps> = ({
         ? { textAlign: labelAlign }
         : undefined;
 
-  // requiredMark=true 时，始终保留星号占位，非必填用 visibility:hidden
+  // requiredMark=true , always keep asterisk placeholder, use visibility:hidden
   const showRequiredMark = requiredMark === true;
 
   return (
@@ -222,7 +222,7 @@ const FormItem: React.FC<FormItemProps> = ({
           )}
           <span className="aero-form-item-label-text">{label}</span>
           {requiredMark === 'optional' && !isRequired && (
-            <span className="aero-form-item-optional">（选填）</span>
+            <span className="aero-form-item-optional">{optionalText}</span>
           )}
         </label>
       )}

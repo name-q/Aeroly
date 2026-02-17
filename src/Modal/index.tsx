@@ -7,39 +7,39 @@ import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface ModalProps {
-  /** 是否显示 */
+  /** Whether visible */
   open: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange: (open: boolean) => void;
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 内容 */
+  /** Content */
   children?: React.ReactNode;
-  /** 底部操作区，传 null 隐藏 */
+  /** Footer actions area，传 null 隐藏 */
   footer?: React.ReactNode | null;
-  /** 确认按钮文案 */
+  /** OK button text */
   okText?: React.ReactNode;
-  /** 取消按钮文案 */
+  /** Cancel button text */
   cancelText?: React.ReactNode;
-  /** 确认回调，返回 Promise 时按钮自动 loading */
+  /** OK callback，返回 Promise 时按钮自动 loading */
   onOk?: () => void | Promise<void>;
-  /** 取消回调 */
+  /** Cancel callback */
   onCancel?: () => void;
-  /** 宽度 */
+  /** Width */
   width?: number | string;
-  /** 是否显示遮罩 */
+  /** Whether to show mask */
   mask?: boolean;
-  /** 点击遮罩是否关闭 */
+  /** Whether clicking mask closes */
   maskClosable?: boolean;
-  /** 按 Esc 是否关闭 */
+  /** Whether pressing Esc closes */
   keyboard?: boolean;
-  /** 自定义关闭图标 */
+  /** Custom close icon */
   closeIcon?: React.ReactNode;
-  /** 是否居中显示 */
+  /** Whether centered */
   centered?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -209,23 +209,23 @@ const Modal: React.FC<ModalProps> & {
 // ---- 命令式 confirm ----
 
 export interface ConfirmConfig {
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 内容 */
+  /** Content */
   content?: React.ReactNode;
-  /** 确认按钮文案 */
+  /** OK button text */
   okText?: React.ReactNode;
-  /** 取消按钮文案 */
+  /** Cancel button text */
   cancelText?: React.ReactNode;
-  /** 确认回调 */
+  /** OK callback */
   onOk?: () => void | Promise<void>;
-  /** 取消回调 */
+  /** Cancel callback */
   onCancel?: () => void;
-  /** 是否显示遮罩 */
+  /** Whether to show mask */
   mask?: boolean;
-  /** 图标类型 */
+  /** IconType */
   type?: 'confirm' | 'info' | 'success' | 'warning' | 'error';
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: LucideIcon;
 }
 

@@ -11,42 +11,42 @@ interface ColResponsive {
 }
 
 export interface RowProps {
-  /** 栅格间距，数字为 px，支持语义 token；传数组 [水平, 垂直] 分别控制 */
+  /** Grid gutter，数字为 px，支持语义 token；传数组 [水平, 垂直] 分别控制 */
   gutter?: number | 'xs' | 'sm' | 'md' | 'lg' | [number | 'xs' | 'sm' | 'md' | 'lg', number | 'xs' | 'sm' | 'md' | 'lg'];
-  /** 主轴对齐 */
+  /** Main axis alignment */
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  /** 交叉轴对齐 */
+  /** Cross-axis alignment */
   align?: 'start' | 'center' | 'end' | 'stretch';
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface ColProps {
-  /** 栅格占位格数（共 24 格），0 表示隐藏 */
+  /** Grid column span（共 24 格），0 表示隐藏 */
   span?: number;
   /** 左侧偏移格数 */
   offset?: number;
   /** CSS flex 属性，设置后 span 失效 */
   flex?: number | string;
-  /** ≥0px 响应式配置 */
+  /** ≥0px Responsive config */
   xs?: number | ColResponsive;
-  /** ≥576px 响应式配置 */
+  /** ≥576px Responsive config */
   sm?: number | ColResponsive;
-  /** ≥768px 响应式配置 */
+  /** ≥768px Responsive config */
   md?: number | ColResponsive;
-  /** ≥992px 响应式配置 */
+  /** ≥992px Responsive config */
   lg?: number | ColResponsive;
-  /** ≥1200px 响应式配置 */
+  /** ≥1200px Responsive config */
   xl?: number | ColResponsive;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -182,7 +182,7 @@ const Col: React.FC<ColProps> = ({
   const { gutterH } = React.useContext(RowContext);
   const currentBp = useBreakpoint();
 
-  // 解析响应式配置
+  // 解析Responsive config
   const responsiveMap: Partial<Record<Breakpoint, ColResponsive>> = {};
   const rawMap = { xs, sm, md, lg, xl };
   for (const key of bpOrder) {

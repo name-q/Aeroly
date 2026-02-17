@@ -3,36 +3,36 @@ import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SegmentedOption {
-  /** 选项值 */
+  /** Option value */
   value: string | number;
-  /** 显示内容 */
+  /** Display content */
   label: React.ReactNode;
-  /** 是否禁用该选项 */
+  /** Whether this option is disabled */
   disabled?: boolean;
 }
 
 export interface SegmentedProps {
-  /** 选项数据，支持字符串数组或对象数组 */
+  /** Options data, supports string array or object array */
   options: (string | number | SegmentedOption)[];
-  /** 当前选中值（受控） */
+  /** Current selected value (controlled) */
   value?: string | number;
-  /** 默认选中值（非受控） */
+  /** Default selected value (uncontrolled) */
   defaultValue?: string | number;
-  /** 选中变化回调 */
+  /** Selection change callback */
   onChange?: (value: string | number) => void;
-  /** 是否撑满父容器宽度 */
+  /** Whether to fill parent container width */
   block?: boolean;
-  /** 是否整体禁用 */
+  /** Whether to disable all */
   disabled?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-/** 将简写选项统一为 SegmentedOption 格式 */
+/** Normalize shorthand options to SegmentedOption format */
 function normalizeOption(option: string | number | SegmentedOption): SegmentedOption {
   if (typeof option === 'string' || typeof option === 'number') {
     return { value: option, label: option };
@@ -60,7 +60,7 @@ const Segmented: React.FC<SegmentedProps> = ({
 
   const normalizedOptions = options.map(normalizeOption);
 
-  // 滑块定位
+  // Slider positioning
   const containerRef = useRef<HTMLDivElement>(null);
   const [thumbStyle, setThumbStyle] = useState<React.CSSProperties>({});
 
@@ -82,7 +82,7 @@ const Segmented: React.FC<SegmentedProps> = ({
     updateThumb();
   }, [updateThumb]);
 
-  // 窗口 resize 时重新计算
+  // Recalculate on window resize
   useEffect(() => {
     window.addEventListener('resize', updateThumb);
     return () => window.removeEventListener('resize', updateThumb);

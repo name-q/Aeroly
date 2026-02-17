@@ -9,48 +9,48 @@ import './index.less';
 // ---- Types ----
 
 export interface DropdownItem {
-  /** 唯一标识 */
+  /** Unique identifier */
   key: string;
-  /** 显示文本 */
+  /** Display text */
   label: React.ReactNode;
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 危险操作（红色） */
+  /** Danger action (red) */
   danger?: boolean;
-  /** 分割线 */
+  /** Divider */
   type?: 'divider';
-  /** 子菜单 */
+  /** Submenu */
   children?: DropdownItem[];
 }
 
 export interface DropdownProps {
-  /** 菜单项 */
+  /** Menu item */
   items: DropdownItem[];
-  /** 点击菜单项回调 */
+  /** Menu item click callback */
   onSelect?: (key: string) => void;
-  /** 当前选中项（高亮） */
+  /** Current selected item (highlighted) */
   selectedKey?: string;
-  /** 触发方式 */
+  /** Trigger mode */
   trigger?: 'hover' | 'click';
-  /** 弹出方向 */
+  /** Placement */
   placement?: PopoverPlacement;
-  /** 是否显示（受控） */
+  /** Whether visible (controlled) */
   open?: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 触发元素 */
+  /** Trigger element */
   children: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- SubMenu (hover 展开子菜单) ----
+// ---- SubMenu (hover to expand submenu) ----
 
 const SubMenu: React.FC<{
   item: DropdownItem;

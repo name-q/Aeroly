@@ -4,33 +4,33 @@ import './index.less';
 // ---- Types ----
 
 export interface FlexProps {
-  /** 主轴方向 */
+  /** 主轴Direction */
   direction?: 'row' | 'column';
   /** 主轴分布 */
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  /** 交叉轴对齐 */
+  /** Cross-axis alignment */
   align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-  /** 间距，数字为 px，支持语义化 token */
+  /** Gap，数字为 px，支持语义化 token */
   gap?: number | 'xs' | 'sm' | 'md' | 'lg';
-  /** 是否换行 */
+  /** Whether to wrap */
   wrap?: boolean;
   /** 水平+垂直双向居中的快捷方式 */
   center?: boolean;
-  /** 撑满父容器宽度 */
+  /** 撑满父容器Width */
   full?: boolean;
-  /** 是否为行内弹性盒 */
+  /** Whether为行内弹性盒 */
   inline?: boolean;
-  /** CSS flex 属性（用于作为子元素时控制伸缩） */
+  /** CSS flex 属性（用于作为Children时控制伸缩） */
   flex?: number | string;
   /** margin auto 抽象，用于推开相邻元素 */
   auto?: boolean | 'left' | 'right' | 'top' | 'bottom';
-  /** 渲染的 HTML 标签 */
+  /** Render的 HTML 标签 */
   component?: React.ElementType;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -104,7 +104,7 @@ const Flex: React.FC<FlexProps> = ({
   // full
   if (full) s.width = '100%';
 
-  // flex（作为子元素时）
+  // flex（作为Children时）
   if (flex !== undefined) {
     if (typeof flex === 'number') {
       s.flex = `${flex} 1 0%`;

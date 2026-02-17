@@ -16,57 +16,57 @@ const CheckboxGroupContext = createContext<CheckboxGroupContextValue | null>(nul
 // ---- Types ----
 
 export interface CheckboxProps {
-  /** 是否选中（受控） */
+  /** WhetherSelect（Controlled） */
   checked?: boolean;
-  /** 默认是否选中（非受控） */
+  /** DefaultWhetherSelect（uncontrolled) */
   defaultChecked?: boolean;
-  /** 是否为半选状态（仅视觉） */
+  /** Whether half-checked state (visual only) */
   indeterminate?: boolean;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 在 Group 中使用时的标识值 */
+  /** Identifier value when used in Group */
   value?: string | number;
-  /** 选中状态变化回调 */
+  /** SelectStatusChange callback */
   onChange?: (checked: boolean) => void;
-  /** 标签内容 */
+  /** Label content */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface CheckboxGroupProps {
-  /** 当前选中值（受控） */
+  /** Current selected value (controlled) */
   value?: (string | number)[];
-  /** 默认选中值（非受控） */
+  /** Default selected value (uncontrolled) */
   defaultValue?: (string | number)[];
-  /** 选中变化回调 */
+  /** Selection change callback */
   onChange?: (value: (string | number)[]) => void;
-  /** 是否整体禁用 */
+  /** Whether to disable all */
   disabled?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 选项数据 */
+  /** Options data */
   options?: (string | number | CheckboxOptionType)[];
-  /** 排列方向 */
+  /** Direction */
   direction?: 'horizontal' | 'vertical';
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface CheckboxOptionType {
-  /** 选项值 */
+  /** Option value */
   value: string | number;
-  /** 显示内容 */
+  /** Display content */
   label: React.ReactNode;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
 }
 

@@ -1,83 +1,83 @@
 ---
-title: Statistic 统计数值
+title: Statistic
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Statistic 统计数值
+# Statistic
 
-突出展示某个或某组数字、带描述的统计类数据。
+Display statistic numbers or data with descriptions prominently.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 前缀与后缀
+## Prefix & Suffix
 
-<code src="./demos/prefix.tsx"></code>
+<code src="./en/demos/prefix.tsx"></code>
 
-## 数值动画
+## Animated Value
 
-<code src="./demos/animated.tsx"></code>
+<code src="./en/demos/animated.tsx"></code>
 
-## 加载状态
+## Loading State
 
-<code src="./demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx"></code>
 
-## 倒计时
+## Countdown
 
-<code src="./demos/countdown.tsx"></code>
+<code src="./en/demos/countdown.tsx"></code>
 
 ## API
 
 ### Statistic
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| title | 标题 | `ReactNode` | - |
-| value | 数值 | `number \| string` | - |
-| precision | 小数精度 | `number` | - |
-| prefix | 前缀（图标或文字） | `ReactNode` | - |
-| suffix | 后缀（单位等） | `ReactNode` | - |
-| groupSeparator | 千分位分隔符 | `string` | `','` |
-| decimalSeparator | 小数点字符 | `string` | `'.'` |
-| formatter | 自定义格式化 | `(value: number \| string) => ReactNode` | - |
-| animated | 是否开启数值滚动动画 | `boolean` | `false` |
-| animationDuration | 动画时长（ms） | `number` | `800` |
-| status | 状态色 | `'default' \| 'success' \| 'warning' \| 'error'` | `'default'` |
-| loading | 是否加载中（骨架屏） | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| title | Title | `ReactNode` | - |
+| value | Value | `number \| string` | - |
+| precision | Decimal precision | `number` | - |
+| prefix | Prefix (icon or text) | `ReactNode` | - |
+| suffix | Suffix (unit, etc.) | `ReactNode` | - |
+| groupSeparator | Thousands separator | `string` | `','` |
+| decimalSeparator | Decimal point character | `string` | `'.'` |
+| formatter | Custom formatter | `(value: number \| string) => ReactNode` | - |
+| animated | Enable value scroll animation | `boolean` | `false` |
+| animationDuration | Animation duration (ms) | `number` | `800` |
+| status | Status color | `'default' \| 'success' \| 'warning' \| 'error'` | `'default'` |
+| loading | Loading state (skeleton) | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Statistic.Countdown
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| title | 标题 | `ReactNode` | - |
-| value | 目标时间戳（ms） | `number` | - |
-| format | 格式化模板 | `string` | `'HH:mm:ss'` |
-| prefix | 前缀 | `ReactNode` | - |
-| suffix | 后缀 | `ReactNode` | - |
-| status | 状态色 | `'default' \| 'success' \| 'warning' \| 'error'` | `'default'` |
-| onFinish | 倒计时结束回调 | `() => void` | - |
-| onChange | 变化回调（每秒） | `(remaining: number) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| title | Title | `ReactNode` | - |
+| value | Target timestamp (ms) | `number` | - |
+| format | Format template | `string` | `'HH:mm:ss'` |
+| prefix | Prefix | `ReactNode` | - |
+| suffix | Suffix | `ReactNode` | - |
+| status | Status color | `'default' \| 'success' \| 'warning' \| 'error'` | `'default'` |
+| onFinish | Countdown finish callback | `() => void` | - |
+| onChange | Change callback (every second) | `(remaining: number) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-### format 模板
+### Format Template
 
-| 占位符 | 说明 |
-|--------|------|
-| `D` | 天 |
-| `DD` | 天（补零） |
-| `H` | 小时 |
-| `HH` | 小时（补零） |
-| `m` | 分钟 |
-| `mm` | 分钟（补零） |
-| `s` | 秒 |
-| `ss` | 秒（补零） |
+| Placeholder | Description |
+|-------------|-------------|
+| `D` | Days |
+| `DD` | Days (zero-padded) |
+| `H` | Hours |
+| `HH` | Hours (zero-padded) |
+| `m` | Minutes |
+| `mm` | Minutes (zero-padded) |
+| `s` | Seconds |
+| `ss` | Seconds (zero-padded) |

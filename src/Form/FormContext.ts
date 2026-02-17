@@ -10,6 +10,7 @@ export interface FormContextValue {
   size: 'small' | 'medium' | 'large';
   requiredMark: boolean | 'optional';
   validateTrigger: string | string[];
+  optionalText: string;
 }
 
 export const FormContext = createContext<FormContextValue | null>(null);

@@ -2,60 +2,60 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Search, Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
-import { useSize } from '../ConfigProvider/useConfig';
+import { useSize, useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
 
 export interface AutoCompleteOption {
-  /** 选项值 */
+  /** Option value */
   value: string;
-  /** 显示文本（默认同 value） */
+  /** Display text (defaults to value) */
   label?: React.ReactNode;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
 }
 
 export interface AutoCompleteProps {
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: string;
-  /** 默认值 */
+  /** Default value */
   defaultValue?: string;
-  /** 值变化回调（输入或选中都会触发） */
+  /** Value change callback (triggered by input or selection) */
   onChange?: (value: string) => void;
-  /** 选中选项回调 */
+  /** Selection callback */
   onSelect?: (value: string, option: AutoCompleteOption) => void;
-  /** 选项列表 */
+  /** Options list */
   options?: AutoCompleteOption[];
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 允许清除 */
+  /** Allow clear */
   allowClear?: boolean;
-  /** 加载中 */
+  /** Loading */
   loading?: boolean;
-  /** 无匹配时提示 */
+  /** Content when no match found */
   notFoundContent?: React.ReactNode;
-  /** 自定义过滤（默认前缀匹配，传 false 关闭内置过滤） */
+  /** Custom filter (default prefix match, pass false to disable built-in filter) */
   filterOption?: boolean | ((input: string, option: AutoCompleteOption) => boolean);
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 前缀图标 */
+  /** Prefix icon */
   prefix?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
-  /** 失焦回调 */
+  /** Blur callback */
   onBlur?: () => void;
-  /** 聚焦回调 */
+  /** Focus callback */
   onFocus?: () => void;
 }
 
-// ---- 默认过滤 ----
+// ---- Default filter ----
 
 const defaultFilter = (input: string, option: AutoCompleteOption): boolean => {
   const text = typeof option.label === 'string' ? option.label : option.value;
@@ -85,6 +85,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   onFocus,
 }) => {
   const size = useSize(sizeProp);
+  const localeAutoComplete = useLocale('AutoComplete');
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
   const currentValue = isControlled ? value! : internalValue;
@@ -100,14 +101,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const optionsRef = useRef<HTMLDivElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
-  // ---- 过滤选项 ----
+  // ---- Filter options ----
   const filteredOptions = useMemo(() => {
     if (!currentValue || filterOption === false) return options;
     const fn = typeof filterOption === 'function' ? filterOption : defaultFilter;
     return options.filter((opt) => fn(currentValue, opt));
   }, [options, currentValue, filterOption]);
 
-  // ---- 更新值 ----
+  // ---- Update value ----
   const updateValue = useCallback(
     (val: string) => {
       if (!isControlled) setInternalValue(val);
@@ -116,7 +117,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     [isControlled, onChange],
   );
 
-  // ---- 打开/关闭动画 ----
+  // ---- Open/close animation ----
   useEffect(() => {
     if (open) {
       setMounted(true);
@@ -135,7 +136,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     }
   };
 
-  // ---- 点击外部关闭 ----
+  // ---- Click outside to close ----
   useEffect(() => {
     if (!open) return;
     const handleClick = (e: MouseEvent) => {
@@ -147,14 +148,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [open]);
 
-  // ---- 输入 ----
+  // ---- Input ----
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     updateValue(val);
     if (!open) setOpen(true);
   };
 
-  // ---- 选中 ----
+  // ---- Select ----
   const handleSelect = useCallback(
     (opt: AutoCompleteOption) => {
       if (opt.disabled) return;
@@ -166,14 +167,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     [updateValue, onSelect],
   );
 
-  // ---- 清除 ----
+  // ---- Clear ----
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     updateValue('');
     inputRef.current?.focus();
   };
 
-  // ---- 键盘导航 ----
+  // ---- Keyboard navigation ----
   const navigable = useMemo(
     () => filteredOptions.filter((o) => !o.disabled),
     [filteredOptions],
@@ -224,7 +225,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     }
   };
 
-  // ---- 是否显示下拉 ----
+  // ---- Whether to show dropdown ----
   const showDropdown = open && (filteredOptions.length > 0 || loading || notFoundContent);
 
   const iconSize = size === 'small' ? 14 : size === 'large' ? 18 : 16;
@@ -289,7 +290,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
             {loading ? (
               <div className="aero-autocomplete-loading">
                 <Icon icon={Loader} size={14} spin />
-                <span>搜索中...</span>
+                <span>{localeAutoComplete.searching}</span>
               </div>
             ) : filteredOptions.length > 0 ? (
               filteredOptions.map((opt) => {

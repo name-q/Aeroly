@@ -9,43 +9,43 @@ export interface SliderMarks {
 }
 
 export interface SliderProps {
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: number | [number, number];
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: number | [number, number];
-  /** 最小值 */
+  /** Minimum value */
   min?: number;
-  /** 最大值 */
+  /** Maximum value */
   max?: number;
-  /** 步长，设为 null 时只能选择 marks 的值 */
+  /** Step, set to null to only select mark values */
   step?: number | null;
-  /** 刻度标记 */
+  /** Marks */
   marks?: SliderMarks;
-  /** 是否禁用（灰显 + 不可操作） */
+  /** Whether disabled (grayed out + no interaction) */
   disabled?: boolean;
-  /** 是否只读（正常样式但不可操作，值只能由外部改变） */
+  /** Whether readonly (normal style but no interaction, value can only be changed externally) */
   readOnly?: boolean;
-  /** 是否为范围选择 */
+  /** Whether range selection */
   range?: boolean;
-  /** 是否垂直 */
+  /** Whether vertical */
   vertical?: boolean;
-  /** 是否始终显示 tooltip */
+  /** Whether to always show tooltip */
   tooltipVisible?: boolean;
-  /** 自定义 tooltip 格式化 */
+  /** Custom tooltip formatter */
   tipFormatter?: ((value: number) => React.ReactNode) | null;
-  /** 是否开启 track 光泽流动动画 */
+  /** Whether to enable track shimmer animation */
   animated?: boolean;
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (value: number | [number, number]) => void;
-  /** 拖拽结束回调 */
+  /** Drag end callback */
   onChangeComplete?: (value: number | [number, number]) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 工具函数 ----
+// ---- Utilities ----
 
 function clamp(val: number, min: number, max: number) {
   return Math.min(Math.max(val, min), max);
@@ -118,7 +118,7 @@ const Slider: React.FC<SliderProps> = ({
   const [dragging, setDragging] = useState<null | 0 | 1>(null);
   const [hovering, setHovering] = useState<null | 0 | 1>(null);
 
-  // 所有可变状态放 ref，拖拽事件通过 ref 读取，避免闭包过期
+  // Store all mutable state in ref, read from ref in drag events to avoid stale closures
   const stateRef = useRef({
     dragging: null as null | 0 | 1,
     display,
@@ -159,7 +159,7 @@ const Slider: React.FC<SliderProps> = ({
     [min, max, step, marks, vertical],
   );
 
-  // 拖拽事件：全部通过 stateRef 读取，函数引用永远不变
+  // Drag events: all read from stateRef, function references never change
   const onPointerMove = useCallback((e: PointerEvent) => {
     const { dragging: idx, display: prev, range: r } = stateRef.current;
     if (idx === null) return;
@@ -198,7 +198,7 @@ const Slider: React.FC<SliderProps> = ({
   const handleRailClick = (e: React.MouseEvent) => {
     if (inactive) return;
     const val = getValueFromPosition(e.clientX, e.clientY);
-    // 找更近的 handle
+    // Find closer handle
     let idx: 0 | 1 = 1;
     if (range) {
       const d0 = Math.abs(val - display[0]);
@@ -237,7 +237,7 @@ const Slider: React.FC<SliderProps> = ({
     };
   }, [onPointerMove, onPointerUp]);
 
-  // ---- 渲染 ----
+  // ---- Render ----
   const p0 = percentOf(display[0], min, max);
   const p1 = percentOf(display[1], min, max);
   const showTooltip = tipFormatter !== null;

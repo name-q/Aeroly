@@ -6,15 +6,15 @@ import './index.less';
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export interface MasonryProps {
-  /** 列数，支持响应式对象 */
+  /** Column count, supports responsive object */
   columns?: number | Partial<Record<Breakpoint, number>>;
-  /** 间距，数字为 px，支持语义 token */
+  /** Gap, number in px, supports semantic tokens */
   gutter?: number | 'xs' | 'sm' | 'md' | 'lg';
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

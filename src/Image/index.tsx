@@ -10,11 +10,11 @@ export type ImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 type ImageStatus = 'loading' | 'loaded' | 'error';
 
 export interface ImageProps {
-  /** 图片地址 */
+  /** Image URL */
   src?: string;
-  /** 替代文本 */
+  /** Alt text */
   alt?: string;
-  /** 宽度 */
+  /** Width */
   width?: number | string;
   /** 高度 */
   height?: number | string;
@@ -22,43 +22,43 @@ export interface ImageProps {
   fit?: ImageFit;
   /** 圆角 */
   borderRadius?: number | string;
-  /** 加载中占位 */
+  /** Loading占位 */
   placeholder?: React.ReactNode;
   /** 加载失败兜底 */
   fallback?: React.ReactNode;
-  /** 是否可预览 */
+  /** Whether previewable */
   preview?: boolean;
-  /** 预览时使用的图片地址（如高清图） */
+  /** 预览时使用的Image URL（如高清图） */
   previewSrc?: string;
-  /** 是否懒加载 */
+  /** Whether lazy load */
   lazy?: boolean;
-  /** 加载完成回调 */
+  /** 加载Finish callback */
   onLoad?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
-  /** 加载失败回调 */
+  /** 加载失败Callback */
   onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface PreviewGroupProps {
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 是否可预览 */
+  /** Whether previewable */
   preview?: boolean;
 }
 
 export interface ImagePreviewProps {
-  /** 是否显示 */
+  /** Whether visible */
   open: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange: (open: boolean) => void;
   /** 单图地址（与 images 二选一） */
   src?: string;
   /** 多图地址列表（与 src 二选一） */
   images?: string[];
-  /** 默认展示第几张（从 0 开始） */
+  /** Default展示第几张（从 0 开始） */
   defaultCurrent?: number;
 }
 
@@ -244,7 +244,7 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
   );
 };
 
-// ─── Image 主组件 ───
+// ─── Image Main component ───
 
 const Image: React.FC<ImageProps> & {
   PreviewGroup: typeof PreviewGroup;

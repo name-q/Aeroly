@@ -6,60 +6,60 @@ import './index.less';
 export type StatisticStatus = 'default' | 'success' | 'warning' | 'error';
 
 export interface StatisticProps {
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 数值 */
+  /** Value */
   value: number | string;
-  /** 精度（小数位数），仅 value 为 number 时生效 */
+  /** Precision (decimal places)，仅 value 为 number 时生效 */
   precision?: number;
-  /** 前缀（图标或文字） */
+  /** Prefix（Icon或文字） */
   prefix?: React.ReactNode;
-  /** 后缀（单位等） */
+  /** Suffix（单位等） */
   suffix?: React.ReactNode;
   /** 千分位分隔符 */
   groupSeparator?: string;
   /** 小数点字符 */
   decimalSeparator?: string;
-  /** 自定义数值格式化 */
+  /** CustomValue格式化 */
   formatter?: (value: number | string) => React.ReactNode;
-  /** 是否开启数值滚动动画 */
+  /** Whether开启Value滚动动画 */
   animated?: boolean;
   /** 动画时长（ms） */
   animationDuration?: number;
-  /** 状态色 */
+  /** StatusColor */
   status?: StatisticStatus;
-  /** 是否加载中 */
+  /** Whether loading */
   loading?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface CountdownProps {
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
   /** 目标时间戳（ms） */
   value: number;
   /** 格式化模板 */
   format?: string;
-  /** 前缀 */
+  /** Prefix */
   prefix?: React.ReactNode;
-  /** 后缀 */
+  /** Suffix */
   suffix?: React.ReactNode;
-  /** 状态色 */
+  /** StatusColor */
   status?: StatisticStatus;
-  /** 倒计时结束回调 */
+  /** Countdown finish callback */
   onFinish?: () => void;
-  /** 变化回调（每秒） */
+  /** Change callback（每秒） */
   onChange?: (remaining: number) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 工具函数 ----
+// ---- Utilities ----
 
 function formatNumber(
   value: number,

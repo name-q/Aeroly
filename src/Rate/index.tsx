@@ -4,33 +4,33 @@ import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface RateProps {
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: number;
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: number;
-  /** 星星总数 */
+  /** Total star count */
   count?: number;
-  /** 是否允许半选 */
+  /** Whether to allow half select */
   allowHalf?: boolean;
-  /** 是否允许再次点击清除 */
+  /** Whether to allow click again to clear */
   allowClear?: boolean;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否只读 */
+  /** Whether readonly */
   readOnly?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 自定义颜色，字符串或根据当前值动态返回颜色的函数 */
+  /** Custom color, string or function that returns color based on current value */
   color?: string | ((value: number) => string);
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: React.ReactNode;
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (value: number) => void;
-  /** hover 变化回调 */
+  /** hover Change callback */
   onHoverChange?: (value: number) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -55,7 +55,7 @@ const Rate: React.FC<RateProps> = ({
   const size = useSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue);
-  // null = 没有 hover，number = hover 中的值（含 0）
+  // null = no hover, number = hovered value (including 0)
   const [hoverValue, setHoverValue] = useState<number | null>(null);
   const currentValue = isControlled ? value! : internalValue;
   const displayValue = hoverValue !== null ? hoverValue : currentValue;
@@ -117,7 +117,7 @@ const Rate: React.FC<RateProps> = ({
 
   const iconSize = sizeMap[size];
 
-  // 解析颜色
+  // Parse color
   const resolvedColor = color
     ? typeof color === 'function' ? color(displayValue) : color
     : undefined;

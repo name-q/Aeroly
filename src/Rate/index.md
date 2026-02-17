@@ -1,65 +1,65 @@
 ---
-title: Rate 评分
+title: Rate
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Rate 评分
+# Rate
 
-用于对事物进行快速评级，支持整星和半星选择，星星带有柔和的光晕反馈。
+Used for quick rating of items, supporting full and half star selection with a soft glow feedback on stars.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 半选
+## Half Star
 
-<code src="./demos/half.tsx"></code>
+<code src="./en/demos/half.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 自定义数量
+## Custom Count
 
-<code src="./demos/count.tsx"></code>
+<code src="./en/demos/count.tsx"></code>
 
-## 自定义图标
+## Custom Icon
 
-<code src="./demos/custom-icon.tsx"></code>
+<code src="./en/demos/custom-icon.tsx"></code>
 
-## 自定义颜色
+## Custom Color
 
-<code src="./demos/color.tsx"></code>
+<code src="./en/demos/color.tsx"></code>
 
-## 禁用与只读
+## Disabled and Read Only
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| value | 当前值（受控） | `number` | - |
-| defaultValue | 默认值（非受控） | `number` | `0` |
-| count | 星星总数 | `number` | `5` |
-| allowHalf | 是否允许半选 | `boolean` | `false` |
-| allowClear | 是否允许再次点击清除 | `boolean` | `true` |
-| disabled | 是否禁用 | `boolean` | `false` |
-| readOnly | 是否只读 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| icon | 自定义图标 | `ReactNode` | `<Star />` |
-| color | 自定义颜色，支持固定色或动态函数 | `string \| ((value: number) => string)` | - |
-| onChange | 变化回调 | `(value: number) => void` | - |
-| onHoverChange | hover 变化回调 | `(value: number) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| value | Current value (controlled) | `number` | - |
+| defaultValue | Default value (uncontrolled) | `number` | `0` |
+| count | Total number of stars | `number` | `5` |
+| allowHalf | Whether to allow half selection | `boolean` | `false` |
+| allowClear | Whether to allow clearing by clicking again | `boolean` | `true` |
+| disabled | Whether disabled | `boolean` | `false` |
+| readOnly | Whether read only | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| icon | Custom icon | `ReactNode` | `<Star />` |
+| color | Custom color, supports fixed color or dynamic function | `string \| ((value: number) => string)` | - |
+| onChange | Change callback | `(value: number) => void` | - |
+| onHoverChange | Hover change callback | `(value: number) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

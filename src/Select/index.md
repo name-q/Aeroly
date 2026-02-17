@@ -1,88 +1,88 @@
 ---
-title: Select 选择器
+title: Select
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Select 选择器
+# Select
 
-下拉选择器，支持单选、多选、搜索过滤、分组、键盘导航。
+Dropdown selector. Supports single select, multiple select, search filtering, grouping, and keyboard navigation.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 多选
+## Multiple Selection
 
-<code src="./demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx"></code>
 
-## 搜索
+## Search
 
-<code src="./demos/search.tsx"></code>
+<code src="./en/demos/search.tsx"></code>
 
-## 分组
+## Grouping
 
-<code src="./demos/group.tsx"></code>
+<code src="./en/demos/group.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### Select
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| options | 选项列表（支持分组） | `SelectOptionType[]` | - |
-| value | 当前值（受控） | `string \| number \| (string \| number)[]` | - |
-| defaultValue | 默认值 | `string \| number \| (string \| number)[]` | - |
-| onChange | 值变化回调 | `(value, option) => void` | - |
-| placeholder | 占位文案 | `string` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| allowClear | 是否允许清除 | `boolean` | `false` |
-| showSearch | 是否可搜索 | `boolean` | `false` |
-| filterOption | 自定义搜索过滤 | `(input: string, option: SelectOption) => boolean` | 内置 label 匹配 |
-| searchPlaceholder | 搜索框占位文案 | `string` | - |
-| multiple | 是否多选 | `boolean` | `false` |
-| maxTagCount | 多选时最多显示的标签数 | `number` | - |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 状态 | `'error' \| 'warning'` | - |
-| notFoundContent | 无数据时的提示 | `ReactNode` | - |
-| open | 下拉面板是否显示（受控） | `boolean` | - |
-| onOpenChange | 下拉面板显隐变化回调 | `(open: boolean) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| options | Option list (supports grouping) | `SelectOptionType[]` | - |
+| value | Current value (controlled) | `string \| number \| (string \| number)[]` | - |
+| defaultValue | Default value | `string \| number \| (string \| number)[]` | - |
+| onChange | Callback when value changes | `(value, option) => void` | - |
+| placeholder | Placeholder text | `string` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| allowClear | Whether to allow clearing | `boolean` | `false` |
+| showSearch | Whether searchable | `boolean` | `false` |
+| filterOption | Custom search filter | `(input: string, option: SelectOption) => boolean` | Built-in label matching |
+| searchPlaceholder | Search input placeholder | `string` | - |
+| multiple | Whether multiple selection | `boolean` | `false` |
+| maxTagCount | Max number of tags to display in multiple mode | `number` | - |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Status | `'error' \| 'warning'` | - |
+| notFoundContent | Content when no data | `ReactNode` | - |
+| open | Whether dropdown is visible (controlled) | `boolean` | - |
+| onOpenChange | Callback when dropdown visibility changes | `(open: boolean) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### SelectOption
 
-| 属性 | 说明 | 类型 |
-|------|------|------|
-| label | 显示文本 | `ReactNode` |
-| value | 选项值 | `string \| number` |
-| disabled | 是否禁用 | `boolean` |
+| Property | Description | Type |
+|----------|-------------|------|
+| label | Display text | `ReactNode` |
+| value | Option value | `string \| number` |
+| disabled | Whether disabled | `boolean` |
 
 ### SelectGroupOption
 
-| 属性 | 说明 | 类型 |
-|------|------|------|
-| label | 分组标题 | `ReactNode` |
-| options | 分组下的选项 | `SelectOption[]` |
+| Property | Description | Type |
+|----------|-------------|------|
+| label | Group title | `ReactNode` |
+| options | Options in the group | `SelectOption[]` |
 
-### 键盘交互
+### Keyboard Interaction
 
-| 按键 | 说明 |
-|------|------|
-| `↑` `↓` | 在选项间移动高亮 |
-| `Enter` | 选中当前高亮项 |
-| `Esc` | 关闭下拉面板 |
-| `Backspace` | 多选模式下删除最后一个标签 |
+| Key | Description |
+|-----|-------------|
+| `↑` `↓` | Move highlight between options |
+| `Enter` | Select the highlighted option |
+| `Esc` | Close the dropdown |
+| `Backspace` | Remove the last tag in multiple mode |

@@ -4,7 +4,7 @@ import { pad } from './utils';
 export const ITEM_HEIGHT = 32;
 export const VISIBLE_COUNT = 7;
 const REPEAT_COUNT = 100;
-const SIDE_VISIBLE_COUNT = Math.floor(283 / ITEM_HEIGHT); // 侧边布局可见数
+const SIDE_VISIBLE_COUNT = Math.floor(283 / ITEM_HEIGHT); // Side layout visible count
 const CENTER_OFFSET = Math.floor(SIDE_VISIBLE_COUNT / 2) * ITEM_HEIGHT;
 const BUFFER = 10;
 

@@ -8,19 +8,19 @@ import './index.less';
 export type MessageType = 'info' | 'success' | 'warning' | 'error';
 
 export interface MessageConfig {
-  /** 提示内容 */
+  /** Tooltip content */
   content: React.ReactNode;
-  /** 提示类型 */
+  /** Alert type */
   type?: MessageType;
-  /** 自动关闭延时（ms），设为 0 则不自动关闭 */
+  /** Auto close delay (ms), set to 0 for no auto close */
   duration?: number;
-  /** 关闭回调 */
+  /** Close callback */
   onClose?: () => void;
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: LucideIcon;
 }
 
-// 图标映射
+// Icon mapping
 const iconMap: Record<MessageType, LucideIcon> = {
   info: Info,
   success: CircleCheck,
@@ -28,7 +28,7 @@ const iconMap: Record<MessageType, LucideIcon> = {
   error: CircleX,
 };
 
-// ---- 单条消息组件 ----
+// ---- Single message component ----
 interface MessageItemProps extends Required<Pick<MessageConfig, 'type' | 'duration'>> {
   content: React.ReactNode;
   icon?: LucideIcon;
@@ -45,7 +45,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
-    // 触发入场动画
+    // Trigger enter animation
     requestAnimationFrame(() => setVisible(true));
 
     if (duration > 0) {
@@ -75,7 +75,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   );
 };
 
-// ---- 容器管理 ----
+// ---- Container management ----
 let containerRoot: ReturnType<typeof createRoot> | null = null;
 let containerEl: HTMLDivElement | null = null;
 let messageList: { key: number; config: MessageConfig }[] = [];
@@ -121,7 +121,7 @@ function open(config: MessageConfig) {
   render();
 }
 
-// ---- 对外 API ----
+// ---- Public API ----
 const message = {
   info: (content: React.ReactNode, duration?: number) =>
     open({ content, type: 'info', duration }),

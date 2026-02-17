@@ -1,96 +1,96 @@
 ---
-title: Tree 树形控件
+title: Tree
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Tree 树形控件
+# Tree
 
-展现层级关系的树形结构，支持展开收起、选中、勾选（父子联动）、连接线、自定义图标。
+A hierarchical tree structure. Supports expand/collapse, selection, checkboxes (with parent-child association), connecting lines, and custom icons.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 勾选框
+## Checkable
 
-<code src="./demos/checkable.tsx"></code>
+<code src="./en/demos/checkable.tsx"></code>
 
-## 连接线
+## Connecting Lines
 
-<code src="./demos/line.tsx"></code>
+<code src="./en/demos/line.tsx"></code>
 
-## 自定义图标
+## Custom Icons
 
-<code src="./demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
-## 拖拽排序
+## Drag & Drop
 
-<code src="./demos/draggable.tsx"></code>
+<code src="./en/demos/draggable.tsx"></code>
 
 ## API
 
 ### Tree
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| treeData | 树数据 | `TreeNodeData[]` | - |
-| expandedKeys | 展开的节点 key（受控） | `string[]` | - |
-| defaultExpandedKeys | 默认展开的节点 key | `string[]` | `[]` |
-| defaultExpandAll | 是否默认展开所有节点 | `boolean` | `false` |
-| onExpand | 展开/收起回调 | `(keys: string[], info) => void` | - |
-| selectedKeys | 选中的节点 key（受控） | `string[]` | - |
-| defaultSelectedKeys | 默认选中的节点 key | `string[]` | `[]` |
-| onSelect | 选中回调 | `(keys: string[], info) => void` | - |
-| checkedKeys | 勾选的节点 key（受控） | `string[]` | - |
-| defaultCheckedKeys | 默认勾选的节点 key | `string[]` | `[]` |
-| onCheck | 勾选回调 | `(keys: string[], info) => void` | - |
-| checkable | 是否显示勾选框 | `boolean` | `false` |
-| multiple | 是否允许多选 | `boolean` | `false` |
-| showLine | 是否显示连接线 | `boolean` | `false` |
-| showIcon | 是否显示图标 | `boolean` | `false` |
-| disabled | 是否禁用整棵树 | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| treeData | Tree data | `TreeNodeData[]` | - |
+| expandedKeys | Expanded node keys (controlled) | `string[]` | - |
+| defaultExpandedKeys | Default expanded node keys | `string[]` | `[]` |
+| defaultExpandAll | Whether to expand all nodes by default | `boolean` | `false` |
+| onExpand | Callback when expand/collapse | `(keys: string[], info) => void` | - |
+| selectedKeys | Selected node keys (controlled) | `string[]` | - |
+| defaultSelectedKeys | Default selected node keys | `string[]` | `[]` |
+| onSelect | Callback when selected | `(keys: string[], info) => void` | - |
+| checkedKeys | Checked node keys (controlled) | `string[]` | - |
+| defaultCheckedKeys | Default checked node keys | `string[]` | `[]` |
+| onCheck | Callback when checked | `(keys: string[], info) => void` | - |
+| checkable | Whether to show checkboxes | `boolean` | `false` |
+| multiple | Whether to allow multiple selection | `boolean` | `false` |
+| showLine | Whether to show connecting lines | `boolean` | `false` |
+| showIcon | Whether to show icons | `boolean` | `false` |
+| disabled | Whether to disable the entire tree | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### TreeNodeData
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| key | 唯一标识 | `string` | - |
-| title | 显示内容 | `ReactNode` | - |
-| children | 子节点 | `TreeNodeData[]` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| icon | 自定义图标 | `ReactNode` | - |
-| isLeaf | 是否为叶子节点 | `boolean` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| key | Unique identifier | `string` | - |
+| title | Display content | `ReactNode` | - |
+| children | Child nodes | `TreeNodeData[]` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| icon | Custom icon | `ReactNode` | - |
+| isLeaf | Whether it is a leaf node | `boolean` | - |
 
 ### Tree.Draggable
 
-继承 Tree 的所有属性，额外支持：
+Inherits all Tree properties, with additional support for:
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| onDrop | 拖拽完成回调 | `(info: DropInfo) => void` | - |
-| allowDrop | 控制是否允许放置 | `(info: { dragNode, dropNode, dropPosition }) => boolean` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| onDrop | Callback when drop completes | `(info: DropInfo) => void` | - |
+| allowDrop | Control whether drop is allowed | `(info: { dragNode, dropNode, dropPosition }) => boolean` | - |
 
 ### DropInfo
 
-| 属性 | 说明 | 类型 |
-|------|------|------|
-| dragNode | 被拖拽的节点 | `TreeNodeData` |
-| dropNode | 目标节点 | `TreeNodeData` |
-| dropPosition | 放置位置 | `'before' \| 'inside' \| 'after'` |
-| treeData | 移动后的新树数据 | `TreeNodeData[]` |
+| Property | Description | Type |
+|----------|-------------|------|
+| dragNode | The dragged node | `TreeNodeData` |
+| dropNode | The target node | `TreeNodeData` |
+| dropPosition | Drop position | `'before' \| 'inside' \| 'after'` |
+| treeData | New tree data after move | `TreeNodeData[]` |

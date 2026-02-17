@@ -1,66 +1,66 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 数据展示
+  title: Data Display
   order: 3
 toc: content
 ---
 
-# Tabs 标签页
+# Tabs
 
-在同一区域切换显示不同内容面板。支持三种风格变体、滑动指示器动画、可关闭标签和键盘导航。
+Switch between different content panels within the same area. Supports three style variants, sliding indicator animation, closable tabs, and keyboard navigation.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx" description="最简单的用法，默认 line 风格。"></code>
+<code src="./en/demos/basic.tsx" description="The simplest usage, default line style."></code>
 
-## 风格变体
+## Style Variants
 
-<code src="./demos/variant.tsx" description="三种风格：line（下划线）、card（卡片）、pill（胶囊）。"></code>
+<code src="./en/demos/variant.tsx" description="Three styles: line (underline), card, and pill."></code>
 
-## 图标标签
+## Icon Tabs
 
-<code src="./demos/icon.tsx" description="在标签前添加 Lucide 图标。"></code>
+<code src="./en/demos/icon.tsx" description="Add Lucide icons before tab labels."></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx" description="small / medium / large 三种尺寸。"></code>
+<code src="./en/demos/size.tsx" description="Three sizes: small / medium / large."></code>
 
-## 可关闭标签
+## Closable Tabs
 
-<code src="./demos/closable.tsx" description="动态增删标签页，关闭后自动选中相邻标签。"></code>
+<code src="./en/demos/closable.tsx" description="Dynamically add and remove tabs, automatically selects an adjacent tab after closing."></code>
 
-## 附加内容
+## Extra Content
 
-<code src="./demos/extra.tsx" description="在标签栏右侧放置额外操作。"></code>
+<code src="./en/demos/extra.tsx" description="Place extra actions on the right side of the tab bar."></code>
 
 ## API
 
 ### TabsProps
 
-| 属性 | 类型 | 默认值 | 说明 |
+| Property | Type | Default | Description |
 |------|------|--------|------|
-| items | `TabItem[]` | - | 标签页数据 |
-| activeKey | `string` | - | 当前激活 key（受控） |
-| defaultActiveKey | `string` | - | 默认激活 key（非受控） |
-| onChange | `(key: string) => void` | - | 切换回调 |
-| variant | `'line' \| 'card' \| 'pill'` | `'line'` | 风格变体 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
-| centered | `boolean` | `false` | 居中对齐 |
-| onClose | `(key: string) => void` | - | 关闭标签回调 |
-| extra | `ReactNode` | - | 标签栏右侧附加内容 |
-| className | `string` | - | 自定义类名 |
-| style | `CSSProperties` | - | 自定义样式 |
+| items | `TabItem[]` | - | Tab data |
+| activeKey | `string` | - | Currently active key (controlled) |
+| defaultActiveKey | `string` | - | Default active key (uncontrolled) |
+| onChange | `(key: string) => void` | - | Switch callback |
+| variant | `'line' \| 'card' \| 'pill'` | `'line'` | Style variant |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size |
+| centered | `boolean` | `false` | Center aligned |
+| onClose | `(key: string) => void` | - | Close tab callback |
+| extra | `ReactNode` | - | Extra content on the right side of the tab bar |
+| className | `string` | - | Custom class name |
+| style | `CSSProperties` | - | Custom style |
 
 ### TabItem
 
-| 属性 | 类型 | 说明 |
+| Property | Type | Description |
 |------|------|------|
-| key | `string` | 唯一标识 |
-| label | `ReactNode` | 标签文字 |
-| icon | `LucideIcon` | 图标 |
-| children | `ReactNode` | 面板内容 |
-| disabled | `boolean` | 禁用 |
-| closable | `boolean` | 可关闭 |
+| key | `string` | Unique identifier |
+| label | `ReactNode` | Tab label text |
+| icon | `LucideIcon` | Icon |
+| children | `ReactNode` | Panel content |
+| disabled | `boolean` | Disabled |
+| closable | `boolean` | Closable |

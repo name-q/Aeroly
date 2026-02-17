@@ -5,40 +5,40 @@ import './index.less';
 // ---- Types ----
 
 export interface DescriptionsItem {
-  /** 标签名 */
+  /** Label */
   label: React.ReactNode;
-  /** 内容 */
+  /** Content */
   children: React.ReactNode;
-  /** 占据列数 */
+  /** Column span */
   span?: number;
 }
 
 export interface DescriptionsProps {
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 额外操作区（右上角） */
+  /** Extra action area (top right) */
   extra?: React.ReactNode;
-  /** 描述项列表 */
+  /** Description items list */
   items: DescriptionsItem[];
-  /** 每行列数 */
+  /** Columns per row */
   column?: number;
-  /** 布局方向 */
+  /** Layout direction */
   layout?: 'horizontal' | 'vertical';
-  /** 是否显示边框 */
+  /** Whether to show border */
   bordered?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** label 对齐方式 */
+  /** label Alignment */
   labelAlign?: 'left' | 'right';
-  /** 冒号 */
+  /** Colon */
   colon?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 将 items 按 column 分行，支持 span ----
+// ---- Split items into rows by column, supports span ----
 
 function buildRows(items: DescriptionsItem[], column: number): DescriptionsItem[][] {
   const rows: DescriptionsItem[][] = [];
@@ -69,7 +69,7 @@ function buildRows(items: DescriptionsItem[], column: number): DescriptionsItem[
   return rows;
 }
 
-// ---- 渲染 label + colon ----
+// ---- Render label + colon ----
 
 function renderLabel(item: DescriptionsItem, labelAlign: string, colon: boolean) {
   return (

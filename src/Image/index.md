@@ -1,91 +1,91 @@
 ---
-title: Image 图片
+title: Image
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Image 图片
+# Image
 
-图片容器，支持加载占位、失败兜底、预览浮层，以及多图分组浏览。
+An image container supporting loading placeholders, error fallbacks, preview overlays, and multi-image group browsing.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 填充模式
+## Object Fit
 
-<code src="./demos/fit.tsx"></code>
+<code src="./en/demos/fit.tsx"></code>
 
-## 加载失败
+## Load Failure
 
-<code src="./demos/fallback.tsx"></code>
+<code src="./en/demos/fallback.tsx"></code>
 
-## 图片预览
+## Image Preview
 
-<code src="./demos/preview.tsx"></code>
+<code src="./en/demos/preview.tsx"></code>
 
-## 多图预览
+## Multi-image Preview
 
-<code src="./demos/preview-group.tsx"></code>
+<code src="./en/demos/preview-group.tsx"></code>
 
-## 懒加载
+## Lazy Loading
 
-<code src="./demos/lazy.tsx"></code>
+<code src="./en/demos/lazy.tsx"></code>
 
-## 独立预览
+## Standalone Preview
 
-<code src="./demos/standalone.tsx"></code>
+<code src="./en/demos/standalone.tsx"></code>
 
 ## API
 
 ### Image
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| src | 图片地址 | `string` | - |
-| alt | 替代文本 | `string` | - |
-| width | 宽度 | `number \| string` | - |
-| height | 高度 | `number \| string` | - |
-| fit | 适应方式 | `'contain' \| 'cover' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'` |
-| borderRadius | 圆角 | `number \| string` | `8` |
-| placeholder | 加载中占位 | `ReactNode` | 内置骨架屏 |
-| fallback | 加载失败兜底 | `ReactNode` | 内置错误图标 |
-| preview | 是否可预览 | `boolean` | `true` |
-| previewSrc | 预览时使用的图片地址（如高清图） | `string` | 同 `src` |
-| lazy | 是否懒加载 | `boolean` | `false` |
-| onLoad | 加载完成回调 | `(e: SyntheticEvent) => void` | - |
-| onError | 加载失败回调 | `(e: SyntheticEvent) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| src | Image URL | `string` | - |
+| alt | Alternative text | `string` | - |
+| width | Width | `number \| string` | - |
+| height | Height | `number \| string` | - |
+| fit | Object fit mode | `'contain' \| 'cover' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'` |
+| borderRadius | Border radius | `number \| string` | `8` |
+| placeholder | Loading placeholder | `ReactNode` | Built-in skeleton |
+| fallback | Error fallback | `ReactNode` | Built-in error icon |
+| preview | Whether previewable | `boolean` | `true` |
+| previewSrc | Image URL used for preview (e.g. high-res image) | `string` | Same as `src` |
+| lazy | Whether to lazy load | `boolean` | `false` |
+| onLoad | Load complete callback | `(e: SyntheticEvent) => void` | - |
+| onError | Load failure callback | `(e: SyntheticEvent) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Image.PreviewGroup
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| children | 子元素 | `ReactNode` | - |
-| preview | 是否可预览 | `boolean` | `true` |
+| children | Child elements | `ReactNode` | - |
+| preview | Whether previewable | `boolean` | `true` |
 
 ### Image.Preview
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| open | 是否显示 | `boolean` | - |
-| onOpenChange | 显隐变化回调 | `(open: boolean) => void` | - |
-| src | 单图地址（与 images 二选一） | `string` | - |
-| images | 多图地址列表（与 src 二选一） | `string[]` | - |
-| defaultCurrent | 默认展示第几张（从 0 开始） | `number` | `0` |
+| open | Whether visible | `boolean` | - |
+| onOpenChange | Visibility change callback | `(open: boolean) => void` | - |
+| src | Single image URL (mutually exclusive with images) | `string` | - |
+| images | Multiple image URL list (mutually exclusive with src) | `string[]` | - |
+| defaultCurrent | Default displayed image index (starting from 0) | `number` | `0` |
 
-### 键盘交互
+### Keyboard Interaction
 
-| 按键 | 说明 |
+| Key | Description |
 |------|------|
-| `Esc` | 关闭预览 |
-| `←` | 上一张（分组模式） |
-| `→` | 下一张（分组模式） |
-| `+` / `=` | 放大 |
-| `-` | 缩小 |
+| `Esc` | Close preview |
+| `←` | Previous image (group mode) |
+| `→` | Next image (group mode) |
+| `+` / `=` | Zoom in |
+| `-` | Zoom out |

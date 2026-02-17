@@ -1,63 +1,63 @@
 ---
-title: Message 全局提示
+title: Message
 group:
-  title: 反馈
+  title: Feedback
   order: 5
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Message 全局提示
+# Message
 
-全局展示操作反馈信息。顶部居中显示并自动消失，不打断用户操作的轻量级提示。
+Global message notifications for operation feedback. Displayed at the top center and auto-dismissed, providing lightweight prompts without interrupting user workflow.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 不同类型
+## Different Types
 
-<code src="./demos/types.tsx"></code>
+<code src="./en/demos/types.tsx"></code>
 
-## 自定义时长
+## Custom Duration
 
-<code src="./demos/duration.tsx"></code>
+<code src="./en/demos/duration.tsx"></code>
 
-## 自定义图标
+## Custom Icon
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
 ## API
 
-命令式调用，直接使用 `message` 对象的方法：
+Imperative API -- use methods on the `message` object directly:
 
 ```ts
 import { message } from 'aero-ui';
 
-message.info('提示内容');
-message.success('提示内容');
-message.warning('提示内容');
-message.error('提示内容');
+message.info('Info message');
+message.success('Success message');
+message.warning('Warning message');
+message.error('Error message');
 ```
 
-### 快捷方法
+### Shortcut Methods
 
-| 方法 | 说明 | 类型 |
-|------|------|------|
-| message.info | 信息提示 | `(content: ReactNode, duration?: number) => void` |
-| message.success | 成功提示 | `(content: ReactNode, duration?: number) => void` |
-| message.warning | 警告提示 | `(content: ReactNode, duration?: number) => void` |
-| message.error | 错误提示 | `(content: ReactNode, duration?: number) => void` |
-| message.open | 自定义配置 | `(config: MessageConfig) => void` |
+| Method | Description | Type |
+|--------|-------------|------|
+| message.info | Info message | `(content: ReactNode, duration?: number) => void` |
+| message.success | Success message | `(content: ReactNode, duration?: number) => void` |
+| message.warning | Warning message | `(content: ReactNode, duration?: number) => void` |
+| message.error | Error message | `(content: ReactNode, duration?: number) => void` |
+| message.open | Custom configuration | `(config: MessageConfig) => void` |
 
 ### MessageConfig
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| content | 提示内容 | `ReactNode` | - |
-| type | 提示类型 | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
-| duration | 自动关闭延时（ms），设为 0 不自动关闭 | `number` | `3000` |
-| icon | 自定义图标 | `LucideIcon` | - |
-| onClose | 关闭回调 | `() => void` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| content | Message content | `ReactNode` | - |
+| type | Message type | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
+| duration | Auto-close delay (ms), set to 0 to disable auto-close | `number` | `3000` |
+| icon | Custom icon | `LucideIcon` | - |
+| onClose | Callback when closed | `() => void` | - |

@@ -9,42 +9,42 @@ export type TabsVariant = 'line' | 'card' | 'pill';
 export type TabsSize = 'small' | 'medium' | 'large';
 
 export interface TabItem {
-  /** 唯一标识 */
+  /** Unique identifier */
   key: string;
-  /** 标签文字 */
+  /** Label text */
   label: React.ReactNode;
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 面板内容 */
+  /** Panel content */
   children?: React.ReactNode;
-  /** 禁用 */
+  /** Disabled */
   disabled?: boolean;
-  /** 可关闭 */
+  /** Closable */
   closable?: boolean;
 }
 
 export interface TabsProps {
-  /** 标签页数据 */
+  /** Tab items data */
   items: TabItem[];
-  /** 当前激活 key（受控） */
+  /** Current active key (controlled) */
   activeKey?: string;
-  /** 默认激活 key（非受控） */
+  /** Default active key (uncontrolled) */
   defaultActiveKey?: string;
-  /** 切换回调 */
+  /** Change callback */
   onChange?: (key: string) => void;
-  /** 风格变体 */
+  /** Style variant */
   variant?: TabsVariant;
-  /** 尺寸 */
+  /** Size */
   size?: TabsSize;
-  /** 居中对齐 */
+  /** Center aligned */
   centered?: boolean;
-  /** 关闭标签回调 */
+  /** Close tab callback */
   onClose?: (key: string) => void;
-  /** 标签栏右侧附加内容 */
+  /** Extra content on the right of tab bar */
   extra?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -143,7 +143,7 @@ const Tabs: React.FC<TabsProps> = ({
     const nextKey = enabledItems[nextIdx].key;
     handleSelect(nextKey);
 
-    // 聚焦对应 tab
+    // Focus corresponding tab
     const nav = navRef.current;
     if (nav) {
       const tabs = nav.querySelectorAll<HTMLElement>('.aero-tabs-tab');

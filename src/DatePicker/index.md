@@ -1,64 +1,64 @@
 ---
-title: DatePicker 日期选择框
+title: DatePicker
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# DatePicker 日期选择框
+# DatePicker
 
-选择或输入日期，支持日、月、年三级视图切换。
+Select or input a date. Supports day, month, and year view switching.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 自定义格式
+## Custom Format
 
-<code src="./demos/format.tsx"></code>
+<code src="./en/demos/format.tsx"></code>
 
-## 禁用特定日期
+## Disabled Dates
 
-<code src="./demos/disabledDate.tsx"></code>
+<code src="./en/demos/disabledDate.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
-## 日期时间选择
+## Date & Time Selection
 
-<code src="./demos/showTime.tsx"></code>
+<code src="./en/demos/showTime.tsx"></code>
 
-## 日期时间（隐藏秒）
+## Date & Time (Hide Seconds)
 
-<code src="./demos/showTimeNoSecond.tsx"></code>
+<code src="./en/demos/showTimeNoSecond.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 当前值（受控） | `string` | - |
-| defaultValue | 默认值（非受控） | `string` | - |
-| onChange | 变化回调 | `(value: string) => void` | - |
-| placeholder | 占位文案 | `string` | `'请选择日期'` |
-| disabled | 是否禁用 | `boolean` | `false` |
-| allowClear | 是否允许清除 | `boolean` | `true` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 状态 | `'error' \| 'warning'` | - |
-| format | 显示格式 | `string` | `'YYYY-MM-DD'` |
-| disabledDate | 禁用日期判断 | `(date: Date) => boolean` | - |
-| showTime | 是否显示时间选择 | `boolean \| { showSecond?: boolean }` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Current value (controlled) | `string` | - |
+| defaultValue | Default value (uncontrolled) | `string` | - |
+| onChange | Callback when value changes | `(value: string) => void` | - |
+| placeholder | Placeholder text | `string` | `'Select date'` |
+| disabled | Whether disabled | `boolean` | `false` |
+| allowClear | Whether to allow clearing | `boolean` | `true` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Status | `'error' \| 'warning'` | - |
+| format | Display format | `string` | `'YYYY-MM-DD'` |
+| disabledDate | Function to determine disabled dates | `(date: Date) => boolean` | - |
+| showTime | Whether to show time selection | `boolean \| { showSecond?: boolean }` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

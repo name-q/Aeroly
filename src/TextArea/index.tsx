@@ -5,43 +5,43 @@ import './index.less';
 // ---- Types ----
 
 export interface TextAreaProps {
-  /** 输入值（受控） */
+  /** Input value (controlled) */
   value?: string;
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: string;
-  /** 值变化回调 */
+  /** Value change callback */
   onChange?: (value: string) => void;
-  /** 占位文本 */
+  /** Placeholder */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否只读 */
+  /** Whether readonly */
   readOnly?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 校验状态 */
+  /** ValidationStatus */
   status?: 'error' | 'warning';
-  /** 最大长度 */
+  /** Max length */
   maxLength?: number;
-  /** 是否显示字数统计 */
+  /** Whether to show character count */
   showCount?: boolean;
-  /** 固定行数（关闭自适应时生效） */
+  /** 固定Number of rows（关闭自适应时生效） */
   rows?: number;
-  /** 自适应高度，默认开启；可传对象限制最小/最大行数 */
+  /** 自适应高度，Default开启；可传对象限制最小/Maximum rows */
   autoSize?: boolean | { minRows?: number; maxRows?: number };
-  /** 是否允许手动拖拽调整高度 */
+  /** Whether允许手动拖拽调整高度 */
   resize?: boolean;
-  /** 自动聚焦 */
+  /** Auto focus */
   autoFocus?: boolean;
-  /** 聚焦回调 */
+  /** Focus callback */
   onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  /** 失焦回调 */
+  /** Blur callback */
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  /** 按键回调 */
+  /** Key press callback */
   onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -98,7 +98,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     const el = textareaRef.current;
     if (!el || !autoSize) return;
 
-    // 重置以获取准确 scrollHeight
+    // Reset以获取准确 scrollHeight
     el.style.height = 'auto';
     el.style.minHeight = '';
     el.style.maxHeight = '';
@@ -108,7 +108,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     const paddingY = parseFloat(computed.paddingTop) + parseFloat(computed.paddingBottom);
     const borderY = parseFloat(computed.borderTopWidth) + parseFloat(computed.borderBottomWidth);
 
-    const scrollH = el.scrollHeight; // 包含 padding，不包含 border
+    const scrollH = el.scrollHeight; // Includes padding, excludes border
 
     if (typeof autoSize === 'object') {
       if (autoSize.minRows) {

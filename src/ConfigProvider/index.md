@@ -1,72 +1,72 @@
 ---
-title: ConfigProvider 全局化配置
+title: ConfigProvider
 group:
   order: 0
 nav:
-  title: 组件
+  title: Components
   path: /components
 ---
 
-# ConfigProvider 全局化配置
+# ConfigProvider
 
-为组件提供统一的全局化配置，包括语言包（国际化）、主题定制、全局尺寸等。
+Provides unified global configuration for components, including locale (i18n), theme customization, and global size.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 切换语言
+## Switch Language
 
-<code src="./demos/locale.tsx"></code>
+<code src="./en/demos/locale.tsx"></code>
 
-## 主题定制
+## Theme Customization
 
-<code src="./demos/theme.tsx"></code>
+<code src="./en/demos/theme.tsx"></code>
 
-## 嵌套覆盖
+## Nested Override
 
-<code src="./demos/nested.tsx"></code>
+<code src="./en/demos/nested.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| locale | 语言包 | `Locale` | `zhCN` |
-| size | 全局尺寸 | `'small' \| 'medium' \| 'large'` | - |
-| theme | 主题变量，key 不含 `--aero-` 前缀 | `Record<string, string>` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| locale | Locale pack | `Locale` | `zhCN` |
+| size | Global size | `'small' \| 'medium' \| 'large'` | - |
+| theme | Theme variables, keys without `--aero-` prefix | `Record<string, string>` | - |
 
-## 主题变量
+## Theme Variables
 
-通过 `theme` 属性覆盖 CSS Variables，作用域限定在 ConfigProvider 内部：
+Override CSS Variables via the `theme` prop, scoped within the ConfigProvider:
 
 ```tsx | pure
 <ConfigProvider theme={{ 'primary-color': '#ff6a00' }}>
-  <Button type="primary">橙色主题</Button>
+  <Button type="primary">Orange Theme</Button>
 </ConfigProvider>
 ```
 
-常用变量：
+Common variables:
 
-| 变量名 | 说明 | 默认值（亮色） |
-|--------|------|----------------|
-| `primary-color` | 主色 | `#50b8e7` |
-| `text-color` | 主文本色 | `#1a1a1a` |
-| `text-secondary` | 次要文本色 | `#666666` |
-| `border-color` | 边框色 | `rgba(0,0,0,0.08)` |
-| `success-color` | 成功色 | `#52c41a` |
-| `warning-color` | 警告色 | `#faad14` |
-| `error-color` | 错误色 | `#f5222d` |
+| Variable | Description | Default (Light) |
+|----------|-------------|-----------------|
+| `primary-color` | Primary color | `#50b8e7` |
+| `text-color` | Primary text color | `#1a1a1a` |
+| `text-secondary` | Secondary text color | `#666666` |
+| `border-color` | Border color | `rgba(0,0,0,0.08)` |
+| `success-color` | Success color | `#52c41a` |
+| `warning-color` | Warning color | `#faad14` |
+| `error-color` | Error color | `#f5222d` |
 
-## 内置语言包
+## Built-in Locales
 
-| 语言包 | 导入方式 |
-|--------|----------|
-| 简体中文 | `import { zhCN } from 'aero-ui'` |
+| Locale | Import |
+|--------|--------|
+| Simplified Chinese | `import { zhCN } from 'aero-ui'` |
 | English | `import { enUS } from 'aero-ui'` |
 
-## 自定义语言包
+## Custom Locale
 
-语言包是一个纯对象，结构与 `Locale` 类型一致。你可以基于内置语言包扩展：
+A locale is a plain object matching the `Locale` type. You can extend from built-in locales:
 
 ```tsx | pure
 import { zhCN } from 'aero-ui';
@@ -76,31 +76,31 @@ const jaJP: Locale = {
   ...zhCN,
   locale: 'ja_JP',
   Modal: { okText: 'OK', cancelText: 'キャンセル' },
-  // ... 其他组件
+  // ... other components
 };
 ```
 
-## 优先级
+## Priority
 
-ConfigProvider 提供的 `locale`、`size`、`theme` 均遵循相同的优先级规则：
+The `locale`, `size`, and `theme` provided by ConfigProvider all follow the same priority rules:
 
-> **组件自身 prop > 最近的 ConfigProvider > 上层 ConfigProvider > 默认值**
+> **Component's own prop > Nearest ConfigProvider > Parent ConfigProvider > Default value**
 
-即组件上直接传入的 prop 始终最优先，ConfigProvider 只在组件未指定时生效。多层嵌套时，就近原则。
+Props passed directly to a component always take the highest priority. ConfigProvider only takes effect when the component doesn't specify a value. For nested providers, the nearest one wins.
 
 ```tsx | pure
 <ConfigProvider size="large">
-  {/* 全局 large，Button 跟随 → large */}
-  <Button type="primary">大按钮</Button>
+  {/* Global large, Button follows -> large */}
+  <Button type="primary">Large Button</Button>
 
-  {/* 组件自身指定 small，覆盖全局 → small */}
-  <Input size="small" placeholder="小输入框" />
+  {/* Component specifies small, overrides global -> small */}
+  <Input size="small" placeholder="Small input" />
 
-  {/* 嵌套 ConfigProvider，内层覆盖外层 → small */}
+  {/* Nested ConfigProvider, inner overrides outer -> small */}
   <ConfigProvider size="small">
-    <Select options={[]} placeholder="小选择器" />
+    <Select options={[]} placeholder="Small select" />
   </ConfigProvider>
 </ConfigProvider>
 ```
 
-`size` 未指定时的最终默认值为 `'medium'`。
+The final default value when `size` is not specified is `'medium'`.

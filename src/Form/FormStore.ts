@@ -43,7 +43,7 @@ export interface FormInstance {
   submit: () => void;
   isFieldTouched: (name: NamePath) => boolean;
   isFieldValidating: (name: NamePath) => boolean;
-  /** 内部方法 */
+  /** Internal methods */
   __INTERNAL__: {
     subscribe: (key: string, listener: () => void) => () => void;
     subscribeGlobal: (listener: (changed: Record<string, any>, all: Record<string, any>) => void) => () => void;
@@ -51,6 +51,7 @@ export interface FormInstance {
     getFieldState: (key: string) => FieldState;
     setInitialValues: (values: Record<string, any>, init: boolean) => void;
     setCallbacks: (cbs: StoreCallbacks) => void;
+    setLocale: (locale: FormLocale) => void;
   };
 }
 
@@ -60,7 +61,7 @@ export interface StoreCallbacks {
   onValuesChange?: (changed: Record<string, any>, all: Record<string, any>) => void;
 }
 
-// ---- NamePath 工具 ----
+// ---- NamePath utilities ----
 
 export function toNameKey(name: NamePath): string {
   if (Array.isArray(name)) return name.join('.');
@@ -107,6 +108,36 @@ function deleteNestedValue(obj: any, key: string): any {
 
 // ---- FormStore ----
 
+export interface FormLocale {
+  required: string;
+  whitespace: string;
+  min: string;
+  max: string;
+  minLength: string;
+  maxLength: string;
+  pattern: string;
+  validateFailed: string;
+  email: string;
+  url: string;
+  number: string;
+  integer: string;
+}
+
+const DEFAULT_LOCALE: FormLocale = {
+  required: '此项为必填项',
+  whitespace: '不能只包含空格',
+  min: '不能小于 {min}',
+  max: '不能大于 {max}',
+  minLength: '长度不能少于 {minLength}',
+  maxLength: '长度不能超过 {maxLength}',
+  pattern: '格式不正确',
+  validateFailed: '校验失败',
+  email: '请输入有效的邮箱地址',
+  url: '请输入有效的 URL',
+  number: '请输入数字',
+  integer: '请输入整数',
+};
+
 export class FormStore {
   private values: Record<string, any> = {};
   private initialValues: Record<string, any> = {};
@@ -116,14 +147,12 @@ export class FormStore {
   private touched: Set<string> = new Set();
   private validating: Set<string> = new Set();
 
-  // 字段级订阅
   private listeners: Map<string, Set<() => void>> = new Map();
-  // 全局订阅
   private globalListeners: Set<(changed: Record<string, any>, all: Record<string, any>) => void> = new Set();
-  // snapshot 缓存
   private snapshots: Map<string, FieldState> = new Map();
 
   private callbacks: StoreCallbacks = {};
+  private locale: FormLocale = DEFAULT_LOCALE;
 
   getForm(): FormInstance {
     return {
@@ -145,11 +174,12 @@ export class FormStore {
         getFieldState: this.getFieldState,
         setInitialValues: this.setInitialValues,
         setCallbacks: this.setCallbacks,
+        setLocale: this.setLocale,
       },
     };
   }
 
-  // ---- 值操作 ----
+  // ---- Value operations ----
 
   private getFieldValue = (name: NamePath): any => {
     return getNestedValue(this.values, toNameKey(name));
@@ -185,7 +215,7 @@ export class FormStore {
     this.notifyGlobal(changed);
   };
 
-  // ---- 错误 ----
+  // ---- Errors ----
 
   private getFieldError = (name: NamePath): string[] => {
     return this.errors.get(toNameKey(name)) || [];
@@ -195,7 +225,7 @@ export class FormStore {
     return this.warnings.get(toNameKey(name)) || [];
   };
 
-  // ---- 状态 ----
+  // ---- Status ----
 
   private isFieldTouched = (name: NamePath): boolean => {
     return this.touched.has(toNameKey(name));
@@ -205,7 +235,7 @@ export class FormStore {
     return this.validating.has(toNameKey(name));
   };
 
-  // ---- 校验 ----
+  // ---- Validation ----
 
   private validateField = async (key: string): Promise<FieldError | null> => {
     const rules = this.fieldRules.get(key);
@@ -226,7 +256,7 @@ export class FormStore {
     const errors: string[] = [];
     const warnings: string[] = [];
 
-    // 不为中间 validating 状态通知，避免不必要的 re-render
+    // Skip intermediate validating state notification to avoid unnecessary re-render
     let hasAsync = false;
 
     for (const rule of rules) {
@@ -237,33 +267,33 @@ export class FormStore {
             value === undefined || value === null || value === ''
             || (Array.isArray(value) && (value.length === 0 || value.some((v: any) => v === undefined || v === null || v === '')))
           ) {
-            throw new Error(rule.message || '此项为必填项');
+            throw new Error(rule.message || this.locale.required);
           }
         }
 
-        // 后续规则只在有值时检查
+        // Subsequent rules only checked when value exists
         if (value !== undefined && value !== null && value !== '') {
           // whitespace
           if (rule.whitespace && typeof value === 'string' && value.trim() === '') {
-            throw new Error(rule.message || '不能只包含空格');
+            throw new Error(rule.message || this.locale.whitespace);
           }
 
           // type
           if (rule.type) {
-            validateType(value, rule.type, rule.message);
+            validateType(value, rule.type, rule.message, this.locale);
           }
 
           // min / max
           if (rule.min !== undefined) {
             const num = typeof value === 'number' ? value : Number(value);
             if (num < rule.min) {
-              throw new Error(rule.message || `不能小于 ${rule.min}`);
+              throw new Error(rule.message || this.locale.min.replace('{min}', String(rule.min)));
             }
           }
           if (rule.max !== undefined) {
             const num = typeof value === 'number' ? value : Number(value);
             if (num > rule.max) {
-              throw new Error(rule.message || `不能大于 ${rule.max}`);
+              throw new Error(rule.message || this.locale.max.replace('{max}', String(rule.max)));
             }
           }
 
@@ -271,19 +301,19 @@ export class FormStore {
           if (rule.minLength !== undefined) {
             const len = typeof value === 'string' ? value.length : Array.isArray(value) ? value.length : 0;
             if (len < rule.minLength) {
-              throw new Error(rule.message || `长度不能少于 ${rule.minLength}`);
+              throw new Error(rule.message || this.locale.minLength.replace('{minLength}', String(rule.minLength)));
             }
           }
           if (rule.maxLength !== undefined) {
             const len = typeof value === 'string' ? value.length : Array.isArray(value) ? value.length : 0;
             if (len > rule.maxLength) {
-              throw new Error(rule.message || `长度不能超过 ${rule.maxLength}`);
+              throw new Error(rule.message || this.locale.maxLength.replace('{maxLength}', String(rule.maxLength)));
             }
           }
 
           // pattern
           if (rule.pattern && !rule.pattern.test(String(value))) {
-            throw new Error(rule.message || '格式不正确');
+            throw new Error(rule.message || this.locale.pattern);
           }
 
           // custom validator
@@ -291,7 +321,7 @@ export class FormStore {
             const result = rule.validator(value, allValues);
             if (result && typeof (result as any).then === 'function') {
               hasAsync = true;
-              // 只在有异步校验时才通知 validating 状态
+              // Only notify validating state for async validators
               if (!this.validating.has(key)) {
                 this.validating.add(key);
                 this.invalidateSnapshot(key);
@@ -302,7 +332,7 @@ export class FormStore {
           }
         }
       } catch (err: any) {
-        const msg = err?.message || '校验失败';
+        const msg = err?.message || this.locale.validateFailed;
         if (rule.warningOnly) {
           warnings.push(msg);
         } else {
@@ -354,7 +384,7 @@ export class FormStore {
     return { ...this.values };
   };
 
-  // ---- 重置 ----
+  // ---- Reset ----
 
   private resetFields = (names?: NamePath[]): void => {
     if (!names) {
@@ -364,7 +394,7 @@ export class FormStore {
       this.touched.clear();
       this.validating.clear();
       this.snapshots.clear();
-      // 通知所有已注册字段
+      // Notify all registered fields
       for (const key of this.listeners.keys()) {
         this.notifyField(key);
       }
@@ -389,7 +419,7 @@ export class FormStore {
     }
   };
 
-  // ---- 提交 ----
+  // ---- Submit ----
 
   private submit = async (): Promise<void> => {
     try {
@@ -403,7 +433,7 @@ export class FormStore {
     }
   };
 
-  // ---- 订阅 ----
+  // ---- Subscribe ----
 
   private subscribe = (key: string, listener: () => void): (() => void) => {
     if (!this.listeners.has(key)) {
@@ -459,7 +489,11 @@ export class FormStore {
     this.callbacks = cbs;
   };
 
-  // ---- 通知 ----
+  private setLocale = (locale: FormLocale): void => {
+    this.locale = locale;
+  };
+
+  // ---- Notifications ----
 
   private invalidateSnapshot(key: string): void {
     this.snapshots.delete(key);
@@ -479,13 +513,13 @@ export class FormStore {
   }
 }
 
-// ---- 类型校验辅助 ----
+// ---- Type validation helper ----
 
-function validateType(value: any, type: string, message?: string): void {
+function validateType(value: any, type: string, message: string | undefined, locale: FormLocale): void {
   switch (type) {
     case 'email': {
       if (typeof value === 'string' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        throw new Error(message || '请输入有效的邮箱地址');
+        throw new Error(message || locale.email);
       }
       break;
     }
@@ -493,19 +527,19 @@ function validateType(value: any, type: string, message?: string): void {
       try {
         new URL(typeof value === 'string' ? value : String(value));
       } catch {
-        throw new Error(message || '请输入有效的 URL');
+        throw new Error(message || locale.url);
       }
       break;
     }
     case 'number': {
       if (isNaN(Number(value))) {
-        throw new Error(message || '请输入数字');
+        throw new Error(message || locale.number);
       }
       break;
     }
     case 'integer': {
       if (!Number.isInteger(Number(value))) {
-        throw new Error(message || '请输入整数');
+        throw new Error(message || locale.integer);
       }
       break;
     }

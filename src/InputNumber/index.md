@@ -1,64 +1,64 @@
 ---
-title: InputNumber 数字输入框
+title: InputNumber
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# InputNumber 数字输入框
+# InputNumber
 
-通过鼠标或键盘输入数字，支持步进、范围限制、精度控制和格式化。
+Enter a number via mouse or keyboard. Supports stepping, range limits, precision control, and formatting.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 步长 & 精度
+## Step & Precision
 
-<code src="./demos/step.tsx"></code>
+<code src="./en/demos/step.tsx"></code>
 
-## 格式化
+## Formatter
 
-<code src="./demos/formatter.tsx"></code>
+<code src="./en/demos/formatter.tsx"></code>
 
-## 禁用 & 只读
+## Disabled & ReadOnly
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### InputNumber
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 当前值（受控） | `number \| null` | - |
-| defaultValue | 默认值 | `number \| null` | `null` |
-| onChange | 值变化回调 | `(value: number \| null) => void` | - |
-| min | 最小值 | `number` | `-Infinity` |
-| max | 最大值 | `number` | `Infinity` |
-| step | 步长 | `number` | `1` |
-| precision | 小数精度 | `number` | 从 step 推导 |
-| disabled | 禁用 | `boolean` | `false` |
-| readOnly | 只读 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 状态 | `'error' \| 'warning'` | - |
-| placeholder | 占位文本 | `string` | - |
-| controls | 是否显示步进按钮 | `boolean` | `true` |
-| prefix | 前缀内容 | `ReactNode` | - |
-| formatter | 格式化显示 | `(value: number \| undefined) => string` | - |
-| parser | 从显示值解析数字 | `(displayValue: string) => number` | - |
-| keyboard | 是否支持键盘上下键 | `boolean` | `true` |
-| onStep | 步进回调 | `(value: number, info) => void` | - |
-| onPressEnter | 回车回调 | `(e) => void` | - |
-| onFocus | 聚焦回调 | `(e) => void` | - |
-| onBlur | 失焦回调 | `(e) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Current value (controlled) | `number \| null` | - |
+| defaultValue | Default value | `number \| null` | `null` |
+| onChange | Callback when value changes | `(value: number \| null) => void` | - |
+| min | Minimum value | `number` | `-Infinity` |
+| max | Maximum value | `number` | `Infinity` |
+| step | Step size | `number` | `1` |
+| precision | Decimal precision | `number` | Derived from step |
+| disabled | Whether disabled | `boolean` | `false` |
+| readOnly | Whether read-only | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Status | `'error' \| 'warning'` | - |
+| placeholder | Placeholder text | `string` | - |
+| controls | Whether to show step buttons | `boolean` | `true` |
+| prefix | Prefix content | `ReactNode` | - |
+| formatter | Format display value | `(value: number \| undefined) => string` | - |
+| parser | Parse display value to number | `(displayValue: string) => number` | - |
+| keyboard | Whether to support keyboard up/down keys | `boolean` | `true` |
+| onStep | Callback when stepping | `(value: number, info) => void` | - |
+| onPressEnter | Callback when Enter is pressed | `(e) => void` | - |
+| onFocus | Callback when focused | `(e) => void` | - |
+| onBlur | Callback when blurred | `(e) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

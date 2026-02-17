@@ -1,73 +1,73 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 通用
+  title: General
   order: 0
 toc: content
 ---
 
-# FloatButton 悬浮按钮
+# FloatButton
 
-固定在页面边缘的快捷操作入口，支持单按钮、按钮组展开收起、回到顶部。自带 Tooltip 和 Badge。
+A shortcut action entry fixed at the edge of the page. Supports single button, expandable/collapsible button group, and back-to-top. Built-in Tooltip and Badge.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 按钮组
+## Button Group
 
-<code src="./demos/group.tsx"></code>
+<code src="./en/demos/group.tsx"></code>
 
-## 回到顶部
+## Back to Top
 
-<code src="./demos/backtop.tsx"></code>
+<code src="./en/demos/backtop.tsx"></code>
 
 ## API
 
 ### FloatButton
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| icon | `LucideIcon` | - | 图标 |
-| description | `ReactNode` | - | 描述文字（图标下方） |
-| tooltip | `ReactNode` | - | Tooltip 提示 |
-| tooltipPlacement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'left'` | Tooltip 方向 |
-| badge | `number` | - | 徽标数 |
-| dot | `boolean` | - | 徽标小红点 |
-| shape | `'circle' \| 'square'` | `'circle'` | 按钮形状 |
-| type | `'default' \| 'primary'` | `'default'` | 按钮类型 |
-| onClick | `(e: MouseEvent) => void` | - | 点击回调 |
-| href | `string` | - | 链接地址 |
-| target | `string` | - | 链接 target |
-| className | `string` | - | 自定义类名 |
-| style | `React.CSSProperties` | - | 自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| icon | `LucideIcon` | - | Icon |
+| description | `ReactNode` | - | Description text (below icon) |
+| tooltip | `ReactNode` | - | Tooltip content |
+| tooltipPlacement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'left'` | Tooltip direction |
+| badge | `number` | - | Badge count |
+| dot | `boolean` | - | Badge dot |
+| shape | `'circle' \| 'square'` | `'circle'` | Button shape |
+| type | `'default' \| 'primary'` | `'default'` | Button type |
+| onClick | `(e: MouseEvent) => void` | - | Click callback |
+| href | `string` | - | Link URL |
+| target | `string` | - | Link target |
+| className | `string` | - | Custom class name |
+| style | `React.CSSProperties` | - | Custom style |
 
 ### FloatButton.Group
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| icon | `LucideIcon` | `Plus` | 触发按钮图标 |
-| closeIcon | `LucideIcon` | - | 展开后的关闭图标，不传则旋转 icon 45° |
-| trigger | `'hover' \| 'click'` | `'click'` | 触发方式 |
-| open | `boolean` | - | 是否展开（受控） |
-| onOpenChange | `(open: boolean) => void` | - | 展开变化回调 |
-| shape | `'circle' \| 'square'` | `'circle'` | 按钮形状 |
-| tooltip | `ReactNode` | - | 触发按钮 Tooltip |
-| type | `'default' \| 'primary'` | `'default'` | 触发按钮类型 |
-| className | `string` | - | 自定义类名 |
-| style | `React.CSSProperties` | - | 自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| icon | `LucideIcon` | `Plus` | Trigger button icon |
+| closeIcon | `LucideIcon` | - | Close icon when expanded, rotates icon 45 degrees if not provided |
+| trigger | `'hover' \| 'click'` | `'click'` | Trigger mode |
+| open | `boolean` | - | Whether expanded (controlled) |
+| onOpenChange | `(open: boolean) => void` | - | Expand change callback |
+| shape | `'circle' \| 'square'` | `'circle'` | Button shape |
+| tooltip | `ReactNode` | - | Trigger button Tooltip |
+| type | `'default' \| 'primary'` | `'default'` | Trigger button type |
+| className | `string` | - | Custom class name |
+| style | `React.CSSProperties` | - | Custom style |
 
 ### FloatButton.BackTop
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| visibilityHeight | `number` | `400` | 滚动高度达到此值时显示 |
-| target | `() => HTMLElement \| Window` | `window` | 滚动目标 |
-| shape | `'circle' \| 'square'` | `'circle'` | 按钮形状 |
-| icon | `LucideIcon` | `ArrowUp` | 图标 |
-| tooltip | `ReactNode` | `'回到顶部'` | Tooltip 提示 |
-| onClick | `() => void` | - | 点击回调 |
-| className | `string` | - | 自定义类名 |
-| style | `React.CSSProperties` | - | 自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| visibilityHeight | `number` | `400` | Show when scroll height reaches this value |
+| target | `() => HTMLElement \| Window` | `window` | Scroll target |
+| shape | `'circle' \| 'square'` | `'circle'` | Button shape |
+| icon | `LucideIcon` | `ArrowUp` | Icon |
+| tooltip | `ReactNode` | `'Back to Top'` | Tooltip content |
+| onClick | `() => void` | - | Click callback |
+| className | `string` | - | Custom class name |
+| style | `React.CSSProperties` | - | Custom style |

@@ -14,36 +14,36 @@ export type TableSize = 'small' | 'medium' | 'large';
 export type RowKey<T> = keyof T | ((record: T) => string | number);
 
 export interface ColumnType<T = any> {
-  /** 列标题 */
+  /** 列Title */
   title: React.ReactNode;
   /** 数据字段名 */
   dataIndex?: string;
-  /** 唯一标识（默认取 dataIndex） */
+  /** Unique identifier（Default取 dataIndex） */
   key?: string;
   /** 列宽 */
   width?: number | string;
-  /** 对齐方式 */
+  /** Alignment */
   align?: ColumnAlign;
   /** 固定列 */
   fixed?: 'left' | 'right';
-  /** 自定义渲染 */
+  /** CustomRender */
   render?: (value: any, record: T, index: number) => React.ReactNode;
   /** 排序函数 */
   sorter?: (a: T, b: T) => number;
-  /** 默认排序 */
+  /** Default排序 */
   defaultSortOrder?: SortOrder;
   /** 文本溢出省略 */
   ellipsis?: boolean;
-  /** 自定义 className */
+  /** Custom className */
   className?: string;
 }
 
 export interface RowSelection<T = any> {
-  /** 选中的行 key */
+  /** Select的行 key */
   selectedRowKeys?: (string | number)[];
-  /** 选中变化回调 */
+  /** Selection change callback */
   onChange?: (selectedRowKeys: (string | number)[], selectedRows: T[]) => void;
-  /** 行是否可选 */
+  /** 行Whether可选 */
   getCheckboxProps?: (record: T) => { disabled?: boolean };
 }
 
@@ -52,11 +52,11 @@ export interface TableProps<T = any> {
   columns: ColumnType<T>[];
   /** 数据源 */
   dataSource: T[];
-  /** 行唯一标识 */
+  /** 行Unique identifier */
   rowKey?: RowKey<T>;
-  /** 行选择配置 */
+  /** Row selection config */
   rowSelection?: RowSelection<T>;
-  /** 分页配置，false 关闭分页 */
+  /** Pagination config，false 关闭分页 */
   pagination?: {
     current?: number;
     defaultCurrent?: number;
@@ -69,15 +69,15 @@ export interface TableProps<T = any> {
     pageSizeOptions?: number[];
     onChange?: (page: number, pageSize: number) => void;
   } | false;
-  /** 尺寸 */
+  /** Size */
   size?: TableSize;
-  /** 是否显示边框 */
+  /** Whether to show border */
   bordered?: boolean;
-  /** 是否显示斑马纹 */
+  /** Whether to show striped rows */
   striped?: boolean;
-  /** 是否加载中 */
+  /** Whether loading */
   loading?: boolean;
-  /** 空状态自定义 */
+  /** 空StatusCustom */
   emptyText?: React.ReactNode;
   /** 行点击 */
   onRow?: (record: T, index: number) => {
@@ -87,19 +87,19 @@ export interface TableProps<T = any> {
   sticky?: boolean;
   /** 纵向滚动高度 */
   scroll?: { y?: number | string };
-  /** 默认展开的行 key（非受控） */
+  /** Default展开的行 key（uncontrolled) */
   defaultExpandedRowKeys?: (string | number)[];
-  /** 展开的行 key（受控） */
+  /** 展开的行 key（Controlled） */
   expandedRowKeys?: (string | number)[];
-  /** 展开行变化回调 */
+  /** 展开行Change callback */
   onExpandedRowsChange?: (keys: (string | number)[]) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 工具函数 ----
+// ---- Utilities ----
 
 function getRowKeyValue<T>(record: T, rowKey: RowKey<T>, index: number): string | number {
   if (typeof rowKey === 'function') return rowKey(record);
@@ -145,7 +145,7 @@ function flattenData<T>(
   return result;
 }
 
-// ---- 排序图标 ----
+// ---- 排序Icon ----
 
 const SortIcon: React.FC<{ order: SortOrder }> = ({ order }) => (
   <span className="aero-table-sorter">
@@ -262,7 +262,7 @@ function Table<T = any>({
     pg?.onChange?.(page, ps);
   }, [pg]);
 
-  // ---- 选择 ----
+  // ---- Selection ----
   const selectable = !!rowSelection;
   const selectedKeys = rowSelection?.selectedRowKeys ?? [];
 
@@ -304,7 +304,7 @@ function Table<T = any>({
   const SELECTION_WIDTH = size === 'small' ? 40 : 48;
 
   const fixedOffsets = useMemo(() => {
-    // 构建完整列列表（含选择列）
+    // 构建完整列列表（含Selection列）
     type ColEntry = { key: string; fixed?: 'left' | 'right'; width: number };
     const allCols: ColEntry[] = [];
     if (selectable) {
@@ -400,7 +400,7 @@ function Table<T = any>({
     };
   }, [updateScrollShadow]);
 
-  // ---- 渲染 ----
+  // ---- Render ----
   const cls = [
     'aero-table-wrapper',
     `aero-table--${size}`,
@@ -428,7 +428,7 @@ function Table<T = any>({
     return flattenData(pagedData, rowKey, expandedSet);
   }, [pagedData, rowKey, expandedSet, hasTreeData]);
 
-  // 找到第一个数据列的 index（用于放展开图标）
+  // 找到第一个数据列的 index（用于放展开Icon）
   const firstDataColIndex = 0;
 
   return (

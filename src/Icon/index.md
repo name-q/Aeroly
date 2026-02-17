@@ -1,26 +1,26 @@
 ---
-title: Icon 图标
+title: Icon
 order: 0
 group:
-  title: 通用
+  title: General
   order: 1
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Icon 图标
+# Icon
 
-基于 Lucide React 的图标包装组件，提供统一的尺寸、旋转和动画能力。
+Icon wrapper component based on Lucide React, providing unified size, rotation, and animation capabilities.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 旋转角度
+## Rotation Angle
 
-通过 `rotate` 设置图标旋转角度。
+Set the icon rotation angle via `rotate`.
 
 ```tsx
 import { Icon } from 'aero-ui';
@@ -36,9 +36,9 @@ export default () => (
 );
 ```
 
-## 旋转动画
+## Spin Animation
 
-通过 `spin` 开启持续旋转动画，常用于加载状态。
+Enable continuous spin animation via `spin`, commonly used for loading states.
 
 ```tsx
 import { Icon } from 'aero-ui';
@@ -53,7 +53,7 @@ export default () => (
 );
 ```
 
-## 自定义颜色和尺寸
+## Custom Color and Size
 
 ```tsx
 import { Icon } from 'aero-ui';
@@ -70,17 +70,17 @@ export default () => (
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| icon | Lucide 图标组件 | `LucideIcon` | - |
-| size | 图标尺寸 | `number \| string` | `16` |
-| color | 图标颜色 | `string` | `currentColor` |
-| strokeWidth | 线条粗细 | `number` | `2` |
-| rotate | 旋转角度（度） | `number` | - |
-| spin | 是否旋转动画 | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| icon | Lucide icon component | `LucideIcon` | - |
+| size | Icon size | `number \| string` | `16` |
+| color | Icon color | `string` | `currentColor` |
+| strokeWidth | Stroke width | `number` | `2` |
+| rotate | Rotation angle (degrees) | `number` | - |
+| spin | Whether to enable spin animation | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-## 图标列表
+## Icon Gallery
 
-<code src="./demos/gallery.tsx" inline></code>
+<code src="./en/demos/gallery.tsx" inline></code>

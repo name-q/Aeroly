@@ -7,7 +7,7 @@ import FormList from './FormList';
 import type { FormInstance } from './FormStore';
 import type { FormItemProps } from './FormItem';
 import type { FormListProps, FormListField, FormListOperation, FormListMeta } from './FormList';
-import { useSize } from '../ConfigProvider/useConfig';
+import { useSize, useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
 // ---- Types ----
@@ -22,7 +22,7 @@ export interface FormProps {
   size?: 'small' | 'medium' | 'large';
   requiredMark?: boolean | 'optional';
   validateTrigger?: string | string[];
-  /** 提交校验失败时自动滚动到第一个错误字段 */
+  /** Auto scroll to first error field on validation failure */
   scrollToFirstError?: boolean | ScrollIntoViewOptions;
   onFinish?: (values: Record<string, any>) => void;
   onFinishFailed?: (info: { values: Record<string, any>; errorFields: any[] }) => void;
@@ -32,9 +32,9 @@ export interface FormProps {
   style?: React.CSSProperties;
 }
 
-// ---- 滚动工具 ----
+// ---- Scroll utilities ----
 
-/** 向上查找最近的可滚动祖先（适配 Modal / Drawer 等场景） */
+/** Find nearest scrollable ancestor (for Modal / Drawer scenarios) */
 function findScrollParent(el: HTMLElement): HTMLElement | Window {
   let node = el.parentElement;
   while (node && node !== document.body) {
@@ -55,11 +55,11 @@ function scrollToElement(target: HTMLElement, options?: ScrollIntoViewOptions) {
     return;
   }
 
-  // 容器内滚动
+  // Scroll within container
   const container = scrollParent as HTMLElement;
   const containerRect = container.getBoundingClientRect();
   const targetRect = target.getBoundingClientRect();
-  // 目标相对于容器的偏移，滚动到容器中间
+  // Target offset relative to container, scroll to center
   const offsetTop = targetRect.top - containerRect.top + container.scrollTop;
   const scrollTo = offsetTop - container.clientHeight / 2 + targetRect.height / 2;
 
@@ -87,35 +87,39 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
   style,
 }, ref) => {
   const size = useSize(sizeProp);
+  const formLocale = useLocale('Form');
   const [form] = useForm(formProp);
   const { __INTERNAL__: internal } = form;
   const initializedRef = useRef(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // 通过 ref 暴露 FormInstance，支持跨组件操作
+  // Expose FormInstance via ref for cross-component access
   useImperativeHandle(ref, () => form, [form]);
 
-  // 用 ref 持有回调和配置，避免每次 render 都触发 setCallbacks
+  // Sync locale to FormStore
+  internal.setLocale(formLocale);
+
+  // Hold callbacks in ref to avoid triggering setCallbacks on every render
   const callbacksRef = useRef({ onFinish, onFinishFailed, onValuesChange, scrollToFirstError });
   callbacksRef.current = { onFinish, onFinishFailed, onValuesChange, scrollToFirstError };
 
-  // 设置初始值 — 同步执行，确保首次 render 时 values 已就绪
+  // Set initial values synchronously to ensure values are ready on first render
   if (!initializedRef.current) {
     internal.setInitialValues(initialValues || {}, true);
     initializedRef.current = true;
   }
 
-  // 设置回调 — 只注册一次，通过 ref 间接调用最新回调
+  // Set callbacks once, invoke latest callbacks indirectly via ref
   useEffect(() => {
     internal.setCallbacks({
       onFinish: (values) => callbacksRef.current.onFinish?.(values),
       onFinishFailed: (info) => {
         callbacksRef.current.onFinishFailed?.(info);
-        // 滚动到第一个错误字段
+        // Scroll to first error field
         const scrollOpt = callbacksRef.current.scrollToFirstError;
         if (scrollOpt && formRef.current) {
           requestAnimationFrame(() => {
-            // 找第一个可见的错误字段（排除 hidden）
+            // Find first visible error field (excluding hidden)
             const allErrors = formRef.current?.querySelectorAll('.aero-form-item--error:not(.aero-form-item--hidden)');
             const target = (allErrors && allErrors.length > 0 ? allErrors[0] : formRef.current) as HTMLElement | null;
             if (target) {
@@ -134,7 +138,7 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
     form.submit();
   }, [form]);
 
-  // 稳定化 context，只在相关 props 变化时更新
+  // Stabilize context, only update when relevant props change
   const contextValue: FormContextValue = useMemo(() => ({
     form,
     layout,
@@ -144,7 +148,8 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
     size,
     requiredMark,
     validateTrigger,
-  }), [form, layout, labelWidth, labelAlign, disabled, size, requiredMark, validateTrigger]);
+    optionalText: formLocale.optional,
+  }), [form, layout, labelWidth, labelAlign, disabled, size, requiredMark, validateTrigger, formLocale.optional]);
 
   const formCls = [
     'aero-form',
@@ -165,7 +170,7 @@ const InternalForm = forwardRef<FormInstance, FormProps>(({
   );
 });
 
-// ---- 复合导出 ----
+// ---- Compound export ----
 
 type FormType = typeof InternalForm & {
   Item: typeof FormItem;

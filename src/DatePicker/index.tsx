@@ -12,31 +12,31 @@ import { useLocale, useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface DatePickerProps {
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: string;
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: string;
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (value: string) => void;
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否允许清除 */
+  /** Whether to allow clearing */
   allowClear?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 显示格式，仅影响输入框显示 */
+  /** Display format, only affects input display */
   format?: string;
-  /** 禁用特定日期 */
+  /** Disable specific dates */
   disabledDate?: (date: Date) => boolean;
-  /** 是否显示时间选择 */
+  /** Whether to show time picker */
   showTime?: boolean | { showSecond?: boolean };
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -323,10 +323,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
-  // 解析选中值（含时间部分）
+  // Parse selected value (including time part)
   const [selY, selM, selD, selH, selMi, selS] = currentValue ? parseDateTime(currentValue) : [0, -1, 0, 0, 0, 0];
 
-  // showTime 模式下暂存的日期+时间
+  // Temporary date+time in showTime mode
   const [tempYear, setTempYear] = useState(0);
   const [tempMonth, setTempMonth] = useState(0);
   const [tempDay, setTempDay] = useState(0);
@@ -334,11 +334,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const [tempMinute, setTempMinute] = useState(0);
   const [tempSecond, setTempSecond] = useState(0);
 
-  // viewDate：面板当前显示的年月
+  // viewDate: year/month currently shown in panel
   const [viewYear, setViewYear] = useState(() => selY || new Date().getFullYear());
   const [viewMonth, setViewMonth] = useState(() => (selM >= 0 ? selM : new Date().getMonth()));
 
-  // 打开时同步 viewDate 到选中值，并初始化 temp 时间
+  // Sync viewDate to selected value on open, initialize temp time
   useEffect(() => {
     if (open) {
       if (currentValue) {
@@ -366,7 +366,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     }
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 打开/关闭动画
+  // Open/close animation
   useEffect(() => {
     if (open) {
       setMounted(true);
@@ -384,7 +384,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     }
   };
 
-  // 点击外部关闭
+  // Click outside to close
   useEffect(() => {
     if (!open) return;
     const handleClick = (e: MouseEvent) => {
@@ -399,7 +399,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const selectDate = useCallback(
     (year: number, month: number, day: number) => {
       if (hasTime) {
-        // showTime 模式：只更新日期部分，不关闭面板
+        // showTime mode: only update date part, do not close panel
         setTempYear(year);
         setTempMonth(month);
         setTempDay(day);
@@ -453,7 +453,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     selectDate(now.getFullYear(), now.getMonth(), now.getDate());
   }, [selectDate, disabledDate]);
 
-  // 显示文本
+  // Display text
   const displayText = currentValue
     ? formatDisplay(selY, selM, selD, selH, selMi, selS, format)
     : '';

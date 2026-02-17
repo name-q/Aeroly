@@ -7,29 +7,29 @@ export type TagType = 'default' | 'info' | 'success' | 'warning' | 'error';
 export type TagSize = 'small' | 'medium' | 'large';
 
 export interface TagProps {
-  /** 标签内容 */
+  /** Label content */
   children: React.ReactNode;
-  /** 类型 */
+  /** Type */
   type?: TagType;
-  /** 尺寸 */
+  /** Size */
   size?: TagSize;
-  /** 是否可关闭 */
+  /** Whether closable */
   closable?: boolean;
-  /** 关闭回调 */
+  /** Close callback */
   onClose?: () => void;
-  /** 是否显示（受控） */
+  /** Whether visible (controlled) */
   visible?: boolean;
-  /** 自定义颜色（覆盖 type） */
+  /** Custom color（覆盖 type） */
   color?: string;
-  /** 是否圆角胶囊 */
+  /** Whether圆角胶囊 */
   round?: boolean;
-  /** 是否有边框 */
+  /** Whether有边框 */
   bordered?: boolean;
-  /** 点击回调 */
+  /** Click callback */
   onClick?: (e: React.MouseEvent) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

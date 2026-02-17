@@ -20,9 +20,9 @@ import {
   Radio,
   Button,
   Flex,
+  Icon,
 } from 'aero-ui';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import Icon from '../../Icon';
 
 const cityOptions = [
   { label: '北京', value: 'beijing' },

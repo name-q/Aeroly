@@ -9,15 +9,15 @@ import './index.less';
 export type UploadStatus = 'pending' | 'uploading' | 'success' | 'error';
 
 export interface UploadFile {
-  /** 唯一标识 */
+  /** Unique identifier */
   uid: string;
   /** 文件名 */
   name: string;
   /** 文件大小（字节） */
   size?: number;
-  /** MIME 类型 */
+  /** MIME Type */
   type?: string;
-  /** 上传状态 */
+  /** 上传Status */
   status: UploadStatus;
   /** 上传进度 0-100 */
   percent?: number;
@@ -25,7 +25,7 @@ export interface UploadFile {
   thumbUrl?: string;
   /** 远程地址 */
   url?: string;
-  /** 错误信息 */
+  /** Errors信息 */
   error?: string;
   /** 原始 File 对象 */
   originFile?: File;
@@ -34,43 +34,43 @@ export interface UploadFile {
 }
 
 export interface UploadProps {
-  /** 文件列表（受控） */
+  /** 文件列表（Controlled） */
   fileList?: UploadFile[];
-  /** 默认文件列表（非受控） */
+  /** Default file list（uncontrolled) */
   defaultFileList?: UploadFile[];
-  /** 文件列表变化回调 */
+  /** File list change callback */
   onChange?: (fileList: UploadFile[]) => void;
-  /** 自定义上传实现，返回 abort 函数 */
+  /** Custom upload implementation，返回 abort 函数 */
   customRequest?: (options: CustomRequestOptions) => { abort: () => void } | void;
-  /** 接受的文件类型（同 input accept） */
+  /** Accepted file types（同 input accept） */
   accept?: string;
-  /** 是否支持多选 */
+  /** Whether to support multiple */
   multiple?: boolean;
-  /** 最大文件数量 */
+  /** Max file count量 */
   maxCount?: number;
   /** 单文件大小限制（字节） */
   maxSize?: number;
-  /** 上传前校验，返回 false 或 Promise.reject 阻止上传 */
+  /** 上传前Validation，返回 false 或 Promise.reject 阻止上传 */
   beforeUpload?: (file: File, fileList: File[]) => boolean | Promise<boolean>;
-  /** 移除文件回调，返回 false 阻止移除 */
+  /** 移除文件Callback，返回 false 阻止移除 */
   onRemove?: (file: UploadFile) => boolean | Promise<boolean> | void;
-  /** 点击文件回调 */
+  /** 点击文件Callback */
   onPreview?: (file: UploadFile) => void;
-  /** 拖拽模式 */
+  /** 拖拽Mode */
   drag?: boolean;
   /** 展示方式 */
   listType?: 'text' | 'picture' | 'picture-card';
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 拖拽区域自定义内容 */
+  /** 拖拽区域CustomContent */
   children?: React.ReactNode;
-  /** 提示文字 */
+  /** Tooltip text */
   tip?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
-  /** AI 处理钩子：文件选中后触发，可用于分析/标注/转换 */
+  /** AI 处理钩子：文件Select后触发，可用于分析/标注/转换 */
   onProcess?: (file: UploadFile, originFile: File) => Promise<Partial<UploadFile>> | void;
 }
 
@@ -154,7 +154,7 @@ const Upload: React.FC<UploadProps> = ({
     (updater: (prev: UploadFile[]) => UploadFile[]) => {
       if (isControlled) {
         const next = updater(fileListRef.current);
-        fileListRef.current = next; // 立刻更新，防止连续调用丢失
+        fileListRef.current = next; // Update immediately to prevent loss during consecutive calls
         onChange?.(next);
       } else {
         setInternalFileList((prev) => {
@@ -211,7 +211,7 @@ const Upload: React.FC<UploadProps> = ({
     [customRequest, updateFile],
   );
 
-  // 处理文件选择
+  // 处理文件Selection
   const handleFiles = useCallback(
     async (files: File[]) => {
       if (disabled) return;
@@ -228,7 +228,7 @@ const Upload: React.FC<UploadProps> = ({
       const errorFiles: UploadFile[] = [];
 
       for (const file of incoming) {
-        // maxSize 校验 — 超限文件标记为 error 并提示
+        // maxSize Validation — 超限文件标记为 error 并Hint
         if (maxSize && file.size > maxSize) {
           errorFiles.push({
             uid: genUid(),
@@ -242,7 +242,7 @@ const Upload: React.FC<UploadProps> = ({
           continue;
         }
 
-        // beforeUpload 校验
+        // beforeUpload Validation
         if (beforeUpload) {
           try {
             const result = beforeUpload(file, incoming);
@@ -310,7 +310,7 @@ const Upload: React.FC<UploadProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     handleFiles(files);
-    // 重置 input 以允许重复选择同一文件
+    // Reset input 以允许重复Selection同一文件
     e.target.value = '';
   };
 
@@ -410,7 +410,7 @@ const Upload: React.FC<UploadProps> = ({
       />
 
       {isPictureCard ? (
-        // picture-card 模式：卡片和触发按钮在同一行
+        // picture-card Mode：卡片和触发按钮在同一行
         <div className="aero-upload-card-list">
           {fileList.map((file) => {
             const isSuccess = file.status === 'success';
@@ -441,7 +441,7 @@ const Upload: React.FC<UploadProps> = ({
                   </div>
                 )}
 
-                {/* 上传中遮罩 */}
+                {/* Upload progress overlay */}
                 {isUploading && (
                   <div className="aero-upload-card__mask">
                     <Icon icon={Loader} size={20} spin />
@@ -449,7 +449,7 @@ const Upload: React.FC<UploadProps> = ({
                   </div>
                 )}
 
-                {/* hover 操作层 */}
+                {/* Hover action overlay */}
                 {!isUploading && (
                   <div className="aero-upload-card__actions">
                     {isSuccess && onPreview && (
@@ -526,7 +526,7 @@ const Upload: React.FC<UploadProps> = ({
                       .join(' ')}
                     onClick={canClick ? () => onPreview!(file) : undefined}
                   >
-                    {/* 缩略图或图标 */}
+                    {/* Thumbnail or icon */}
                     <div className="aero-upload-file__icon">
                       {listType === 'picture' && (file.thumbUrl || (isSuccess && file.url && isImage)) ? (
                         <img src={file.thumbUrl || file.url} alt={file.name} />
@@ -535,7 +535,7 @@ const Upload: React.FC<UploadProps> = ({
                       )}
                     </div>
 
-                    {/* 文件信息 */}
+                    {/* File info */}
                     <div className="aero-upload-file__info">
                       <div className="aero-upload-file__name">
                         <span>{file.name}</span>
@@ -564,7 +564,7 @@ const Upload: React.FC<UploadProps> = ({
                       )}
                     </div>
 
-                    {/* 操作 */}
+                    {/* Actions */}
                     <div className="aero-upload-file__actions">
                       {file.status === 'uploading' && (
                         <span className="aero-upload-file__loading">

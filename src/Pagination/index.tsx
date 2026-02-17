@@ -9,39 +9,39 @@ import './index.less';
 // ---- Types ----
 
 export interface PaginationProps {
-  /** 当前页（受控） */
+  /** Current page (controlled) */
   current?: number;
-  /** 默认当前页 */
+  /** Default current page */
   defaultCurrent?: number;
-  /** 数据总数 */
+  /** Total data count */
   total?: number;
-  /** 每页条数（受控） */
+  /** Items per page（Controlled） */
   pageSize?: number;
-  /** 默认每页条数 */
+  /** DefaultItems per page */
   defaultPageSize?: number;
-  /** 页码/pageSize 变化回调 */
+  /** Page numbers/pageSize Change callback */
   onChange?: (page: number, pageSize: number) => void;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 禁用 */
+  /** Disabled */
   disabled?: boolean;
-  /** 显示快速跳转输入框 */
+  /** Show quick jump input */
   showQuickJumper?: boolean;
-  /** 显示 pageSize 切换器 */
+  /** Show page size switcher */
   showSizeChanger?: boolean;
-  /** pageSize 选项 */
+  /** Page size options */
   pageSizeOptions?: number[];
-  /** 显示总数 */
+  /** Show total count */
   showTotal?: (total: number, range: [number, number]) => React.ReactNode;
-  /** 简洁模式 */
+  /** Simple mode */
   simple?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 页码生成 ----
+// ---- Page number generation ----
 
 type PageItem = number | 'left' | 'right';
 
@@ -73,11 +73,11 @@ function generatePages(current: number, totalPages: number): PageItem[] {
   return pages;
 }
 
-// ---- 尺寸映射 ----
+// ---- Size mapping ----
 
 const iconSizeMap = { small: 12, medium: 14, large: 16 };
 
-// ---- 省略号按钮 ----
+// ---- Ellipsis button ----
 
 const EllipsisButton: React.FC<{
   direction: 'left' | 'right';
@@ -131,12 +131,12 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const size = useSize(sizeProp);
   const localePag = useLocale('Pagination');
-  // ---- pageSize 状态 ----
+  // ---- pageSize Status ----
   const isPageSizeControlled = pageSize !== undefined;
   const [internalPageSize, setInternalPageSize] = useState(defaultPageSize);
   const currentPageSize = isPageSizeControlled ? pageSize! : internalPageSize;
 
-  // ---- current 状态 ----
+  // ---- current Status ----
   const isCurrentControlled = current !== undefined;
   const [internalCurrent, setInternalCurrent] = useState(defaultCurrent);
   const currentPage = isCurrentControlled ? current! : internalCurrent;
@@ -156,12 +156,12 @@ const Pagination: React.FC<PaginationProps> = ({
     [currentPageSize, total, isCurrentControlled, isPageSizeControlled, onChange],
   );
 
-  // ---- 页码列表 ----
+  // ---- Page number list ----
   const pages = useMemo(() => generatePages(safeCurrent, totalPages), [safeCurrent, totalPages]);
 
   const iconSize = iconSizeMap[size];
 
-  // ---- simple 模式 ----
+  // ---- simple Mode ----
   if (simple) {
     return (
       <SimplePagination
@@ -189,14 +189,14 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <nav className={containerCls} style={style} aria-label="pagination">
-      {/* 总数 */}
+      {/* Total count */}
       {showTotal && (
         <span className="aero-pagination-total">
           {showTotal(total, [rangeStart, rangeEnd])}
         </span>
       )}
 
-      {/* 上一页 */}
+      {/* Previous page */}
       <button
         className={[
           'aero-pagination-item',
@@ -211,7 +211,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <Icon icon={ChevronLeft} size={iconSize} />
       </button>
 
-      {/* 页码 */}
+      {/* Page numbers */}
       {pages.map((item, idx) => {
         if (item === 'left') {
           return (
@@ -252,7 +252,7 @@ const Pagination: React.FC<PaginationProps> = ({
         );
       })}
 
-      {/* 下一页 */}
+      {/* Next page */}
       <button
         className={[
           'aero-pagination-item',
@@ -267,7 +267,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <Icon icon={ChevronRight} size={iconSize} />
       </button>
 
-      {/* pageSize 切换 */}
+      {/* pageSize switcher */}
       {showSizeChanger && (
         <Select
           className="aero-pagination-size-changer"
@@ -283,7 +283,7 @@ const Pagination: React.FC<PaginationProps> = ({
         />
       )}
 
-      {/* 快速跳转 */}
+      {/* Quick jump */}
       {showQuickJumper && (
         <QuickJumper
           disabled={disabled}

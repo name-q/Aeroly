@@ -3,21 +3,21 @@ import type { LucideIcon } from 'lucide-react';
 import './index.less';
 
 export interface IconProps {
-  /** Lucide 图标组件 */
+  /** Lucide IconComponent */
   icon: LucideIcon;
-  /** 图标尺寸，默认 16 */
+  /** IconSize，Default 16 */
   size?: number | string;
-  /** 图标颜色，默认 currentColor */
+  /** Icon颜Color，Default currentColor */
   color?: string;
-  /** 线条粗细，默认 2 */
+  /** 线条粗细，Default 2 */
   strokeWidth?: number;
-  /** 旋转角度（度） */
+  /** Rotation angle（度） */
   rotate?: number;
-  /** 是否旋转动画 */
+  /** Whether旋转动画 */
   spin?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

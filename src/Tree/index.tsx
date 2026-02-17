@@ -7,80 +7,80 @@ import './index.less';
 // ---- Types ----
 
 export interface TreeNodeData {
-  /** 唯一标识 */
+  /** Unique identifier */
   key: string;
-  /** 显示内容 */
+  /** Display content */
   title: React.ReactNode;
-  /** 子节点 */
+  /** Children nodes */
   children?: TreeNodeData[];
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: React.ReactNode;
-  /** 是否为叶子节点（无展开箭头） */
+  /** Whether it is a leaf node（no expand arrow) */
   isLeaf?: boolean;
 }
 
 export interface TreeProps {
-  /** 树数据 */
+  /** Tree data */
   treeData: TreeNodeData[];
-  /** 展开的节点 key（受控） */
+  /** Expanded node keys (controlled) */
   expandedKeys?: string[];
-  /** 默认展开的节点 key（非受控） */
+  /** Default expanded node keys（uncontrolled) */
   defaultExpandedKeys?: string[];
-  /** 展开/收起回调 */
+  /** Expand/collapse callback */
   onExpand?: (expandedKeys: string[], info: { node: TreeNodeData; expanded: boolean }) => void;
-  /** 是否默认展开所有节点 */
+  /** WhetherExpand all nodes by default */
   defaultExpandAll?: boolean;
-  /** 选中的节点 key（受控） */
+  /** Selected node key (controlled) */
   selectedKeys?: string[];
-  /** 默认选中的节点 key（非受控） */
+  /** Default selected node key (uncontrolled) */
   defaultSelectedKeys?: string[];
-  /** 选中回调 */
+  /** Selection callback */
   onSelect?: (selectedKeys: string[], info: { node: TreeNodeData; selected: boolean }) => void;
-  /** 勾选的节点 key（受控） */
+  /** Checked node keys (controlled) */
   checkedKeys?: string[];
-  /** 默认勾选的节点 key（非受控） */
+  /** Default checked node keys (uncontrolled) */
   defaultCheckedKeys?: string[];
-  /** 勾选回调 */
+  /** Check callback */
   onCheck?: (checkedKeys: string[], info: { node: TreeNodeData; checked: boolean }) => void;
-  /** 是否显示勾选框 */
+  /** Whether visibleCheckbox */
   checkable?: boolean;
-  /** 是否允许多选 */
+  /** Whether to allow multiple selection */
   multiple?: boolean;
-  /** 是否显示连接线 */
+  /** Whether to show connecting lines */
   showLine?: boolean;
-  /** 是否显示图标 */
+  /** Whether to show icon */
   showIcon?: boolean;
-  /** 是否禁用整棵树 */
+  /** Whether to disable the entire tree */
   disabled?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export type DropPosition = 'before' | 'inside' | 'after';
 
 export interface DropInfo {
-  /** 被拖拽的节点 */
+  /** Dragged node */
   dragNode: TreeNodeData;
-  /** 目标节点 */
+  /** Target node */
   dropNode: TreeNodeData;
-  /** 放置位置 */
+  /** Drop position */
   dropPosition: DropPosition;
-  /** 移动后的新树数据 */
+  /** New tree data after move */
   treeData: TreeNodeData[];
 }
 
 export interface DraggableTreeProps extends TreeProps {
-  /** 拖拽完成回调 */
+  /** Drag finish callback */
   onDrop?: (info: DropInfo) => void;
-  /** 控制是否允许放置 */
+  /** Control whether drop is allowed */
   allowDrop?: (info: { dragNode: TreeNodeData; dropNode: TreeNodeData; dropPosition: DropPosition }) => boolean;
 }
 
-// ---- 工具函数 ----
+// ---- Utilities ----
 
 function collectAllKeys(data: TreeNodeData[]): string[] {
   const keys: string[] = [];
@@ -94,7 +94,7 @@ function collectAllKeys(data: TreeNodeData[]): string[] {
   return keys;
 }
 
-// 收集所有叶子 key
+// Collect all leaf keys
 function collectLeafKeys(data: TreeNodeData[]): Set<string> {
   const keys = new Set<string>();
   const walk = (nodes: TreeNodeData[]) => {
@@ -110,7 +110,7 @@ function collectLeafKeys(data: TreeNodeData[]): Set<string> {
   return keys;
 }
 
-// 收集所有禁用节点的叶子 key
+// Collect all disabled node leaf keys
 function collectDisabledLeafKeys(data: TreeNodeData[], treeDisabled: boolean): Set<string> {
   const keys = new Set<string>();
   const walk = (nodes: TreeNodeData[], parentDisabled: boolean) => {
@@ -127,7 +127,7 @@ function collectDisabledLeafKeys(data: TreeNodeData[], treeDisabled: boolean): S
   return keys;
 }
 
-// 构建 key -> 子孙叶子 key 映射
+// Build key -> descendant leaf key mapping
 function buildDescendantLeafMap(data: TreeNodeData[]): Map<string, string[]> {
   const map = new Map<string, string[]>();
   const walk = (nodes: TreeNodeData[]): string[] => {
@@ -148,7 +148,7 @@ function buildDescendantLeafMap(data: TreeNodeData[]): Map<string, string[]> {
   return map;
 }
 
-// 根据叶子选中状态，向上推导父节点选中状态
+// Derive parent node selection state from leaf selection state
 function deriveCheckedKeys(
   checkedLeafKeys: Set<string>,
   data: TreeNodeData[],
@@ -177,7 +177,7 @@ function deriveCheckedKeys(
   return { checked, halfChecked };
 }
 
-// ---- TreeNode 组件 ----
+// ---- TreeNode Component ----
 
 interface TreeNodeProps {
   node: TreeNodeData;
@@ -272,7 +272,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         onDrop={isDraggable ? (e) => onDropProp?.(e, node) : undefined}
         onDragEnd={isDraggable ? onDragEndProp : undefined}
       >
-        {/* 展开箭头 */}
+        {/* Expand arrow */}
         <span
           className={[
             'aero-tree-switcher',
@@ -286,7 +286,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           {!isLeaf && <Icon icon={ChevronRight} size={14} />}
         </span>
 
-        {/* 勾选框 */}
+        {/* Checkbox */}
         {checkable && (
           <span className="aero-tree-checkbox-wrap" onClick={(e) => e.stopPropagation()}>
             <Checkbox
@@ -299,16 +299,16 @@ const TreeNode: React.FC<TreeNodeProps> = ({
           </span>
         )}
 
-        {/* 图标 */}
+        {/* Icon */}
         {showIcon && node.icon && (
           <span className="aero-tree-icon">{node.icon}</span>
         )}
 
-        {/* 标题 */}
+        {/* Title */}
         <span className="aero-tree-title">{node.title}</span>
       </div>
 
-      {/* 子节点 */}
+      {/* Children nodes */}
       {!isLeaf && (
         <div
           className={[
@@ -353,7 +353,7 @@ const Tree: React.FC<TreeProps> = ({
   className,
   style,
 }) => {
-  // ---- 展开状态 ----
+  // ---- Expand state ----
   const allKeys = useMemo(() => collectAllKeys(treeData), [treeData]);
   const isExpandControlled = expandedKeys !== undefined;
   const [internalExpanded, setInternalExpanded] = useState<string[]>(
@@ -375,7 +375,7 @@ const Tree: React.FC<TreeProps> = ({
     [currentExpanded, expandedSet, isExpandControlled, onExpand, treeData],
   );
 
-  // ---- 选中状态 ----
+  // ---- SelectStatus ----
   const isSelectControlled = selectedKeys !== undefined;
   const [internalSelected, setInternalSelected] = useState<string[]>(defaultSelectedKeys);
   const currentSelected = isSelectControlled ? selectedKeys! : internalSelected;
@@ -399,14 +399,14 @@ const Tree: React.FC<TreeProps> = ({
     [currentSelected, selectedSet, isSelectControlled, multiple, onSelectProp, treeData],
   );
 
-  // ---- 勾选状态（基于叶子节点，自动推导父节点） ----
+  // ---- Check state (based on leaf nodes, auto-derive parent nodes) ----
   const leafKeys = useMemo(() => collectLeafKeys(treeData), [treeData]);
   const descendantMap = useMemo(() => buildDescendantLeafMap(treeData), [treeData]);
   const disabledLeafKeys = useMemo(() => collectDisabledLeafKeys(treeData, disabled), [treeData, disabled]);
 
   const isCheckControlled = checkedKeys !== undefined;
   const [internalCheckedLeaves, setInternalCheckedLeaves] = useState<Set<string>>(() => {
-    // 初始化：将 defaultCheckedKeys 中的叶子提取出来
+    // Initialize: extract leaves from defaultCheckedKeys
     const initial = new Set<string>();
     for (const key of defaultCheckedKeys) {
       const leaves = descendantMap.get(key);
@@ -415,7 +415,7 @@ const Tree: React.FC<TreeProps> = ({
     return initial;
   });
 
-  // 受控模式：从 checkedKeys 推导叶子
+  // Controlled mode: derive leaves from checkedKeys
   const currentCheckedLeaves = useMemo(() => {
     if (!isCheckControlled) return internalCheckedLeaves;
     const leaves = new Set<string>();
@@ -434,11 +434,11 @@ const Tree: React.FC<TreeProps> = ({
   const handleCheck = useCallback(
     (key: string) => {
       const allLeaves = descendantMap.get(key) || [key];
-      // 排除禁用叶子
+      // Exclude disabled leaves
       const leaves = allLeaves.filter((k) => !disabledLeafKeys.has(k));
       if (leaves.length === 0) return;
 
-      // 判断可操作叶子是否已全部选中
+      // Check if all actionable leaves are selected
       const allChecked = leaves.every((k) => currentCheckedLeaves.has(k));
       const nextLeaves = new Set(currentCheckedLeaves);
 
@@ -458,7 +458,7 @@ const Tree: React.FC<TreeProps> = ({
     [currentCheckedLeaves, descendantMap, disabledLeafKeys, isCheckControlled, onCheckProp, treeData],
   );
 
-  // ---- 渲染 ----
+  // ---- Render ----
   const renderChildren = useCallback(
     (nodes: TreeNodeData[], level: number) =>
       nodes.map((node) => (
@@ -499,7 +499,7 @@ const Tree: React.FC<TreeProps> = ({
   );
 };
 
-// ---- 辅助 ----
+// ---- Helpers ----
 
 function findNode(data: TreeNodeData[], key: string): TreeNodeData | null {
   for (const node of data) {
@@ -512,7 +512,7 @@ function findNode(data: TreeNodeData[], key: string): TreeNodeData | null {
   return null;
 }
 
-// ---- 拖拽工具函数 ----
+// ---- Drag utilities ----
 
 function removeNode(data: TreeNodeData[], key: string): TreeNodeData[] {
   return data
@@ -879,7 +879,7 @@ const DraggableTreeInner: React.FC<DraggableTreeInnerProps> = ({
   );
 };
 
-// ---- 组合导出 ----
+// ---- Compound export ----
 
 type TreeComponent = React.FC<TreeProps> & {
   Draggable: React.FC<DraggableTreeProps>;

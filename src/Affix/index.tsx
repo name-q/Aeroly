@@ -6,9 +6,9 @@ export interface AffixProps {
   offsetTop?: number;
   /** 距底部固定距离（px），与 offsetTop 互斥 */
   offsetBottom?: number;
-  /** 固定状态变化回调 */
+  /** 固定StatusChange callback */
   onChange?: (affixed: boolean) => void;
-  /** 自定义滚动容器，默认自动查找最近可滚动祖先 */
+  /** Custom滚动容器，Default自动查找最近可滚动祖先 */
   target?: () => HTMLElement | Window;
   className?: string;
   style?: React.CSSProperties;
@@ -43,7 +43,7 @@ const Affix: React.FC<AffixProps> = ({
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
-  // 确定方向：有 offsetBottom 时吸底，否则吸顶
+  // 确定Direction：有 offsetBottom 时吸底，否则吸顶
   const isBottom = offsetBottom !== undefined;
   const offset = isBottom ? offsetBottom! : (offsetTop ?? 0);
 
@@ -109,7 +109,7 @@ const Affix: React.FC<AffixProps> = ({
 
   return (
     <>
-      {/* 哨兵：零高度，用于 IntersectionObserver 检测 */}
+      {/* Sentinel: zero-height element for IntersectionObserver detection */}
       {!isBottom && <div ref={sentinelRef} className="aero-affix-sentinel" />}
       <div ref={stickyRef} className={rootCls} style={stickyStyle}>
         {children}

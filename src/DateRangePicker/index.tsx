@@ -22,7 +22,7 @@ export interface DateRangePickerProps {
   format?: string;
   disabledDate?: (date: Date) => boolean;
   showTime?: boolean | { showSecond?: boolean };
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
   className?: string;
   style?: React.CSSProperties;
@@ -108,7 +108,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     return [value[0] ?? '', value[1] ?? ''];
   }, [isControlled, value, internalValue]);
 
-  // 受控值残缺时（如 ['2025-06-01']），回写规范化后的值让 Form 存储保持一致
+  // Controlled值残缺时（如 ['2025-06-01']），回写规范化后的值让 Form 存储保持一致
   useEffect(() => {
     if (!isControlled || !value) return;
     if (
@@ -129,11 +129,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
-  // 左面板年月
+  // 左Panel年月
   const [viewYear, setViewYear] = useState(() => new Date().getFullYear());
   const [viewMonth, setViewMonth] = useState(() => new Date().getMonth());
 
-  // 范围选择状态
+  // 范围SelectionStatus
   const [selecting, setSelecting] = useState<Selecting>('idle');
   const [tempStart, setTempStart] = useState('');
   const [tempEnd, setTempEnd] = useState('');
@@ -147,7 +147,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const [endMinute, setEndMinute] = useState(0);
   const [endSecond, setEndSecond] = useState(0);
 
-  // 右面板 = 左面板 + 1 月
+  // 右Panel = 左Panel + 1 月
   const rightYear = viewMonth === 11 ? viewYear + 1 : viewYear;
   const rightMonth = viewMonth === 11 ? 0 : viewMonth + 1;
 
@@ -207,7 +207,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     }
   };
 
-  // 点击外部关闭
+  // Click outside to close
   useEffect(() => {
     if (!open) return;
     const handleClick = (e: MouseEvent) => {
@@ -318,19 +318,19 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     }
   };
 
-  // 左面板日历
+  // 左Panel日历
   const leftDays = useMemo(
     () => getRangeCalendarDays(viewYear, viewMonth, tempStart, tempEnd, hoverDate, selecting, disabledDate),
     [viewYear, viewMonth, tempStart, tempEnd, hoverDate, selecting, disabledDate],
   );
 
-  // 右面板日历
+  // 右Panel日历
   const rightDays = useMemo(
     () => getRangeCalendarDays(rightYear, rightMonth, tempStart, tempEnd, hoverDate, selecting, disabledDate),
     [rightYear, rightMonth, tempStart, tempEnd, hoverDate, selecting, disabledDate],
   );
 
-  // 显示文本
+  // Display text
   const formatValue = (val: string) => {
     if (!val) return '';
     const [y, m, d, h, mi, s] = parseDateTime(val);

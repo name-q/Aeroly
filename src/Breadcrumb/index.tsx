@@ -8,32 +8,32 @@ import './index.less';
 // ─── Types ───
 
 export interface BreadcrumbItemType {
-  /** 唯一标识 */
+  /** Unique identifier */
   key?: string;
-  /** 显示文本 */
+  /** Display text */
   label: React.ReactNode;
-  /** 链接地址 */
+  /** Link URL */
   href?: string;
   /** 链接打开方式 */
   target?: '_blank' | '_self' | '_parent' | '_top';
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 点击回调（同时存在 href 时，会阻止默认跳转，仅执行回调） */
+  /** Click callback（同时存在 href 时，会阻止Default跳转，仅执行Callback） */
   onClick?: (e: React.MouseEvent) => void;
-  /** 下拉菜单项 */
+  /** Dropdown items */
   menu?: { label: React.ReactNode; href?: string; target?: string; onClick?: (e: React.MouseEvent) => void }[];
 }
 
 export interface BreadcrumbProps {
-  /** 面包屑数据 */
+  /** Breadcrumb items */
   items: BreadcrumbItemType[];
-  /** 自定义分隔符 */
+  /** Custom separator */
   separator?: React.ReactNode;
   /** 超过此数量时折叠中间项 */
   maxItems?: number;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -147,7 +147,7 @@ const BreadcrumbEllipsis: React.FC<{ items: BreadcrumbItemType[] }> = ({ items }
   );
 };
 
-// ─── Breadcrumb 主组件 ───
+// ─── Breadcrumb Main component ───
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items,

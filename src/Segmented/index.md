@@ -1,60 +1,60 @@
 ---
-title: Segmented 分段控制器
+title: Segmented
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Segmented 分段控制器
+# Segmented
 
-用于展示多个选项并允许用户选择其中单个选项，常用于视图切换、筛选等场景。
+Displays multiple options and allows the user to select one. Commonly used for view switching, filtering, and similar scenarios.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 撑满宽度
+## Block Mode
 
-<code src="./demos/block.tsx"></code>
+<code src="./en/demos/block.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 自定义渲染
+## Custom Rendering
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| options | 选项数据 | `(string \| number \| SegmentedOption)[]` | - |
-| value | 当前选中值（受控） | `string \| number` | - |
-| defaultValue | 默认选中值（非受控） | `string \| number` | 第一项的值 |
-| onChange | 选中变化回调 | `(value: string \| number) => void` | - |
-| block | 是否撑满父容器宽度 | `boolean` | `false` |
-| disabled | 是否整体禁用 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| options | Option data | `(string \| number \| SegmentedOption)[]` | - |
+| value | Currently selected value (controlled) | `string \| number` | - |
+| defaultValue | Default selected value (uncontrolled) | `string \| number` | Value of the first option |
+| onChange | Callback when selection changes | `(value: string \| number) => void` | - |
+| block | Whether to fill parent container width | `boolean` | `false` |
+| disabled | Whether to disable all options | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### SegmentedOption
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 选项值 | `string \| number` | - |
-| label | 显示内容 | `ReactNode` | - |
-| disabled | 是否禁用该选项 | `boolean` | `false` |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Option value | `string \| number` | - |
+| label | Display content | `ReactNode` | - |
+| disabled | Whether to disable this option | `boolean` | `false` |

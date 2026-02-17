@@ -1,49 +1,49 @@
 ---
-title: Switch 开关
+title: Switch
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Switch 开关
+# Switch
 
-用于切换两种状态，滑轨搭配实体滑块，开关感知清晰。
+Toggle between two states. A track with a solid thumb provides clear on/off perception.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 文案
+## Text Labels
 
-<code src="./demos/text.tsx"></code>
+<code src="./en/demos/text.tsx"></code>
 
-## 加载中
+## Loading
 
-<code src="./demos/loading.tsx"></code>
+<code src="./en/demos/loading.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| checked | 是否开启（受控） | `boolean` | - |
-| defaultChecked | 默认是否开启（非受控） | `boolean` | `false` |
-| disabled | 是否禁用 | `boolean` | `false` |
-| loading | 是否加载中 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| checkedText | 开启时的文案 | `ReactNode` | - |
-| uncheckedText | 关闭时的文案 | `ReactNode` | - |
-| onChange | 变化回调 | `(checked: boolean) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| checked | Whether turned on (controlled) | `boolean` | - |
+| defaultChecked | Whether turned on by default (uncontrolled) | `boolean` | `false` |
+| disabled | Whether disabled | `boolean` | `false` |
+| loading | Whether in loading state | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| checkedText | Text label when on | `ReactNode` | - |
+| uncheckedText | Text label when off | `ReactNode` | - |
+| onChange | Callback when state changes | `(checked: boolean) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

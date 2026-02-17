@@ -6,27 +6,27 @@ import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface ButtonProps {
-  /** 按钮内容 */
+  /** 按钮Content */
   children?: React.ReactNode;
-  /** 按钮类型 */
+  /** Button type */
   type?: 'primary' | 'default' | 'text';
-  /** 按钮尺寸 */
+  /** 按钮Size */
   size?: 'small' | 'medium' | 'large';
-  /** 是否保持胶囊圆角（默认跟随全局圆角） */
+  /** Whether保持胶囊圆角（Default跟随全局圆角） */
   pill?: boolean;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否加载中 */
+  /** Whether loading */
   loading?: boolean;
-  /** 图标（Lucide 图标组件） */
+  /** Icon（Lucide Iconcomponent) */
   icon?: LucideIcon;
   /** 点击事件 */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** 原生 button type */
   htmlType?: 'button' | 'submit' | 'reset';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

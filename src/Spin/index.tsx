@@ -3,17 +3,17 @@ import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SpinProps {
-  /** 是否为加载状态 */
+  /** Whether为加载Status */
   spinning?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 提示文字 */
+  /** Tooltip text */
   tip?: React.ReactNode;
   /** 延迟显示（ms），防闪烁 */
   delay?: number;
-  /** 自定义指示器 */
+  /** Custom指示器 */
   indicator?: React.ReactNode;
-  /** 包裹内容 */
+  /** Wrapped content */
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -62,7 +62,7 @@ const Spin: React.FC<SpinProps> = ({
 
   const cls = ['aero-spin', `aero-spin--${size}`, className].filter(Boolean).join(' ');
 
-  // 容器模式
+  // 容器Mode
   if (children) {
     return (
       <div className={`aero-spin-container${show ? ' aero-spin-container--spinning' : ''}`} style={style}>
@@ -78,7 +78,7 @@ const Spin: React.FC<SpinProps> = ({
     );
   }
 
-  // 独立模式
+  // 独立Mode
   if (!show) return null;
 
   return (

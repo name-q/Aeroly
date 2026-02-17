@@ -8,13 +8,13 @@ interface DropdownPosition {
   alignment: Alignment;
 }
 
-const GAP = 6; // dropdown 与 trigger 之间的间距
+const GAP = 6; // Gap between dropdown and trigger
 
 /**
  * 自动检测 dropdown 应该向上/向下弹出、左/右对齐
- * @param triggerRef  触发器（输入框）的 ref
- * @param dropdownRef 弹出面板的 ref
- * @param open        当前是否展开
+ * @param triggerRef  触发器（Input框）的 ref
+ * @param dropdownRef 弹出Panel的 ref
+ * @param open        CurrentWhether展开
  */
 export function useDropdownPosition(
   triggerRef: RefObject<HTMLElement | null>,
@@ -36,7 +36,7 @@ export function useDropdownPosition(
       const dropdownRect = dropdown.getBoundingClientRect();
       const { innerHeight, innerWidth } = window;
 
-      // 垂直方向：下方空间不够 && 上方空间够 → 向上弹出
+      // 垂直Direction：下方空间不够 && 上方空间够 → 向上弹出
       const spaceBelow = innerHeight - triggerRect.bottom - GAP;
       const spaceAbove = triggerRect.top - GAP;
       const placement: Placement =
@@ -44,7 +44,7 @@ export function useDropdownPosition(
           ? 'top'
           : 'bottom';
 
-      // 水平方向：右侧溢出 → 右对齐
+      // 水平Direction：右侧溢出 → 右对齐
       const overflowRight = triggerRect.left + dropdownRect.width - innerWidth;
       const alignment: Alignment = overflowRight > 0 ? 'right' : 'left';
 

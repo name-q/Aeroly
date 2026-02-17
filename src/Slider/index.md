@@ -1,72 +1,72 @@
 ---
-title: Slider 滑动输入条
+title: Slider
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Slider 滑动输入条
+# Slider
 
-通过拖动滑块在一个区间内选择值，支持单值和范围选择。
+Select a value within a range by dragging a slider, supporting single value and range selection.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 范围选择
+## Range Selection
 
-<code src="./demos/range.tsx"></code>
+<code src="./en/demos/range.tsx"></code>
 
-## 步长
+## Step
 
-<code src="./demos/step.tsx"></code>
+<code src="./en/demos/step.tsx"></code>
 
-## 刻度标记
+## Marks
 
-<code src="./demos/marks.tsx"></code>
+<code src="./en/demos/marks.tsx"></code>
 
-## 提示气泡
+## Tooltip
 
-<code src="./demos/tooltip.tsx"></code>
+<code src="./en/demos/tooltip.tsx"></code>
 
-## 动画
+## Animation
 
-<code src="./demos/animated.tsx"></code>
+<code src="./en/demos/animated.tsx"></code>
 
-## 垂直模式
+## Vertical Mode
 
-<code src="./demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| value | 当前值（受控） | `number \| [number, number]` | - |
-| defaultValue | 默认值（非受控） | `number \| [number, number]` | `0` |
-| min | 最小值 | `number` | `0` |
-| max | 最大值 | `number` | `100` |
-| step | 步长，设为 `null` 时只能选择 marks 的值 | `number \| null` | `1` |
-| marks | 刻度标记 | `Record<number, ReactNode>` | - |
-| disabled | 是否禁用（灰显 + 不可操作） | `boolean` | `false` |
-| readOnly | 是否只读（正常样式但不可操作） | `boolean` | `false` |
-| range | 是否为范围选择 | `boolean` | `false` |
-| vertical | 是否垂直 | `boolean` | `false` |
-| tooltipVisible | 是否始终显示 tooltip | `boolean` | - |
-| tipFormatter | 自定义 tooltip 格式化，设为 `null` 隐藏 | `((value: number) => ReactNode) \| null` | `(v) => v` |
-| animated | 是否开启 track 光泽流动动画 | `boolean` | `true` |
-| onChange | 变化回调 | `(value: number \| [number, number]) => void` | - |
-| onChangeComplete | 拖拽结束回调 | `(value: number \| [number, number]) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| value | Current value (controlled) | `number \| [number, number]` | - |
+| defaultValue | Default value (uncontrolled) | `number \| [number, number]` | `0` |
+| min | Minimum value | `number` | `0` |
+| max | Maximum value | `number` | `100` |
+| step | Step size, set to `null` to only allow marks values | `number \| null` | `1` |
+| marks | Tick marks | `Record<number, ReactNode>` | - |
+| disabled | Whether disabled (grayed out and non-interactive) | `boolean` | `false` |
+| readOnly | Whether read only (normal appearance but non-interactive) | `boolean` | `false` |
+| range | Whether range selection | `boolean` | `false` |
+| vertical | Whether vertical | `boolean` | `false` |
+| tooltipVisible | Whether to always show tooltip | `boolean` | - |
+| tipFormatter | Custom tooltip formatter, set to `null` to hide | `((value: number) => ReactNode) \| null` | `(v) => v` |
+| animated | Whether to enable track shine flow animation | `boolean` | `true` |
+| onChange | Change callback | `(value: number \| [number, number]) => void` | - |
+| onChangeComplete | Drag end callback | `(value: number \| [number, number]) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

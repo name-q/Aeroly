@@ -12,7 +12,7 @@ import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
 import './index.less';
 
-/** 内置场景预设 */
+/** Built-in scene presets */
 export type EmptyPreset =
   | 'default'
   | 'search'
@@ -22,27 +22,27 @@ export type EmptyPreset =
   | 'noContent';
 
 export interface EmptyProps {
-  /** 内置场景预设，自动匹配图标和文案 */
+  /** Built-in scene presets, auto-match icon and text */
   preset?: EmptyPreset;
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: LucideIcon | React.ReactNode | null;
-  /** 图标大小 */
+  /** Icon size */
   iconSize?: number;
-  /** 主文案 */
+  /** Main text */
   title?: React.ReactNode;
-  /** 描述文案 */
+  /** Description text */
   description?: React.ReactNode;
-  /** 操作区（按钮等） */
+  /** Action area (buttons, etc.) */
   extra?: React.ReactNode;
-  /** 完全自定义图片区域（覆盖 icon） */
+  /** Fully custom image area (overrides icon) */
   image?: React.ReactNode;
-  /** 图片区域尺寸 */
+  /** Image area size */
   imageSize?: number;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
-  /** 子元素（放在最底部） */
+  /** Children (placed at bottom) */
   children?: React.ReactNode;
 }
 
@@ -76,11 +76,11 @@ const Empty: React.FC<EmptyProps> = ({
   const presetLocale = localeEmpty[preset];
   const presetIcon = presetIconMap[preset];
 
-  // 最终显示的文案
+  // Final display text
   const finalTitle = title ?? presetLocale.title;
   const finalDesc = description ?? presetLocale.description;
 
-  // 图片/图标区域
+  // Image / icon area
   const renderVisual = () => {
     if (image) {
       return (
@@ -95,12 +95,12 @@ const Empty: React.FC<EmptyProps> = ({
 
     if (icon === null) return null;
 
-    // 已经是 JSX 元素（如 <MyIcon />）
+    // Already a JSX element (e.g. <MyIcon />)
     if (React.isValidElement(icon)) {
       return <div className="aero-empty__icon">{icon}</div>;
     }
 
-    // LucideIcon / forwardRef 组件 / 普通组件
+    // LucideIcon / forwardRef component / regular component
     if (icon) {
       return (
         <div className="aero-empty__icon">
@@ -109,7 +109,7 @@ const Empty: React.FC<EmptyProps> = ({
       );
     }
 
-    // preset 默认
+    // preset Default
     return (
       <div className="aero-empty__icon">
         <Icon icon={presetIcon} size={iconSize} />

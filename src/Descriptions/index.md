@@ -1,60 +1,60 @@
 ---
-title: Descriptions 描述列表
+title: Descriptions
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Descriptions 描述列表
+# Descriptions
 
-成组展示多个只读字段，常用于详情页。
+Display multiple read-only fields in groups, commonly used on detail pages.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 带边框
+## Bordered
 
-<code src="./demos/bordered.tsx"></code>
+<code src="./en/demos/bordered.tsx"></code>
 
-## 带操作
+## With Actions
 
-<code src="./demos/extra.tsx"></code>
+<code src="./en/demos/extra.tsx"></code>
 
-## 垂直布局
+## Vertical Layout
 
-<code src="./demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx"></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
 ## API
 
 ### Descriptions
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| title | 标题 | `ReactNode` | - |
-| extra | 额外操作区（右上角） | `ReactNode` | - |
-| items | 描述项列表 | `DescriptionsItem[]` | - |
-| column | 每行列数 | `number` | `3` |
-| layout | 布局方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
-| bordered | 是否显示边框 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| labelAlign | label 对齐方式 | `'left' \| 'right'` | `'left'` |
-| colon | 是否显示冒号 | `boolean` | `true` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| title | Title | `ReactNode` | - |
+| extra | Extra action area (top right) | `ReactNode` | - |
+| items | Description item list | `DescriptionsItem[]` | - |
+| column | Number of columns per row | `number` | `3` |
+| layout | Layout direction | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| bordered | Whether to show border | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| labelAlign | Label alignment | `'left' \| 'right'` | `'left'` |
+| colon | Whether to show colon | `boolean` | `true` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### DescriptionsItem
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| label | 标签名 | `ReactNode` | - |
-| children | 内容 | `ReactNode` | - |
-| span | 占据列数 | `number` | `1` |
+| label | Label name | `ReactNode` | - |
+| children | Content | `ReactNode` | - |
+| span | Column span | `number` | `1` |

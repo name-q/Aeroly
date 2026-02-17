@@ -36,7 +36,7 @@ const FormList: React.FC<FormListProps> = ({ name, initialValue, children }) => 
   const { __INTERNAL__: internal } = form;
   const nameKey = toNameKey(name);
 
-  // 订阅数组字段
+  // Subscribe to array field
   const subscribe = useCallback(
     (onStoreChange: () => void) => {
       return internal.subscribe(nameKey, onStoreChange);
@@ -57,7 +57,7 @@ const FormList: React.FC<FormListProps> = ({ name, initialValue, children }) => 
 
   const keysRef = React.useRef<number[]>([]);
 
-  // 确保 keys 与列表长度同步
+  // Ensure keys are in sync with list length
   const list = getList();
   while (keysRef.current.length < list.length) {
     keysRef.current.push(keyCounter++);

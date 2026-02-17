@@ -1,54 +1,54 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 导航
+  title: Navigation
   order: 2
 toc: content
 ---
 
-# Dropdown 下拉菜单
+# Dropdown
 
-向下弹出的操作菜单，基于 Popover 定位，支持子菜单嵌套、图标、危险操作、选中高亮。
+A dropdown action menu based on Popover positioning, supporting submenu nesting, icons, danger actions, and selected highlighting.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 子菜单
+## Submenu
 
-<code src="./demos/submenu.tsx"></code>
+<code src="./en/demos/submenu.tsx"></code>
 
-## 点击触发 & 选中状态
+## Click Trigger & Selected State
 
-<code src="./demos/click.tsx"></code>
+<code src="./en/demos/click.tsx"></code>
 
 ## API
 
 ### DropdownProps
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| items | `DropdownItem[]` | - | 菜单项数据 |
-| onSelect | `(key: string) => void` | - | 点击菜单项回调 |
-| selectedKey | `string` | - | 当前选中项（高亮） |
-| trigger | `'hover' \| 'click'` | `'hover'` | 触发方式 |
-| placement | `PopoverPlacement` | `'bottom'` | 弹出方向 |
-| open | `boolean` | - | 是否显示（受控） |
-| onOpenChange | `(open: boolean) => void` | - | 显隐变化回调 |
-| disabled | `boolean` | `false` | 是否禁用 |
-| className | `string` | - | 菜单自定义类名 |
-| style | `React.CSSProperties` | - | 菜单自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| items | `DropdownItem[]` | - | Menu item data |
+| onSelect | `(key: string) => void` | - | Menu item click callback |
+| selectedKey | `string` | - | Currently selected item (highlighted) |
+| trigger | `'hover' \| 'click'` | `'hover'` | Trigger mode |
+| placement | `PopoverPlacement` | `'bottom'` | Popup direction |
+| open | `boolean` | - | Whether to show (controlled) |
+| onOpenChange | `(open: boolean) => void` | - | Visibility change callback |
+| disabled | `boolean` | `false` | Whether disabled |
+| className | `string` | - | Menu custom class name |
+| style | `React.CSSProperties` | - | Menu custom style |
 
 ### DropdownItem
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| key | `string` | 唯一标识 |
-| label | `ReactNode` | 显示文本 |
-| icon | `LucideIcon` | 图标 |
-| disabled | `boolean` | 是否禁用 |
-| danger | `boolean` | 危险操作（红色） |
-| type | `'divider'` | 分割线 |
-| children | `DropdownItem[]` | 子菜单 |
+| Property | Type | Description |
+|----------|------|-------------|
+| key | `string` | Unique identifier |
+| label | `ReactNode` | Display text |
+| icon | `LucideIcon` | Icon |
+| disabled | `boolean` | Whether disabled |
+| danger | `boolean` | Danger action (red) |
+| type | `'divider'` | Divider |
+| children | `DropdownItem[]` | Submenu |

@@ -5,7 +5,7 @@ import '../HomePage.less';
 
 export default function GlobalLayout() {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === '/' || location.pathname === '/cn' || location.pathname === '/cn/';
 
   if (isHome) {
     return <HomePage />;

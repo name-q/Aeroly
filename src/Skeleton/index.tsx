@@ -4,7 +4,7 @@ import './index.less';
 // ---- Types ----
 
 export interface SkeletonProps {
-  /** 是否启用光影动画，默认 true */
+  /** Whether to enable shimmer animation, default true */
   active?: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -12,37 +12,37 @@ export interface SkeletonProps {
 }
 
 export interface SkeletonBlockProps {
-  /** 宽度，支持数字(px)或字符串 */
+  /** Width, supports number (px) or string */
   width?: number | string;
-  /** 高度，支持数字(px)或字符串 */
+  /** Height, supports number (px) or string */
   height?: number | string;
-  /** 圆角，默认 8px */
+  /** Border radius, default 8px */
   borderRadius?: number | string;
-  /** 是否启用光影动画，默认继承父级 */
+  /** Whether to en shimmer animation, inherits from parent by default */
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
 export interface SkeletonCircleProps {
-  /** 直径，默认 40 */
+  /** Diameter, default 40 */
   size?: number;
-  /** 是否启用光影动画，默认继承父级 */
+  /** Whether to en shimmer animation, inherits from parent by default */
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
 export interface SkeletonTextProps {
-  /** 行数，默认 3 */
+  /** Number of rows，Default 3 */
   rows?: number;
-  /** 每行宽度，可传数组分别指定，百分比或数字 */
+  /** Width per row, array for individual widths, percentage or number */
   widths?: (number | string)[];
-  /** 行高，默认 16 */
+  /** Line height, default 16 */
   lineHeight?: number;
-  /** 行间距，默认 12 */
+  /** Row gap, default 12 */
   gap?: number;
-  /** 是否启用光影动画，默认继承父级 */
+  /** Whether to en shimmer animation, inherits from parent by default */
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -131,7 +131,7 @@ const Text: React.FC<SkeletonTextProps> = ({
   const ctx = React.useContext(SkeletonContext);
   const active = activeProp ?? ctx.active;
 
-  // 默认宽度：最后一行 60%，其余 100%
+  // Default width: last row 60%, others 100%
   const getWidth = (i: number): string => {
     if (widths && widths[i] !== undefined) return toSize(widths[i]);
     return i === rows - 1 && rows > 1 ? '60%' : '100%';

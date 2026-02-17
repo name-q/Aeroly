@@ -3,25 +3,25 @@ import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
 export interface SwitchProps {
-  /** 是否开启（受控） */
+  /** Whether开启（Controlled） */
   checked?: boolean;
-  /** 默认是否开启（非受控） */
+  /** DefaultWhether开启（uncontrolled) */
   defaultChecked?: boolean;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否加载中 */
+  /** Whether loading */
   loading?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
   /** 开启时的文案 */
   checkedText?: React.ReactNode;
   /** 关闭时的文案 */
   uncheckedText?: React.ReactNode;
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (checked: boolean) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -85,7 +85,7 @@ const Switch: React.FC<SwitchProps> = ({
     >
       {hasText && (
         <span className="aero-switch-text">
-          {/* 两个文案都渲染，grid 重叠取较宽的撑开宽度 */}
+          {/* Render both labels, grid overlap takes the wider one to set width */}
           <span className={`aero-switch-text-inner${isChecked ? ' aero-switch-text-inner--active' : ''}`}>
             {checkedText}
           </span>

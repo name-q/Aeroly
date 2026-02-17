@@ -8,27 +8,27 @@ import './index.less';
 export type AlertType = 'info' | 'success' | 'warning' | 'error';
 
 export interface AlertProps {
-  /** 提示内容 */
+  /** Tooltip content */
   children: React.ReactNode;
-  /** 提示类型 */
+  /** Alert type */
   type?: AlertType;
-  /** 辅助描述文字 */
+  /** Helper description text */
   description?: React.ReactNode;
-  /** 是否可关闭 */
+  /** Whether closable */
   closable?: boolean;
-  /** 关闭回调 */
+  /** Close callback */
   onClose?: () => void;
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: LucideIcon;
-  /** 是否显示图标 */
+  /** Whether to show icon */
   showIcon?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 是否开启文字光影掠过效果 */
+  /** Whether to enable text shimmer effect */
   shimmer?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

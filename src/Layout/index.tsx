@@ -4,55 +4,55 @@ import './index.less';
 // ---- Types ----
 
 export interface LayoutProps {
-  /** flex:1 撑满父容器剩余空间 */
+  /** flex:1 to fill remaining parent space */
   full?: boolean;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface HeaderProps {
-  /** 高度，数字为 px */
+  /** Height, number in px */
   height?: number | string;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface FooterProps {
-  /** 高度，数字为 px */
+  /** Height, number in px */
   height?: number | string;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface ContentProps {
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface SiderProps {
-  /** 宽度，数字为 px */
+  /** Width, number in px */
   width?: number | string;
-  /** 子元素 */
+  /** Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -122,7 +122,7 @@ const Sider: React.FC<SiderProps> = ({
   );
 };
 
-// ---- 标记 Sider ----
+// ---- Mark Sider ----
 (Sider as any).__AERO_SIDER = true;
 
 // ---- Layout ----

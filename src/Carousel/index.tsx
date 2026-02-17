@@ -25,19 +25,19 @@ export interface CarouselRef {
 }
 
 export interface CarouselProps {
-  /** 轮播项数据 */
+  /** Carousel items数据 */
   items: CarouselItem[];
-  /** 当前索引（受控） */
+  /** Current索引（Controlled） */
   current?: number;
-  /** 默认索引（非受控） */
+  /** Default索引（uncontrolled) */
   defaultCurrent?: number;
-  /** 切换回调 */
+  /** Change callback */
   onChange?: (current: number) => void;
-  /** 切换前回调 */
+  /** 切换前Callback */
   beforeChange?: (from: number, to: number) => void;
-  /** 切换效果 */
+  /** Transition effect */
   effect?: CarouselEffect;
-  /** 方向 */
+  /** Direction */
   direction?: CarouselDirection;
   /** 自动播放 */
   autoplay?: boolean;
@@ -51,11 +51,11 @@ export interface CarouselProps {
   dotsPosition?: 'bottom' | 'top' | 'left' | 'right' | 'inner';
   /** 循环 */
   loop?: boolean;
-  /** 垂直模式高度 */
+  /** 垂直Mode高度 */
   height?: number | string;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

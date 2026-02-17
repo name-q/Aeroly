@@ -9,27 +9,27 @@ export interface BadgeProps {
   overflowCount?: number;
   /** 不展示数字，只显示小红点 */
   dot?: boolean;
-  /** 当 count 为 0 时是否显示 */
+  /** 当 count 为 0 时Whether visible */
   showZero?: boolean;
   /** 光影掠过动画 */
   shimmer?: boolean;
-  /** 自定义颜色 */
+  /** Custom color */
   color?: string;
-  /** 自定义显示内容（覆盖 count） */
+  /** CustomDisplay content（覆盖 count） */
   text?: React.ReactNode;
-  /** 设置状态点（独立使用，无 children） */
+  /** 设置Status点（独立使用，无 children） */
   status?: 'default' | 'processing' | 'success' | 'warning' | 'error';
-  /** 状态点旁的文本 */
+  /** Status点旁的文本 */
   statusText?: React.ReactNode;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
   /** 偏移 [right, top] */
   offset?: [number, number];
-  /** 包裹的子元素 */
+  /** 包裹的Children */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -50,7 +50,7 @@ const Badge: React.FC<BadgeProps> = ({
   style,
 }) => {
   const size = useSize(sizeProp);
-  // 状态点模式（独立使用）
+  // Status点Mode（独立使用）
   if (status && !children) {
     return (
       <span
@@ -70,11 +70,11 @@ const Badge: React.FC<BadgeProps> = ({
     );
   }
 
-  // 是否显示徽标
+  // Whether visible徽标
   const hasCount = count !== undefined && (count > 0 || showZero);
   const showBadge = dot || hasCount || text !== undefined;
 
-  // 显示内容
+  // Display content
   let displayContent: React.ReactNode = null;
   if (text !== undefined) {
     displayContent = text;

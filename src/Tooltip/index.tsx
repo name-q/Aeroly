@@ -6,23 +6,23 @@ import './index.less';
 export type TooltipPlacement = PopoverPlacement;
 
 export interface TooltipProps {
-  /** 提示内容 */
+  /** Tooltip content */
   title: React.ReactNode;
-  /** 弹出方向 */
+  /** Placement */
   placement?: TooltipPlacement;
-  /** 是否显示（受控） */
+  /** Whether visible (controlled) */
   open?: boolean;
-  /** 默认是否显示 */
+  /** DefaultWhether visible */
   defaultOpen?: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 弹层与触发元素的间距 */
+  /** Gap between popup and trigger */
   offset?: number;
-  /** 触发元素 */
+  /** Trigger element */
   children: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

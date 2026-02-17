@@ -1,62 +1,62 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 导航
+  title: Navigation
   order: 4
 toc: content
 ---
 
-# Menu 导航菜单
+# Menu
 
-为页面或功能提供导航的菜单列表，支持垂直、水平、多级子菜单和收起模式。
+A navigation menu list for pages or features, supporting vertical, horizontal, multi-level submenus, and collapsed mode.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx" description="最简单的垂直菜单，通过 items 传入菜单数据。"></code>
+<code src="./en/demos/basic.tsx" description="The simplest vertical menu, passing menu data via items."></code>
 
-## 多级子菜单
+## Multi-level Submenu
 
-<code src="./demos/submenu.tsx" description="子菜单可以无限嵌套，展开/收起带动画过渡。"></code>
+<code src="./en/demos/submenu.tsx" description="Submenus can be nested infinitely, with animated expand/collapse transitions."></code>
 
-## 水平模式
+## Horizontal Mode
 
-<code src="./demos/horizontal.tsx" description="设置 mode='horizontal' 切换为水平导航栏，子菜单以浮层弹出。"></code>
+<code src="./en/demos/horizontal.tsx" description="Set mode='horizontal' to switch to a horizontal navigation bar, submenus pop up as overlays."></code>
 
-## 收起模式
+## Collapsed Mode
 
-<code src="./demos/collapsed.tsx" description="侧栏收起后仅显示图标，子菜单以浮层弹出。"></code>
+<code src="./en/demos/collapsed.tsx" description="When the sidebar is collapsed, only icons are shown, and submenus pop up as overlays."></code>
 
-## 分组与分割线
+## Groups and Dividers
 
-<code src="./demos/group.tsx" description="通过 type='group' 对菜单项分组，type='divider' 添加分割线。支持 disabled 禁用。"></code>
+<code src="./en/demos/group.tsx" description="Use type='group' to group menu items, type='divider' to add dividers. Supports disabled state."></code>
 
 ## API
 
 ### Menu
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| items | 菜单项数据 | `MenuItemType[]` | - |
-| selectedKey | 当前选中项（受控） | `string` | - |
-| defaultSelectedKey | 默认选中项 | `string` | - |
-| openKeys | 展开的子菜单（受控） | `string[]` | - |
-| defaultOpenKeys | 默认展开的子菜单 | `string[]` | `[]` |
-| onSelect | 选中回调 | `(key: string) => void` | - |
-| onOpenChange | 展开/收起回调 | `(openKeys: string[]) => void` | - |
-| mode | 菜单模式 | `'vertical' \| 'horizontal'` | `'vertical'` |
-| collapsed | 收起侧栏（仅 vertical） | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| items | Menu item data | `MenuItemType[]` | - |
+| selectedKey | Currently selected item (controlled) | `string` | - |
+| defaultSelectedKey | Default selected item | `string` | - |
+| openKeys | Expanded submenus (controlled) | `string[]` | - |
+| defaultOpenKeys | Default expanded submenus | `string[]` | `[]` |
+| onSelect | Selection callback | `(key: string) => void` | - |
+| onOpenChange | Expand/collapse callback | `(openKeys: string[]) => void` | - |
+| mode | Menu mode | `'vertical' \| 'horizontal'` | `'vertical'` |
+| collapsed | Collapse sidebar (vertical only) | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### MenuItemType
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| key | 唯一标识 | `string` | - |
-| label | 显示文本 | `ReactNode` | - |
-| icon | 图标（Lucide 组件） | `LucideIcon` | - |
-| children | 子菜单 | `MenuItemType[]` | - |
-| disabled | 禁用 | `boolean` | `false` |
-| type | 特殊类型 | `'group' \| 'divider'` | - |
+| key | Unique identifier | `string` | - |
+| label | Display text | `ReactNode` | - |
+| icon | Icon (Lucide component) | `LucideIcon` | - |
+| children | Submenu items | `MenuItemType[]` | - |
+| disabled | Disabled | `boolean` | `false` |
+| type | Special type | `'group' \| 'divider'` | - |

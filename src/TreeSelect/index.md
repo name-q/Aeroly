@@ -1,81 +1,81 @@
 ---
-title: TreeSelect 树选择
+title: TreeSelect
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# TreeSelect 树选择
+# TreeSelect
 
-树形结构的下拉选择器，支持单选、多选（勾选框 + 父子联动）、搜索过滤、仅选叶子节点。
+A tree-structured dropdown selector supporting single selection, multiple selection (checkbox with parent-child linkage), search filtering, and leaf-only selection.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 多选
+## Multiple Selection
 
-<code src="./demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx"></code>
 
-## 搜索
+## Search
 
-<code src="./demos/search.tsx"></code>
+<code src="./en/demos/search.tsx"></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### TreeSelect
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| treeData | 树数据 | `TreeSelectNodeData[]` | - |
-| value | 当前值（受控） | `string \| string[]` | - |
-| defaultValue | 默认值 | `string \| string[]` | - |
-| onChange | 值变化回调 | `(value, nodes) => void` | - |
-| placeholder | 占位文案 | `string` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| allowClear | 是否允许清除 | `boolean` | `false` |
-| showSearch | 是否可搜索 | `boolean` | `false` |
-| filterTreeNode | 自定义搜索过滤 | `(input: string, node: TreeSelectNodeData) => boolean` | 内置 title 匹配 |
-| searchPlaceholder | 搜索框占位文案 | `string` | - |
-| multiple | 是否多选（勾选框模式） | `boolean` | `false` |
-| maxTagCount | 多选时最多显示的标签数 | `number` | - |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 状态 | `'error' \| 'warning'` | - |
-| notFoundContent | 无数据时的提示 | `ReactNode` | - |
-| defaultExpandAll | 默认展开所有节点 | `boolean` | `false` |
-| defaultExpandedKeys | 默认展开的节点 key | `string[]` | `[]` |
-| treeLeafOnly | 是否只能选择叶子节点（单选） | `boolean` | `false` |
-| open | 下拉面板是否显示（受控） | `boolean` | - |
-| onOpenChange | 下拉面板显隐变化回调 | `(open: boolean) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| treeData | Tree data | `TreeSelectNodeData[]` | - |
+| value | Current value (controlled) | `string \| string[]` | - |
+| defaultValue | Default value | `string \| string[]` | - |
+| onChange | Callback when value changes | `(value, nodes) => void` | - |
+| placeholder | Placeholder text | `string` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| allowClear | Whether to allow clearing | `boolean` | `false` |
+| showSearch | Whether searchable | `boolean` | `false` |
+| filterTreeNode | Custom search filter | `(input: string, node: TreeSelectNodeData) => boolean` | Built-in title matching |
+| searchPlaceholder | Search input placeholder | `string` | - |
+| multiple | Whether multiple selection (checkbox mode) | `boolean` | `false` |
+| maxTagCount | Maximum number of tags displayed in multiple mode | `number` | - |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Status | `'error' \| 'warning'` | - |
+| notFoundContent | Content when no data | `ReactNode` | - |
+| defaultExpandAll | Whether to expand all nodes by default | `boolean` | `false` |
+| defaultExpandedKeys | Default expanded node keys | `string[]` | `[]` |
+| treeLeafOnly | Whether only leaf nodes are selectable (single select) | `boolean` | `false` |
+| open | Whether the dropdown is visible (controlled) | `boolean` | - |
+| onOpenChange | Callback when dropdown visibility changes | `(open: boolean) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### TreeSelectNodeData
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| key | 唯一标识 | `string` | - |
-| title | 显示内容 | `ReactNode` | - |
-| children | 子节点 | `TreeSelectNodeData[]` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| isLeaf | 是否为叶子节点 | `boolean` | - |
+| key | Unique identifier | `string` | - |
+| title | Display content | `ReactNode` | - |
+| children | Child nodes | `TreeSelectNodeData[]` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| isLeaf | Whether it is a leaf node | `boolean` | - |
 
-### 键盘交互
+### Keyboard Interaction
 
-| 按键 | 说明 |
+| Key | Description |
 |------|------|
-| `↓` / `Enter` | 打开下拉面板 |
-| `Esc` | 关闭下拉面板 |
-| `Backspace` | 多选模式下删除最后一个标签 |
+| `↓` / `Enter` | Open dropdown |
+| `Esc` | Close dropdown |
+| `Backspace` | Remove last tag in multiple mode |

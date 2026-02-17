@@ -1,69 +1,69 @@
 ---
-title: Flex 弹性布局
+title: Flex
 group:
-  title: 布局
+  title: Layout
   order: 2
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Flex 弹性布局
+# Flex
 
-意图驱动的弹性布局组件。默认水平排列、垂直居中，用语义化 props 代替手写 flex CSS，让 AI 和人类都能一行搞定常见布局。
+Intent-driven flex layout component. Defaults to horizontal direction with vertical centering. Uses semantic props instead of hand-written flex CSS, making common layouts a one-liner for both AI and humans.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 纵向排列
+## Vertical Direction
 
-<code src="./demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx"></code>
 
-## 主轴分布
+## Main Axis Distribution
 
-<code src="./demos/justify.tsx"></code>
+<code src="./en/demos/justify.tsx"></code>
 
-## 居中
+## Centering
 
-<code src="./demos/center.tsx"></code>
+<code src="./en/demos/center.tsx"></code>
 
-## 自动换行
+## Wrapping
 
-<code src="./demos/wrap.tsx"></code>
+<code src="./en/demos/wrap.tsx"></code>
 
-## 弹性比例
+## Flex Ratio
 
-<code src="./demos/flex.tsx"></code>
+<code src="./en/demos/flex.tsx"></code>
 
-## Auto 间距
+## Auto Spacing
 
-<code src="./demos/auto.tsx"></code>
+<code src="./en/demos/auto.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| direction | 主轴方向 | `'row' \| 'column'` | `'row'` |
-| justify | 主轴分布 | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
-| align | 交叉轴对齐 | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'center'` |
-| gap | 间距，数字为 px | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | - |
-| wrap | 是否换行 | `boolean` | `false` |
-| center | 水平+垂直双向居中 | `boolean` | `false` |
-| full | 撑满父容器宽度 | `boolean` | `false` |
-| inline | 行内弹性盒 | `boolean` | `false` |
-| flex | 弹性控制：数字为伸缩比例，`"100px"` 为固定宽度，也支持完整写法如 `"0 0 100px"` | `number \| string` | - |
-| auto | margin auto 抽象 | `boolean \| 'left' \| 'right' \| 'top' \| 'bottom'` | - |
-| component | 渲染的 HTML 标签 | `React.ElementType` | `'div'` |
-| children | 子元素 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| direction | Main axis direction | `'row' \| 'column'` | `'row'` |
+| justify | Main axis distribution | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
+| align | Cross axis alignment | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'center'` |
+| gap | Gap size, number in px | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | - |
+| wrap | Whether to wrap | `boolean` | `false` |
+| center | Horizontal + vertical centering | `boolean` | `false` |
+| full | Fill parent container width | `boolean` | `false` |
+| inline | Inline flex box | `boolean` | `false` |
+| flex | Flex control: number for flex ratio, `"100px"` for fixed width, also supports full syntax like `"0 0 100px"` | `number \| string` | - |
+| auto | Margin auto abstraction | `boolean \| 'left' \| 'right' \| 'top' \| 'bottom'` | - |
+| component | HTML tag to render | `React.ElementType` | `'div'` |
+| children | Child elements | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-### gap 语义 token
+### gap Semantic Tokens
 
-| Token | 值 |
-|-------|-----|
+| Token | Value |
+|-------|-------|
 | `xs` | 4px |
 | `sm` | 8px |
 | `md` | 12px |

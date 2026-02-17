@@ -6,33 +6,33 @@ import './index.less';
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
 
 export interface DrawerProps {
-  /** 是否显示 */
+  /** Whether visible */
   open: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange: (open: boolean) => void;
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 抽屉内容 */
+  /** Drawer content */
   children?: React.ReactNode;
-  /** 弹出方向 */
+  /** Placement */
   placement?: DrawerPlacement;
-  /** 宽度（左右方向生效） */
+  /** Width (effective for left/right placement) */
   width?: number | string;
-  /** 高度（上下方向生效） */
+  /** Height (effective for top/bottom placement) */
   height?: number | string;
-  /** 底部操作区 */
+  /** Footer actions area */
   footer?: React.ReactNode;
-  /** 是否显示遮罩 */
+  /** Whether to show mask */
   mask?: boolean;
-  /** 点击遮罩是否关闭 */
+  /** Whether clicking mask closes */
   maskClosable?: boolean;
-  /** 按 Esc 是否关闭 */
+  /** Whether pressing Esc closes */
   keyboard?: boolean;
-  /** 自定义关闭图标 */
+  /** Custom close icon */
   closeIcon?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -52,14 +52,14 @@ const Drawer: React.FC<DrawerProps> = ({
   className,
   style,
 }) => {
-  // mounted 控制 DOM 挂载，animating 控制入场动画
+  // mounted controls DOM mount, animating controls enter animation
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     if (open) {
       setMounted(true);
-      // 下一帧触发入场动画，确保 DOM 已挂载
+      // Trigger enter animation on next frame to ensure DOM is mounted
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
       });
@@ -72,7 +72,7 @@ const Drawer: React.FC<DrawerProps> = ({
     if (!open) setMounted(false);
   };
 
-  // 锁定背景滚动
+  // Lock background scroll
   useEffect(() => {
     if (open) {
       const prev = document.body.style.overflow;
@@ -83,7 +83,7 @@ const Drawer: React.FC<DrawerProps> = ({
     }
   }, [open]);
 
-  // Esc 关闭
+  // Esc to close
   useEffect(() => {
     if (!open || !keyboard) return;
     const handleKeyDown = (e: KeyboardEvent) => {

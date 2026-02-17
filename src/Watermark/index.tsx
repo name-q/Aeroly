@@ -2,31 +2,31 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import './index.less';
 
 export interface WatermarkProps {
-  /** 水印文字，支持字符串或字符串数组（多行） */
+  /** Watermark text，支持字符串或字符串数组（多行） */
   content?: string | string[];
-  /** 水印图片地址（优先于 content） */
+  /** Watermark image地址（优先于 content） */
   image?: string;
-  /** 图片宽度，默认 120 */
+  /** 图片Width，Default 120 */
   imageWidth?: number;
-  /** 图片高度，默认 64 */
+  /** 图片高度，Default 64 */
   imageHeight?: number;
-  /** 字体大小，默认 14 */
+  /** Font size，Default 14 */
   fontSize?: number;
-  /** 字体颜色，默认 rgba(0,0,0,0.08) */
+  /** Font color，Default rgba(0,0,0,0.08) */
   fontColor?: string;
-  /** 字体粗细，默认 normal */
+  /** 字体粗细，Default normal */
   fontWeight?: 'normal' | 'light' | 'bold' | number;
-  /** 字体，默认 sans-serif */
+  /** 字体，Default sans-serif */
   fontFamily?: string;
-  /** 旋转角度，默认 -22 */
+  /** Rotation angle，Default -22 */
   rotate?: number;
-  /** 水印间距 [水平, 垂直]，默认 [100, 100] */
+  /** Watermark gap [水平, 垂直]，Default [100, 100] */
   gap?: [number, number];
   /** 水印相对于容器左上角的偏移 [x, y] */
   offset?: [number, number];
-  /** z-index，默认 9 */
+  /** z-index，Default 9 */
   zIndex?: number;
-  /** 是否全屏覆盖（fixed 定位），默认 false */
+  /** Whether全屏覆盖（fixed 定位），Default false */
   fullscreen?: boolean;
   children?: React.ReactNode;
   className?: string;

@@ -1,57 +1,57 @@
 ---
-title: Badge 徽标数
+title: Badge
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Badge 徽标数
+# Badge
 
-图标或文字右上角的圆形徽标数字，用于消息提示、状态标记。
+A circular badge number at the top-right corner of an icon or text, used for message notifications and status indicators.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 小红点
+## Dot
 
-<code src="./demos/dot.tsx"></code>
+<code src="./en/demos/dot.tsx"></code>
 
-## 封顶数字
+## Overflow Count
 
-<code src="./demos/overflow.tsx"></code>
+<code src="./en/demos/overflow.tsx"></code>
 
-## 光影动画
+## Shimmer Animation
 
-<code src="./demos/shimmer.tsx"></code>
+<code src="./en/demos/shimmer.tsx"></code>
 
-## 自定义颜色和内容
+## Custom Color & Content
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
-## 状态点
+## Status Dot
 
-<code src="./demos/status.tsx"></code>
+<code src="./en/demos/status.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| count | 展示的数字，0 时隐藏 | `number` | - |
-| overflowCount | 封顶数字 | `number` | `99` |
-| dot | 只显示小红点 | `boolean` | `false` |
-| showZero | count 为 0 时是否显示 | `boolean` | `false` |
-| shimmer | 光影掠过动画 | `boolean` | `false` |
-| color | 自定义颜色 | `string` | - |
-| text | 自定义显示内容 | `ReactNode` | - |
-| status | 状态点（独立使用） | `'default' \| 'processing' \| 'success' \| 'warning' \| 'error'` | - |
-| statusText | 状态点旁的文本 | `ReactNode` | - |
-| size | 尺寸，影响徽标数和小红点大小 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| offset | 偏移 [right, top] | `[number, number]` | - |
-| children | 包裹的子元素 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| count | Number to display, hidden when 0 | `number` | - |
+| overflowCount | Max count to show | `number` | `99` |
+| dot | Show dot only instead of number | `boolean` | `false` |
+| showZero | Whether to show when count is 0 | `boolean` | `false` |
+| shimmer | Shimmer sweep animation | `boolean` | `false` |
+| color | Custom color | `string` | - |
+| text | Custom display content | `ReactNode` | - |
+| status | Status dot (standalone usage) | `'default' \| 'processing' \| 'success' \| 'warning' \| 'error'` | - |
+| statusText | Text next to status dot | `ReactNode` | - |
+| size | Size, affects badge number and dot size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| offset | Offset [right, top] | `[number, number]` | - |
+| children | Wrapped child element | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

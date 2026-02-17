@@ -1,87 +1,87 @@
 ---
-title: Input 输入框
+title: Input
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Input 输入框
+# Input
 
-用于文本输入，清晰的交互反馈。支持前后缀、可清除、密码切换、字数统计等能力。
+Text input with clear interaction feedback. Supports prefix/suffix, clearable, password toggle, character count, and more.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 前缀与后缀
+## Prefix & Suffix
 
-<code src="./demos/prefix-suffix.tsx"></code>
+<code src="./en/demos/prefix-suffix.tsx"></code>
 
-## 可清除
+## Clearable
 
-<code src="./demos/clear.tsx"></code>
+<code src="./en/demos/clear.tsx"></code>
 
-## 密码输入
+## Password Input
 
-<code src="./demos/password.tsx"></code>
+<code src="./en/demos/password.tsx"></code>
 
-## 字数统计
+## Character Count
 
-<code src="./demos/count.tsx"></code>
+<code src="./en/demos/count.tsx"></code>
 
-## 前后附加内容
+## Addon Before & After
 
-<code src="./demos/addon.tsx"></code>
+<code src="./en/demos/addon.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 校验状态
+## Validation Status
 
-<code src="./demos/status.tsx"></code>
+<code src="./en/demos/status.tsx"></code>
 
-## 禁用与只读
+## Disabled & ReadOnly
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### Input
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 输入值（受控） | `string` | - |
-| defaultValue | 默认值（非受控） | `string` | `''` |
-| onChange | 值变化回调 | `(value: string) => void` | - |
-| placeholder | 占位文本 | `string` | - |
-| type | 输入类型 | `'text' \| 'password' \| 'number' \| 'email' \| 'tel' \| 'url'` | `'text'` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 校验状态 | `'error' \| 'warning'` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| readOnly | 是否只读 | `boolean` | `false` |
-| loading | 是否加载中 | `boolean` | `false` |
-| allowClear | 是否可清除 | `boolean` | `false` |
-| maxLength | 最大长度 | `number` | - |
-| showCount | 是否显示字数统计 | `boolean` | `false` |
-| prefixIcon | 前缀图标（Lucide 图标组件） | `LucideIcon` | - |
-| suffixIcon | 后缀图标（Lucide 图标组件） | `LucideIcon` | - |
-| prefix | 前缀内容 | `ReactNode` | - |
-| suffix | 后缀内容 | `ReactNode` | - |
-| addonBefore | 前置附加内容 | `ReactNode` | - |
-| addonAfter | 后置附加内容 | `ReactNode` | - |
-| autoFocus | 自动聚焦 | `boolean` | `false` |
-| onPressEnter | 按下回车回调 | `(e: KeyboardEvent) => void` | - |
-| onFocus | 聚焦回调 | `(e: FocusEvent) => void` | - |
-| onBlur | 失焦回调 | `(e: FocusEvent) => void` | - |
-| onKeyDown | 按键回调 | `(e: KeyboardEvent) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Input value (controlled) | `string` | - |
+| defaultValue | Default value (uncontrolled) | `string` | `''` |
+| onChange | Callback when value changes | `(value: string) => void` | - |
+| placeholder | Placeholder text | `string` | - |
+| type | Input type | `'text' \| 'password' \| 'number' \| 'email' \| 'tel' \| 'url'` | `'text'` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Validation status | `'error' \| 'warning'` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| readOnly | Whether read-only | `boolean` | `false` |
+| loading | Whether loading | `boolean` | `false` |
+| allowClear | Whether clearable | `boolean` | `false` |
+| maxLength | Maximum length | `number` | - |
+| showCount | Whether to show character count | `boolean` | `false` |
+| prefixIcon | Prefix icon (Lucide icon component) | `LucideIcon` | - |
+| suffixIcon | Suffix icon (Lucide icon component) | `LucideIcon` | - |
+| prefix | Prefix content | `ReactNode` | - |
+| suffix | Suffix content | `ReactNode` | - |
+| addonBefore | Addon content before input | `ReactNode` | - |
+| addonAfter | Addon content after input | `ReactNode` | - |
+| autoFocus | Auto focus | `boolean` | `false` |
+| onPressEnter | Callback when Enter is pressed | `(e: KeyboardEvent) => void` | - |
+| onFocus | Callback when focused | `(e: FocusEvent) => void` | - |
+| onBlur | Callback when blurred | `(e: FocusEvent) => void` | - |
+| onKeyDown | Callback when key is pressed | `(e: KeyboardEvent) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

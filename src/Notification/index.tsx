@@ -9,21 +9,21 @@ export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 export type NotificationPlacement = 'topRight' | 'topLeft' | 'bottomRight' | 'bottomLeft';
 
 export interface NotificationConfig {
-  /** 标题 */
+  /** Title */
   title: React.ReactNode;
-  /** 描述内容 */
+  /** DescriptionContent */
   description?: React.ReactNode;
-  /** 类型 */
+  /** Type */
   type?: NotificationType;
-  /** 自动关闭延时（ms），0 则不自动关闭 */
+  /** Auto close delay (ms), 0 means no auto close */
   duration?: number;
-  /** 自定义图标 */
+  /** Custom icon */
   icon?: LucideIcon;
-  /** 弹出位置 */
+  /** Placement */
   placement?: NotificationPlacement;
-  /** 关闭回调 */
+  /** Close callback */
   onClose?: () => void;
-  /** 底部操作区 */
+  /** Footer actions area */
   footer?: React.ReactNode;
 }
 
@@ -34,7 +34,7 @@ const iconMap: Record<NotificationType, LucideIcon> = {
   error: CircleX,
 };
 
-// ---- 单条通知 ----
+// ---- Single notification ----
 
 interface NotificationItemProps {
   title: React.ReactNode;
@@ -117,7 +117,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   );
 };
 
-// ---- 容器管理（按 placement 分组） ----
+// ---- Container management (grouped by placement) ----
 
 const containers: Partial<Record<NotificationPlacement, {
   el: HTMLDivElement;
@@ -144,7 +144,7 @@ function removeNotification(key: number, onClose?: () => void) {
 }
 
 function renderAll() {
-  // 按 placement 分组渲染
+  // Render grouped by placement
   const groups: Partial<Record<NotificationPlacement, typeof notificationList>> = {};
   for (const item of notificationList) {
     const p = item.config.placement || 'topRight';
@@ -152,7 +152,7 @@ function renderAll() {
     groups[p]!.push(item);
   }
 
-  // 渲染有内容的容器
+  // Render containers with content
   for (const p of Object.keys(groups) as NotificationPlacement[]) {
     const { root } = getContainer(p);
     root.render(
@@ -174,7 +174,7 @@ function renderAll() {
     );
   }
 
-  // 清空没有内容的容器
+  // Clean up containers without content
   for (const p of Object.keys(containers) as NotificationPlacement[]) {
     if (!groups[p] || groups[p]!.length === 0) {
       containers[p]!.root.render(null);
@@ -188,7 +188,7 @@ function open(config: NotificationConfig) {
   renderAll();
 }
 
-// ---- 对外 API ----
+// ---- Public API ----
 
 const notification = {
   info: (title: React.ReactNode, description?: React.ReactNode, config?: Partial<NotificationConfig>) =>

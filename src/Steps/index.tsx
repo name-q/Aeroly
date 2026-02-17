@@ -10,38 +10,38 @@ import './index.less';
 export type StepStatus = 'wait' | 'process' | 'finish' | 'error';
 
 export interface StepItem {
-  /** 标题 */
+  /** Title */
   title: React.ReactNode;
-  /** 描述 */
+  /** Description */
   description?: React.ReactNode;
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 单独指定状态，优先级高于 current 推断 */
+  /** 单独指定Status，优先级高于 current 推断 */
   status?: StepStatus;
-  /** 是否禁用点击 */
+  /** Whether disabled点击 */
   disabled?: boolean;
 }
 
 export interface StepsProps {
   /** 步骤数据 */
   items: StepItem[];
-  /** 当前步骤（从 1 开始） */
+  /** Current step（从 1 开始） */
   current?: number;
-  /** 当前步骤的状态 */
+  /** Current step的Status */
   status?: StepStatus;
-  /** 排列方向 */
+  /** Direction */
   direction?: 'horizontal' | 'vertical';
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 标签位置（仅水平方向生效） */
+  /** Label placement（仅水平Direction生效） */
   labelPlacement?: 'horizontal' | 'vertical';
-  /** 是否可点击切换 */
+  /** Whether clickable切换 */
   clickable?: boolean;
-  /** 点击步骤回调（返回从 1 开始的步骤号） */
+  /** 点击步骤Callback（返回从 1 开始的步骤号） */
   onChange?: (current: number) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -117,7 +117,7 @@ const Steps: React.FC<StepsProps> = ({
         }
 
         if (direction === 'vertical') {
-          // 垂直模式：绝对定位 tail
+          // 垂直Mode：绝对定位 tail
           return (
             <div
               key={index}
@@ -140,7 +140,7 @@ const Steps: React.FC<StepsProps> = ({
         }
 
         if (isLabelVertical) {
-          // 水平 label-vertical：icon 居中，线绝对定位从图标右侧到 item 右边缘
+          // 水平 label-vertical：icon 居中，线绝对定位从Icon右侧到 item 右边缘
           return (
             <div
               key={index}

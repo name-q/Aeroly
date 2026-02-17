@@ -7,35 +7,35 @@ import './index.less';
 export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 export interface PopoverProps {
-  /** 弹出内容 */
+  /** 弹出Content */
   content: React.ReactNode;
-  /** 标题 */
+  /** Title */
   title?: React.ReactNode;
-  /** 触发方式 */
+  /** Trigger mode */
   trigger?: 'hover' | 'click';
-  /** 弹出方向 */
+  /** Placement */
   placement?: PopoverPlacement;
-  /** 是否显示（受控） */
+  /** Whether visible (controlled) */
   open?: boolean;
-  /** 默认是否显示（非受控） */
+  /** DefaultWhether visible（uncontrolled) */
   defaultOpen?: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 弹层与触发元素的间距 */
+  /** Gap between popup and trigger */
   offset?: number;
-  /** 触发元素 */
+  /** Trigger element */
   children: React.ReactNode;
-  /** 裸模式：不包裹 inner/content，不限宽，不加 padding，直接渲染 content */
+  /** 裸Mode：不包裹 inner/content，不限宽，不加 padding，直接Render content */
   raw?: boolean;
-  /** 弹出层自定义类名 */
+  /** 弹出层Custom class name */
   popupClassName?: string;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 位置计算 ----
+// ---- Position calculation ----
 
 interface Pos { top: number; left: number; actualPlacement: PopoverPlacement }
 
@@ -142,7 +142,7 @@ const Popover: React.FC<PopoverProps> = ({
     [isControlled, onOpenChange],
   );
 
-  // 计算位置
+  // Calculate position
   const updatePosition = useCallback(() => {
     const triggerEl = triggerRef.current;
     const popEl = popRef.current;
@@ -154,7 +154,7 @@ const Popover: React.FC<PopoverProps> = ({
     setPos(result);
   }, [placement, offset]);
 
-  // 挂载/卸载动画
+  // Mount/unmount animation
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
@@ -166,7 +166,7 @@ const Popover: React.FC<PopoverProps> = ({
     }
   }, [isOpen]);
 
-  // 挂载后计算位置
+  // 挂载后Calculate position
   useEffect(() => {
     if (mounted) {
       updatePosition();
@@ -210,7 +210,7 @@ const Popover: React.FC<PopoverProps> = ({
     setOpen(!isOpen);
   };
 
-  // 点击外部关闭（click 模式）
+  // Click outside to close（click Mode）
   useEffect(() => {
     if (trigger !== 'click' || !isOpen) return;
     const handleDocClick = (e: MouseEvent) => {

@@ -1,57 +1,57 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 2
 group:
-  title: 数据展示
+  title: Data Display
   order: 3
-title: Empty 空状态
+title: Empty
 order: 9
 toc: content
 ---
 
-# Empty 空状态
+# Empty
 
-数据为空时的占位提示，内置 6 种场景预设，开箱即用。
+Placeholder prompt when data is empty, with 6 built-in scene presets ready to use.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx" description="零配置即可使用，默认展示「暂无数据」。"></code>
+<code src="./en/demos/basic.tsx" description="Zero configuration needed. Displays 'No Data' by default."></code>
 
-## 场景预设
+## Scene Presets
 
-<code src="./demos/presets.tsx" description="通过 preset 快速切换场景，自动匹配图标和文案。"></code>
+<code src="./en/demos/presets.tsx" description="Quickly switch scenes via preset, automatically matching icons and text."></code>
 
-## 带操作按钮
+## With Action Button
 
-<code src="./demos/action.tsx" description="通过 extra 添加操作区，引导用户下一步行为。"></code>
+<code src="./en/demos/action.tsx" description="Add an action area via extra to guide users to the next step."></code>
 
-## 自定义图标
+## Custom Icon
 
-<code src="./demos/custom.tsx" description="传入 Lucide 图标或任意 ReactNode 自定义视觉。"></code>
+<code src="./en/demos/custom.tsx" description="Pass a Lucide icon or any ReactNode to customize the visual."></code>
 
 ## API
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| preset | `EmptyPreset` | `'default'` | 场景预设 |
-| icon | `LucideIcon \| ReactNode \| null` | - | 自定义图标，null 隐藏 |
-| iconSize | `number` | `48` | 图标大小 |
-| title | `ReactNode` | - | 主文案，覆盖预设 |
-| description | `ReactNode` | - | 描述文案，覆盖预设 |
-| extra | `ReactNode` | - | 操作区 |
-| image | `ReactNode` | - | 自定义图片区域，覆盖 icon |
-| imageSize | `number` | `120` | 图片区域尺寸 |
-| className | `string` | - | 自定义类名 |
-| style | `CSSProperties` | - | 自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| preset | `EmptyPreset` | `'default'` | Scene preset |
+| icon | `LucideIcon \| ReactNode \| null` | - | Custom icon, null to hide |
+| iconSize | `number` | `48` | Icon size |
+| title | `ReactNode` | - | Main text, overrides preset |
+| description | `ReactNode` | - | Description text, overrides preset |
+| extra | `ReactNode` | - | Action area |
+| image | `ReactNode` | - | Custom image area, overrides icon |
+| imageSize | `number` | `120` | Image area size |
+| className | `string` | - | Custom class name |
+| style | `CSSProperties` | - | Custom style |
 
 ### EmptyPreset
 
-| 值 | 图标 | 默认文案 |
-|------|------|--------|
-| `default` | Inbox | 暂无数据 |
-| `search` | Search | 未找到结果 |
-| `noData` | PackageOpen | 暂无数据 |
-| `noPermission` | ShieldX | 无访问权限 |
-| `networkError` | WifiOff | 网络异常 |
-| `noContent` | FileX2 | 暂无内容 |
+| Value | Icon | Default Text |
+|-------|------|--------------|
+| `default` | Inbox | No Data |
+| `search` | Search | No Results Found |
+| `noData` | PackageOpen | No Data |
+| `noPermission` | ShieldX | No Access Permission |
+| `networkError` | WifiOff | Network Error |
+| `noContent` | FileX2 | No Content |

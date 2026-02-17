@@ -1,70 +1,70 @@
 ---
-title: Notification 通知提醒框
+title: Notification
 group:
-  title: 反馈
+  title: Feedback
   order: 5
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Notification 通知提醒框
+# Notification
 
-全局展示通知提醒信息，从屏幕边缘滑入，支持四个角定位、自适应内容高度、手动关闭。
+Display global notification messages that slide in from the screen edge. Supports four corner positions, adaptive content height, and manual close.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 不同类型
+## Different Types
 
-<code src="./demos/types.tsx"></code>
+<code src="./en/demos/types.tsx"></code>
 
-## 自定义时长
+## Custom Duration
 
-<code src="./demos/duration.tsx"></code>
+<code src="./en/demos/duration.tsx"></code>
 
-## 弹出位置
+## Placement
 
-<code src="./demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx"></code>
 
-## 带操作按钮
+## With Action Buttons
 
-<code src="./demos/footer.tsx"></code>
+<code src="./en/demos/footer.tsx"></code>
 
 ## API
 
-命令式调用，直接使用 `notification` 对象的方法：
+Imperative API. Use methods on the `notification` object directly:
 
 ```ts
 import { notification } from 'aero-ui';
 
-notification.info('标题', '描述内容');
-notification.success('标题', '描述内容');
-notification.warning('标题', '描述内容');
-notification.error('标题', '描述内容');
+notification.info('Title', 'Description');
+notification.success('Title', 'Description');
+notification.warning('Title', 'Description');
+notification.error('Title', 'Description');
 ```
 
-### 快捷方法
+### Shortcut Methods
 
-| 方法 | 说明 | 类型 |
-|------|------|------|
-| notification.info | 信息通知 | `(title, description?, config?) => void` |
-| notification.success | 成功通知 | `(title, description?, config?) => void` |
-| notification.warning | 警告通知 | `(title, description?, config?) => void` |
-| notification.error | 错误通知 | `(title, description?, config?) => void` |
-| notification.open | 自定义配置 | `(config: NotificationConfig) => void` |
+| Method | Description | Type |
+|--------|-------------|------|
+| notification.info | Info notification | `(title, description?, config?) => void` |
+| notification.success | Success notification | `(title, description?, config?) => void` |
+| notification.warning | Warning notification | `(title, description?, config?) => void` |
+| notification.error | Error notification | `(title, description?, config?) => void` |
+| notification.open | Custom config | `(config: NotificationConfig) => void` |
 
 ### NotificationConfig
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| title | 标题 | `ReactNode` | - |
-| description | 描述内容 | `ReactNode` | - |
-| type | 类型 | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
-| duration | 自动关闭延时（ms），0 不自动关闭 | `number` | `4500` |
-| icon | 自定义图标 | `LucideIcon` | - |
-| placement | 弹出位置 | `'topRight' \| 'topLeft' \| 'bottomRight' \| 'bottomLeft'` | `'topRight'` |
-| footer | 底部操作区 | `ReactNode` | - |
-| onClose | 关闭回调 | `() => void` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| title | Title | `ReactNode` | - |
+| description | Description content | `ReactNode` | - |
+| type | Type | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
+| duration | Auto-close delay in ms, 0 to disable | `number` | `4500` |
+| icon | Custom icon | `LucideIcon` | - |
+| placement | Placement position | `'topRight' \| 'topLeft' \| 'bottomRight' \| 'bottomLeft'` | `'topRight'` |
+| footer | Footer action area | `ReactNode` | - |
+| onClose | Callback when closed | `() => void` | - |

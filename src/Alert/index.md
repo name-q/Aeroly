@@ -1,46 +1,46 @@
 ---
-title: Alert 警告提示
+title: Alert
 group:
-  title: 反馈
+  title: Feedback
   order: 5
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Alert 警告提示
+# Alert
 
-页面内的静态警告提示，不打断用户流程。标题文字默认带有光影掠过效果，吸引用户注意。
+Static alert messages within a page that do not interrupt user workflow. The title text features a shimmer sweep effect by default to draw user attention.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 辅助描述
+## With Description
 
-<code src="./demos/description.tsx"></code>
+<code src="./en/demos/description.tsx"></code>
 
-## 可关闭
+## Closable
 
-<code src="./demos/closable.tsx"></code>
+<code src="./en/demos/closable.tsx"></code>
 
-## 自定义
+## Custom
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| children | 提示内容（标题） | `ReactNode` | - |
-| type | 提示类型 | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
-| description | 辅助描述文字 | `ReactNode` | - |
-| closable | 是否可关闭 | `boolean` | `false` |
-| onClose | 关闭回调 | `() => void` | - |
-| icon | 自定义图标 | `LucideIcon` | - |
-| showIcon | 是否显示图标 | `boolean` | `true` |
-| size | 尺寸，影响内边距、字号和图标大小 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| shimmer | 是否开启文字光影掠过效果 | `boolean` | `true` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| children | Alert content (title) | `ReactNode` | - |
+| type | Alert type | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
+| description | Supplementary description text | `ReactNode` | - |
+| closable | Whether the alert can be closed | `boolean` | `false` |
+| onClose | Callback when closed | `() => void` | - |
+| icon | Custom icon | `LucideIcon` | - |
+| showIcon | Whether to show the icon | `boolean` | `true` |
+| size | Size, affects padding, font size, and icon size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| shimmer | Whether to enable the text shimmer sweep effect | `boolean` | `true` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

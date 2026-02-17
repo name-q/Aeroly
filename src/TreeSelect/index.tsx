@@ -9,62 +9,62 @@ import './index.less';
 // ---- Types ----
 
 export interface TreeSelectNodeData {
-  /** 唯一标识 */
+  /** Unique identifier */
   key: string;
-  /** 显示内容 */
+  /** Display content */
   title: React.ReactNode;
-  /** 子节点 */
+  /** Children nodes */
   children?: TreeSelectNodeData[];
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否为叶子节点 */
+  /** Whether it is a leaf node */
   isLeaf?: boolean;
 }
 
 export interface TreeSelectProps {
-  /** 树数据 */
+  /** Tree data */
   treeData: TreeSelectNodeData[];
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: string | string[];
-  /** 默认值 */
+  /** Default value */
   defaultValue?: string | string[];
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (value: string | string[], nodes: TreeSelectNodeData | TreeSelectNodeData[]) => void;
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否允许清除 */
+  /** Whether to allow clearing */
   allowClear?: boolean;
-  /** 是否可搜索 */
+  /** Whether searchable */
   showSearch?: boolean;
-  /** 自定义搜索过滤（返回 true 表示匹配） */
+  /** Custom search filter (return true for match) */
   filterTreeNode?: (input: string, node: TreeSelectNodeData) => boolean;
-  /** 搜索框占位文案 */
+  /** Search input placeholder */
   searchPlaceholder?: string;
-  /** 是否多选（使用勾选框模式） */
+  /** Whether multiple select (checkbox mode) */
   multiple?: boolean;
-  /** 多选时最多显示的标签数，超出显示 +N */
+  /** Max tags to display in multiple mode, shows +N for overflow */
   maxTagCount?: number;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 无数据时的提示 */
+  /** Empty state content */
   notFoundContent?: React.ReactNode;
-  /** 默认展开所有节点 */
+  /** Expand all nodes by default */
   defaultExpandAll?: boolean;
-  /** 默认展开的节点 key */
+  /** Default expanded node keys */
   defaultExpandedKeys?: string[];
-  /** 是否只能选择叶子节点（单选模式） */
+  /** Whether only leaf nodes are selectable (single mode) */
   treeLeafOnly?: boolean;
-  /** 下拉面板是否显示（受控） */
+  /** Whether dropdown is visible (controlled) */
   open?: boolean;
-  /** 下拉面板显隐变化回调 */
+  /** Dropdown visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -93,7 +93,7 @@ function findNode(data: TreeSelectNodeData[], key: string): TreeSelectNodeData |
   return null;
 }
 
-/** 构建 key -> 子孙叶子 key 映射 */
+/** Build key -> descendant leaf key mapping */
 function buildDescendantLeafMap(data: TreeSelectNodeData[]): Map<string, string[]> {
   const map = new Map<string, string[]>();
   const walk = (nodes: TreeSelectNodeData[]): string[] => {
@@ -114,7 +114,7 @@ function buildDescendantLeafMap(data: TreeSelectNodeData[]): Map<string, string[
   return map;
 }
 
-/** 根据叶子选中状态推导所有节点的 checked / halfChecked */
+/** Derive checked / halfChecked for all nodes from leaf selection state */
 function deriveCheckedKeys(
   checkedLeafKeys: Set<string>,
   data: TreeSelectNodeData[],
@@ -142,7 +142,7 @@ function deriveCheckedKeys(
   return { checked, halfChecked };
 }
 
-/** 收集禁用叶子 key */
+/** Collect disabled leaf keys */
 function collectDisabledLeafKeys(data: TreeSelectNodeData[], treeDisabled: boolean): Set<string> {
   const keys = new Set<string>();
   const walk = (nodes: TreeSelectNodeData[], parentDisabled: boolean) => {
@@ -164,7 +164,7 @@ const defaultFilter: TreeSelectProps['filterTreeNode'] = (input, node) => {
   return title.toLowerCase().includes(input.toLowerCase());
 };
 
-/** 搜索时过滤树：保留匹配节点及其祖先路径 */
+/** Filter tree during search: keep matching nodes and ancestor paths */
 function filterTree(
   data: TreeSelectNodeData[],
   input: string,
@@ -213,14 +213,14 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   style,
 }) => {
   const size = useSize(sizeProp);
-  // ---- 受控/非受控值 ----
+  // ---- Controlled/uncontrolled value ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | string[]>(
     defaultValue ?? (multiple ? [] : ''),
   );
   const currentValue = isControlled ? value! : internalValue;
 
-  // ---- 下拉开关 ----
+  // ---- Dropdown toggle ----
   const isOpenControlled = openProp !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = isOpenControlled ? openProp! : internalOpen;
@@ -242,17 +242,17 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   const searchRef = useRef<HTMLInputElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
-  // ---- 展开状态 ----
+  // ---- Expand state ----
   const allKeys = useMemo(() => collectAllKeys(treeData), [treeData]);
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(
     () => new Set(defaultExpandAll ? allKeys : (defaultExpandedKeys || [])),
   );
 
-  // ---- 多选 checkable 相关 ----
+  // ---- Multiple select (checkable) ----
   const descendantMap = useMemo(() => buildDescendantLeafMap(treeData), [treeData]);
   const disabledLeafKeys = useMemo(() => collectDisabledLeafKeys(treeData, disabled), [treeData, disabled]);
 
-  // 从 currentValue 推导叶子选中集合
+  // Derive leaf selection set from currentValue
   const currentCheckedLeaves = useMemo(() => {
     if (!multiple) return new Set<string>();
     const arr = currentValue as string[];
@@ -269,13 +269,13 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     [multiple, currentCheckedLeaves, treeData, descendantMap],
   );
 
-  // ---- 搜索过滤 ----
+  // ---- Search filter ----
   const filteredTreeData = useMemo(() => {
     if (!showSearch || !searchText) return treeData;
     return filterTree(treeData, searchText, filterTreeNode!);
   }, [treeData, showSearch, searchText, filterTreeNode]);
 
-  // 搜索时自动展开所有匹配节点
+  // Auto expand all matching nodes during search
   const displayExpandedKeys = useMemo(() => {
     if (showSearch && searchText) {
       return new Set(collectAllKeys(filteredTreeData));
@@ -283,7 +283,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     return expandedKeys;
   }, [showSearch, searchText, filteredTreeData, expandedKeys]);
 
-  // ---- 打开/关闭动画 ----
+  // ---- Open/close animation ----
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
@@ -303,7 +303,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     }
   };
 
-  // ---- 点击外部关闭 ----
+  // ---- Click outside to close ----
   useEffect(() => {
     if (!isOpen) return;
     const handleClick = (e: MouseEvent) => {
@@ -315,7 +315,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [isOpen, setOpen]);
 
-  // ---- 展开/收起 ----
+  // ---- Expand/collapse ----
   const handleToggle = useCallback((key: string) => {
     setExpandedKeys((prev) => {
       const next = new Set(prev);
@@ -325,7 +325,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     });
   }, []);
 
-  // ---- 单选 ----
+  // ---- Single select ----
   const handleSelectSingle = useCallback(
     (node: TreeSelectNodeData) => {
       if (node.disabled || disabled) return;
@@ -338,7 +338,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     [disabled, treeLeafOnly, isControlled, onChange, setOpen],
   );
 
-  // ---- 多选 (checkable) ----
+  // ---- Multiple select (checkable) ----
   const handleCheck = useCallback(
     (key: string) => {
       if (disabled) return;
@@ -364,7 +364,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     [disabled, descendantMap, disabledLeafKeys, currentCheckedLeaves, treeData, isControlled, onChange],
   );
 
-  // ---- 清除 ----
+  // ---- Clear ----
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     const next = multiple ? [] : '';
@@ -373,11 +373,11 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     setOpen(false);
   };
 
-  // ---- 多选移除标签 ----
+  // ---- Remove tag in multiple mode ----
   const handleRemoveTag = (key: string, e: React.MouseEvent) => {
     e.stopPropagation();
     if (disabled) return;
-    // 取消勾选该节点对应的叶子
+    // Uncheck leaves corresponding to this node
     const allLeaves = descendantMap.get(key) || [key];
     const nextLeaves = new Set(currentCheckedLeaves);
     allLeaves.forEach((k) => nextLeaves.delete(k));
@@ -389,7 +389,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     onChange?.(nextKeys, nodes);
   };
 
-  // ---- 键盘 ----
+  // ---- Keyboard ----
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (disabled) return;
@@ -413,7 +413,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     [disabled, isOpen, multiple, searchText, currentValue, setOpen, handleRemoveTag],
   );
 
-  // ---- 显示内容 ----
+  // ---- Display content ----
   const hasValue = multiple
     ? (currentValue as string[]).length > 0
     : currentValue !== '' && currentValue !== undefined;
@@ -432,7 +432,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  // ---- 多选标签渲染 ----
+  // ---- Render multiple select tags ----
   const renderTags = () => {
     const arr = currentValue as string[];
     const showArr = maxTagCount !== undefined ? arr.slice(0, maxTagCount) : arr;
@@ -464,7 +464,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     );
   };
 
-  // ---- 渲染树节点 ----
+  // ---- Render tree nodes ----
   const renderTreeNodes = (nodes: TreeSelectNodeData[], level: number) => {
     return nodes.map((node) => {
       const isLeaf = node.isLeaf || !node.children?.length;
@@ -496,7 +496,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
               }
             }}
           >
-            {/* 展开箭头 */}
+            {/* Expand arrow */}
             <span
               className={[
                 'aero-tree-select-switcher',
@@ -513,7 +513,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
               {!isLeaf && <Icon icon={ChevronRight} size={14} />}
             </span>
 
-            {/* 多选勾选框 */}
+            {/* Multiple select checkbox */}
             {multiple && (
               <span
                 className="aero-tree-select-checkbox-wrap"
@@ -529,16 +529,16 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
               </span>
             )}
 
-            {/* 标题 */}
+            {/* Title */}
             <span className="aero-tree-select-node-title">{node.title}</span>
 
-            {/* 单选选中标记 */}
+            {/* Single select check mark */}
             {isSelected && !multiple && (
               <Icon icon={Check} size={14} className="aero-tree-select-node-check" />
             )}
           </div>
 
-          {/* 子节点 */}
+          {/* Children nodes */}
           {!isLeaf && isExpanded && node.children && (
             <div className="aero-tree-select-node-children">
               {renderTreeNodes(node.children, level + 1)}

@@ -8,69 +8,69 @@ import './index.less';
 // ---- Types ----
 
 export interface CascaderOption {
-  /** 选项值 */
+  /** Option value */
   value: string | number;
-  /** 显示文本 */
+  /** Display text */
   label: React.ReactNode;
-  /** 子选项 */
+  /** Child options */
   children?: CascaderOption[];
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否为叶子节点（无展开箭头） */
+  /** Whether it is a leaf node（no expand arrow) */
   isLeaf?: boolean;
 }
 
 export type CascaderValueType = (string | number)[];
 
 export interface CascaderProps {
-  /** 级联选项数据 */
+  /** Cascader options data */
   options: CascaderOption[];
-  /** 当前值（受控），每项为从根到叶的路径数组 */
+  /** Current value (controlled), each item is a root-to-leaf path array */
   value?: CascaderValueType | CascaderValueType[];
-  /** 默认值 */
+  /** Default value */
   defaultValue?: CascaderValueType | CascaderValueType[];
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (
     value: CascaderValueType | CascaderValueType[],
     selectedOptions: CascaderOption[] | CascaderOption[][],
   ) => void;
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否允许清除 */
+  /** Whether to allow clearing */
   allowClear?: boolean;
-  /** 是否可搜索 */
+  /** Whether searchable */
   showSearch?: boolean;
-  /** 搜索框占位文案 */
+  /** Search input placeholder */
   searchPlaceholder?: string;
-  /** 是否多选 */
+  /** Whether multiple */
   multiple?: boolean;
-  /** 多选时最多显示的标签数 */
+  /** Max tags to display in multiple mode */
   maxTagCount?: number;
-  /** 选择即改变（选中任意层级即触发 onChange，而非仅叶子） */
+  /** Change on select (trigger onChange on any level, not just leaf) */
   changeOnSelect?: boolean;
-  /** 自定义显示文本的分隔符 */
+  /** Custom display text separator */
   displaySeparator?: string;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 无数据时的提示 */
+  /** Empty state content */
   notFoundContent?: React.ReactNode;
-  /** 下拉面板是否显示（受控） */
+  /** Whether dropdown is visible (controlled) */
   open?: boolean;
-  /** 下拉面板显隐变化回调 */
+  /** Dropdown visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 // ---- Helpers ----
 
-/** 根据路径查找选项链 */
+/** Find option chain by path */
 function getOptionsByPath(
   options: CascaderOption[],
   path: CascaderValueType,
@@ -86,7 +86,7 @@ function getOptionsByPath(
   return result;
 }
 
-/** 获取路径对应的显示文本 */
+/** Get display text for path */
 function getLabels(
   options: CascaderOption[],
   path: CascaderValueType,
@@ -98,7 +98,7 @@ function getLabels(
     .join(separator);
 }
 
-/** 展平所有叶子路径（用于搜索） */
+/** Flatten all leaf paths (for search) */
 interface FlatPath {
   path: CascaderValueType;
   options: CascaderOption[];
@@ -157,14 +157,14 @@ const Cascader: React.FC<CascaderProps> = ({
   style,
 }) => {
   const size = useSize(sizeProp);
-  // ---- 受控/非受控值 ----
+  // ---- Controlled/uncontrolled value ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<CascaderValueType | CascaderValueType[]>(
     defaultValue ?? (multiple ? [] : []),
   );
   const currentValue = isControlled ? value! : internalValue;
 
-  // ---- 下拉开关 ----
+  // ---- Dropdown toggle ----
   const isOpenControlled = openProp !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = isOpenControlled ? openProp! : internalOpen;
@@ -181,7 +181,7 @@ const Cascader: React.FC<CascaderProps> = ({
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
 
-  // 当前展开的路径（用于多列面板展示）
+  // Currently expanded path (for multi-column panel display)
   const [activePath, setActivePath] = useState<CascaderValueType>([]);
 
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -189,7 +189,7 @@ const Cascader: React.FC<CascaderProps> = ({
   const searchRef = useRef<HTMLInputElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
-  // ---- 搜索 ----
+  // ---- Search ----
   const allPaths = useMemo(() => flattenPaths(options), [options]);
 
   const filteredPaths = useMemo(() => {
@@ -201,12 +201,12 @@ const Cascader: React.FC<CascaderProps> = ({
     );
   }, [allPaths, showSearch, searchText]);
 
-  // ---- 打开/关闭动画 ----
+  // ---- Open/close animation ----
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
       setSearchText('');
-      // 初始化 activePath 为当前选中值的路径
+      // Initialize activePath to current selected value path
       if (!multiple) {
         const val = currentValue as CascaderValueType;
         setActivePath(val.length > 0 ? val.slice(0, -1) : []);
@@ -228,7 +228,7 @@ const Cascader: React.FC<CascaderProps> = ({
     }
   };
 
-  // ---- 点击外部关闭 ----
+  // ---- Click outside to close ----
   useEffect(() => {
     if (!isOpen) return;
     const handleClick = (e: MouseEvent) => {
@@ -240,7 +240,7 @@ const Cascader: React.FC<CascaderProps> = ({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [isOpen, setOpen]);
 
-  // ---- 获取某一列的选项 ----
+  // ---- Get options for a column ----
   const getColumnOptions = useCallback(
     (level: number): CascaderOption[] => {
       if (level === 0) return options;
@@ -257,7 +257,7 @@ const Cascader: React.FC<CascaderProps> = ({
     [options, activePath],
   );
 
-  // 计算要显示的列数
+  // Calculate number of columns to display
   const columns = useMemo(() => {
     const cols: CascaderOption[][] = [options];
     let current = options;
@@ -274,7 +274,7 @@ const Cascader: React.FC<CascaderProps> = ({
     return cols;
   }, [options, activePath]);
 
-  // ---- 选中判断 ----
+  // ---- Selection check ----
   const isSelectedPath = useCallback(
     (path: CascaderValueType): boolean => {
       if (multiple) {
@@ -285,7 +285,7 @@ const Cascader: React.FC<CascaderProps> = ({
     [currentValue, multiple],
   );
 
-  // ---- 选择 ----
+  // ---- Selection ----
   const handleSelect = useCallback(
     (opt: CascaderOption, level: number) => {
       if (opt.disabled) return;
@@ -313,7 +313,7 @@ const Cascader: React.FC<CascaderProps> = ({
         }
       }
 
-      // 展开子列
+      // Expand child column
       if (!isLeaf) {
         setActivePath(newPath);
       } else {
@@ -323,7 +323,7 @@ const Cascader: React.FC<CascaderProps> = ({
     [activePath, options, multiple, currentValue, isControlled, onChange, changeOnSelect, setOpen],
   );
 
-  // ---- 搜索模式选择 ----
+  // ---- Search mode selection ----
   const handleSearchSelect = useCallback(
     (fp: FlatPath) => {
       const disabled = fp.options.some((o) => o.disabled);
@@ -349,7 +349,7 @@ const Cascader: React.FC<CascaderProps> = ({
     [multiple, currentValue, isControlled, onChange, options, setOpen],
   );
 
-  // ---- 清除 ----
+  // ---- Clear ----
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     const next: CascaderValueType | CascaderValueType[] = multiple ? [] : [];
@@ -358,7 +358,7 @@ const Cascader: React.FC<CascaderProps> = ({
     setOpen(false);
   };
 
-  // ---- 多选移除标签 ----
+  // ---- Remove tag in multiple mode ----
   const handleRemoveTag = (path: CascaderValueType, e: React.MouseEvent) => {
     e.stopPropagation();
     if (disabled) return;
@@ -368,7 +368,7 @@ const Cascader: React.FC<CascaderProps> = ({
     onChange?.(arr, chains);
   };
 
-  // ---- 键盘 ----
+  // ---- Keyboard ----
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (disabled) return;
@@ -385,7 +385,7 @@ const Cascader: React.FC<CascaderProps> = ({
     [disabled, isOpen, setOpen],
   );
 
-  // ---- 显示内容 ----
+  // ---- Display content ----
   const hasValue = multiple
     ? (currentValue as CascaderValueType[]).length > 0
     : (currentValue as CascaderValueType).length > 0;
@@ -404,13 +404,13 @@ const Cascader: React.FC<CascaderProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  // ---- 单选显示文本 ----
+  // ---- Single selectDisplay text ----
   const displayLabel = useMemo(() => {
     if (multiple || !hasValue) return '';
     return getLabels(options, currentValue as CascaderValueType, displaySeparator);
   }, [multiple, hasValue, options, currentValue, displaySeparator]);
 
-  // ---- 多选标签渲染 ----
+  // ---- Render multiple select tags ----
   const renderTags = () => {
     const arr = currentValue as CascaderValueType[];
     const showArr = maxTagCount !== undefined ? arr.slice(0, maxTagCount) : arr;
@@ -442,7 +442,7 @@ const Cascader: React.FC<CascaderProps> = ({
     );
   };
 
-  // ---- 渲染多列面板 ----
+  // ---- Render multi-column panel ----
   const renderColumns = () => (
     <div className="aero-cascader-menus">
       {columns.map((colOpts, level) => (
@@ -481,7 +481,7 @@ const Cascader: React.FC<CascaderProps> = ({
     </div>
   );
 
-  // ---- 渲染搜索结果 ----
+  // ---- Render search results ----
   const renderSearchResults = () => {
     if (filteredPaths.length === 0) {
       return <div className="aero-cascader-empty">{notFoundContent}</div>;

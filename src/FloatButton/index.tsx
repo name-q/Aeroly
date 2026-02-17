@@ -11,75 +11,75 @@ import './index.less';
 // ---- Types ----
 
 export interface FloatButtonProps {
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 描述文字（图标下方） */
+  /** Description text (below icon) */
   description?: React.ReactNode;
-  /** Tooltip 提示 */
+  /** Tooltip Hint */
   tooltip?: React.ReactNode;
-  /** Tooltip 方向 */
+  /** Tooltip Direction */
   tooltipPlacement?: 'top' | 'bottom' | 'left' | 'right';
-  /** 徽标数 */
+  /** Badge count */
   badge?: number;
-  /** 徽标小红点 */
+  /** Badge dot */
   dot?: boolean;
-  /** 按钮形状 */
+  /** Button shape */
   shape?: 'circle' | 'square';
-  /** 按钮类型 */
+  /** Button type */
   type?: 'default' | 'primary';
-  /** 点击回调 */
+  /** Click callback */
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-  /** 链接地址 */
+  /** Link URL */
   href?: string;
-  /** 链接 target */
+  /** Link target */
   target?: string;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface FloatButtonGroupProps {
-  /** 展开时的图标，默认 Plus */
+  /** Icon when expanded, default Plus */
   icon?: LucideIcon;
-  /** 展开时的关闭图标，默认旋转 icon 45° */
+  /** Close icon when expanded, default rotates icon 45° */
   closeIcon?: LucideIcon;
-  /** 触发方式 */
+  /** Trigger mode */
   trigger?: 'hover' | 'click';
-  /** 是否展开（受控） */
+  /** Whether expanded (controlled) */
   open?: boolean;
-  /** 展开变化回调 */
+  /** Expand change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 按钮形状 */
+  /** Button shape */
   shape?: 'circle' | 'square';
-  /** Tooltip 提示 */
+  /** Tooltip Hint */
   tooltip?: React.ReactNode;
-  /** 按钮类型 */
+  /** Button type */
   type?: 'default' | 'primary';
-  /** 子按钮 */
+  /** Child buttons */
   children: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
 export interface BackTopProps {
-  /** 滚动高度达到此值时显示，默认 400 */
+  /** Show when scroll height reaches this value, default 400 */
   visibilityHeight?: number;
-  /** 滚动目标，默认 window */
+  /** Scroll target, default window */
   target?: () => HTMLElement | Window;
-  /** 按钮形状 */
+  /** Button shape */
   shape?: 'circle' | 'square';
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** Tooltip 提示 */
+  /** Tooltip Hint */
   tooltip?: React.ReactNode;
-  /** 点击回调 */
+  /** Click callback */
   onClick?: () => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -182,7 +182,7 @@ const FloatButtonGroup: React.FC<FloatButtonGroupProps> = ({
     [isControlled, onOpenChange],
   );
 
-  // 点击外部关闭
+  // Click outside to close
   useEffect(() => {
     if (trigger !== 'click' || !isOpen) return;
     const handleDoc = (e: MouseEvent) => {
@@ -244,7 +244,7 @@ const FloatButtonGroup: React.FC<FloatButtonGroupProps> = ({
     triggerBtn
   );
 
-  // 计算子按钮数量用于交错动画
+  // Calculate child button count for staggered animation
   const childArray = React.Children.toArray(children);
 
   return (
@@ -300,7 +300,7 @@ const BackTop: React.FC<BackTopProps> = ({
       setVisible(getScrollTop() >= visibilityHeight);
     }, 100);
 
-    // 初始检测
+    // Initial detection
     handleScroll();
 
     el.addEventListener('scroll', handleScroll, { passive: true });

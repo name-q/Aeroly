@@ -72,6 +72,26 @@ const zhCN: Locale = {
   FloatButton: {
     backToTop: '回到顶部',
   },
+
+  Form: {
+    required: '此项为必填项',
+    whitespace: '不能只包含空格',
+    min: '不能小于 {min}',
+    max: '不能大于 {max}',
+    minLength: '长度不能少于 {minLength}',
+    maxLength: '长度不能超过 {maxLength}',
+    pattern: '格式不正确',
+    validateFailed: '校验失败',
+    email: '请输入有效的邮箱地址',
+    url: '请输入有效的 URL',
+    number: '请输入数字',
+    integer: '请输入整数',
+    optional: '（选填）',
+  },
+
+  AutoComplete: {
+    searching: '搜索中...',
+  },
 };
 
 export default zhCN;

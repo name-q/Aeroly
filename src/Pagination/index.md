@@ -1,60 +1,60 @@
 ---
-title: Pagination 分页
+title: Pagination
 group:
-  title: 导航
+  title: Navigation
   order: 5
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Pagination 分页
+# Pagination
 
-数据量较多时，采用分页的形式分隔长列表，每次只加载一页数据。
+Split long lists into pages when dealing with large amounts of data, loading one page at a time.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 更多页码
+## More Pages
 
-<code src="./demos/more.tsx"></code>
+<code src="./en/demos/more.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 简洁模式
+## Simple Mode
 
-<code src="./demos/simple.tsx"></code>
+<code src="./en/demos/simple.tsx"></code>
 
-## 总数 & 快速跳转 & 条数切换
+## Total & Quick Jumper & Page Size Changer
 
-<code src="./demos/jumper.tsx"></code>
+<code src="./en/demos/jumper.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### Pagination
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| current | 当前页（受控） | `number` | - |
-| defaultCurrent | 默认当前页 | `number` | `1` |
-| total | 数据总数 | `number` | `0` |
-| pageSize | 每页条数（受控） | `number` | - |
-| defaultPageSize | 默认每页条数 | `number` | `10` |
-| onChange | 页码/pageSize 变化回调 | `(page: number, pageSize: number) => void` | - |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| disabled | 禁用 | `boolean` | `false` |
-| showQuickJumper | 显示快速跳转输入框 | `boolean` | `false` |
-| showSizeChanger | 显示每页条数切换器 | `boolean` | `false` |
-| pageSizeOptions | 每页条数选项 | `number[]` | `[10, 20, 50, 100]` |
-| showTotal | 显示总数 | `(total: number, range: [number, number]) => ReactNode` | - |
-| simple | 简洁模式 | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| current | Current page (controlled) | `number` | - |
+| defaultCurrent | Default current page | `number` | `1` |
+| total | Total number of data items | `number` | `0` |
+| pageSize | Number of items per page (controlled) | `number` | - |
+| defaultPageSize | Default number of items per page | `number` | `10` |
+| onChange | Callback when page or pageSize changes | `(page: number, pageSize: number) => void` | - |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| disabled | Whether disabled | `boolean` | `false` |
+| showQuickJumper | Whether to show quick jumper input | `boolean` | `false` |
+| showSizeChanger | Whether to show page size changer | `boolean` | `false` |
+| pageSizeOptions | Page size options | `number[]` | `[10, 20, 50, 100]` |
+| showTotal | Show total count | `(total: number, range: [number, number]) => ReactNode` | - |
+| simple | Simple mode | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

@@ -1,55 +1,55 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 2
 group:
-  title: 数据展示
+  title: Data Display
   order: 3
-title: QRCode 二维码
+title: QRCode
 order: 15
 toc: content
 ---
 
-# QRCode 二维码
+# QRCode
 
-将文本、链接等信息编码为二维码，支持 Logo、状态控制、下载复制。有 icon 时自动使用高纠错等级。
+Encode text, links, and other information into QR codes. Supports Logo, status control, download, and copy. Automatically uses high error correction level when an icon is provided.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 中心 Logo
+## Center Logo
 
-<code src="./demos/icon.tsx"></code>
+<code src="./en/demos/icon.tsx"></code>
 
-## 自定义样式
+## Custom Style
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
-## 状态控制
+## Status Control
 
-<code src="./demos/status.tsx"></code>
+<code src="./en/demos/status.tsx"></code>
 
-## 无边框
+## Borderless
 
-<code src="./demos/borderless.tsx"></code>
+<code src="./en/demos/borderless.tsx"></code>
 
 ## API
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| value | `string` | - | 二维码内容（必填） |
-| size | `number` | `160` | 尺寸（px） |
-| color | `string` | `'#000000'` | 前景色 |
-| bgColor | `string` | `'#ffffff'` | 背景色 |
-| icon | `string` | - | 中心图标图片 URL，传入后自动使用高纠错 |
-| iconSize | `number` | `size * 0.2` | 图标尺寸 |
-| iconBorderRadius | `number` | `4` | 图标圆角 |
-| bordered | `boolean` | `true` | 是否显示卡片边框和操作栏 |
-| downloadName | `string` | `'qrcode.png'` | 下载文件名 |
-| onCopy | `(success: boolean) => void` | - | 复制回调，参数为是否成功 |
-| status | `'active' \| 'expired' \| 'loading' \| 'scanned'` | `'active'` | 状态 |
-| statusRender | `(info) => ReactNode` | - | 自定义状态覆盖层 |
-| onRefresh | `() => void` | - | 过期状态下的刷新回调 |
-| className | `string` | - | 自定义类名 |
-| style | `CSSProperties` | - | 自定义样式 |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| value | `string` | - | QR code content (required) |
+| size | `number` | `160` | Size (px) |
+| color | `string` | `'#000000'` | Foreground color |
+| bgColor | `string` | `'#ffffff'` | Background color |
+| icon | `string` | - | Center icon image URL, automatically uses high error correction when provided |
+| iconSize | `number` | `size * 0.2` | Icon size |
+| iconBorderRadius | `number` | `4` | Icon border radius |
+| bordered | `boolean` | `true` | Show card border and action bar |
+| downloadName | `string` | `'qrcode.png'` | Download file name |
+| onCopy | `(success: boolean) => void` | - | Copy callback, parameter indicates success |
+| status | `'active' \| 'expired' \| 'loading' \| 'scanned'` | `'active'` | Status |
+| statusRender | `(info) => ReactNode` | - | Custom status overlay |
+| onRefresh | `() => void` | - | Refresh callback in expired status |
+| className | `string` | - | Custom class name |
+| style | `CSSProperties` | - | Custom style |

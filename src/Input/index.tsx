@@ -8,57 +8,57 @@ import './index.less';
 // ---- Types ----
 
 export interface InputProps {
-  /** 输入值（受控） */
+  /** Input value (controlled) */
   value?: string;
-  /** 默认值（非受控） */
+  /** Default value（uncontrolled) */
   defaultValue?: string;
-  /** 值变化回调 */
+  /** Value change callback */
   onChange?: (value: string) => void;
-  /** 占位文本 */
+  /** Placeholder */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否只读 */
+  /** Whether readonly */
   readOnly?: boolean;
-  /** 是否加载中 */
+  /** Whether loading */
   loading?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 输入类型 */
+  /** InputType */
   type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'url';
-  /** 前缀图标（Lucide 图标组件） */
+  /** Prefix icon（Lucide Iconcomponent) */
   prefixIcon?: LucideIcon;
-  /** 后缀图标（Lucide 图标组件） */
+  /** SuffixIcon（Lucide Iconcomponent) */
   suffixIcon?: LucideIcon;
-  /** 前缀内容（文字/节点） */
+  /** Prefix content (text/node) */
   prefix?: React.ReactNode;
-  /** 后缀内容（文字/节点） */
+  /** Suffix content (text/node) */
   suffix?: React.ReactNode;
-  /** 前置附加内容（输入框外左侧） */
+  /** Addon before (outside input, left side) */
   addonBefore?: React.ReactNode;
-  /** 后置附加内容（输入框外右侧） */
+  /** Addon after (outside input, right side) */
   addonAfter?: React.ReactNode;
-  /** 是否可清除 */
+  /** Whether clearable */
   allowClear?: boolean;
-  /** 最大长度 */
+  /** Max length */
   maxLength?: number;
-  /** 是否显示字数统计（需配合 maxLength） */
+  /** Whether to show character count (requires maxLength) */
   showCount?: boolean;
-  /** 自动聚焦 */
+  /** Auto focus */
   autoFocus?: boolean;
-  /** 聚焦回调 */
+  /** Focus callback */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** 失焦回调 */
+  /** Blur callback */
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** 按下回车回调 */
+  /** Enter key callback */
   onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  /** 按键回调 */
+  /** Key press callback */
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -141,10 +141,10 @@ const Input: React.FC<InputProps> = ({
 
   const iconSize = size === 'small' ? 14 : size === 'large' ? 18 : 16;
 
-  // 是否显示清除按钮
+  // Whether to show clear button
   const showClear = allowClear && currentValue.length > 0 && !disabled && !readOnly;
 
-  // 后缀区域内容
+  // Suffix areaContent
   const hasSuffix = suffixIcon || suffix || isPassword || showClear || loading || showCount;
 
   const hasAddon = addonBefore || addonAfter;
@@ -162,7 +162,7 @@ const Input: React.FC<InputProps> = ({
 
   const inputEl = (
     <div className={wrapperClassNames} style={hasAddon ? undefined : style}>
-      {/* 前缀 */}
+      {/* Prefix */}
       {(prefixIcon || prefix) && (
         <span className="aero-input-prefix">
           {prefixIcon && <Icon icon={prefixIcon} size={iconSize} />}
@@ -186,7 +186,7 @@ const Input: React.FC<InputProps> = ({
         onKeyDown={handleKeyDown}
       />
 
-      {/* 后缀区域 */}
+      {/* Suffix area */}
       {hasSuffix && (
         <span className="aero-input-suffix">
           {loading && <Icon icon={Loader} spin size={iconSize} />}
@@ -222,7 +222,7 @@ const Input: React.FC<InputProps> = ({
     </div>
   );
 
-  // 有 addon 时包一层
+  // Wrap with addon container
   if (hasAddon) {
     return (
       <div

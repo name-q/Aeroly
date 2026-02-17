@@ -7,55 +7,55 @@ import './index.less';
 // ---- Types ----
 
 export interface InputNumberProps {
-  /** 当前值（受控），null 表示空 */
+  /** Current value (controlled)，null 表示空 */
   value?: number | null;
-  /** 默认值 */
+  /** Default value */
   defaultValue?: number | null;
-  /** 值变化回调 */
+  /** Value change callback */
   onChange?: (value: number | null) => void;
-  /** 最小值 */
+  /** Minimum value */
   min?: number;
-  /** 最大值 */
+  /** Maximum value */
   max?: number;
-  /** 步长 */
+  /** Step */
   step?: number;
   /** 小数精度 */
   precision?: number;
-  /** 禁用 */
+  /** Disabled */
   disabled?: boolean;
   /** 只读 */
   readOnly?: boolean;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 占位文本 */
+  /** Placeholder */
   placeholder?: string;
-  /** 是否显示步进按钮 */
+  /** Whether visibleStep buttons */
   controls?: boolean;
-  /** 前缀内容 */
+  /** PrefixContent */
   prefix?: React.ReactNode;
-  /** 格式化显示 */
+  /** Format display */
   formatter?: (value: number | undefined) => string;
   /** 从显示值解析数字 */
   parser?: (displayValue: string) => number;
-  /** 是否支持键盘上下键 */
+  /** Whether支持Keyboard上下键 */
   keyboard?: boolean;
-  /** 步进回调 */
+  /** 步进Callback */
   onStep?: (value: number, info: { offset: number; type: 'up' | 'down' }) => void;
-  /** 回车回调 */
+  /** 回车Callback */
   onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  /** 聚焦回调 */
+  /** Focus callback */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** 失焦回调 */
+  /** Blur callback */
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ---- 工具函数 ----
+// ---- Utilities ----
 
 function getPrecision(num: number): number {
   const str = String(num);
@@ -122,7 +122,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
   // 精度：优先 prop，否则从 step 推导
   const precision = precisionProp ?? getPrecision(step);
 
-  // 输入框显示文本
+  // Input框Display text
   const formatValue = useCallback(
     (val: number | null | undefined): string => {
       if (val === null || val === undefined) return '';
@@ -202,7 +202,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 
   useEffect(() => stopLongPress, [stopLongPress]);
 
-  // 输入处理 — 实时解析并通知 Form，让校验能即时响应
+  // Input处理 — 实时解析并Notifications Form，让Validation能即时响应
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
     setDisplayValue(text);
@@ -221,7 +221,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
   const commitValue = useCallback(() => {
     const text = displayValue.trim();
     if (text === '') {
-      // 仅当值确实有变化时才通知（避免聚焦不输入直接 blur 触发校验）
+      // 仅当值确实有变化时才Notifications（避免聚焦不Input直接 blur 触发Validation）
       if (currentValue !== null && currentValue !== undefined && currentValue !== '') {
         triggerChange(null);
       }
@@ -230,7 +230,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
     }
     const parsed = parseInput(text);
     if (isNaN(parsed)) {
-      // 无效输入，恢复
+      // 无效Input，恢复
       setDisplayValue(formatValue(currentValue));
       return;
     }
@@ -287,10 +287,10 @@ const InputNumber: React.FC<InputNumberProps> = ({
 
   return (
     <div className={wrapperCls} style={style}>
-      {/* 前缀 */}
+      {/* Prefix */}
       {prefix && <span className="aero-input-number-prefix">{prefix}</span>}
 
-      {/* input 容器：mirror 撑宽，input 绝对定位覆盖 */}
+      {/* Input container: mirror stretches width, input absolutely positioned on top */}
       <span className="aero-input-number-body">
         <span className="aero-input-number-mirror" aria-hidden="true">
           {displayValue || placeholder || ''}
@@ -312,7 +312,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         />
       </span>
 
-      {/* 步进按钮 */}
+      {/* Step buttons */}
       {controls && (
         <span className="aero-input-number-controls">
           <button

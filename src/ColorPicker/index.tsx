@@ -7,7 +7,7 @@ import { throttle } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
-// ─── 颜色算法 ───
+// ─── 颜Color算法 ───
 
 interface HSVA {
   h: number; // 0-360
@@ -150,29 +150,29 @@ function useDrag(
 // ─── Props ───
 
 export interface ColorPickerProps {
-  /** 颜色值（受控） */
+  /** Color value (controlled) */
   value?: string;
-  /** 默认颜色 */
+  /** Default颜Color */
   defaultValue?: string;
-  /** 颜色变化回调 */
+  /** Color change callback */
   onChange?: (color: string) => void;
   /** 显示透明度 */
   showAlpha?: boolean;
-  /** 禁用 */
+  /** Disabled */
   disabled?: boolean;
-  /** 触发器尺寸 */
+  /** 触发器Size */
   size?: 'small' | 'medium' | 'large';
-  /** 预设颜色 */
+  /** Presets颜Color */
   presets?: string[];
-  /** 弹出方向 */
+  /** Placement */
   placement?: PopoverPlacement;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
-// ─── 组件 ───
+// ─── Component ───
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   value,
@@ -198,21 +198,21 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
-  // 同步受控值（保留退化色的 hue/saturation）
+  // 同步Controlled值（保留退化Color的 hue/saturation）
   useEffect(() => {
     if (isControlled) {
       const parsed = parseColor(value!);
       setHsva(prev => {
         // 纯黑(v=0)时 hue/sat 无意义，保留之前的
         if (parsed.v === 0) return { ...prev, s: parsed.s || prev.s, v: 0, a: parsed.a };
-        // 灰色(s=0)时 hue 无意义，保留之前的
+        // 灰Color(s=0)时 hue 无意义，保留之前的
         if (parsed.s === 0) return { h: prev.h, s: 0, v: parsed.v, a: parsed.a };
         return parsed;
       });
     }
   }, [value, isControlled]);
 
-  // 同步 hex 输入框
+  // 同步 hex Input框
   useEffect(() => {
     const [r, g, b] = hsvToRgb(hsva.h, hsva.s, hsva.v);
     setHexInput(rgbToHex(r, g, b).replace('#', '').toUpperCase());
@@ -223,14 +223,14 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChangeRef.current?.(formatColor(next, showAlpha));
   }, [isControlled, showAlpha]);
 
-  // 当前 RGB
+  // Current RGB
   const [r, g, b] = hsvToRgb(hsva.h, hsva.s, hsva.v);
   const hueColor = `hsl(${hsva.h}, 100%, 50%)`;
   const displayColor = hsva.a < 1
     ? `rgba(${r}, ${g}, ${b}, ${hsva.a})`
     : rgbToHex(r, g, b);
 
-  // ─── 饱和度/明度面板 ───
+  // ─── Saturation / BrightnessPanel ───
   const svDrag = useDrag(useCallback((x: number, y: number, rect: DOMRect) => {
     const s = clamp(x / rect.width * 100, 0, 100);
     const v = clamp(100 - y / rect.height * 100, 0, 100);
@@ -239,7 +239,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChangeRef.current?.(formatColor(next, showAlpha));
   }, [isControlled, showAlpha]));
 
-  // ─── 色相条 ───
+  // ─── Hue bar ───
   const hueDrag = useDrag(useCallback((x: number, _y: number, rect: DOMRect) => {
     const h = clamp(Math.round(x / rect.width * 359), 0, 359);
     const next = { ...hsvaRef.current, h };
@@ -247,7 +247,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChangeRef.current?.(formatColor(next, showAlpha));
   }, [isControlled, showAlpha]));
 
-  // ─── 透明度条 ───
+  // ─── Alpha bar ───
   const alphaDrag = useDrag(useCallback((x: number, _y: number, rect: DOMRect) => {
     const a = clamp(Math.round(x / rect.width * 100) / 100, 0, 1);
     const next = { ...hsvaRef.current, a };
@@ -255,7 +255,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChangeRef.current?.(formatColor(next, showAlpha));
   }, [isControlled, showAlpha]));
 
-  // ─── Hex 输入 ───
+  // ─── Hex Input ───
   const handleHexChange = (val: string) => {
     setHexInput(val.replace('#', '').toUpperCase());
   };
@@ -271,7 +271,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     }
   };
 
-  // ─── RGB 输入 ───
+  // ─── RGB Input ───
   const handleRgbChange = (channel: 'r' | 'g' | 'b', val: number | null) => {
     const nr = channel === 'r' ? (val ?? 0) : r;
     const ng = channel === 'g' ? (val ?? 0) : g;
@@ -284,7 +284,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     updateColor({ ...hsva, a: clamp((val ?? 100) / 100, 0, 1) });
   };
 
-  // ─── 预设 ───
+  // ─── Presets ───
   const handlePreset = (color: string) => {
     const parsed = parseColor(color);
     updateColor(parsed);
@@ -297,10 +297,10 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     className || '',
   ].filter(Boolean).join(' ');
 
-  // ─── 面板 ───
+  // ─── Panel ───
   const panel = (
     <div className="aero-colorpicker-panel">
-      {/* 饱和度/明度 */}
+      {/* Saturation / Brightness */}
       <div
         className="aero-colorpicker-saturation"
         ref={svDrag.ref}
@@ -319,7 +319,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         />
       </div>
 
-      {/* 色相条 */}
+      {/* Hue bar */}
       <div
         className="aero-colorpicker-hue"
         ref={hueDrag.ref}
@@ -334,7 +334,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         />
       </div>
 
-      {/* 透明度条 */}
+      {/* Alpha bar */}
       {showAlpha && (
         <div
           className="aero-colorpicker-alpha"
@@ -357,7 +357,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
       )}
 
-      {/* 输入区 */}
+      {/* Input area */}
       <div className="aero-colorpicker-inputs">
         <div className="aero-colorpicker-inputs__hex">
           <Input
@@ -393,7 +393,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
       </div>
 
-      {/* 预设 */}
+      {/* Presets */}
       {presets && presets.length > 0 && (
         <div className="aero-colorpicker-presets">
           {presets.map((color, i) => (

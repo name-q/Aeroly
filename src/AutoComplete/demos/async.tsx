@@ -3,9 +3,8 @@
  * description: 连接本地 Koa 服务（localhost:3001）异步搜索城市，输入时实时请求，带 loading 状态和防抖。
  */
 import React, { useState, useRef, useCallback } from 'react';
-import { AutoComplete } from 'aero-ui';
+import { AutoComplete, Icon } from 'aero-ui';
 import { MapPin } from 'lucide-react';
-import Icon from '../../Icon';
 import type { AutoCompleteOption } from 'aero-ui';
 
 const API = 'http://localhost:3001/api/search/cities';

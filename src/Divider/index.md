@@ -1,37 +1,37 @@
 ---
-title: Divider 分割线
+title: Divider
 group:
-  title: 布局
+  title: Layout
   order: 2
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Divider 分割线
+# Divider
 
-区隔内容的分割线，支持水平与垂直方向，水平方向可嵌入文字。
+A divider line to separate content. Supports horizontal and vertical directions; horizontal dividers can embed text.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 带文字
+## With Text
 
-<code src="./demos/text.tsx"></code>
+<code src="./en/demos/text.tsx"></code>
 
-## 垂直分割线
+## Vertical Divider
 
-<code src="./demos/vertical.tsx"></code>
+<code src="./en/demos/vertical.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| direction | 分割线方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
-| type | 线条样式 | `'solid' \| 'dashed' \| 'fade'` | `'solid'` |
-| orientation | 文字位置（仅水平有效） | `'left' \| 'center' \| 'right'` | `'center'` |
-| children | 嵌入文字 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| direction | Divider direction | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| type | Line style | `'solid' \| 'dashed' \| 'fade'` | `'solid'` |
+| orientation | Text position (horizontal only) | `'left' \| 'center' \| 'right'` | `'center'` |
+| children | Embedded text | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

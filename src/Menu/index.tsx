@@ -16,42 +16,42 @@ import './index.less';
 // ─── Types ───
 
 export interface MenuItemType {
-  /** 唯一标识 */
+  /** Unique identifier */
   key: string;
-  /** 显示文本 */
+  /** Display text */
   label: React.ReactNode;
-  /** 图标 */
+  /** Icon */
   icon?: LucideIcon;
-  /** 子菜单 */
+  /** Submenu */
   children?: MenuItemType[];
-  /** 禁用 */
+  /** Disabled */
   disabled?: boolean;
-  /** 分组标题（仅作为分组使用，不可选中） */
+  /** 分组Title（仅作为分组使用，不可Select） */
   type?: 'group' | 'divider';
 }
 
 export interface MenuProps {
-  /** 菜单项数据 */
+  /** Menu item data */
   items: MenuItemType[];
-  /** 当前选中项（受控） */
+  /** CurrentSelect项（Controlled） */
   selectedKey?: string;
-  /** 默认选中项 */
+  /** DefaultSelect项 */
   defaultSelectedKey?: string;
-  /** 当前展开的子菜单（受控） */
+  /** Current展开的Submenu（Controlled） */
   openKeys?: string[];
-  /** 默认展开的子菜单 */
+  /** Default展开的Submenu */
   defaultOpenKeys?: string[];
-  /** 选中回调 */
+  /** Selection callback */
   onSelect?: (key: string) => void;
-  /** 展开/收起回调 */
+  /** Expand/collapse callback */
   onOpenChange?: (openKeys: string[]) => void;
-  /** 模式 */
+  /** Mode */
   mode?: 'vertical' | 'horizontal';
   /** 收起侧栏（仅 vertical） */
   collapsed?: boolean;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -77,7 +77,7 @@ const MenuContext = createContext<MenuContextValue>({
   level: 0,
 });
 
-// ─── 工具：判断 key 是否在子树中 ───
+// ─── 工具：判断 key Whether在子树中 ───
 
 function hasSelectedChild(items: MenuItemType[], selectedKey: string): boolean {
   for (const item of items) {
@@ -104,7 +104,7 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
     ctx.onSelect(item.key);
   };
 
-  // level 0 = 默认 padding 16px；level 1+ = 42px(对齐父级icon后文字) + (level-1)*16px
+  // level 0 = Default padding 16px；level 1+ = 42px(对齐父级icon后文字) + (level-1)*16px
   const indent = ctx.mode === 'vertical' && !ctx.collapsed && ctx.level > 0
     ? 42 + (ctx.level - 1) * 16
     : 0;
@@ -209,7 +209,7 @@ const SubMenuPopover: React.FC<{ item: MenuItemType }> = ({ item }) => {
   const isHorizontalRoot = ctx.mode === 'horizontal' && ctx.level === 0;
   const placement = isHorizontalRoot ? 'bottom' : 'right';
 
-  // 选中后关闭弹出层
+  // Select后关闭弹出层
   const handleChildSelect = useCallback((key: string) => {
     ctx.onSelect(key);
     setPopOpen(false);
@@ -282,7 +282,7 @@ const MenuGroup: React.FC<{ item: MenuItemType }> = ({ item }) => {
   );
 };
 
-// ─── 渲染分发 ───
+// ─── Render分发 ───
 
 function renderItem(item: MenuItemType): React.ReactNode {
   if (item.type === 'divider') return <MenuDivider key={item.key} />;
@@ -302,7 +302,7 @@ const SubMenuSwitch: React.FC<{ item: MenuItemType }> = ({ item }) => {
   return <SubMenuInline item={item} />;
 };
 
-// ─── Menu 主组件 ───
+// ─── Menu Main component ───
 
 const Menu: React.FC<MenuProps> = ({
   items,

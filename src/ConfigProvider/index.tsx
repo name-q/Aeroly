@@ -7,16 +7,16 @@ export type { SizeType, ThemeConfig } from './ConfigContext';
 export type { Locale } from '../locale/types';
 
 export interface ConfigProviderProps {
-  /** 语言包 */
+  /** Locale */
   locale?: Locale;
-  /** 全局尺寸 */
+  /** Global size */
   size?: SizeType;
-  /** 主题变量，key 为变量名（不含 --aero- 前缀），如 { 'primary-color': '#ff6600' } */
+  /** Theme variables, key is variable name (without --aero- prefix), e.g. { 'primary-color': '#ff6600' } */
   theme?: ThemeConfig;
   children?: React.ReactNode;
 }
 
-/** 解析颜色为 [r, g, b] */
+/** Parse color to [r, g, b] */
 function parseColor(color: string): [number, number, number] | null {
   let m = /^#([0-9a-f]{3,8})$/i.exec(color);
   if (m) {
@@ -39,13 +39,13 @@ function toHex(rgb: [number, number, number]): string {
   return '#' + rgb.map(c => Math.max(0, Math.min(255, Math.round(c))).toString(16).padStart(2, '0')).join('');
 }
 
-/** 模拟 Less lighten — HSL 空间中增加 L */
+/** Simulate Less lighten — increase L in HSL space */
 function lighten(rgb: [number, number, number], amount: number): [number, number, number] {
   const [h, s, l] = rgbToHsl(rgb);
   return hslToRgb([h, s, Math.min(1, l + amount / 100)]);
 }
 
-/** 模拟 Less darken — HSL 空间中减少 L */
+/** Simulate Less darken — decrease L in HSL space */
 function darken(rgb: [number, number, number], amount: number): [number, number, number] {
   const [h, s, l] = rgbToHsl(rgb);
   return hslToRgb([h, s, Math.max(0, l - amount / 100)]);
@@ -83,10 +83,10 @@ function hslToRgb([h, s, l]: [number, number, number]): [number, number, number]
   ];
 }
 
-/** 颜色变量 → 需要自动派生的 key 列表 */
+/** Color variables that need auto-derived keys */
 const COLOR_KEYS = ['primary-color', 'success-color', 'warning-color', 'error-color'];
 
-/** primary-color 的派生色映射（与 variables.less 对齐） */
+/** primary-color derived color mappings (aligned with variables.less) */
 const PRIMARY_DERIVATIVES: [string, (rgb: [number, number, number]) => [number, number, number]][] = [
   ['primary-color-hover', rgb => lighten(rgb, 6)],
   ['primary-color-active', rgb => darken(rgb, 6)],
@@ -96,7 +96,7 @@ const PRIMARY_DERIVATIVES: [string, (rgb: [number, number, number]) => [number, 
   ['primary-color-light-4', rgb => lighten(rgb, 12)],
 ];
 
-/** 各状态色的派生色映射 */
+/** Derived color mappings for status colors */
 const COLOR_DERIVATIVES: Record<string, [string, (rgb: [number, number, number]) => [number, number, number]][]> = {
   'primary-color': PRIMARY_DERIVATIVES,
   'success-color': [
@@ -118,11 +118,11 @@ function buildThemeStyle(theme?: ThemeConfig): React.CSSProperties | undefined {
     style[`--aero-${key}`] = theme[key];
     const rgb = parseColor(theme[key]);
     if (!rgb) continue;
-    // 自动派生 RGB 通道值变量
+    // Auto-derive RGB channel value variables
     if (COLOR_KEYS.includes(key)) {
       style[`--aero-${key}-rgb`] = toRGBStr(rgb);
     }
-    // 自动派生 hover/active/light 等（用户未手动指定时）
+    // Auto-derive hover/active/light variants (when not manually specified)
     const derivatives = COLOR_DERIVATIVES[key];
     if (derivatives) {
       for (const [suffix, fn] of derivatives) {

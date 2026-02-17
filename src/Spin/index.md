@@ -1,48 +1,48 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 反馈
+  title: Feedback
   order: 4
-title: Spin 加载中
+title: Spin
 order: 3
 toc: content
 ---
 
-# Spin 加载中
+# Spin
 
-用于页面和区块的加载状态，支持独立使用和包裹内容两种模式。
+Loading indicator for pages and sections, supporting both standalone and wrapper modes.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 提示文字
+## Tip Text
 
-<code src="./demos/tip.tsx"></code>
+<code src="./en/demos/tip.tsx"></code>
 
-## 容器模式
+## Wrapper Mode
 
-<code src="./demos/wrapper.tsx"></code>
+<code src="./en/demos/wrapper.tsx"></code>
 
-## 延迟显示
+## Delayed Display
 
-<code src="./demos/delay.tsx"></code>
+<code src="./en/demos/delay.tsx"></code>
 
-## 自定义指示器
+## Custom Indicator
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| spinning | 是否为加载状态 | `boolean` | `true` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| tip | 提示文字 | `ReactNode` | - |
-| delay | 延迟显示（ms），防闪烁 | `number` | - |
-| indicator | 自定义指示器 | `ReactNode` | - |
-| children | 包裹内容（容器模式） | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| spinning | Whether in loading state | `boolean` | `true` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| tip | Tip text | `ReactNode` | - |
+| delay | Delay display (ms), prevents flashing | `number` | - |
+| indicator | Custom indicator | `ReactNode` | - |
+| children | Wrapped content (wrapper mode) | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

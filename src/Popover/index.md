@@ -1,53 +1,53 @@
 ---
-title: Popover 气泡卡片
+title: Popover
 group:
-  title: 数据展示
+  title: Data Display
   order: 4
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Popover 气泡卡片
+# Popover
 
-点击或鼠标移入元素，弹出气泡式的卡片浮层。支持 4 个方向、自动翻转、自适应内容。
+Click or hover on an element to display a floating card. Supports 4 directions, auto-flip, and adaptive content.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 点击触发
+## Click Trigger
 
-<code src="./demos/click.tsx"></code>
+<code src="./en/demos/click.tsx"></code>
 
-## 弹出方向
+## Placement
 
-<code src="./demos/placement.tsx"></code>
+<code src="./en/demos/placement.tsx"></code>
 
-## 自定义内容
+## Custom Content
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| content | 弹出内容 | `ReactNode` | - |
-| title | 标题 | `ReactNode` | - |
-| trigger | 触发方式 | `'hover' \| 'click'` | `'hover'` |
-| placement | 弹出方向 | `PopoverPlacement` | `'top'` |
-| open | 是否显示（受控） | `boolean` | - |
-| defaultOpen | 默认是否显示（非受控） | `boolean` | `false` |
-| onOpenChange | 显隐变化回调 | `(open: boolean) => void` | - |
-| offset | 弹层与触发元素的间距 | `number` | `8` |
-| children | 触发元素 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| content | Popover content | `ReactNode` | - |
+| title | Title | `ReactNode` | - |
+| trigger | Trigger method | `'hover' \| 'click'` | `'hover'` |
+| placement | Placement direction | `PopoverPlacement` | `'top'` |
+| open | Whether visible (controlled) | `boolean` | - |
+| defaultOpen | Whether visible by default (uncontrolled) | `boolean` | `false` |
+| onOpenChange | Callback when visibility changes | `(open: boolean) => void` | - |
+| offset | Gap between popover and trigger element | `number` | `8` |
+| children | Trigger element | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### PopoverPlacement
 

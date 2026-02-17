@@ -2,17 +2,17 @@ import React from 'react';
 import './index.less';
 
 export interface DividerProps {
-  /** 分割线方向 */
+  /** Divider direction */
   direction?: 'horizontal' | 'vertical';
   /** 线条样式 */
   type?: 'solid' | 'dashed' | 'fade';
-  /** 文字位置（仅水平方向有效） */
+  /** Text position（仅水平Direction有效） */
   orientation?: 'left' | 'center' | 'right';
-  /** 分割线内嵌文字 */
+  /** Divider内嵌文字 */
   children?: React.ReactNode;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 

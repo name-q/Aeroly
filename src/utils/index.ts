@@ -1,13 +1,13 @@
 /**
- * AeroUI 公共工具函数
+ * AeroUI Public utilities
  */
 
 export { useDropdownPosition } from './useDropdownPosition';
 export type { Placement, Alignment } from './useDropdownPosition';
 
 /**
- * 节流：在 delay 时间窗口内最多执行一次
- * 适用于拖拽、滚动等高频事件
+ * Throttle: execute at most once within delay window
+ * Suitable for high-frequency events like drag, scroll
  */
 export function throttle<T extends (...args: any[]) => void>(
   fn: T,
@@ -28,7 +28,7 @@ export function throttle<T extends (...args: any[]) => void>(
       last = now;
       fn(...args);
     } else if (!timer) {
-      // 保证尾调用，拖拽松手时最后一次也能触发
+      // Ensure trailing call, last invocation fires when drag ends
       timer = setTimeout(() => {
         last = Date.now();
         timer = null;
@@ -41,8 +41,8 @@ export function throttle<T extends (...args: any[]) => void>(
 }
 
 /**
- * 防抖：延迟 delay 后执行，期间重复调用会重置计时
- * 适用于输入搜索、窗口 resize 等场景
+ * Debounce: execute after delay, repeated calls reset timer
+ * 适用于InputSearch、窗口 resize 等场景
  */
 export function debounce<T extends (...args: any[]) => void>(
   fn: T,

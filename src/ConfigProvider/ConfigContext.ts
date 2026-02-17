@@ -4,15 +4,15 @@ import zhCN from '../locale/zh_CN';
 
 export type SizeType = 'small' | 'medium' | 'large';
 
-/** 主题配置，key 为 CSS Variable 名（不含 --aero- 前缀） */
+/** Theme config, key is CSS Variable name (without --aero- prefix) */
 export type ThemeConfig = Record<string, string>;
 
 export interface ConfigContextValue {
-  /** 语言包 */
+  /** Locale */
   locale: Locale;
-  /** 全局尺寸 */
+  /** Global size */
   size?: SizeType;
-  /** 主题变量 */
+  /** Theme variables */
   theme?: ThemeConfig;
 }
 

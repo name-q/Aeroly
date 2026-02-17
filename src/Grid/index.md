@@ -1,73 +1,73 @@
 ---
-title: Grid 栅格
+title: Grid
 group:
-  title: 布局
+  title: Layout
   order: 2
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Grid 栅格
+# Grid
 
-24 列栅格系统，通过 `Row` 和 `Col` 组合实现响应式布局。`gutter` 支持语义 token，`Col` 同时支持 `span` 和 `flex` 两种模式。
+24-column grid system. Combine `Row` and `Col` for responsive layouts. `gutter` supports semantic tokens, and `Col` supports both `span` and `flex` modes.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 间距
+## Gutter
 
-<code src="./demos/gutter.tsx"></code>
+<code src="./en/demos/gutter.tsx"></code>
 
-## 偏移
+## Offset
 
-<code src="./demos/offset.tsx"></code>
+<code src="./en/demos/offset.tsx"></code>
 
-## 对齐
+## Alignment
 
-<code src="./demos/align.tsx"></code>
+<code src="./en/demos/align.tsx"></code>
 
-## 弹性布局
+## Flex Layout
 
-<code src="./demos/flex.tsx"></code>
+<code src="./en/demos/flex.tsx"></code>
 
-## 响应式
+## Responsive
 
-<code src="./demos/responsive.tsx"></code>
+<code src="./en/demos/responsive.tsx"></code>
 
 ## API
 
 ### Row
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| gutter | 栅格间距，支持语义 token，数组 `[水平, 垂直]` | `number \| 'xs' \| 'sm' \| 'md' \| 'lg' \| [h, v]` | - |
-| justify | 主轴对齐 | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
-| align | 交叉轴对齐 | `'start' \| 'center' \| 'end' \| 'stretch'` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| gutter | Grid spacing, supports semantic tokens, array `[horizontal, vertical]` | `number \| 'xs' \| 'sm' \| 'md' \| 'lg' \| [h, v]` | - |
+| justify | Main axis alignment | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
+| align | Cross axis alignment | `'start' \| 'center' \| 'end' \| 'stretch'` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Col
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| span | 栅格占位格数（共 24 格），0 隐藏 | `number` | - |
-| offset | 左侧偏移格数 | `number` | - |
-| flex | 弹性控制：数字为伸缩比例，`"100px"` 为固定宽度，也支持完整写法；设置后 span 失效 | `number \| string` | - |
-| xs | ≥0px 响应式 | `number \| { span, offset }` | - |
-| sm | ≥576px 响应式 | `number \| { span, offset }` | - |
-| md | ≥768px 响应式 | `number \| { span, offset }` | - |
-| lg | ≥992px 响应式 | `number \| { span, offset }` | - |
-| xl | ≥1200px 响应式 | `number \| { span, offset }` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| span | Number of grid columns to occupy (out of 24), 0 to hide | `number` | - |
+| offset | Number of columns to offset from the left | `number` | - |
+| flex | Flex control: number for flex ratio, `"100px"` for fixed width, also supports full syntax; overrides span when set | `number \| string` | - |
+| xs | >=0px responsive | `number \| { span, offset }` | - |
+| sm | >=576px responsive | `number \| { span, offset }` | - |
+| md | >=768px responsive | `number \| { span, offset }` | - |
+| lg | >=992px responsive | `number \| { span, offset }` | - |
+| xl | >=1200px responsive | `number \| { span, offset }` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-### gutter 语义 token
+### gutter Semantic Tokens
 
-| Token | 值 |
-|-------|-----|
+| Token | Value |
+|-------|-------|
 | `xs` | 4px |
 | `sm` | 8px |
 | `md` | 12px |

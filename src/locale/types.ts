@@ -70,4 +70,24 @@ export interface Locale {
   FloatButton: {
     backToTop: string;
   };
+
+  Form: {
+    required: string;
+    whitespace: string;
+    min: string;
+    max: string;
+    minLength: string;
+    maxLength: string;
+    pattern: string;
+    validateFailed: string;
+    email: string;
+    url: string;
+    number: string;
+    integer: string;
+    optional: string;
+  };
+
+  AutoComplete: {
+    searching: string;
+  };
 }

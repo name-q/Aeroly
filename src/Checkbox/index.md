@@ -1,77 +1,77 @@
 ---
-title: Checkbox 复选框
+title: Checkbox
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Checkbox 复选框
+# Checkbox
 
-用于在一组选项中进行多项选择，提供清晰的选中反馈。
+Used for selecting multiple items from a set of options, providing clear selection feedback.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 复选框组
+## Checkbox Group
 
-<code src="./demos/group.tsx"></code>
+<code src="./en/demos/group.tsx"></code>
 
-## 受控模式
+## Controlled Mode
 
-<code src="./demos/controlled.tsx"></code>
+<code src="./en/demos/controlled.tsx"></code>
 
-## 全选与半选
+## Check All & Indeterminate
 
-<code src="./demos/indeterminate.tsx"></code>
+<code src="./en/demos/indeterminate.tsx"></code>
 
-## 尺寸
+## Sizes
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### Checkbox
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| checked | 是否选中（受控） | `boolean` | - |
-| defaultChecked | 默认是否选中（非受控） | `boolean` | `false` |
-| indeterminate | 是否为半选状态（仅视觉） | `boolean` | `false` |
-| disabled | 是否禁用 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| value | 在 Group 中使用时的标识值 | `string \| number` | - |
-| onChange | 选中状态变化回调 | `(checked: boolean) => void` | - |
-| children | 标签内容 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| checked | Whether checked (controlled) | `boolean` | - |
+| defaultChecked | Whether checked by default (uncontrolled) | `boolean` | `false` |
+| indeterminate | Whether in indeterminate state (visual only) | `boolean` | `false` |
+| disabled | Whether disabled | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| value | Identifier value when used in a Group | `string \| number` | - |
+| onChange | Callback when checked state changes | `(checked: boolean) => void` | - |
+| children | Label content | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Checkbox.Group
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 当前选中值（受控） | `(string \| number)[]` | - |
-| defaultValue | 默认选中值（非受控） | `(string \| number)[]` | `[]` |
-| onChange | 选中变化回调 | `(value: (string \| number)[]) => void` | - |
-| options | 选项数据 | `(string \| number \| CheckboxOptionType)[]` | - |
-| disabled | 是否整体禁用 | `boolean` | `false` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| direction | 排列方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Currently checked values (controlled) | `(string \| number)[]` | - |
+| defaultValue | Default checked values (uncontrolled) | `(string \| number)[]` | `[]` |
+| onChange | Callback when checked values change | `(value: (string \| number)[]) => void` | - |
+| options | Option data | `(string \| number \| CheckboxOptionType)[]` | - |
+| disabled | Whether to disable all options | `boolean` | `false` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| direction | Layout direction | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### CheckboxOptionType
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| value | 选项值 | `string \| number` | - |
-| label | 显示内容 | `ReactNode` | - |
-| disabled | 是否禁用该选项 | `boolean` | `false` |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| value | Option value | `string \| number` | - |
+| label | Display content | `ReactNode` | - |
+| disabled | Whether to disable this option | `boolean` | `false` |

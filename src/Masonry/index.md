@@ -1,59 +1,59 @@
 ---
-title: Masonry 瀑布流
+title: Masonry
 group:
-  title: 布局
+  title: Layout
   order: 2
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Masonry 瀑布流
+# Masonry
 
-基于 CSS 多列布局的瀑布流组件，适用于图片墙、卡片流等不等高内容的排列。支持固定列数和响应式列数，间距复用 Grid 的语义 token。
+A masonry layout component based on CSS multi-column layout, suitable for image walls, card streams, and other variable-height content arrangements. Supports fixed and responsive column counts, with gap values reusing Grid's semantic tokens.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 自定义列数
+## Custom Columns
 
-<code src="./demos/columns.tsx"></code>
+<code src="./en/demos/columns.tsx"></code>
 
-## 响应式列数
+## Responsive Columns
 
-<code src="./demos/responsive.tsx"></code>
+<code src="./en/demos/responsive.tsx"></code>
 
-## 自定义内容
+## Custom Content
 
-<code src="./demos/custom.tsx"></code>
+<code src="./en/demos/custom.tsx"></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| columns | 列数，支持响应式对象 | `number \| Partial<Record<Breakpoint, number>>` | `3` |
-| gutter | 间距，数字为 px，支持语义 token | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
-| children | 子元素 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| columns | Number of columns, supports responsive object | `number \| Partial<Record<Breakpoint, number>>` | `3` |
+| gutter | Gap size, number in px, supports semantic tokens | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
+| children | Child elements | `ReactNode` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-### Breakpoint 响应式断点
+### Breakpoint Responsive Breakpoints
 
-| 断点 | 宽度 |
+| Breakpoint | Width |
 |------|------|
-| `xs` | ≥0px |
-| `sm` | ≥576px |
-| `md` | ≥768px |
-| `lg` | ≥992px |
-| `xl` | ≥1200px |
+| `xs` | >=0px |
+| `sm` | >=576px |
+| `md` | >=768px |
+| `lg` | >=992px |
+| `xl` | >=1200px |
 
-响应式列数降级逻辑：`{ xs: 1, md: 3 }` 在 `sm` 断点时取 `xs` 的值 `1`（向下找最近的已定义断点）。
+Responsive column fallback logic: `{ xs: 1, md: 3 }` at the `sm` breakpoint takes the `xs` value of `1` (falls back to the nearest defined breakpoint below).
 
-### gutter 语义 token
+### Gutter Semantic Tokens
 
-| Token | 值 |
+| Token | Value |
 |-------|-----|
 | `xs` | 4px |
 | `sm` | 8px |

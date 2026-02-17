@@ -1,48 +1,48 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 toc: content
 ---
 
-# ColorPicker 颜色选择器
+# ColorPicker
 
-用于选择颜色，支持 Hex、RGB 输入和透明度调节。
+A color picker supporting Hex, RGB input and opacity adjustment.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx" description="点击触发器弹出颜色面板，拖拽或输入修改颜色。"></code>
+<code src="./en/demos/basic.tsx" description="Click the trigger to open the color panel, drag or type to modify the color."></code>
 
-## 透明度
+## Opacity
 
-<code src="./demos/alpha.tsx" description="设置 showAlpha 开启透明度选择，输出 rgba 格式。"></code>
+<code src="./en/demos/alpha.tsx" description="Enable showAlpha for opacity selection, outputs rgba format."></code>
 
-## 预设颜色
+## Preset Colors
 
-<code src="./demos/presets.tsx" description="通过 presets 提供常用颜色快捷选择。"></code>
+<code src="./en/demos/presets.tsx" description="Provide commonly used colors for quick selection via presets."></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx" description="三种尺寸：small / medium / large。"></code>
+<code src="./en/demos/size.tsx" description="Three sizes: small / medium / large."></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx" description="禁用状态。"></code>
+<code src="./en/demos/disabled.tsx" description="Disabled state."></code>
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| value | 颜色值（受控） | `string` | - |
-| defaultValue | 默认颜色 | `string` | `'#1677ff'` |
-| onChange | 颜色变化回调 | `(color: string) => void` | - |
-| showAlpha | 显示透明度 | `boolean` | `false` |
-| disabled | 禁用 | `boolean` | `false` |
-| size | 触发器尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| presets | 预设颜色列表 | `string[]` | - |
-| placement | 弹出方向 | `PopoverPlacement` | `'bottom'` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| value | Color value (controlled) | `string` | - |
+| defaultValue | Default color | `string` | `'#1677ff'` |
+| onChange | Callback when color changes | `(color: string) => void` | - |
+| showAlpha | Show opacity | `boolean` | `false` |
+| disabled | Disabled | `boolean` | `false` |
+| size | Trigger size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| presets | Preset color list | `string[]` | - |
+| placement | Popup direction | `PopoverPlacement` | `'bottom'` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |

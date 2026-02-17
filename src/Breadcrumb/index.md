@@ -1,55 +1,55 @@
 ---
 nav:
-  title: 组件
+  title: Components
   order: 1
 group:
-  title: 导航
+  title: Navigation
   order: 4
 toc: content
 ---
 
-# Breadcrumb 面包屑
+# Breadcrumb
 
-显示当前页面在系统层级结构中的位置，并能向上返回。
+Displays the current page's position in the system hierarchy and allows navigating back up.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx" description="最简单的面包屑，最后一项为当前页面。"></code>
+<code src="./en/demos/basic.tsx" description="The simplest breadcrumb, with the last item being the current page."></code>
 
-## 带图标
+## With Icons
 
-<code src="./demos/icon.tsx" description="每一项可以配置 Lucide 图标。"></code>
+<code src="./en/demos/icon.tsx" description="Each item can be configured with a Lucide icon."></code>
 
-## 自定义分隔符
+## Custom Separator
 
-<code src="./demos/separator.tsx" description="通过 separator 自定义分隔符，支持字符串或 ReactNode。"></code>
+<code src="./en/demos/separator.tsx" description="Customize the separator via the separator prop, supports string or ReactNode."></code>
 
-## 下拉菜单
+## Dropdown Menu
 
-<code src="./demos/menu.tsx" description="通过 menu 为某一项添加下拉选择，hover 弹出。"></code>
+<code src="./en/demos/menu.tsx" description="Add a dropdown selection to an item via menu, shown on hover."></code>
 
-## 折叠省略
+## Collapse
 
-<code src="./demos/collapse.tsx" description="设置 maxItems 后，超出的中间项会折叠为省略号，hover 展开。"></code>
+<code src="./en/demos/collapse.tsx" description="When maxItems is set, excess middle items collapse into an ellipsis, expanding on hover."></code>
 
 ## API
 
 ### Breadcrumb
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| items | 面包屑数据 | `BreadcrumbItemType[]` | - |
-| separator | 自定义分隔符 | `ReactNode` | `<ChevronRight />` |
-| maxItems | 超过此数量折叠中间项 | `number` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| items | Breadcrumb data | `BreadcrumbItemType[]` | - |
+| separator | Custom separator | `ReactNode` | `<ChevronRight />` |
+| maxItems | Collapse middle items when exceeding this count | `number` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### BreadcrumbItemType
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 | --- | --- | --- | --- |
-| label | 显示文本 | `ReactNode` | - |
-| href | 链接地址 | `string` | - |
-| icon | 图标（Lucide 组件） | `LucideIcon` | - |
-| onClick | 点击回调（同时存在 href 时会阻止跳转，仅执行回调） | `(e: MouseEvent) => void` | - |
-| menu | 下拉菜单项 | `{ label, href?, onClick? }[]` | - |
+| label | Display text | `ReactNode` | - |
+| href | Link URL | `string` | - |
+| icon | Icon (Lucide component) | `LucideIcon` | - |
+| onClick | Click callback (prevents navigation when href is also present, only executes callback) | `(e: MouseEvent) => void` | - |
+| menu | Dropdown menu items | `{ label, href?, onClick? }[]` | - |

@@ -8,16 +8,16 @@ import './index.less';
 // ---- Types ----
 
 export interface SelectOption {
-  /** 选项显示文本 */
+  /** 选项Display text */
   label: React.ReactNode;
-  /** 选项值 */
+  /** Option value */
   value: string | number;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
 }
 
 export interface SelectGroupOption {
-  /** 分组标题 */
+  /** 分组Title */
   label: React.ReactNode;
   /** 分组下的选项 */
   options: SelectOption[];
@@ -26,46 +26,46 @@ export interface SelectGroupOption {
 export type SelectOptionType = SelectOption | SelectGroupOption;
 
 export interface SelectProps {
-  /** 选项列表（支持分组） */
+  /** Options list（支持分组） */
   options: SelectOptionType[];
-  /** 当前值（受控） */
+  /** Current value (controlled) */
   value?: string | number | (string | number)[];
-  /** 默认值 */
+  /** Default value */
   defaultValue?: string | number | (string | number)[];
-  /** 变化回调 */
+  /** Change callback */
   onChange?: (
     value: string | number | (string | number)[],
     option: SelectOption | SelectOption[],
   ) => void;
-  /** 占位文案 */
+  /** Placeholder text */
   placeholder?: string;
-  /** 是否禁用 */
+  /** Whether disabled */
   disabled?: boolean;
-  /** 是否允许清除 */
+  /** Whether to allow clearing */
   allowClear?: boolean;
-  /** 是否可搜索 */
+  /** Whether searchable */
   showSearch?: boolean;
-  /** 自定义搜索过滤 */
+  /** Custom search filter */
   filterOption?: (input: string, option: SelectOption) => boolean;
-  /** 搜索框占位文案 */
+  /** Search input placeholder */
   searchPlaceholder?: string;
-  /** 是否多选 */
+  /** Whether multiple */
   multiple?: boolean;
-  /** 多选时最多显示的标签数，超出显示 +N */
+  /** Max tags to display in multiple mode, shows +N for overflow */
   maxTagCount?: number;
-  /** 尺寸 */
+  /** Size */
   size?: 'small' | 'medium' | 'large';
-  /** 无数据时的提示 */
+  /** Empty state content */
   notFoundContent?: React.ReactNode;
-  /** 下拉面板是否显示（受控） */
+  /** Whether dropdown is visible (controlled) */
   open?: boolean;
-  /** 下拉面板显隐变化回调 */
+  /** Dropdown visibility change callback */
   onOpenChange?: (open: boolean) => void;
-  /** 状态 */
+  /** Status */
   status?: 'error' | 'warning';
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
-  /** 自定义样式 */
+  /** Custom style */
   style?: React.CSSProperties;
 }
 
@@ -75,7 +75,7 @@ function isGroupOption(opt: SelectOptionType): opt is SelectGroupOption {
   return 'options' in opt && Array.isArray((opt as SelectGroupOption).options);
 }
 
-/** 将可能含分组的选项列表展平为纯选项 */
+/** 将可能含分组的Options list展平为纯选项 */
 function flattenOptions(options: SelectOptionType[]): SelectOption[] {
   const result: SelectOption[] = [];
   for (const opt of options) {
@@ -117,14 +117,14 @@ const Select: React.FC<SelectProps> = ({
   style,
 }) => {
   const size = useSize(sizeProp);
-  // ---- 受控/非受控值 ----
+  // ---- Controlled/uncontrolled value ----
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<string | number | (string | number)[]>(
     defaultValue ?? (multiple ? [] : ''),
   );
   const currentValue = isControlled ? value! : internalValue;
 
-  // ---- 下拉开关 ----
+  // ---- Dropdown toggle ----
   const isOpenControlled = openProp !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = isOpenControlled ? openProp! : internalOpen;
@@ -168,7 +168,7 @@ const Select: React.FC<SelectProps> = ({
     [filteredFlat],
   );
 
-  // ---- 打开/关闭动画 ----
+  // ---- Open/close animation ----
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
@@ -189,7 +189,7 @@ const Select: React.FC<SelectProps> = ({
     }
   };
 
-  // ---- 点击外部关闭 ----
+  // ---- Click outside to close ----
   useEffect(() => {
     if (!isOpen) return;
     const handleClick = (e: MouseEvent) => {
@@ -201,7 +201,7 @@ const Select: React.FC<SelectProps> = ({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [isOpen, setOpen]);
 
-  // ---- 选中判断 ----
+  // ---- Selection check ----
   const isSelected = useCallback(
     (val: string | number) => {
       if (multiple) {
@@ -212,7 +212,7 @@ const Select: React.FC<SelectProps> = ({
     [currentValue, multiple],
   );
 
-  // ---- 选择 ----
+  // ---- Selection ----
   const handleSelect = useCallback(
     (opt: SelectOption) => {
       if (opt.disabled) return;
@@ -237,7 +237,7 @@ const Select: React.FC<SelectProps> = ({
     [currentValue, multiple, isControlled, onChange, findOption, setOpen],
   );
 
-  // ---- 清除 ----
+  // ---- Clear ----
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     const next = multiple ? [] : '';
@@ -246,7 +246,7 @@ const Select: React.FC<SelectProps> = ({
     setOpen(false);
   };
 
-  // ---- 多选移除标签 ----
+  // ---- Remove tag in multiple mode ----
   const handleRemoveTag = (val: string | number, e: React.MouseEvent) => {
     e.stopPropagation();
     if (disabled) return;
@@ -256,7 +256,7 @@ const Select: React.FC<SelectProps> = ({
     onChange?.(arr, selectedOpts);
   };
 
-  // ---- 键盘导航 ----
+  // ---- Keyboard navigation ----
   const scrollToActive = useCallback((index: number) => {
     const container = optionsRef.current;
     if (!container) return;
@@ -333,7 +333,7 @@ const Select: React.FC<SelectProps> = ({
     ],
   );
 
-  // ---- 显示内容 ----
+  // ---- Display content ----
   const hasValue = multiple
     ? (currentValue as (string | number)[]).length > 0
     : currentValue !== '' && currentValue !== undefined;
@@ -352,7 +352,7 @@ const Select: React.FC<SelectProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  // ---- 多选标签渲染 ----
+  // ---- Render multiple select tags ----
   const renderTags = () => {
     const arr = currentValue as (string | number)[];
     const showArr = maxTagCount !== undefined ? arr.slice(0, maxTagCount) : arr;
@@ -384,7 +384,7 @@ const Select: React.FC<SelectProps> = ({
     );
   };
 
-  // ---- 渲染选项（支持分组） ----
+  // ---- Render选项（支持分组） ----
   const renderOptions = () => {
     if (filteredFlat.length === 0) {
       return <div className="aero-select-empty">{notFoundContent}</div>;
@@ -423,7 +423,7 @@ const Select: React.FC<SelectProps> = ({
       });
     }
 
-    // 无分组 / 搜索模式下展平
+    // 无分组 / SearchMode下展平
     return filteredFlat.map((opt) => {
       const navIdx = navigableOptions.indexOf(opt);
       return renderOptionItem(opt, navIdx);

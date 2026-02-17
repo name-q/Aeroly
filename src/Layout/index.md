@@ -1,73 +1,73 @@
 ---
-title: Layout 布局
+title: Layout
 group:
-  title: 布局
+  title: Layout
   order: 2
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Layout 布局
+# Layout
 
-页面级布局容器，基于 Flex 实现上下左右经典结构。Content 自动撑满剩余空间并支持滚动，Sider 宽度由外部控制，收缩逻辑交给 Menu 组件。
+Page-level layout container based on Flex, implementing classic top-bottom-left-right structures. Content automatically fills remaining space and supports scrolling. Sider width is controlled externally, and collapse logic is delegated to the Menu component.
 
-## 上中下结构
+## Top-Middle-Bottom Structure
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 侧栏导航
+## Sidebar Navigation
 
-<code src="./demos/sider.tsx"></code>
+<code src="./en/demos/sider.tsx"></code>
 
-## 可收起侧栏
+## Collapsible Sidebar
 
-<code src="./demos/collapsed.tsx"></code>
+<code src="./en/demos/collapsed.tsx"></code>
 
 ## API
 
 ### Layout
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| full | flex:1 撑满父容器剩余空间 | `boolean` | `false` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| full | flex:1 to fill remaining space of parent container | `boolean` | `false` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-Layout 可嵌套使用。包含 `Sider` 时自动切换为左右方向。
+Layout can be nested. Automatically switches to horizontal direction when containing a `Sider`.
 
 ### Layout.Header
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| height | 高度，数字为 px | `number \| string` | `56` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| height | Height, number in px | `number \| string` | `56` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Layout.Footer
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| height | 高度，数字为 px | `number \| string` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| height | Height, number in px | `number \| string` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### Layout.Content
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-Content 自动 `flex: 1` 撑满剩余空间，内容超出时自动滚动。
+Content automatically uses `flex: 1` to fill remaining space and scrolls when content overflows.
 
 ### Layout.Sider
 
-| 属性 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| width | 宽度，数字为 px | `number \| string` | `200` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| width | Width, number in px | `number \| string` | `200` |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
-Sider 不内置收缩逻辑，通过外部状态控制 `width` 即可实现收起效果，配合 Menu 的 `collapsed` 属性联动。
+Sider does not have built-in collapse logic. Control `width` via external state to achieve collapse, combined with Menu's `collapsed` prop.

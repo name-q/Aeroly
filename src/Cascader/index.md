@@ -1,79 +1,79 @@
 ---
-title: Cascader 级联选择
+title: Cascader
 group:
-  title: 数据录入
+  title: Data Entry
   order: 3
 nav:
-  title: 组件
+  title: Components
   path: /components
 toc: content
 ---
 
-# Cascader 级联选择
+# Cascader
 
-多列级联选择器，逐级展开子菜单选择，支持多选、搜索、选择任意层级。
+A multi-column cascading selector that expands submenus level by level, supporting multiple selection, search, and selection at any level.
 
-## 基础用法
+## Basic Usage
 
-<code src="./demos/basic.tsx"></code>
+<code src="./en/demos/basic.tsx"></code>
 
-## 多选
+## Multiple Selection
 
-<code src="./demos/multiple.tsx"></code>
+<code src="./en/demos/multiple.tsx"></code>
 
-## 搜索
+## Search
 
-<code src="./demos/search.tsx"></code>
+<code src="./en/demos/search.tsx"></code>
 
-## 选择任意层级
+## Select Any Level
 
-<code src="./demos/trigger.tsx"></code>
+<code src="./en/demos/trigger.tsx"></code>
 
-## 尺寸
+## Size
 
-<code src="./demos/size.tsx"></code>
+<code src="./en/demos/size.tsx"></code>
 
-## 禁用
+## Disabled
 
-<code src="./demos/disabled.tsx"></code>
+<code src="./en/demos/disabled.tsx"></code>
 
 ## API
 
 ### Cascader
 
-| 属性 | 说明 | 类型 | 默认值 |
+| Property | Description | Type | Default |
 |------|------|------|--------|
-| options | 级联选项数据 | `CascaderOption[]` | - |
-| value | 当前值（受控） | `CascaderValueType \| CascaderValueType[]` | - |
-| defaultValue | 默认值 | `CascaderValueType \| CascaderValueType[]` | - |
-| onChange | 值变化回调 | `(value, selectedOptions) => void` | - |
-| placeholder | 占位文案 | `string` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| allowClear | 是否允许清除 | `boolean` | `false` |
-| showSearch | 是否可搜索 | `boolean` | `false` |
-| searchPlaceholder | 搜索框占位文案 | `string` | - |
-| multiple | 是否多选 | `boolean` | `false` |
-| maxTagCount | 多选时最多显示的标签数 | `number` | - |
-| changeOnSelect | 选择任意层级即触发 onChange | `boolean` | `false` |
-| displaySeparator | 显示文本的分隔符 | `string` | `' / '` |
-| size | 尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
-| status | 状态 | `'error' \| 'warning'` | - |
-| notFoundContent | 无数据时的提示 | `ReactNode` | - |
-| open | 下拉面板是否显示（受控） | `boolean` | - |
-| onOpenChange | 下拉面板显隐变化回调 | `(open: boolean) => void` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| options | Cascading option data | `CascaderOption[]` | - |
+| value | Current value (controlled) | `CascaderValueType \| CascaderValueType[]` | - |
+| defaultValue | Default value | `CascaderValueType \| CascaderValueType[]` | - |
+| onChange | Callback when value changes | `(value, selectedOptions) => void` | - |
+| placeholder | Placeholder text | `string` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| allowClear | Whether to allow clearing | `boolean` | `false` |
+| showSearch | Whether searchable | `boolean` | `false` |
+| searchPlaceholder | Search input placeholder | `string` | - |
+| multiple | Whether multiple selection | `boolean` | `false` |
+| maxTagCount | Maximum number of tags displayed in multiple mode | `number` | - |
+| changeOnSelect | Trigger onChange when selecting any level | `boolean` | `false` |
+| displaySeparator | Display text separator | `string` | `' / '` |
+| size | Size | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| status | Status | `'error' \| 'warning'` | - |
+| notFoundContent | Content when no data | `ReactNode` | - |
+| open | Whether the dropdown is visible (controlled) | `boolean` | - |
+| onOpenChange | Callback when dropdown visibility changes | `(open: boolean) => void` | - |
+| className | Custom class name | `string` | - |
+| style | Custom style | `CSSProperties` | - |
 
 ### CascaderOption
 
-| 属性 | 说明 | 类型 |
+| Property | Description | Type |
 |------|------|------|
-| value | 选项值 | `string \| number` |
-| label | 显示文本 | `ReactNode` |
-| children | 子选项 | `CascaderOption[]` |
-| disabled | 是否禁用 | `boolean` |
-| isLeaf | 是否为叶子节点 | `boolean` |
+| value | Option value | `string \| number` |
+| label | Display text | `ReactNode` |
+| children | Sub-options | `CascaderOption[]` |
+| disabled | Whether disabled | `boolean` |
+| isLeaf | Whether it is a leaf node | `boolean` |
 
 ### CascaderValueType
 
-`(string | number)[]` — 从根到叶的路径数组，如 `['zhejiang', 'hangzhou', 'xihu']`。
+`(string | number)[]` — A path array from root to leaf, e.g. `['zhejiang', 'hangzhou', 'xihu']`.

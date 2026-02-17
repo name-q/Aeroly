@@ -8,31 +8,31 @@ import './index.less';
 export type QRCodeStatus = 'active' | 'expired' | 'loading' | 'scanned';
 
 export interface QRCodeProps {
-  /** 二维码内容（URL、文本等） */
+  /** QR code content（URL、文本等） */
   value: string;
-  /** 尺寸（px），默认 160 */
+  /** Size（px），Default 160 */
   size?: number;
-  /** 前景色，默认 #000000 */
+  /** 前景Color，Default #000000 */
   color?: string;
-  /** 背景色，默认 #ffffff */
+  /** 背景Color，Default #ffffff */
   bgColor?: string;
-  /** 中心图标图片 URL */
+  /** Center icon图片 URL */
   icon?: string;
-  /** 图标尺寸（px），默认 size * 0.2 */
+  /** IconSize（px），Default size * 0.2 */
   iconSize?: number;
-  /** 图标圆角（px），默认 4 */
+  /** Icon圆角（px），Default 4 */
   iconBorderRadius?: number;
-  /** 是否带边框卡片样式，默认 true */
+  /** Whether带边框卡片样式，Default true */
   bordered?: boolean;
-  /** 下载文件名，默认 'qrcode.png' */
+  /** 下载文件名，Default 'qrcode.png' */
   downloadName?: string;
-  /** 复制回调，参数为是否成功 */
+  /** 复制Callback，参数为Whether成功 */
   onCopy?: (success: boolean) => void;
-  /** 状态 */
+  /** Status */
   status?: QRCodeStatus;
-  /** 自定义状态覆盖层 */
+  /** CustomStatus覆盖层 */
   statusRender?: (info: { status: QRCodeStatus; onRefresh?: () => void }) => React.ReactNode;
-  /** 刷新回调（expired 状态下点击刷新） */
+  /** Refresh callback（expired Status下点击刷新） */
   onRefresh?: () => void;
   className?: string;
   style?: React.CSSProperties;
@@ -224,7 +224,7 @@ const QRCode: React.FC<QRCodeProps> = ({
     }
   }, [onCopy]);
 
-  // 状态覆盖层
+  // Status覆盖层
   const renderOverlay = () => {
     if (status === 'active') return null;
 

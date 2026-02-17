@@ -72,6 +72,26 @@ const enUS: Locale = {
   FloatButton: {
     backToTop: 'Back to top',
   },
+
+  Form: {
+    required: 'This field is required',
+    whitespace: 'Cannot be only whitespace',
+    min: 'Cannot be less than {min}',
+    max: 'Cannot be greater than {max}',
+    minLength: 'Must be at least {minLength} characters',
+    maxLength: 'Cannot exceed {maxLength} characters',
+    pattern: 'Invalid format',
+    validateFailed: 'Validation failed',
+    email: 'Please enter a valid email address',
+    url: 'Please enter a valid URL',
+    number: 'Please enter a number',
+    integer: 'Please enter an integer',
+    optional: '(optional)',
+  },
+
+  AutoComplete: {
+    searching: 'Searching...',
+  },
 };
 
 export default enUS;

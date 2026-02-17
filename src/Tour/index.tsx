@@ -8,48 +8,48 @@ import './index.less';
 export type TourPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 export interface TourStepConfig {
-  /** 目标元素的 ref 或 CSS 选择器 */
+  /** 目标元素的 ref 或 CSS Selection器 */
   target?: React.RefObject<HTMLElement | null> | string | null;
-  /** 标题 */
+  /** Title */
   title: React.ReactNode;
-  /** 描述 */
+  /** Description */
   description?: React.ReactNode;
-  /** 弹出方向 */
+  /** Placement */
   placement?: TourPlacement;
-  /** 自定义内容（覆盖 title + description） */
+  /** CustomContent（覆盖 title + description） */
   content?: React.ReactNode;
-  /** 是否显示遮罩高亮 */
+  /** Whether to show mask高亮 */
   mask?: boolean;
 }
 
 export interface TourProps {
-  /** 是否显示 */
+  /** Whether visible */
   open: boolean;
-  /** 显隐变化回调 */
+  /** Visibility change callback */
   onOpenChange: (open: boolean) => void;
   /** 步骤配置 */
   steps: TourStepConfig[];
-  /** 当前步骤（受控） */
+  /** Current step（Controlled） */
   current?: number;
-  /** 步骤变化回调 */
+  /** Step change callback */
   onChange?: (current: number) => void;
-  /** 完成回调 */
+  /** Finish callback */
   onFinish?: () => void;
-  /** 是否显示遮罩 */
+  /** Whether to show mask */
   mask?: boolean;
   /** 点击遮罩关闭 */
   maskClosable?: boolean;
-  /** 按 Esc 关闭 */
+  /** 按 Esc to close */
   keyboard?: boolean;
   /** 高亮区域内边距 */
   spotlightPadding?: number;
-  /** 弹层与目标间距 */
+  /** 弹层与目标Gap */
   offset?: number;
-  /** 自定义类名 */
+  /** Custom class name */
   className?: string;
 }
 
-// ---- 位置计算 ----
+// ---- Position calculation ----
 
 interface Pos {
   top: number;
@@ -134,7 +134,7 @@ function getTargetElement(target?: React.RefObject<HTMLElement | null> | string 
   return target.current;
 }
 
-// ---- Tour 组件 ----
+// ---- Tour Component ----
 
 const Tour: React.FC<TourProps> = (props) => {
   const localeTour = useLocale('Tour');
@@ -169,7 +169,7 @@ const Tour: React.FC<TourProps> = (props) => {
   const isFirst = activeCurrent === 0;
   const stepMask = step?.mask ?? mask;
 
-  // 设置当前步骤
+  // 设置Current step
   const setCurrent = useCallback(
     (idx: number) => {
       if (!isControlled) setInternalCurrent(idx);
@@ -178,14 +178,14 @@ const Tour: React.FC<TourProps> = (props) => {
     [isControlled, onChange],
   );
 
-  // 重置步骤
+  // Reset步骤
   useEffect(() => {
     if (open) {
       setCurrent(0);
     }
   }, [open]);
 
-  // 挂载/卸载动画
+  // Mount/unmount animation
   useEffect(() => {
     if (open) {
      setMounted(true);
@@ -205,7 +205,7 @@ const Tour: React.FC<TourProps> = (props) => {
     }
   };
 
-  // 计算位置
+  // Calculate position
   const updatePosition = useCallback(() => {
     if (!step) return;
     const targetEl = getTargetElement(step.target);
@@ -252,7 +252,7 @@ const Tour: React.FC<TourProps> = (props) => {
 
   useEffect(() => {
     if (mounted) {
-      // 延迟一帧让 popRef 渲染
+      // 延迟一帧让 popRef Render
       requestAnimationFrame(() => updatePosition());
     }
   }, [mounted, activeCurrent, updatePosition]);
@@ -299,7 +299,7 @@ const Tour: React.FC<TourProps> = (props) => {
     onOpenChange(false);
   }, [onOpenChange]);
 
-  // 键盘
+  // Keyboard
   useEffect(() => {
     if (!open || !keyboard) return;
     const handleKeyDown = (e: KeyboardEvent) => {

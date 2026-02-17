@@ -42,7 +42,7 @@ export function getCalendarDays(
 
   const days: CalendarDay[] = [];
 
-  // 上月补齐
+  // Fill previous month
   for (let i = firstDay - 1; i >= 0; i--) {
     const d = daysInPrevMonth - i;
     const date = new Date(prevYear, prevMonth, d);
@@ -58,7 +58,7 @@ export function getCalendarDays(
     });
   }
 
-  // 当月
+  // Current month
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(year, month, d);
     days.push({
@@ -73,7 +73,7 @@ export function getCalendarDays(
     });
   }
 
-  // 下月补齐到 42 格
+  // Fill next month to 42 cells
   const nextMonth = month === 11 ? 0 : month + 1;
   const nextYear = month === 11 ? year + 1 : year;
   const remaining = 42 - days.length;

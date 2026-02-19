@@ -34,6 +34,7 @@ import {
   Tree,
   Statistic,
   ColorPicker,
+  enUS
 } from 'aero-ui';
 import type { SizeType } from 'aero-ui';
 
@@ -267,7 +268,7 @@ export default () => {
       </div>
 
       {/* Component Showcase */}
-      <ConfigProvider theme={theme} size={size}>
+      <ConfigProvider theme={theme} size={size} locale={enUS}>
         <Flex direction="column" gap={20}>
           {/* Button */}
           <Flex gap={12} wrap align="center">

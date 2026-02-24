@@ -3,7 +3,7 @@
  * description: 点击按钮打开对话框，自带确定/取消按钮。
  */
 import React, { useState } from 'react';
-import { Button, Modal } from 'aero-ui';
+import { Button, Modal } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

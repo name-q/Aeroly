@@ -3,7 +3,7 @@
  * description: Disabled state.
  */
 import React from 'react';
-import { DateRangePicker, ConfigProvider, enUS } from 'aero-ui';
+import { DateRangePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

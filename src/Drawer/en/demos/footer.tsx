@@ -3,7 +3,7 @@
  * description: Add a footer action area via `footer`, suitable for form submissions and similar scenarios.
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aero-ui';
+import { Button, Drawer } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

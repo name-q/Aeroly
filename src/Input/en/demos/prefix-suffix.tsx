@@ -3,7 +3,7 @@
  * description: Add icons via `prefixIcon` / `suffixIcon`, or text/nodes via `prefix` / `suffix`.
  */
 import React from 'react';
-import { Input } from 'aero-ui';
+import { Input } from 'aeroui';
 import { Search, Mail, DollarSign } from 'lucide-react';
 
 export default () => (

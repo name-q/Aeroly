@@ -34,7 +34,7 @@ toc: content
 命令式调用，直接使用 `message` 对象的方法：
 
 ```ts
-import { message } from 'aero-ui';
+import { message } from 'aeroui';
 
 message.info('提示内容');
 message.success('提示内容');

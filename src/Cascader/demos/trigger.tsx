@@ -3,7 +3,7 @@
  * description: 设置 `changeOnSelect` 允许选中任意层级，而非仅叶子节点。
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

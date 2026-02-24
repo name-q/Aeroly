@@ -3,7 +3,7 @@
  * description: Use `flex` to control child stretch ratios, creating a classic sidebar + content layout.
  */
 import React from 'react';
-import { Flex } from 'aero-ui';
+import { Flex } from 'aeroui';
 
 export default () => (
   <Flex gap="sm" full>

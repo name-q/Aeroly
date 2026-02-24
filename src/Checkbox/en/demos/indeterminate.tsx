@@ -3,7 +3,7 @@
  * description: Use the `indeterminate` prop to implement check all / partial check behavior.
  */
 import React, { useState } from 'react';
-import { Checkbox } from 'aero-ui';
+import { Checkbox } from 'aeroui';
 
 const allOptions = ['Apple', 'Banana', 'Cherry', 'Durian'];
 

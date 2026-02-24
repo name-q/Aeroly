@@ -3,7 +3,7 @@
  * description: Data items with `children` field automatically support expandable rows, suitable for SPU/SKU parent-child scenarios. Use `defaultExpandedRowKeys` for default expansion, or `expandedRowKeys` + `onExpandedRowsChange` for controlled mode.
  */
 import React from 'react';
-import { Table, Tag, Button, Flex } from 'aero-ui';
+import { Table, Tag, Button, Flex } from 'aeroui';
 
 const columns = [
   { title: 'ID', dataIndex: 'id', width: 100, fixed: 'left' as const },

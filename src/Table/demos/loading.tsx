@@ -3,7 +3,7 @@
  * description: 设置 `loading` 显示加载遮罩，数据请求中使用。
  */
 import React, { useState } from 'react';
-import { Table, Button, Flex } from 'aero-ui';
+import { Table, Button, Flex } from 'aeroui';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },

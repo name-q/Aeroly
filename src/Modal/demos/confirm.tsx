@@ -3,7 +3,7 @@
  * description: 命令式调用，适合简单的确认/提示场景。支持 `confirm`、`info`、`success`、`warning`、`error` 五种类型。
  */
 import React from 'react';
-import { Button, Modal } from 'aero-ui';
+import { Button, Modal } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

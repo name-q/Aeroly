@@ -3,7 +3,7 @@
  * description: 用于行内元素之间的分隔。
  */
 import React from 'react';
-import { Divider } from 'aero-ui';
+import { Divider } from 'aeroui';
 
 export default () => (
   <div>

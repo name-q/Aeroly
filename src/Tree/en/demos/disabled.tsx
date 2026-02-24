@@ -3,7 +3,7 @@
  * description: Set `disabled` on a node to disable individual nodes.
  */
 import React from 'react';
-import { Tree } from 'aero-ui';
+import { Tree } from 'aeroui';
 
 const treeData = [
   {

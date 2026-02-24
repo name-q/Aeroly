@@ -3,7 +3,7 @@
  * description: `center` enables both horizontal and vertical centering. Compare the width difference with and without `full`.
  */
 import React, { useState } from 'react';
-import { Flex, Button, DemoBox } from 'aero-ui';
+import { Flex, Button, DemoBox } from 'aeroui';
 
 export default () => {
   const [isFull, setIsFull] = useState(false);

@@ -3,7 +3,7 @@
  * description: 设置 `status="error"` 标记当前步骤为错误状态。
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

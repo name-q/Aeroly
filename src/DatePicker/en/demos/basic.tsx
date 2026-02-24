@@ -3,7 +3,7 @@
  * description: Click the input to open the date picker panel, supporting day, month, and year view switching.
  */
 import React from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aero-ui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

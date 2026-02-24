@@ -3,7 +3,7 @@
  * description: Basic form with input, select, switch, and other common controls.
  */
 import React from 'react';
-import { Form, Input, Select, Switch, Button, Flex, ConfigProvider, enUS } from 'aero-ui';
+import { Form, Input, Select, Switch, Button, Flex, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [form] = Form.useForm();

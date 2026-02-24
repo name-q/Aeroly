@@ -3,7 +3,7 @@
  * description: hover 触发下拉菜单，支持图标、禁用项和分割线。
  */
 import React from 'react';
-import { Dropdown, Button } from 'aero-ui';
+import { Dropdown, Button } from 'aeroui';
 import { Copy, Pencil, Trash2, Share2, Archive } from 'lucide-react';
 
 const items = [

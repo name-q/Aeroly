@@ -3,7 +3,7 @@
  * description: 通过 `formatter` 和 `parser` 自定义显示格式，如金额和百分比。
  */
 import React from 'react';
-import { InputNumber } from 'aero-ui';
+import { InputNumber } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

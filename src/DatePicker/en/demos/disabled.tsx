@@ -3,7 +3,7 @@
  * description: Set `disabled` to disable the entire picker.
  */
 import React from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aero-ui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

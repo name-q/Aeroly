@@ -3,7 +3,7 @@
  * description: 通过对象数组的 `label` 字段传入自定义 ReactNode，可组合图标与文字。
  */
 import React from 'react';
-import { Segmented, Icon } from 'aero-ui';
+import { Segmented, Icon } from 'aeroui';
 import { List, LayoutGrid, Columns3 } from 'lucide-react';
 
 export default () => (

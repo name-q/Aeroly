@@ -3,7 +3,7 @@
  * description: 使用 `Block`、`Circle`、`Text` 原子组件自由组合骨架屏。
  */
 import React from 'react';
-import { Skeleton, Flex } from 'aero-ui';
+import { Skeleton, Flex } from 'aeroui';
 
 export default () => (
   <Flex gap={24} direction="column">

@@ -3,7 +3,7 @@
  * description: Disable the entire selector, or disable individual nodes.
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

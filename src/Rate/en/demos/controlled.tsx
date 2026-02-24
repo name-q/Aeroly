@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode, displaying the current rating in real time.
  */
 import React, { useState } from 'react';
-import { Rate } from 'aero-ui';
+import { Rate } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState(3);

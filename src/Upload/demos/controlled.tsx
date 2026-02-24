@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Upload } from 'aero-ui';
-import type { UploadFile } from 'aero-ui';
+import { Upload } from 'aeroui';
+import type { UploadFile } from 'aeroui';
 
 const mockFiles: UploadFile[] = [
   { uid: '1', name: '项目方案.pdf', size: 2048000, type: 'application/pdf', status: 'success' },

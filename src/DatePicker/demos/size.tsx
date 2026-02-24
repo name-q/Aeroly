@@ -3,7 +3,7 @@
  * description: 三种尺寸：`small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { DatePicker } from 'aero-ui';
+import { DatePicker } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 16, maxWidth: 720 }}>

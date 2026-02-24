@@ -3,7 +3,7 @@
  * description: Set `centered` to vertically center the dialog.
  */
 import React, { useState } from 'react';
-import { Button, Modal, ConfigProvider, enUS } from 'aero-ui';
+import { Button, Modal, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

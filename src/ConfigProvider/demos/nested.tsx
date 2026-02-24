@@ -3,7 +3,7 @@
  * description: ConfigProvider 支持嵌套，内层配置覆盖外层。未显式传入的属性继承外层。
  */
 import React, { useState } from 'react';
-import { ConfigProvider, zhCN, enUS, Modal, Button, Flex, DatePicker } from 'aero-ui';
+import { ConfigProvider, zhCN, enUS, Modal, Button, Flex, DatePicker } from 'aeroui';
 
 export default () => {
   const [open1, setOpen1] = useState(false);

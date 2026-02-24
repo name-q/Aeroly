@@ -3,8 +3,8 @@
  * description: 通过 `size` 控制间距和字号，支持 `small`、`medium`（默认）、`large`。
  */
 import React, { useState } from 'react';
-import { Descriptions, Segmented } from 'aero-ui';
-import type { DescriptionsProps } from 'aero-ui';
+import { Descriptions, Segmented } from 'aeroui';
+import type { DescriptionsProps } from 'aeroui';
 
 const items = [
   { label: '姓名', children: '张三' },

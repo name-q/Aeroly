@@ -3,7 +3,7 @@
  * description: 最基础的表格用法，通过 `columns` 和 `dataSource` 渲染。
  */
 import React from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },

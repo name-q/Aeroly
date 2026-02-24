@@ -3,7 +3,7 @@
  * description: 通过 `value` 和 `onChange` 实现受控模式。
  */
 import React, { useState } from 'react';
-import { DatePicker } from 'aero-ui';
+import { DatePicker } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('2025-06-15');

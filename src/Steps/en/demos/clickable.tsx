@@ -3,7 +3,7 @@
  * description: Set `clickable` to allow clicking steps to switch, used with `onChange`.
  */
 import React, { useState } from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => {
   const [current, setCurrent] = useState(1);

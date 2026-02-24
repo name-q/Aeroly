@@ -19,7 +19,7 @@ AeroUI 是一个为 AI 编码而设计的 React 组件库。结合 Pencil 设计
 ## 第一步：安装
 
 ```bash
-pnpm i aero-ui lucide-react
+pnpm i aeroui lucide-react
 ```
 
 如果你的项目使用 Vite，还需要安装 Less 支持：
@@ -31,7 +31,7 @@ pnpm i -D less
 然后直接导入使用组件：
 
 ```tsx | pure
-import { Button, Input, Select } from 'aero-ui';
+import { Button, Input, Select } from 'aeroui';
 
 export default () => (
   <div>
@@ -113,7 +113,7 @@ document.documentElement.setAttribute('data-theme', 'dark');
 使用 `ConfigProvider` 在运行时覆盖主题色、语言和全局尺寸：
 
 ```tsx | pure
-import { ConfigProvider, zhCN } from 'aero-ui';
+import { ConfigProvider, zhCN } from 'aeroui';
 
 <ConfigProvider
   locale={zhCN}
@@ -131,7 +131,7 @@ import { ConfigProvider, zhCN } from 'aero-ui';
 AeroUI 内置英文（`enUS`）和中文（`zhCN`）语言包。包含默认文案的组件（Modal、DatePicker、Pagination 等）会自动使用配置的语言。
 
 ```tsx | pure
-import { ConfigProvider, enUS } from 'aero-ui';
+import { ConfigProvider, enUS } from 'aeroui';
 
 <ConfigProvider locale={enUS}>
   <App />

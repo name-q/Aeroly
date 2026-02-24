@@ -3,7 +3,7 @@
  * description: Basic usage displaying values and titles.
  */
 import React from 'react';
-import { Statistic, Flex } from 'aero-ui';
+import { Statistic, Flex } from 'aeroui';
 
 export default () => (
   <Flex gap="lg">

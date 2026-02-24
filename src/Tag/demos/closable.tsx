@@ -3,7 +3,7 @@
  * description: 添加 `closable` 属性可关闭标签。
  */
 import React, { useState } from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 const initialTags = ['电影', '音乐', '游戏', '阅读', '旅行'];
 

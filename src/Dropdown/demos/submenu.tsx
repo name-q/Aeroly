@@ -3,9 +3,9 @@
  * description: 支持子菜单嵌套，hover 自动展开。
  */
 import React from 'react';
-import { Dropdown, Button } from 'aero-ui';
+import { Dropdown, Button } from 'aeroui';
 import { FileText, Download, FileImage, FileSpreadsheet, Printer, Mail } from 'lucide-react';
-import type { DropdownItem } from 'aero-ui';
+import type { DropdownItem } from 'aeroui';
 
 const items: DropdownItem[] = [
   {

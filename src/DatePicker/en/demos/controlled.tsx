@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode.
  */
 import React, { useState } from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aero-ui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('2025-06-15');

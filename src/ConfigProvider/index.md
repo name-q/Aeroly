@@ -61,16 +61,16 @@ Common variables:
 
 | Locale | Import |
 |--------|--------|
-| Simplified Chinese | `import { zhCN } from 'aero-ui'` |
-| English | `import { enUS } from 'aero-ui'` |
+| Simplified Chinese | `import { zhCN } from 'aeroui'` |
+| English | `import { enUS } from 'aeroui'` |
 
 ## Custom Locale
 
 A locale is a plain object matching the `Locale` type. You can extend from built-in locales:
 
 ```tsx | pure
-import { zhCN } from 'aero-ui';
-import type { Locale } from 'aero-ui';
+import { zhCN } from 'aeroui';
+import type { Locale } from 'aeroui';
 
 const jaJP: Locale = {
   ...zhCN,

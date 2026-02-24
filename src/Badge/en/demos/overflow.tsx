@@ -3,7 +3,7 @@
  * description: Shows `99+` when exceeding `overflowCount`. `showZero` controls whether to display when count is 0.
  */
 import React from 'react';
-import { Badge, Button } from 'aero-ui';
+import { Badge, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

@@ -3,7 +3,7 @@
  * description: Use `Form.List` to dynamically add/remove form items, supporting `add`, `remove`, and `move` operations.
  */
 import React from 'react';
-import { Form, Input, Button, Flex, ConfigProvider, enUS } from 'aero-ui';
+import { Form, Input, Button, Flex, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [form] = Form.useForm();

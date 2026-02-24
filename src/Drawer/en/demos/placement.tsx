@@ -3,8 +3,8 @@
  * description: Use `placement` to set the drawer to slide in from top, bottom, left, or right.
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aero-ui';
-import type { DrawerPlacement } from 'aero-ui';
+import { Button, Drawer } from 'aeroui';
+import type { DrawerPlacement } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

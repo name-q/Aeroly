@@ -3,7 +3,7 @@
  * description: 通过 `expandedKeys` 和 `selectedKeys` 完全控制树的状态。
  */
 import React, { useState } from 'react';
-import { Tree, Button } from 'aero-ui';
+import { Tree, Button } from 'aeroui';
 
 const treeData = [
   {

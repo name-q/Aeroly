@@ -3,7 +3,7 @@
  * description: Basic usage — wrap child components to take effect. Without any configuration, it behaves the same as default (Chinese).
  */
 import React from 'react';
-import { ConfigProvider, Modal, Button, Flex } from 'aero-ui';
+import { ConfigProvider, Modal, Button, Flex } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = React.useState(false);

@@ -3,7 +3,7 @@
  * description: Use `tooltipVisible` to control tooltip visibility, and `tipFormatter` to customize the format.
  */
 import React from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>

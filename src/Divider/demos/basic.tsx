@@ -3,7 +3,7 @@
  * description: 默认实线分割，可通过 `type` 切换为虚线 `dashed` 或两端渐隐 `fade`。
  */
 import React from 'react';
-import { Divider } from 'aero-ui';
+import { Divider } from 'aeroui';
 
 export default () => (
   <div>

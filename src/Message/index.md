@@ -34,7 +34,7 @@ Global message notifications for operation feedback. Displayed at the top center
 Imperative API -- use methods on the `message` object directly:
 
 ```ts
-import { message } from 'aero-ui';
+import { message } from 'aeroui';
 
 message.info('Info message');
 message.success('Success message');

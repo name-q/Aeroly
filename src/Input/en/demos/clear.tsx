@@ -3,7 +3,7 @@
  * description: Set `allowClear` to clear input content with one click.
  */
 import React from 'react';
-import { Input } from 'aero-ui';
+import { Input } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 360 }}>

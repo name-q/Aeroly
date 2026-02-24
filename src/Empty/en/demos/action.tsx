@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty, Button, ConfigProvider, enUS } from 'aero-ui';
+import { Empty, Button, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

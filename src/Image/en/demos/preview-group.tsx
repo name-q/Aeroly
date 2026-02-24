@@ -3,7 +3,7 @@
  * description: Wrap multiple images with `Image.PreviewGroup` to navigate between them using arrow keys in preview.
  */
 import React from 'react';
-import { Image } from 'aero-ui';
+import { Image } from 'aeroui';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',

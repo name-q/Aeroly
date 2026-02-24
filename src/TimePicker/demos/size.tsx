@@ -3,7 +3,7 @@
  * description: 三种尺寸：`small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { TimePicker } from 'aero-ui';
+import { TimePicker } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>

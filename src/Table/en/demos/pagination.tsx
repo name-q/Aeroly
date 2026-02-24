@@ -3,7 +3,7 @@
  * description: Configure `pagination` to enable paging, with support for `showTotal`, `showSizeChanger`, etc.
  */
 import React from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: 'ID', dataIndex: 'id', width: 80 },

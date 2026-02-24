@@ -3,7 +3,7 @@
  * description: 添加 `onClick` 使标签可点击，适合用作筛选标签。
  */
 import React, { useState } from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 const options = ['全部', 'React', 'Vue', 'Angular', 'Svelte'];
 

@@ -3,7 +3,7 @@
  * description: Disabled and read-only states.
  */
 import React from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 420 }}>

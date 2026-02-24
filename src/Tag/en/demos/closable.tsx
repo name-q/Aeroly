@@ -3,7 +3,7 @@
  * description: Add `closable` to make tags closable.
  */
 import React, { useState } from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 const initialTags = ['Movies', 'Music', 'Games', 'Reading', 'Travel'];
 

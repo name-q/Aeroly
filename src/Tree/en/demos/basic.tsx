@@ -3,7 +3,7 @@
  * description: Basic tree structure. Click the arrow to expand/collapse.
  */
 import React from 'react';
-import { Tree } from 'aero-ui';
+import { Tree } from 'aeroui';
 
 const treeData = [
   {

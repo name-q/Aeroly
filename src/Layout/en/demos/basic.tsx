@@ -3,7 +3,7 @@
  * description: The most common top-middle-bottom structure. `Content` automatically fills the remaining space.
  */
 import React from 'react';
-import Layout from 'aero-ui/Layout';
+import Layout from 'aeroui/Layout';
 
 const { Header, Content, Footer } = Layout;
 

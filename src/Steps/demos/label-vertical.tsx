@@ -3,7 +3,7 @@
  * description: 设置 `labelPlacement="vertical"` 将标签放在图标下方。
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

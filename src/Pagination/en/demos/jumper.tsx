@@ -3,7 +3,7 @@
  * description: Show total count, page size changer, and quick jumper.
  */
 import React, { useState } from 'react';
-import { Pagination, ConfigProvider, enUS } from 'aero-ui';
+import { Pagination, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [current, setCurrent] = useState(1);

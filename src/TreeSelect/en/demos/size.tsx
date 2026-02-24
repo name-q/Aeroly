@@ -3,7 +3,7 @@
  * description: Three sizes `small`, `medium` (default), and `large`.
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

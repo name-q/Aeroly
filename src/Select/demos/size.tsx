@@ -3,7 +3,7 @@
  * description: 三种尺寸 `small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { Select } from 'aero-ui';
+import { Select } from 'aeroui';
 
 export default () => {
   const options = [

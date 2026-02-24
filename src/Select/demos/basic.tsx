@@ -3,7 +3,7 @@
  * description: 基础单选，点击展开下拉面板选择选项。
  */
 import React from 'react';
-import { Select } from 'aero-ui';
+import { Select } from 'aeroui';
 
 export default () => {
   const options = [

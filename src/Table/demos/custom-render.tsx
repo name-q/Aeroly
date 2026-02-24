@@ -3,7 +3,7 @@
  * description: 通过 `render` 自定义列内容，结合 Tag 展示状态、操作按钮等。
  */
 import React from 'react';
-import { Table, Tag, Button, Flex } from 'aero-ui';
+import { Table, Tag, Button, Flex } from 'aeroui';
 
 const columns = [
   { title: '名称', dataIndex: 'name' },

@@ -3,7 +3,7 @@
  * description: 基础图片展示，支持设置宽高和圆角。
  */
 import React from 'react';
-import { Image } from 'aero-ui';
+import { Image } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>

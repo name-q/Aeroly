@@ -3,7 +3,7 @@
  * description: 设置 `animated` 开启数值滚动动画，数值变化时平滑过渡。
  */
 import React, { useState } from 'react';
-import { Statistic, Button, Flex } from 'aero-ui';
+import { Statistic, Button, Flex } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState(100);

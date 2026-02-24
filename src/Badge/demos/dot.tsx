@@ -3,7 +3,7 @@
  * description: 不展示数字，只显示小红点。
  */
 import React from 'react';
-import { Badge, Button } from 'aero-ui';
+import { Badge, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

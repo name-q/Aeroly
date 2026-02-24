@@ -3,7 +3,7 @@
  * description: Set `direction="vertical"` to display steps vertically.
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

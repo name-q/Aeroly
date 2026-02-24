@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, ConfigProvider, enUS } from 'aero-ui';
+import { Upload, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   return (

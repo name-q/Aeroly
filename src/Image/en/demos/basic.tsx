@@ -3,7 +3,7 @@
  * description: Basic image display, supporting width, height, and border radius.
  */
 import React from 'react';
-import { Image } from 'aero-ui';
+import { Image } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>

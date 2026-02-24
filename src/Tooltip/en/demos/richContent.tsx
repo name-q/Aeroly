@@ -3,7 +3,7 @@
  * description: You can pass a ReactNode as tooltip content.
  */
 import React from 'react';
-import { Tooltip, Button } from 'aero-ui';
+import { Tooltip, Button } from 'aeroui';
 
 export default () => (
   <Tooltip

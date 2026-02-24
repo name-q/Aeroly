@@ -3,7 +3,7 @@
  * description: 设置 `multiple` 开启多选模式，可同时选择多个叶子路径。
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

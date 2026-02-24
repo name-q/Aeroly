@@ -3,7 +3,7 @@
  * description: 同一页面多个 Affix 实例各自独立工作，互不干扰。左右两个滚动容器各有自己的固定元素。
  */
 import React from 'react';
-import { Affix, Button, Flex } from 'aero-ui';
+import { Affix, Button, Flex } from 'aeroui';
 
 const containerStyle: React.CSSProperties = {
   height: 300,

@@ -3,7 +3,7 @@
  * description: Default 3-column masonry layout using Image components to display variable-height images.
  */
 import React from 'react';
-import { Masonry, Image } from 'aero-ui';
+import { Masonry, Image } from 'aeroui';
 
 const images = [
   { src: 'https://picsum.photos/400/300?random=1', h: 300 },

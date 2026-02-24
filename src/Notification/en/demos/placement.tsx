@@ -3,7 +3,7 @@
  * description: Control placement via `placement`, supporting four corners.
  */
 import React from 'react';
-import { notification, Button } from 'aero-ui';
+import { notification, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

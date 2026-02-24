@@ -3,8 +3,8 @@
  * description: 支持 4 个方向，溢出视口时自动翻转。
  */
 import React from 'react';
-import { Tooltip, Button } from 'aero-ui';
-import type { TooltipPlacement } from 'aero-ui';
+import { Tooltip, Button } from 'aeroui';
+import type { TooltipPlacement } from 'aeroui';
 
 const placements: TooltipPlacement[] = ['top', 'bottom', 'left', 'right'];
 

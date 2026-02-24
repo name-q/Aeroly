@@ -3,9 +3,9 @@
  * description: Connect to a local Koa server (localhost:3001) for real uploads. Server code is in the project root server/ directory.
  */
 import React, { useState } from 'react';
-import { Upload, Button, Tabs, ConfigProvider, enUS } from 'aero-ui';
+import { Upload, Button, Tabs, ConfigProvider, enUS } from 'aeroui';
 import { Upload as UploadIcon } from 'lucide-react';
-import type { UploadFile } from 'aero-ui';
+import type { UploadFile } from 'aeroui';
 
 const API = 'http://localhost:3001/api/upload';
 

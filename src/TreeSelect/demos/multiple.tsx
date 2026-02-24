@@ -3,7 +3,7 @@
  * description: 设置 `multiple` 开启多选模式，下拉面板中以勾选框形式选择，支持父子联动。
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

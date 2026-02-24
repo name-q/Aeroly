@@ -3,9 +3,9 @@
  * description: 在 Form 中使用 AutoComplete，通过 `Form.useWatch` 获取实时值动态生成邮箱后缀建议。将 `useWatch` 与 `AutoComplete` 下沉到独立子组件 `EmailAutoComplete`，数据变化只触发子组件重渲染，不会波及整个表单。
  */
 import React from 'react';
-import { Form, AutoComplete, Button, Flex } from 'aero-ui';
-import type { AutoCompleteProps } from 'aero-ui';
-import type { FormInstance } from 'aero-ui';
+import { Form, AutoComplete, Button, Flex } from 'aeroui';
+import type { AutoCompleteProps } from 'aeroui';
+import type { FormInstance } from 'aeroui';
 
 const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
 

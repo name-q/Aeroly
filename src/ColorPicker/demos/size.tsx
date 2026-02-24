@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorPicker } from 'aero-ui';
+import { ColorPicker } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>

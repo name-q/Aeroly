@@ -3,7 +3,7 @@
  * description: 设置 `trigger="click"` 点击触发，点击外部区域关闭。
  */
 import React from 'react';
-import { Popover, Button } from 'aero-ui';
+import { Popover, Button } from 'aeroui';
 
 export default () => (
   <Popover

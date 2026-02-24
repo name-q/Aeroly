@@ -3,7 +3,7 @@
  * description: ConfigProvider supports nesting. Inner configuration overrides outer. Properties not explicitly passed are inherited from the outer layer.
  */
 import React, { useState } from 'react';
-import { ConfigProvider, zhCN, enUS, Modal, Button, Flex, DatePicker } from 'aero-ui';
+import { ConfigProvider, zhCN, enUS, Modal, Button, Flex, DatePicker } from 'aeroui';
 
 export default () => {
   const [open1, setOpen1] = useState(false);

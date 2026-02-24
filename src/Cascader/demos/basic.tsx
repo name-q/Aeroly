@@ -3,7 +3,7 @@
  * description: 基础级联选择，点击逐级展开子菜单，选择叶子节点完成选择。
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

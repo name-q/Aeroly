@@ -3,7 +3,7 @@
  * description: Use `message.open` with full configuration to customize the icon and close callback.
  */
 import React from 'react';
-import { Button, message } from 'aero-ui';
+import { Button, message } from 'aeroui';
 import { Rocket } from 'lucide-react';
 
 export default () => (

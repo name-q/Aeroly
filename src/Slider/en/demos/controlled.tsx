@@ -3,7 +3,7 @@
  * description: Controlled via `value` + `readOnly` to prevent dragging (no graying out), paired with InputNumber to modify the value, demonstrating pure controlled mode.
  */
 import React, { useState } from 'react';
-import { Slider, InputNumber } from 'aero-ui';
+import { Slider, InputNumber } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState(40);

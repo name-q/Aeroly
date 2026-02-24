@@ -3,7 +3,7 @@
  * description: 通过 `showTime={{ showSecond: false }}` 隐藏秒列，只显示时、分。
  */
 import React from 'react';
-import { DatePicker } from 'aero-ui';
+import { DatePicker } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 280 }}>

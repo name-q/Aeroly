@@ -3,7 +3,7 @@
  * description: 禁用整个选择器，或禁用单个选项。
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

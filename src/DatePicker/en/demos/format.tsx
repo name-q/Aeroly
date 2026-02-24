@@ -3,7 +3,7 @@
  * description: Customize the display format in the input via `format`. The value is always `YYYY-MM-DD`.
  */
 import React, { useState } from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aero-ui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('');

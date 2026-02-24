@@ -3,7 +3,7 @@
  * description: Set `size="small"` to use the mini version.
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

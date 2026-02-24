@@ -3,7 +3,7 @@
  * description: Imperative API for simple confirm/prompt scenarios. Supports `confirm`, `info`, `success`, `warning`, and `error` types.
  */
 import React from 'react';
-import { Button, Modal, ConfigProvider, enUS } from 'aero-ui';
+import { Button, Modal, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

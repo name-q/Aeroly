@@ -3,8 +3,8 @@
  * description: Form in Modal -- parent component controls the child Form via `ref`. The form is inside the Modal, submit button is in the Modal footer, and the parent triggers validation and submission via `ref.current.submit()`.
  */
 import React, { useState, useRef } from 'react';
-import { Form, Input, Select, Modal, Button, message, ConfigProvider, enUS } from 'aero-ui';
-import type { FormInstance } from 'aero-ui';
+import { Form, Input, Select, Modal, Button, message, ConfigProvider, enUS } from 'aeroui';
+import type { FormInstance } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

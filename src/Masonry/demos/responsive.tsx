@@ -3,7 +3,7 @@
  * description: 传入响应式对象，不同屏幕宽度自动切换列数。缩放浏览器窗口试试。
  */
 import React from 'react';
-import { Masonry, Image } from 'aero-ui';
+import { Masonry, Image } from 'aeroui';
 
 const images = Array.from({ length: 12 }, (_, i) => ({
   src: `https://picsum.photos/400/${300 + (i % 4) * 50}?random=${i + 40}`,

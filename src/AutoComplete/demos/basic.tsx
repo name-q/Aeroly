@@ -3,7 +3,7 @@
  * description: 输入时自动过滤匹配选项，支持键盘上下选择和回车确认。
  */
 import React, { useState } from 'react';
-import { AutoComplete } from 'aero-ui';
+import { AutoComplete } from 'aeroui';
 
 const allOptions = [
   { value: 'React' },

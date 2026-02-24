@@ -3,7 +3,7 @@
  * description: 配置 `rowSelection` 开启行选择，支持全选和半选状态。
  */
 import React, { useState } from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },

@@ -3,7 +3,7 @@
  * description: 超过 `overflowCount` 显示为 `99+`，`showZero` 控制 0 时是否显示。
  */
 import React from 'react';
-import { Badge, Button } from 'aero-ui';
+import { Badge, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

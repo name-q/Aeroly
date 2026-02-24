@@ -3,7 +3,7 @@
  * description: 设置 `bordered` 显示边框，`striped` 显示斑马纹。
  */
 import React from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },

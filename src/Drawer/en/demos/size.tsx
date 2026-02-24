@@ -3,7 +3,7 @@
  * description: Customize the drawer width or height.
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aero-ui';
+import { Button, Drawer } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

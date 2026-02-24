@@ -3,8 +3,8 @@
  * description: 24-column grid system. Use `span` to control each column's proportion.
  */
 import React from 'react';
-import { DemoBox } from 'aero-ui';
-import { Row, Col } from 'aero-ui';
+import { DemoBox } from 'aeroui';
+import { Row, Col } from 'aeroui';
 
 export default () => (
   <Row gutter={[12, 12]}>

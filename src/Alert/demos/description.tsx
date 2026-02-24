@@ -3,7 +3,7 @@
  * description: 通过 `description` 添加辅助说明文字，适合需要更多上下文的场景。
  */
 import React from 'react';
-import { Alert } from 'aero-ui';
+import { Alert } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

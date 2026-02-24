@@ -3,7 +3,7 @@
  * description: 点击切换 `justify` 的六种分布方式，观察色块位置变化。
  */
 import React, { useState } from 'react';
-import { Flex, Button, DemoBox } from 'aero-ui';
+import { Flex, Button, DemoBox } from 'aeroui';
 
 const modes = ['start', 'center', 'end', 'between', 'around', 'evenly'] as const;
 

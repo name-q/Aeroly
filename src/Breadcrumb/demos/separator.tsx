@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb } from 'aero-ui';
+import { Breadcrumb } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

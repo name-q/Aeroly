@@ -3,7 +3,7 @@
  * description: Loading state automatically shows a spinning icon and disables interaction. Disabled directly disables the button.
  */
 import React from 'react';
-import { Button } from 'aero-ui';
+import { Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>

@@ -3,7 +3,7 @@
  * description: 默认 3 列瀑布流，使用 Image 组件展示不等高图片。
  */
 import React from 'react';
-import { Masonry, Image } from 'aero-ui';
+import { Masonry, Image } from 'aeroui';
 
 const images = [
   { src: 'https://picsum.photos/400/300?random=1', h: 300 },

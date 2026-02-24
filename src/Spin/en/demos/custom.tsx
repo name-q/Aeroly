@@ -3,7 +3,7 @@
  * description: Customize the loading indicator via the `indicator` property.
  */
 import React from 'react';
-import { Spin, Flex, Icon } from 'aero-ui';
+import { Spin, Flex, Icon } from 'aeroui';
 import { Loader } from 'lucide-react';
 
 const CustomIcon = (

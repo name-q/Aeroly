@@ -21,7 +21,7 @@ import {
   Button,
   Flex,
   Icon,
-} from 'aero-ui';
+} from 'aeroui';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const cityOptions = [

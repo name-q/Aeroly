@@ -3,7 +3,7 @@
  * description: 通过 `indicator` 属性自定义加载指示器。
  */
 import React from 'react';
-import { Spin, Flex, Icon } from 'aero-ui';
+import { Spin, Flex, Icon } from 'aeroui';
 import { Loader } from 'lucide-react';
 
 const CustomIcon = (

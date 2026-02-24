@@ -3,7 +3,7 @@
  * description: Customize display format via `formatter` and `parser`, e.g. currency and percentage.
  */
 import React from 'react';
-import { InputNumber } from 'aero-ui';
+import { InputNumber } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

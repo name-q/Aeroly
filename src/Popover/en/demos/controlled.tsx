@@ -2,7 +2,7 @@
  * title: " "
  * description: Fully control visibility via `open` and `onOpenChange`.
  */
-import { Button, Popover } from 'aero-ui';
+import { Button, Popover } from 'aeroui';
 import React, { useState } from 'react';
 
 export default () => {

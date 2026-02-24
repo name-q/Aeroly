@@ -23,7 +23,7 @@ Icon wrapper component based on Lucide React, providing unified size, rotation, 
 Set the icon rotation angle via `rotate`.
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { ArrowUp, Navigation } from 'lucide-react';
 
 export default () => (
@@ -41,7 +41,7 @@ export default () => (
 Enable continuous spin animation via `spin`, commonly used for loading states.
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { Loader, RefreshCw, Settings } from 'lucide-react';
 
 export default () => (
@@ -56,7 +56,7 @@ export default () => (
 ## Custom Color and Size
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { Heart, Star, AlertCircle } from 'lucide-react';
 
 export default () => (

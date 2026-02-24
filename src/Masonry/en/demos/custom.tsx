@@ -3,7 +3,7 @@
  * description: Not limited to images -- any variable-height content can use masonry layout.
  */
 import React from 'react';
-import { Masonry } from 'aero-ui';
+import { Masonry } from 'aeroui';
 
 const cards = [
   { title: 'Design System', desc: 'A unified design language and component library for consistent product experience.' },

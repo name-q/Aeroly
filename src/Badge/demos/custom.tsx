@@ -3,7 +3,7 @@
  * description: 通过 `color` 自定义颜色，`text` 自定义显示内容。
  */
 import React from 'react';
-import { Badge, Button } from 'aero-ui';
+import { Badge, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

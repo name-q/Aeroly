@@ -3,7 +3,7 @@
  * description: Freely compose skeleton layouts using `Block`, `Circle`, and `Text` atomic components.
  */
 import React from 'react';
-import { Skeleton, Flex } from 'aero-ui';
+import { Skeleton, Flex } from 'aeroui';
 
 export default () => (
   <Flex gap={24} direction="column">

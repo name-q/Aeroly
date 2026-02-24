@@ -3,8 +3,8 @@
  * description: Supports 4 directions, auto-flips when overflowing the viewport.
  */
 import React from 'react';
-import { Popover, Button } from 'aero-ui';
-import type { PopoverPlacement } from 'aero-ui';
+import { Popover, Button } from 'aeroui';
+import type { PopoverPlacement } from 'aeroui';
 
 const placements: PopoverPlacement[] = ['top', 'bottom', 'left', 'right'];
 

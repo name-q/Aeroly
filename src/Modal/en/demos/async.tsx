@@ -3,7 +3,7 @@
  * description: When `onOk` returns a Promise, the OK button automatically enters loading state and closes upon completion.
  */
 import React, { useState } from 'react';
-import { Button, Modal, ConfigProvider, enUS } from 'aero-ui';
+import { Button, Modal, ConfigProvider, enUS } from 'aeroui';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 

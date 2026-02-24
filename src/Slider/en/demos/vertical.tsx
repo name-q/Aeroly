@@ -3,7 +3,7 @@
  * description: Set `vertical` to display the slider vertically.
  */
 import React from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 40, height: 200 }}>

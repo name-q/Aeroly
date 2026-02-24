@@ -23,7 +23,7 @@ import {
   Icon,
   ConfigProvider,
   enUS,
-} from 'aero-ui';
+} from 'aeroui';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const cityOptions = [

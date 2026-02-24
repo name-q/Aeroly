@@ -21,8 +21,8 @@ import {
   Switch,
   Button,
   Flex,
-} from 'aero-ui';
-import type { UploadFile } from 'aero-ui';
+} from 'aeroui';
+import type { UploadFile } from 'aeroui';
 
 const cityOptions = [
   { label: '北京', value: 'beijing' },

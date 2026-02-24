@@ -3,7 +3,7 @@
  * description: 三种尺寸：`small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>

@@ -3,7 +3,7 @@
  * description: 按钮模式支持整体禁用和单项禁用。
  */
 import React from 'react';
-import { Radio } from 'aero-ui';
+import { Radio } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

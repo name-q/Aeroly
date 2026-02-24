@@ -3,8 +3,8 @@
  * description: Control spacing and font size via `size`, supports `small`, `medium` (default), and `large`.
  */
 import React, { useState } from 'react';
-import { Descriptions, Segmented } from 'aero-ui';
-import type { DescriptionsProps } from 'aero-ui';
+import { Descriptions, Segmented } from 'aeroui';
+import type { DescriptionsProps } from 'aeroui';
 
 const items = [
   { label: 'Name', children: 'John Doe' },

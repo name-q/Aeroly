@@ -3,7 +3,7 @@
  * description: 配合 `maxLength` 和 `showCount` 显示字数统计。
  */
 import React from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

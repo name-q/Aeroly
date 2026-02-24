@@ -3,7 +3,7 @@
  * description: 基础标签用法。
  */
 import React from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>

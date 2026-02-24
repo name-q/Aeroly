@@ -1,4 +1,4 @@
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { Home, Search, Settings, User, Bell } from 'lucide-react';
 
 export default () => (

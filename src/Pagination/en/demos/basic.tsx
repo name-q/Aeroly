@@ -3,7 +3,7 @@
  * description: Basic pagination, just provide `total`.
  */
 import React from 'react';
-import { Pagination, ConfigProvider, enUS } from 'aero-ui';
+import { Pagination, ConfigProvider, enUS } from 'aeroui';
 
 export default () => (
   <ConfigProvider locale={enUS}>

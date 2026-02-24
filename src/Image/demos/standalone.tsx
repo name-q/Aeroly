@@ -3,7 +3,7 @@
  * description: 通过 `Image.Preview` 独立拉起预览浮层，不依赖 Image 组件渲染图片。适合按钮触发、缩略图查看大图等场景。
  */
 import React, { useState } from 'react';
-import { Image, Button } from 'aero-ui';
+import { Image, Button } from 'aeroui';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200',

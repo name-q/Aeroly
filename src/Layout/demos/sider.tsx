@@ -3,8 +3,8 @@
  * description: 包含 `Sider` 时自动切换为左右结构，配合 `Menu` 和 `Breadcrumb` 联动。Header 中的按钮控制侧栏收起。
  */
 import React, { useState } from 'react';
-import Layout from 'aero-ui/Layout';
-import { Menu, Breadcrumb, Button } from 'aero-ui';
+import Layout from 'aeroui/Layout';
+import { Menu, Breadcrumb, Button } from 'aeroui';
 import { Home, FileText, Settings, Users, BarChart3, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
 const { Header, Content, Sider } = Layout;

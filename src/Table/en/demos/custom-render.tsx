@@ -3,7 +3,7 @@
  * description: Customize column content via `render`, combined with Tag for status display and action buttons.
  */
 import React from 'react';
-import { Table, Tag, Button, Flex } from 'aero-ui';
+import { Table, Tag, Button, Flex } from 'aeroui';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

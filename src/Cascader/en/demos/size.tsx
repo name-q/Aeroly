@@ -3,7 +3,7 @@
  * description: Three sizes `small`, `medium` (default), and `large`.
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

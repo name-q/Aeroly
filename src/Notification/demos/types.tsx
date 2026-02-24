@@ -3,7 +3,7 @@
  * description: 四种类型：`info`、`success`、`warning`、`error`。
  */
 import React from 'react';
-import { notification, Button } from 'aero-ui';
+import { notification, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

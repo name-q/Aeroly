@@ -3,7 +3,7 @@
  * description: Set a fixed number of columns via `columns`.
  */
 import React from 'react';
-import { Masonry, Image } from 'aero-ui';
+import { Masonry, Image } from 'aeroui';
 
 const images = Array.from({ length: 12 }, (_, i) => ({
   src: `https://picsum.photos/400/${280 + (i % 5) * 40}?random=${i + 20}`,

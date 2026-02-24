@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode.
  */
 import React, { useState } from 'react';
-import { TimePicker, ConfigProvider, enUS } from 'aero-ui';
+import { TimePicker, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('09:30:00');

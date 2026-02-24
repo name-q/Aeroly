@@ -3,6 +3,6 @@
  * description: Set `disabled` to disable the slider.
  */
 import React from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => <Slider defaultValue={50} disabled />;

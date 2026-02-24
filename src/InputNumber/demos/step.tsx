@@ -3,7 +3,7 @@
  * description: 自定义步长和小数精度。
  */
 import React from 'react';
-import { InputNumber } from 'aero-ui';
+import { InputNumber } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

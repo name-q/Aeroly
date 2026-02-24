@@ -3,7 +3,7 @@
  * description: 设置 `showSearch` 开启搜索功能，搜索时自动展开匹配路径，保留祖先节点。
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

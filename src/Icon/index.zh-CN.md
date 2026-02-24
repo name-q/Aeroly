@@ -23,7 +23,7 @@ toc: content
 通过 `rotate` 设置图标旋转角度。
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { ArrowUp, Navigation } from 'lucide-react';
 
 export default () => (
@@ -41,7 +41,7 @@ export default () => (
 通过 `spin` 开启持续旋转动画，常用于加载状态。
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { Loader, RefreshCw, Settings } from 'lucide-react';
 
 export default () => (
@@ -56,7 +56,7 @@ export default () => (
 ## 自定义颜色和尺寸
 
 ```tsx
-import { Icon } from 'aero-ui';
+import { Icon } from 'aeroui';
 import { Heart, Star, AlertCircle } from 'lucide-react';
 
 export default () => (

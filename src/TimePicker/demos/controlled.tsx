@@ -3,7 +3,7 @@
  * description: 通过 `value` 和 `onChange` 实现受控模式。
  */
 import React, { useState } from 'react';
-import { TimePicker } from 'aero-ui';
+import { TimePicker } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('09:30:00');

@@ -3,7 +3,7 @@
  * description: 使用 `indeterminate` 属性实现全选/半选效果。
  */
 import React, { useState } from 'react';
-import { Checkbox } from 'aero-ui';
+import { Checkbox } from 'aeroui';
 
 const allOptions = ['Apple', 'Banana', 'Cherry', 'Durian'];
 

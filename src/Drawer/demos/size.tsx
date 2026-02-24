@@ -3,7 +3,7 @@
  * description: 自定义抽屉宽度或高度。
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aero-ui';
+import { Button, Drawer } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

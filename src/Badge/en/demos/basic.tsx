@@ -3,7 +3,7 @@
  * description: Basic usage, displays a number badge at the top-right corner.
  */
 import React from 'react';
-import { Badge, Button } from 'aero-ui';
+import { Badge, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

@@ -3,7 +3,7 @@
  * description: Set `bordered` to show borders and `striped` for zebra stripes.
  */
 import React from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

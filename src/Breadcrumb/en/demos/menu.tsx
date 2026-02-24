@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb } from 'aero-ui';
+import { Breadcrumb } from 'aeroui';
 
 export default () => (
   <Breadcrumb

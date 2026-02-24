@@ -3,7 +3,7 @@
  * description: The most basic usage. Pass description items via `items`.
  */
 import React from 'react';
-import { Descriptions } from 'aero-ui';
+import { Descriptions } from 'aeroui';
 
 export default () => (
   <Descriptions

@@ -3,7 +3,7 @@
  * description: 禁用和只读状态。
  */
 import React from 'react';
-import { Input } from 'aero-ui';
+import { Input } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 360 }}>

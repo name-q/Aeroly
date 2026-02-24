@@ -1,7 +1,7 @@
 import React from 'react';
-import { Upload, Button, ConfigProvider, enUS } from 'aero-ui';
+import { Upload, Button, ConfigProvider, enUS } from 'aeroui';
 import { Upload as UploadIcon } from 'lucide-react';
-import type { UploadFile } from 'aero-ui';
+import type { UploadFile } from 'aeroui';
 
 // Simulate AI image analysis
 const analyzeImage = (_file: File): Promise<Partial<UploadFile>> => {

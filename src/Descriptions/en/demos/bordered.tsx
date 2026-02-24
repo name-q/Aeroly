@@ -3,7 +3,7 @@
  * description: Set `bordered` to show bordered style, suitable for high-density information.
  */
 import React from 'react';
-import { Descriptions } from 'aero-ui';
+import { Descriptions } from 'aeroui';
 
 export default () => (
   <Descriptions

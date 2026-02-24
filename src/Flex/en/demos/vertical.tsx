@@ -3,7 +3,7 @@
  * description: `direction="column"` switches to vertical layout.
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aero-ui';
+import { Flex, DemoBox } from 'aeroui';
 
 export default () => (
   <Flex direction="column" gap="sm" align="start">

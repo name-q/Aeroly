@@ -3,7 +3,7 @@
  * description: Pass action buttons via `footer`.
  */
 import React from 'react';
-import { notification, Button } from 'aero-ui';
+import { notification, Button } from 'aeroui';
 
 export default () => (
   <Button

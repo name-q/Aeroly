@@ -3,7 +3,7 @@
  * description: Set `multiple` to enable multi-select mode with checkboxes and parent-child linkage.
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

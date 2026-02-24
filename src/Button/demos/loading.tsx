@@ -3,7 +3,7 @@
  * description: loading 状态自动显示旋转图标并禁用交互，disabled 直接禁用。
  */
 import React from 'react';
-import { Button } from 'aero-ui';
+import { Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>

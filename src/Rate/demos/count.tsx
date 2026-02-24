@@ -3,7 +3,7 @@
  * description: 设置 `count` 自定义星星总数。
  */
 import React from 'react';
-import { Rate } from 'aero-ui';
+import { Rate } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

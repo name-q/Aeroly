@@ -3,7 +3,7 @@
  * description: 基础表单，包含输入框、选择器、开关等常见控件。
  */
 import React from 'react';
-import { Form, Input, Select, Switch, Button, Flex } from 'aero-ui';
+import { Form, Input, Select, Switch, Button, Flex } from 'aeroui';
 
 export default () => {
   const [form] = Form.useForm();

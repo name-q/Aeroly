@@ -3,9 +3,9 @@
  * description: Supports nested submenus that auto-expand on hover.
  */
 import React from 'react';
-import { Dropdown, Button } from 'aero-ui';
+import { Dropdown, Button } from 'aeroui';
 import { FileText, Download, FileImage, FileSpreadsheet, Printer, Mail } from 'lucide-react';
-import type { DropdownItem } from 'aero-ui';
+import type { DropdownItem } from 'aeroui';
 
 const items: DropdownItem[] = [
   {

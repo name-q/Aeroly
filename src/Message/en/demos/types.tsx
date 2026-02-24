@@ -3,7 +3,7 @@
  * description: Four types: info, success, warning, and error.
  */
 import React from 'react';
-import { Button, message } from 'aero-ui';
+import { Button, message } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

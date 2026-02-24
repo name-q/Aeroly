@@ -3,8 +3,8 @@
  * description: 用 `justify` 和 `align` 控制列的水平与垂直对齐。
  */
 import React from 'react';
-import { DemoBox } from 'aero-ui';
-import { Row, Col } from 'aero-ui';
+import { DemoBox } from 'aeroui';
+import { Row, Col } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

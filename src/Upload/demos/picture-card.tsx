@@ -3,8 +3,8 @@
  * description: 横向卡片模式，hover 显示文件名（错误时追加原因）。预设了不同状态的文件用于演示。
  */
 import React, { useState } from 'react';
-import { Upload, Image } from 'aero-ui';
-import type { UploadFile } from 'aero-ui';
+import { Upload, Image } from 'aeroui';
+import type { UploadFile } from 'aeroui';
 
 const mockFiles: UploadFile[] = [
   {

@@ -3,7 +3,7 @@
  * description: The `auto` prop replaces hand-written `margin: auto`, applied directly on children to push adjacent elements apart.
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aero-ui';
+import { Flex, DemoBox } from 'aeroui';
 
 export default () => (
   <Flex direction="column" gap="md">

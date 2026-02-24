@@ -3,7 +3,7 @@
  * description: Simplest usage — pass `content` to generate a text watermark.
  */
 import React from 'react';
-import { Watermark } from 'aero-ui';
+import { Watermark } from 'aeroui';
 
 export default () => (
   <Watermark content="AeroUI">

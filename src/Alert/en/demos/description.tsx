@@ -3,7 +3,7 @@
  * description: Add supplementary text via `description` for scenarios that need more context.
  */
 import React from 'react';
-import { Alert } from 'aero-ui';
+import { Alert } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

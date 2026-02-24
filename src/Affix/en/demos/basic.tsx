@@ -3,7 +3,7 @@
  * description: Scroll the page and the button stays fixed at 0px from the top.
  */
 import React, { useState } from 'react';
-import { Affix, Button, Flex } from 'aero-ui';
+import { Affix, Button, Flex } from 'aeroui';
 
 export default () => {
   const [affixed, setAffixed] = useState(false);

@@ -3,7 +3,7 @@
  * description: Set `lazy` to enable native lazy loading. Images start loading only when they enter the viewport.
  */
 import React from 'react';
-import { Image } from 'aero-ui';
+import { Image } from 'aeroui';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',

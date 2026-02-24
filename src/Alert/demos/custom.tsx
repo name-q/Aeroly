@@ -3,7 +3,7 @@
  * description: 通过 `icon` 替换默认图标，`showIcon={false}` 隐藏图标，`shimmer={false}` 关闭光影效果。
  */
 import React from 'react';
-import { Alert } from 'aero-ui';
+import { Alert } from 'aeroui';
 import { Sparkles } from 'lucide-react';
 
 export default () => (

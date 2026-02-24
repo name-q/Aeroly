@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode.
  */
 import React, { useState } from 'react';
-import { Segmented } from 'aero-ui';
+import { Segmented } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState<string | number>('February');

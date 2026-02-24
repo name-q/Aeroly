@@ -3,7 +3,7 @@
  * description: 设置 `clickable` 允许点击步骤切换，配合 `onChange` 使用。
  */
 import React, { useState } from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => {
   const [current, setCurrent] = useState(1);

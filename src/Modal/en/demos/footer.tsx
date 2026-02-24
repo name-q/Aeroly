@@ -3,7 +3,7 @@
  * description: Customize the footer action area via `footer`. Pass `null` to completely hide the footer.
  */
 import React, { useState } from 'react';
-import { Button, Modal, ConfigProvider, enUS } from 'aero-ui';
+import { Button, Modal, ConfigProvider, enUS } from 'aeroui';
 
 export default () => {
   const [open1, setOpen1] = useState(false);

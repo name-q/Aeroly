@@ -3,7 +3,7 @@
  * description: Set `multiple` to enable multi-select mode, allowing multiple leaf paths to be selected.
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

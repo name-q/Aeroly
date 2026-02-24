@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { Carousel, Button } from 'aero-ui';
-import type { CarouselRef } from 'aero-ui';
+import { Carousel, Button } from 'aeroui';
+import type { CarouselRef } from 'aeroui';
 
 const items = [
   { key: '1', children: <div style={{ height: 200, background: 'linear-gradient(135deg, #667eea, #764ba2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 24 }}>Panel 1</div> },

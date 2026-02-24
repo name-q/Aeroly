@@ -3,7 +3,7 @@
  * description: 独立使用状态点，`shimmer` 开启光影掠过动画。
  */
 import React from 'react';
-import { Badge } from 'aero-ui';
+import { Badge } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

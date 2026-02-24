@@ -3,7 +3,7 @@
  * description: Set `layout="vertical"` to arrange labels and content vertically.
  */
 import React from 'react';
-import { Descriptions } from 'aero-ui';
+import { Descriptions } from 'aeroui';
 
 export default () => (
   <Descriptions

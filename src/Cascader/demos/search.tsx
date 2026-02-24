@@ -3,7 +3,7 @@
  * description: 设置 `showSearch` 开启搜索，输入关键词可快速定位到叶子路径。
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

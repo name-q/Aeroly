@@ -3,7 +3,7 @@
  * description: Place action buttons on the right side of the title via `extra`.
  */
 import React from 'react';
-import { Descriptions, Button } from 'aero-ui';
+import { Descriptions, Button } from 'aeroui';
 
 export default () => (
   <Descriptions

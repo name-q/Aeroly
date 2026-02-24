@@ -3,7 +3,7 @@
  * description: 通过 `value` 和 `onChange` 实现受控模式，实时显示当前评分。
  */
 import React, { useState } from 'react';
-import { Rate } from 'aero-ui';
+import { Rate } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState(3);

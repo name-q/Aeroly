@@ -3,7 +3,7 @@
  * description: 通过 `image` 传入图片地址作为水印，优先于文字。
  */
 import React from 'react';
-import { Watermark } from 'aero-ui';
+import { Watermark } from 'aeroui';
 
 export default () => (
   <Watermark

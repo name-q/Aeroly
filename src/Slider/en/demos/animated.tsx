@@ -3,7 +3,7 @@
  * description: Track shine flow effect is enabled by default. Set `animated={false}` to disable it.
  */
 import React from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>

@@ -61,16 +61,16 @@ nav:
 
 | 语言包 | 导入方式 |
 |--------|----------|
-| 简体中文 | `import { zhCN } from 'aero-ui'` |
-| English | `import { enUS } from 'aero-ui'` |
+| 简体中文 | `import { zhCN } from 'aeroui'` |
+| English | `import { enUS } from 'aeroui'` |
 
 ## 自定义语言包
 
 语言包是一个纯对象，结构与 `Locale` 类型一致。你可以基于内置语言包扩展：
 
 ```tsx | pure
-import { zhCN } from 'aero-ui';
-import type { Locale } from 'aero-ui';
+import { zhCN } from 'aeroui';
+import type { Locale } from 'aeroui';
 
 const jaJP: Locale = {
   ...zhCN,

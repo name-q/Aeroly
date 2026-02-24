@@ -3,7 +3,7 @@
  * description: 三种尺寸：`small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { Checkbox } from 'aero-ui';
+import { Checkbox } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

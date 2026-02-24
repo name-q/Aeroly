@@ -3,7 +3,7 @@
  * description: Set `changeOnSelect` to allow selecting any level, not just leaf nodes.
  */
 import React from 'react';
-import { Cascader } from 'aero-ui';
+import { Cascader } from 'aeroui';
 
 export default () => {
   const options = [

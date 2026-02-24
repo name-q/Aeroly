@@ -3,7 +3,7 @@
  * description: 设置 `direction="vertical"` 垂直展示步骤条。
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

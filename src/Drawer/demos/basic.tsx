@@ -3,7 +3,7 @@
  * description: 点击按钮从右侧滑出抽屉。
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aero-ui';
+import { Button, Drawer } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

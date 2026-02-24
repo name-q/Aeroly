@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu } from 'aero-ui';
+import { Menu } from 'aeroui';
 import { Home, FileText, Settings, Users } from 'lucide-react';
 
 const items = [

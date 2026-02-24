@@ -3,7 +3,7 @@
  * description: 模拟列表加载场景，骨架屏与真实数据无缝切换。
  */
 import React, { useState, useEffect } from 'react';
-import { Skeleton, Button, Flex } from 'aero-ui';
+import { Skeleton, Button, Flex } from 'aeroui';
 
 interface Item {
   id: number;

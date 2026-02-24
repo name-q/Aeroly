@@ -19,7 +19,7 @@ This guide walks you through the entire process.
 ## Step 1: Install
 
 ```bash
-pnpm i aero-ui lucide-react
+pnpm i aeroui lucide-react
 ```
 
 If your project uses Vite, you also need Less support:
@@ -31,7 +31,7 @@ pnpm i -D less
 Then import and use components directly:
 
 ```tsx | pure
-import { Button, Input, Select } from 'aero-ui';
+import { Button, Input, Select } from 'aeroui';
 
 export default () => (
   <div>
@@ -113,7 +113,7 @@ All AeroUI components automatically adapt — colors, shadows, and glassmorphism
 Use `ConfigProvider` to override theme colors, locale, and global size at runtime:
 
 ```tsx | pure
-import { ConfigProvider, enUS } from 'aero-ui';
+import { ConfigProvider, enUS } from 'aeroui';
 
 <ConfigProvider
   locale={enUS}
@@ -131,7 +131,7 @@ Supported theme keys: `primary-color`, `success-color`, `warning-color`, `error-
 AeroUI ships with English (`enUS`) and Chinese (`zhCN`) locale packs. Components with built-in text (Modal, DatePicker, Pagination, etc.) automatically use the configured locale.
 
 ```tsx | pure
-import { ConfigProvider, zhCN } from 'aero-ui';
+import { ConfigProvider, zhCN } from 'aeroui';
 
 <ConfigProvider locale={zhCN}>
   <App />

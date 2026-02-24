@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode.
  */
 import React, { useState } from 'react';
-import { Radio } from 'aero-ui';
+import { Radio } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState<string | number>('February');

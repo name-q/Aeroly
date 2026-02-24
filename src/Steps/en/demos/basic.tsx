@@ -3,7 +3,7 @@
  * description: The simplest step bar. Use `current` to specify the current step.
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

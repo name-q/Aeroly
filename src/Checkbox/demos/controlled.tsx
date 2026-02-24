@@ -3,7 +3,7 @@
  * description: 通过 `value` 和 `onChange` 实现受控模式。
  */
 import React, { useState } from 'react';
-import { Checkbox } from 'aero-ui';
+import { Checkbox } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState<(string | number)[]>(['February']);

@@ -3,7 +3,7 @@
  * description: 配置 `pagination` 开启分页，支持 `showTotal`、`showSizeChanger` 等。
  */
 import React from 'react';
-import { Table } from 'aero-ui';
+import { Table } from 'aeroui';
 
 const columns = [
   { title: '编号', dataIndex: 'id', width: 80 },

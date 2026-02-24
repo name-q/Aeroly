@@ -3,7 +3,7 @@
  * description: Auto-filters matching options as you type, with keyboard up/down selection and Enter to confirm.
  */
 import React, { useState } from 'react';
-import { AutoComplete } from 'aero-ui';
+import { AutoComplete } from 'aeroui';
 
 const allOptions = [
   { value: 'React' },

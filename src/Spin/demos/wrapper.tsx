@@ -3,7 +3,7 @@
  * description: 包裹内容时，加载状态会在内容上方覆盖遮罩。可通过切换按钮控制加载状态。
  */
 import React, { useState } from 'react';
-import { Spin, Button, Alert } from 'aero-ui';
+import { Spin, Button, Alert } from 'aeroui';
 
 export default () => {
   const [loading, setLoading] = useState(true);

@@ -3,7 +3,7 @@
  * description: Three sizes of segmented controls.
  */
 import React from 'react';
-import { Segmented } from 'aero-ui';
+import { Segmented } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

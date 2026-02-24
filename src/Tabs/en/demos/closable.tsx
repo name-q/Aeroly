@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Tabs, Button } from 'aero-ui';
+import { Tabs, Button } from 'aeroui';
 import { Plus } from 'lucide-react';
-import type { TabItem } from 'aero-ui';
+import type { TabItem } from 'aeroui';
 
 let seq = 3;
 

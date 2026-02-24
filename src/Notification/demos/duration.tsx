@@ -3,7 +3,7 @@
  * description: `duration` 设为 `0` 则不自动关闭，需手动点击关闭按钮。
  */
 import React from 'react';
-import { notification, Button } from 'aero-ui';
+import { notification, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 8 }}>

@@ -3,7 +3,7 @@
  * description: Set `duration` to `0` to disable auto-close. Must be closed manually via the close button.
  */
 import React from 'react';
-import { notification, Button } from 'aero-ui';
+import { notification, Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 8 }}>

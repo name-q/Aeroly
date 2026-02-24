@@ -3,7 +3,7 @@
  * description: 三种按钮类型：默认、主色、文本。
  */
 import React from 'react';
-import { Button } from 'aero-ui';
+import { Button } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>

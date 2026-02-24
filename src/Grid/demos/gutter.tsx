@@ -3,8 +3,8 @@
  * description: `gutter` 支持语义 token 和 `[水平, 垂直]` 数组分别控制行列间距。
  */
 import React from 'react';
-import { DemoBox } from 'aero-ui';
-import { Row, Col } from 'aero-ui';
+import { DemoBox } from 'aeroui';
+import { Row, Col } from 'aeroui';
 
 export default () => (
   <Row gutter={['lg', 'sm']}>

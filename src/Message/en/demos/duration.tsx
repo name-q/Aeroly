@@ -3,7 +3,7 @@
  * description: The second argument customizes the display duration (ms). Default is 3000ms.
  */
 import React from 'react';
-import { Button, message } from 'aero-ui';
+import { Button, message } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12 }}>

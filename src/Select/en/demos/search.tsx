@@ -3,7 +3,7 @@
  * description: Set `showSearch` to enable search. A search input appears at the top of the dropdown panel. Supports custom filter logic.
  */
 import React from 'react';
-import { Select } from 'aero-ui';
+import { Select } from 'aeroui';
 
 export default () => {
   const options = [

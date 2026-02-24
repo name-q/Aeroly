@@ -3,7 +3,7 @@
  * description: In controlled mode, the value is fully driven by external state.
  */
 import React, { useState } from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState('');

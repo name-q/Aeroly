@@ -3,7 +3,7 @@
  * description: 最常见的上-中-下结构。`Content` 自动撑满剩余空间。
  */
 import React from 'react';
-import Layout from 'aero-ui/Layout';
+import Layout from 'aeroui/Layout';
 
 const { Header, Content, Footer } = Layout;
 

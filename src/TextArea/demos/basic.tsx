@@ -3,7 +3,7 @@
  * description: 默认自适应内容高度，随输入自动增长。
  */
 import React from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

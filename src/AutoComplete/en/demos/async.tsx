@@ -3,9 +3,9 @@
  * description: Connects to a local Koa server (localhost:3001) for async city search. Real-time requests on input with loading state and debounce.
  */
 import React, { useState, useRef, useCallback } from 'react';
-import { AutoComplete, Icon, ConfigProvider, enUS } from 'aero-ui';
+import { AutoComplete, Icon, ConfigProvider, enUS } from 'aeroui';
 import { MapPin } from 'lucide-react';
-import type { AutoCompleteOption } from 'aero-ui';
+import type { AutoCompleteOption } from 'aeroui';
 
 const API = 'http://localhost:3001/api/search/cities';
 

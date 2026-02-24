@@ -3,7 +3,7 @@
  * description: 设置 `bordered` 显示边框样式，适合信息密度较高的场景。
  */
 import React from 'react';
-import { Descriptions } from 'aero-ui';
+import { Descriptions } from 'aeroui';
 
 export default () => (
   <Descriptions

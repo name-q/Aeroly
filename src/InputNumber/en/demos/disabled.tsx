@@ -3,7 +3,7 @@
  * description: Disabled and read-only states. `controls={false}` hides the step buttons.
  */
 import React from 'react';
-import { InputNumber } from 'aero-ui';
+import { InputNumber } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

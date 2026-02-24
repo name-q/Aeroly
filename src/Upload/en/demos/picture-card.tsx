@@ -3,8 +3,8 @@
  * description: Horizontal card mode, hover to show filename (with error reason if failed). Preset files with different statuses for demonstration.
  */
 import React, { useState } from 'react';
-import { Upload, Image, ConfigProvider, enUS } from 'aero-ui';
-import type { UploadFile } from 'aero-ui';
+import { Upload, Image, ConfigProvider, enUS } from 'aeroui';
+import type { UploadFile } from 'aeroui';
 
 const mockFiles: UploadFile[] = [
   {

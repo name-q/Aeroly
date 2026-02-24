@@ -3,7 +3,7 @@
  * description: Fully control visibility via `open` and `onOpenChange`.
  */
 import React, { useState } from 'react';
-import { Tooltip, Button } from 'aero-ui';
+import { Tooltip, Button } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

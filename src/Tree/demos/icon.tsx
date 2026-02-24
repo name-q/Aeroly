@@ -3,7 +3,7 @@
  * description: 通过节点的 `icon` 属性自定义图标，设置 `showIcon` 开启显示。
  */
 import React from 'react';
-import { Tree } from 'aero-ui';
+import { Tree } from 'aeroui';
 import { Folder, FileText, Image, FileCode } from 'lucide-react';
 
 const treeData = [

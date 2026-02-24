@@ -3,7 +3,7 @@
  * description: Basic single-select tree selector. Click to expand the dropdown panel and select a tree node.
  */
 import React from 'react';
-import { TreeSelect } from 'aero-ui';
+import { TreeSelect } from 'aeroui';
 
 export default () => {
   const treeData = [

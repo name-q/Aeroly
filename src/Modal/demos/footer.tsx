@@ -3,7 +3,7 @@
  * description: 通过 `footer` 自定义底部操作区，传 `null` 可完全隐藏底部。
  */
 import React, { useState } from 'react';
-import { Button, Modal } from 'aero-ui';
+import { Button, Modal } from 'aeroui';
 
 export default () => {
   const [open1, setOpen1] = useState(false);

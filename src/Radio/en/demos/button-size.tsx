@@ -3,7 +3,7 @@
  * description: Button mode also supports three sizes.
  */
 import React from 'react';
-import { Radio } from 'aero-ui';
+import { Radio } from 'aeroui';
 
 const options = [
   { value: 'day', label: 'Day' },

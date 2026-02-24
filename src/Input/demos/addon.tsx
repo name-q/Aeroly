@@ -3,7 +3,7 @@
  * description: 通过 `addonBefore` 和 `addonAfter` 在输入框外侧添加附加内容。
  */
 import React from 'react';
-import { Input } from 'aero-ui';
+import { Input } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 420 }}>

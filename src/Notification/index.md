@@ -38,7 +38,7 @@ Display global notification messages that slide in from the screen edge. Support
 Imperative API. Use methods on the `notification` object directly:
 
 ```ts
-import { notification } from 'aero-ui';
+import { notification } from 'aeroui';
 
 notification.info('Title', 'Description');
 notification.success('Title', 'Description');

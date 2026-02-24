@@ -3,7 +3,7 @@
  * description: Solid line by default. Switch to dashed via `type="dashed"` or fade-out via `type="fade"`.
  */
 import React from 'react';
-import { Divider } from 'aero-ui';
+import { Divider } from 'aeroui';
 
 export default () => (
   <div>

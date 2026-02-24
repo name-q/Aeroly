@@ -3,7 +3,7 @@
  * description: Use `Image.Preview` to open a standalone preview overlay without rendering an Image component. Suitable for button-triggered or thumbnail-to-full-image scenarios.
  */
 import React, { useState } from 'react';
-import { Image, Button } from 'aero-ui';
+import { Image, Button } from 'aeroui';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200',

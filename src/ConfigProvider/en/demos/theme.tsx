@@ -35,8 +35,8 @@ import {
   Statistic,
   ColorPicker,
   enUS
-} from 'aero-ui';
-import type { SizeType } from 'aero-ui';
+} from 'aeroui';
+import type { SizeType } from 'aeroui';
 
 const presets = {
   default: {

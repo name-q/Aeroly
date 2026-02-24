@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Button } from 'aero-ui';
+import { Tabs, Button } from 'aeroui';
 
 export default () => {
   return (

@@ -3,7 +3,7 @@
  * description: Set `offsetBottom` to fix an element at the bottom of the container, suitable for form submit bars, summary rows, etc.
  */
 import React from 'react';
-import { Affix, Button, Flex } from 'aero-ui';
+import { Affix, Button, Flex } from 'aeroui';
 
 export default () => {
   return (

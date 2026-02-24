@@ -3,7 +3,7 @@
  * description: 第二个参数可自定义显示时长（ms），默认 3000ms。
  */
 import React from 'react';
-import { Button, message } from 'aero-ui';
+import { Button, message } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', gap: 12 }}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Tour } from 'aero-ui';
-import type { TourStepConfig } from 'aero-ui';
+import { Button, Tour } from 'aeroui';
+import type { TourStepConfig } from 'aeroui';
 
 export default () => {
   const [open, setOpen] = useState(false);

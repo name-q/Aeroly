@@ -3,6 +3,6 @@
  * description: 设置 `disabled` 禁用滑动条。
  */
 import React from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => <Slider defaultValue={50} disabled />;

@@ -3,7 +3,7 @@
  * description: Customize color via `color`, enable pill shape via `round`, remove border via `bordered={false}`.
  */
 import React from 'react';
-import { Tag } from 'aero-ui';
+import { Tag } from 'aeroui';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

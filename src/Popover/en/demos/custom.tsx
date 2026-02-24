@@ -3,7 +3,7 @@
  * description: `content` accepts any ReactNode for complex content.
  */
 import React from 'react';
-import { Popover, Button } from 'aero-ui';
+import { Popover, Button } from 'aeroui';
 
 const content = (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 200 }}>

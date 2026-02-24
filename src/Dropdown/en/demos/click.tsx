@@ -3,7 +3,7 @@
  * description: Set `trigger="click"` to switch to click trigger, combined with `selectedKey` to highlight the current selection.
  */
 import React, { useState } from 'react';
-import { Dropdown, Button } from 'aero-ui';
+import { Dropdown, Button } from 'aeroui';
 import { SortAsc, ArrowUpAZ, ArrowDownAZ, Clock, Star } from 'lucide-react';
 
 const items = [

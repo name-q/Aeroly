@@ -3,9 +3,9 @@
  * description: Use AutoComplete in a Form. Dynamically generate email suffix suggestions via `Form.useWatch`. Extract `useWatch` and `AutoComplete` into a separate child component `EmailAutoComplete` so that data changes only trigger the child component re-render, not the entire form.
  */
 import React from 'react';
-import { Form, AutoComplete, Button, Flex, ConfigProvider, enUS } from 'aero-ui';
-import type { AutoCompleteProps } from 'aero-ui';
-import type { FormInstance } from 'aero-ui';
+import { Form, AutoComplete, Button, Flex, ConfigProvider, enUS } from 'aeroui';
+import type { AutoCompleteProps } from 'aeroui';
+import type { FormInstance } from 'aeroui';
 
 const emailSuffixes = ['@gmail.com', '@qq.com', '@163.com', '@outlook.com', '@foxmail.com'];
 

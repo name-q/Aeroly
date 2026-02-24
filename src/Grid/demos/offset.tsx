@@ -3,8 +3,8 @@
  * description: `offset` 控制列的左侧偏移格数。
  */
 import React from 'react';
-import { DemoBox } from 'aero-ui';
-import { Row, Col } from 'aero-ui';
+import { DemoBox } from 'aeroui';
+import { Row, Col } from 'aeroui';
 
 export default () => (
   <Row gutter={[12, 12]}>

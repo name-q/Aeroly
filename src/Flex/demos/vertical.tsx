@@ -3,7 +3,7 @@
  * description: `direction="column"` 切换纵向排列。
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aero-ui';
+import { Flex, DemoBox } from 'aeroui';
 
 export default () => (
   <Flex direction="column" gap="sm" align="start">

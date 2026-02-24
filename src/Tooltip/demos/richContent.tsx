@@ -3,7 +3,7 @@
  * description: 可以传入 ReactNode 作为提示内容。
  */
 import React from 'react';
-import { Tooltip, Button } from 'aero-ui';
+import { Tooltip, Button } from 'aeroui';
 
 export default () => (
   <Tooltip

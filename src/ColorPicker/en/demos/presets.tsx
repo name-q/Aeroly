@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ColorPicker } from 'aero-ui';
+import { ColorPicker } from 'aeroui';
 
 const presets = [
   '#f5222d', '#fa541c', '#fa8c16', '#faad14', '#fadb14',

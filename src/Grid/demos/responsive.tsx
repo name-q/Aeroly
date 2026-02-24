@@ -3,8 +3,8 @@
  * description: 通过 `xs` `sm` `md` `lg` `xl` 断点属性实现响应式布局，缩放浏览器窗口查看效果。
  */
 import React from 'react';
-import { DemoBox } from 'aero-ui';
-import { Row, Col } from 'aero-ui';
+import { DemoBox } from 'aeroui';
+import { Row, Col } from 'aeroui';
 
 export default () => (
   <Row gutter={[12, 12]}>

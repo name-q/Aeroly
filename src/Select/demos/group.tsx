@@ -3,7 +3,7 @@
  * description: 使用分组选项，将相关选项归类展示。传入 `{ label, options }` 格式即可。
  */
 import React from 'react';
-import { Select } from 'aero-ui';
+import { Select } from 'aeroui';
 
 export default () => {
   const options = [

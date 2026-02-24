@@ -3,7 +3,7 @@
  * description: 设置 `range` 开启范围选择，拖动两个滑块选择区间。
  */
 import React, { useState } from 'react';
-import { Slider } from 'aero-ui';
+import { Slider } from 'aeroui';
 
 export default () => {
   const [value, setValue] = useState<[number, number]>([20, 60]);

@@ -3,7 +3,7 @@
  * description: 设置 `offsetBottom` 将元素固定在容器底部，适合表单提交栏、汇总行等场景。
  */
 import React from 'react';
-import { Affix, Button, Flex } from 'aero-ui';
+import { Affix, Button, Flex } from 'aeroui';
 
 export default () => {
   return (

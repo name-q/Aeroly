@@ -3,7 +3,7 @@
  * description: Use `maxLength` with `showCount` to display character count.
  */
 import React from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

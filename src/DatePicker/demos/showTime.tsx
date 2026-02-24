@@ -3,7 +3,7 @@
  * description: 设置 `showTime` 后，选择日期后面板不关闭，底部出现时间滚动列，点击"确定"关闭面板。
  */
 import React from 'react';
-import { DatePicker } from 'aero-ui';
+import { DatePicker } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 280 }}>

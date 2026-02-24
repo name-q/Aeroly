@@ -3,7 +3,7 @@
  * description: Set `status="error"` to mark the current step as an error state.
  */
 import React from 'react';
-import { Steps } from 'aero-ui';
+import { Steps } from 'aeroui';
 
 export default () => (
   <Steps

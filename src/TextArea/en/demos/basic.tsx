@@ -3,7 +3,7 @@
  * description: Auto-resizes to fit content by default, growing naturally as you type.
  */
 import React from 'react';
-import { TextArea } from 'aero-ui';
+import { TextArea } from 'aeroui';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

@@ -1,9 +1,27 @@
 {
-  "name": "aero-ui",
+  "name": "aeroui",
   "version": "1.0.0",
-  "description": "Designed for AI collaboration and effortless interface building.",
+  "description": "A React UI component library designed for AI collaboration and effortless interface building.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://aero-ui.zeroc.top",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/name-q/aeroui"
+  },
+  "bugs": {
+    "url": "https://github.com/name-q/aeroui/issues"
+  },
+  "keywords": [
+    "aeroui",
+    "react",
+    "ui",
+    "components",
+    "ai-friendly",
+    "pencil",
+    "design-to-code",
+    "typescript"
+  ],
   "scripts": {
     "start": "npm run dev",
     "dev": "dumi dev",

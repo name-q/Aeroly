@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
             </a>
             <a
               className="aero-home-btn aero-home-btn--ghost"
-              href="https://github.com"
+              href="https://github.com/name-q/aeroly"
               target="_blank"
               rel="noopener noreferrer"
             >

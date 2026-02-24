@@ -94,6 +94,16 @@ import { ConfigProvider, enUS, zhCN } from 'aeroui';
 </ConfigProvider>
 ```
 
+## Mock Server
+
+The `server/` directory contains a local Koa server for testing file upload demos. To start it:
+
+```bash
+cd server && node index.js
+```
+
+This launches a mock backend on `http://localhost:3001` that handles upload requests for the Upload component demos.
+
 ## Links
 
 - [Documentation](https://aero-ui.zeroc.top)

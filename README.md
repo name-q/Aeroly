@@ -23,7 +23,6 @@
 ## Features
 
 - **Pencil Support** — Built-in `.pen` design file with 91 reusable components. AI reads the design and generates React code directly.
-- **Glassmorphism** — Frosted glass aesthetics with layered `backdrop-filter` blur, delivering a modern, airy visual language.
 - **60+ Components** — From Form to Table, Modal to Masonry — a comprehensive toolkit for production interfaces.
 - **AI-Friendly** — Consistent API patterns (`value`/`onChange`, `open`/`onOpenChange`, `size`, `disabled`) so AI can predict usage across all components.
 - **Themeable** — CSS Variables + `ConfigProvider` for runtime theme switching. Dark mode built-in.
@@ -56,16 +55,6 @@ export default () => (
 ```
 
 No global CSS import needed — styles are injected automatically when your bundler processes the component Less files.
-
-## Components
-
-| Category | Components |
-|----------|-----------|
-| General | Button, Icon, Divider, Flex, Grid, Layout |
-| Navigation | Menu, Tabs, Breadcrumb, Pagination, Steps, Segmented, Dropdown, Affix |
-| Form | Input, InputNumber, TextArea, Select, TreeSelect, Cascader, AutoComplete, Checkbox, Radio, Switch, DatePicker, TimePicker, DateRangePicker, ColorPicker, Rate, Slider, Upload, Form |
-| Data Display | Table, Tree, Tag, Badge, Statistic, Descriptions, Carousel, Image, QRCode, Empty, Skeleton, Masonry, Watermark |
-| Feedback | Modal, Drawer, Message, Notification, Alert, Spin, Tooltip, Popover, Tour, FloatButton |
 
 ## AI Workflow with Pencil
 

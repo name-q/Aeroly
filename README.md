@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://aero-ui.zeroc.top">
+  <a href="https://aeroly.zeroc.top">
     <img src="./logo.png" alt="aeroly" width="120" />
   </a>
 </p>
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://aero-ui.zeroc.top">Documentation</a> · <a href="https://aero-ui.zeroc.top/cn">中文文档</a> · <a href="https://aero-ui.zeroc.top/guide/ai-workflow">AI Workflow Guide</a>
+  <a href="https://aeroly.zeroc.top">Documentation</a> · <a href="https://aeroly.zeroc.top/cn">中文文档</a> · <a href="https://aeroly.zeroc.top/guide/ai-workflow">AI Workflow Guide</a>
 </p>
 
 ---
@@ -65,7 +65,7 @@ aeroly ships with an `aeroly.pen` design file containing all components as reusa
 3. **Iterate** on the design visually
 4. **Ask AI** to read the design and generate React code with aeroly
 
-See the [AI Workflow Guide](https://aero-ui.zeroc.top/guide/ai-workflow) for details.
+See the [AI Workflow Guide](https://aeroly.zeroc.top/guide/ai-workflow) for details.
 
 ## Theming
 
@@ -106,8 +106,8 @@ This launches a mock backend on `http://localhost:3001` that handles upload requ
 
 ## Links
 
-- [Documentation](https://aero-ui.zeroc.top)
-- [AI Workflow Guide](https://aero-ui.zeroc.top/guide/ai-workflow)
+- [Documentation](https://aeroly.zeroc.top)
+- [AI Workflow Guide](https://aeroly.zeroc.top/guide/ai-workflow)
 - [GitHub](https://github.com/name-q/aeroly)
 
 ## License

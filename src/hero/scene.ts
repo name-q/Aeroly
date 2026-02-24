@@ -37,26 +37,23 @@ const LETTER_STROKES: Record<string, number[][]> = {
     [0.85, 0.9, 0.15, 0.9],   // top
     [0.15, 0.9, 0.15, 0],     // left
   ],
-  U: [
-    [0, 1.4, 0, 0.3],         // left down
-    [0, 0.3, 0.2, 0],         // left curve
-    [0.2, 0, 0.8, 0],         // bottom
-    [0.8, 0, 1, 0.3],         // right curve
-    [1, 0.3, 1, 1.4],         // right up
+  l: [
+    [0.4, 0, 0.4, 1.4],       // stem
   ],
-  I: [
-    [0.2, 0, 0.8, 0],         // bottom bar
-    [0.5, 0, 0.5, 1.4],       // stem
-    [0.2, 1.4, 0.8, 1.4],     // top bar
+  y: [
+    [0.15, 0.45, 0.15, 0.9],   // left side of loop
+    [0.15, 0.45, 0.85, 0.45],  // bottom of loop
+    [0.85, 0.9, 0.85, 0],      // right side down to baseline
+    [0.85, 0, 0.5, -0.3],      // descender curving inward
   ],
 };
 
 const WORD = 'Aeroly';
 const LETTER_WIDTHS: Record<string, number> = {
-  A: 1.0, e: 1.0, r: 1.0, o: 1.0, U: 1.0, I: 1.0,
+  A: 1.0, e: 1.0, r: 1.0, o: 1.0, l: 0.8, y: 1.0,
 };
 const LETTER_HEIGHTS: Record<string, number> = {
-  A: 1.4, e: 0.9, r: 0.9, o: 0.9, U: 1.4, I: 1.4,
+  A: 1.4, e: 0.9, r: 0.9, o: 0.9, l: 1.4, y: 0.9,
 };
 const KERNING = 0.35;
 

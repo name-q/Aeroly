@@ -19,7 +19,7 @@ Aeroly 是一个为 AI 编码而设计的 React 组件库。结合 Pencil 设计
 ## 第一步：安装
 
 ```bash
-pnpm i Aeroly lucide-react
+pnpm i aeroly lucide-react
 ```
 
 如果你的项目使用 Vite，还需要安装 Less 支持：

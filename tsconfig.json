@@ -8,8 +8,8 @@
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "AeroUi": ["src"],
-      "AeroUi/*": ["src/*", "*"]
+      "Aeroly": ["src"],
+      "Aeroly/*": ["src/*", "*"]
     }
   },
   "include": [".dumirc.ts", ".fatherrc.ts", "src/**/*", ".dumi/theme/**/*"]

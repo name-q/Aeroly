@@ -19,7 +19,7 @@ This guide walks you through the entire process.
 ## Step 1: Install
 
 ```bash
-pnpm i Aeroly lucide-react
+pnpm i aeroly lucide-react
 ```
 
 If your project uses Vite, you also need Less support:

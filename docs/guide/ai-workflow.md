@@ -30,7 +30,7 @@ pnpm i -D less
 
 Then import and use components directly:
 
-```tsx
+```tsx | pure
 import { Button, Input, Select } from 'aero-ui';
 
 export default () => (
@@ -92,49 +92,7 @@ Once you're happy with the design, ask the AI to generate React code:
 
 > "Read the dashboard design from AeroUi.pen and generate a React page using AeroUI components."
 
-The AI will translate the visual design into working React code:
-
-```tsx
-import React, { useState } from 'react';
-import {
-  Layout, Menu, Input, Button, Table, Pagination, Modal, Tag, Flex
-} from 'aero-ui';
-import { Users, Settings, Search, Plus } from 'lucide-react';
-
-export default function UserManagement() {
-  const [current, setCurrent] = useState(1);
-
-  const columns = [
-    { title: 'Name', dataIndex: 'name' },
-    { title: 'Email', dataIndex: 'email' },
-    { title: 'Role', dataIndex: 'role', render: (v: string) => <Tag>{v}</Tag> },
-  ];
-
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout.Sider>
-        <Menu
-          items={[
-            { key: 'users', label: 'Users', icon: <Users size={16} /> },
-            { key: 'settings', label: 'Settings', icon: <Settings size={16} /> },
-          ]}
-          selectedKeys={['users']}
-        />
-      </Layout.Sider>
-      <Layout>
-        <Layout.Content style={{ padding: 24 }}>
-          <Flex gap={12} style={{ marginBottom: 16 }}>
-            <Input prefix={<Search size={16} />} placeholder="Search users" />
-            <Button type="primary" icon={<Plus size={16} />}>Add User</Button>
-          </Flex>
-          <Table columns={columns} dataSource={[]} rowKey="id" />
-          <Pagination current={current} total={100} onChange={setCurrent} />
-        </Layout.Content>
-      </Layout>
-    </Layout>
-  );
-}
-```
+The AI will translate the visual design into working React code
 
 ---
 
@@ -154,7 +112,7 @@ All AeroUI components automatically adapt — colors, shadows, and glassmorphism
 
 Use `ConfigProvider` to override theme colors, locale, and global size at runtime:
 
-```tsx
+```tsx | pure
 import { ConfigProvider, enUS } from 'aero-ui';
 
 <ConfigProvider
@@ -172,7 +130,7 @@ Supported theme keys: `primary-color`, `success-color`, `warning-color`, `error-
 
 AeroUI ships with English (`enUS`) and Chinese (`zhCN`) locale packs. Components with built-in text (Modal, DatePicker, Pagination, etc.) automatically use the configured locale.
 
-```tsx
+```tsx | pure
 import { ConfigProvider, zhCN } from 'aero-ui';
 
 <ConfigProvider locale={zhCN}>

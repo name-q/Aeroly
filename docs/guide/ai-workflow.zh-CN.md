@@ -30,7 +30,7 @@ pnpm i -D less
 
 然后直接导入使用组件：
 
-```tsx
+```tsx | pure
 import { Button, Input, Select } from 'aero-ui';
 
 export default () => (
@@ -92,49 +92,7 @@ AI 会：
 
 > "读取 AeroUi.pen 中的后台设计稿，使用 AeroUI 组件生成 React 页面。"
 
-AI 会将视觉设计转化为可运行的 React 代码：
-
-```tsx
-import React, { useState } from 'react';
-import {
-  Layout, Menu, Input, Button, Table, Pagination, Modal, Tag, Flex
-} from 'aero-ui';
-import { Users, Settings, Search, Plus } from 'lucide-react';
-
-export default function UserManagement() {
-  const [current, setCurrent] = useState(1);
-
-  const columns = [
-    { title: '姓名', dataIndex: 'name' },
-    { title: '邮箱', dataIndex: 'email' },
-    { title: '角色', dataIndex: 'role', render: (v: string) => <Tag>{v}</Tag> },
-  ];
-
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout.Sider>
-        <Menu
-          items={[
-            { key: 'users', label: '用户管理', icon: <Users size={16} /> },
-            { key: 'settings', label: '系统设置', icon: <Settings size={16} /> },
-          ]}
-          selectedKeys={['users']}
-        />
-      </Layout.Sider>
-      <Layout>
-        <Layout.Content style={{ padding: 24 }}>
-          <Flex gap={12} style={{ marginBottom: 16 }}>
-            <Input prefix={<Search size={16} />} placeholder="搜索用户" />
-            <Button type="primary" icon={<Plus size={16} />}>新建用户</Button>
-          </Flex>
-          <Table columns={columns} dataSource={[]} rowKey="id" />
-          <Pagination current={current} total={100} onChange={setCurrent} />
-        </Layout.Content>
-      </Layout>
-    </Layout>
-  );
-}
-```
+AI 会将视觉设计转化为可运行的 React 代码
 
 ---
 
@@ -154,7 +112,7 @@ document.documentElement.setAttribute('data-theme', 'dark');
 
 使用 `ConfigProvider` 在运行时覆盖主题色、语言和全局尺寸：
 
-```tsx
+```tsx | pure
 import { ConfigProvider, zhCN } from 'aero-ui';
 
 <ConfigProvider
@@ -172,7 +130,7 @@ import { ConfigProvider, zhCN } from 'aero-ui';
 
 AeroUI 内置英文（`enUS`）和中文（`zhCN`）语言包。包含默认文案的组件（Modal、DatePicker、Pagination 等）会自动使用配置的语言。
 
-```tsx
+```tsx | pure
 import { ConfigProvider, enUS } from 'aero-ui';
 
 <ConfigProvider locale={enUS}>

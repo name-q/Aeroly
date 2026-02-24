@@ -10,12 +10,12 @@ const i18n = {
     github: 'GitHub',
     getStartedLink: '/cn/components/button',
     features: [
-      { icon: '🧊', title: '毛玻璃美学', desc: '多层 backdrop-filter 模糊叠加，打造现代通透的视觉语言。' },
-      { icon: '🎨', title: '主题定制', desc: 'CSS Variables + ConfigProvider 运行时主题切换，暗色模式开箱即用。' },
-      { icon: '🤖', title: 'AI 友好', desc: '简洁一致的 API 设计，专为 AI 辅助开发工作流打造。' },
-      { icon: '📦', title: '60+ 组件', desc: '从 Form 到 Table，Modal 到 Masonry——构建生产级界面的完整工具集。' },
-      { icon: '🌐', title: '国际化', desc: '内置中英文语言包，可轻松扩展至任意语言。' },
-      { icon: '⚡', title: '轻量高效', desc: '支持 Tree-shaking，零运行时 CSS-in-JS，Less + CSS Variables 保持包体精简。' },
+      { title: 'Pencil 支持', desc: '内置 .pen 设计文件，AI 可直接读取组件设计稿并生成代码。' },
+      { title: '主题定制', desc: 'CSS Variables + ConfigProvider 运行时主题切换，暗色模式开箱即用。' },
+      { title: 'AI 友好', desc: '简洁一致的 API 设计，专为 AI 辅助开发工作流打造。' },
+      { title: '60+ 组件', desc: '从 Form 到 Table，Modal 到 Masonry——构建生产级界面的完整工具集。' },
+      { title: '国际化', desc: '内置中英文语言包，可轻松扩展至任意语言。' },
+      { title: '轻量高效', desc: '支持 Tree-shaking，零运行时 CSS-in-JS，Less + CSS Variables 保持包体精简。' },
     ],
     footer: 'AeroUI — 用心构建。',
   },
@@ -25,12 +25,12 @@ const i18n = {
     github: 'GitHub',
     getStartedLink: '/components/button',
     features: [
-      { icon: '🧊', title: 'Glassmorphism', desc: 'Frosted glass aesthetics with layered backdrop-filter blur, delivering a modern, airy visual language.' },
-      { icon: '🎨', title: 'Themeable', desc: 'CSS Variables + ConfigProvider for runtime theme switching. Dark mode built-in from day one.' },
-      { icon: '🤖', title: 'AI-Friendly', desc: 'Clean API surface and consistent patterns designed for seamless AI-assisted development workflows.' },
-      { icon: '📦', title: '60+ Components', desc: 'From Form to Table, Modal to Masonry — a comprehensive toolkit for building production interfaces.' },
-      { icon: '🌐', title: 'i18n Ready', desc: 'Built-in locale system with Chinese and English support. Easily extensible to any language.' },
-      { icon: '⚡', title: 'Lightweight', desc: 'Tree-shakeable exports, zero runtime CSS-in-JS. Less + CSS Variables keep the bundle lean.' },
+      { title: 'Pencil Support', desc: 'Built-in .pen design file lets AI read component designs and generate code directly.' },
+      { title: 'Themeable', desc: 'CSS Variables + ConfigProvider for runtime theme switching. Dark mode built-in from day one.' },
+      { title: 'AI-Friendly', desc: 'Clean API surface and consistent patterns designed for seamless AI-assisted development workflows.' },
+      { title: '60+ Components', desc: 'From Form to Table, Modal to Masonry — a comprehensive toolkit for building production interfaces.' },
+      { title: 'i18n Ready', desc: 'Built-in locale system with Chinese and English support. Easily extensible to any language.' },
+      { title: 'Lightweight', desc: 'Tree-shakeable exports, zero runtime CSS-in-JS. Less + CSS Variables keep the bundle lean.' },
     ],
     footer: 'AeroUI — Built with care.',
   },
@@ -80,7 +80,6 @@ const HomePage: React.FC = () => {
         <div className="aero-home-features-grid">
           {t.features.map((f) => (
             <div className="aero-home-feature-card" key={f.title}>
-              <div className="aero-home-feature-icon">{f.icon}</div>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
             </div>

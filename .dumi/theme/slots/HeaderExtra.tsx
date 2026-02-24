@@ -22,7 +22,7 @@ const HeaderExtra: React.FC = () => {
   const current = versions[0];
 
   return (
-    <div ref={ref} style={{ position: 'relative', marginRight: 8 }}>
+    <div ref={ref} style={{ position: 'relative', marginLeft: 16 }}>
       <button
         onClick={() => setOpen(!open)}
         style={{

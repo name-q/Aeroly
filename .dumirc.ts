@@ -12,8 +12,14 @@ export default defineConfig({
     logo: '/logo.png',
     footer: 'Powered by AeroUi',
     nav: {
-      'en-US': [{ title: 'Components', link: '/components/button' }],
-      'zh-CN': [{ title: '组件', link: '/cn/components/button' }],
+      'en-US': [
+        { title: 'Guide', link: '/guide/ai-workflow' },
+        { title: 'Components', link: '/components/button' },
+      ],
+      'zh-CN': [
+        { title: '指南', link: '/cn/guide/ai-workflow' },
+        { title: '组件', link: '/cn/components/button' },
+      ],
     },
   },
 });

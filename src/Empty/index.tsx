@@ -46,10 +46,6 @@ export interface EmptyProps {
   children?: React.ReactNode;
 }
 
-interface PresetConfig {
-  icon: LucideIcon;
-}
-
 const presetIconMap: Record<EmptyPreset, LucideIcon> = {
   default: Inbox,
   search: Search,

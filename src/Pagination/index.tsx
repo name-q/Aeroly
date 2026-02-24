@@ -212,7 +212,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>
 
       {/* Page numbers */}
-      {pages.map((item, idx) => {
+      {pages.map((item) => {
         if (item === 'left') {
           return (
             <EllipsisButton

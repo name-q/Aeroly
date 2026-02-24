@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'aero-ui';
-import { Home, FileText, Settings, Users, FolderOpen, BarChart3, Shield, Bell } from 'lucide-react';
+import { Home, FileText, Settings, Users, BarChart3, Shield } from 'lucide-react';
 
 const items = [
   { key: 'home', label: 'Home', icon: Home },

@@ -94,22 +94,6 @@ function collectAllKeys(data: TreeNodeData[]): string[] {
   return keys;
 }
 
-// Collect all leaf keys
-function collectLeafKeys(data: TreeNodeData[]): Set<string> {
-  const keys = new Set<string>();
-  const walk = (nodes: TreeNodeData[]) => {
-    for (const node of nodes) {
-      if (!node.children?.length || node.isLeaf) {
-        keys.add(node.key);
-      } else {
-        walk(node.children);
-      }
-    }
-  };
-  walk(data);
-  return keys;
-}
-
 // Collect all disabled node leaf keys
 function collectDisabledLeafKeys(data: TreeNodeData[], treeDisabled: boolean): Set<string> {
   const keys = new Set<string>();
@@ -253,12 +237,6 @@ const TreeNode: React.FC<TreeNodeProps> = ({
     }
   };
 
-  const handleCheck = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isDisabled) return;
-    onCheck(node.key);
-  };
-
   return (
     <div className="aero-tree-node-wrapper">
       <div
@@ -400,7 +378,6 @@ const Tree: React.FC<TreeProps> = ({
   );
 
   // ---- Check state (based on leaf nodes, auto-derive parent nodes) ----
-  const leafKeys = useMemo(() => collectLeafKeys(treeData), [treeData]);
   const descendantMap = useMemo(() => buildDescendantLeafMap(treeData), [treeData]);
   const disabledLeafKeys = useMemo(() => collectDisabledLeafKeys(treeData, disabled), [treeData, disabled]);
 
@@ -781,7 +758,6 @@ const DraggableTreeInner: React.FC<DraggableTreeInnerProps> = ({
     [currentSelected, selectedSet, isSelectControlled, multiple, onSelectProp, treeData],
   );
 
-  const leafKeys = useMemo(() => collectLeafKeys(treeData), [treeData]);
   const descendantMap = useMemo(() => buildDescendantLeafMap(treeData), [treeData]);
   const disabledLeafKeys = useMemo(() => collectDisabledLeafKeys(treeData, disabled), [treeData, disabled]);
 

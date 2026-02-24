@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Popover from '../Popover';
 import type { PopoverPlacement } from '../Popover';
 import Input from '../Input';

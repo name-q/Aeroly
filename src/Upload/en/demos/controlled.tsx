@@ -16,7 +16,7 @@ export default () => {
     <Upload
       fileList={fileList}
       onChange={setFileList}
-      customRequest={({ file, onProgress, onSuccess }) => {
+      customRequest={({ onProgress, onSuccess }) => {
         let percent = 0;
         const timer = setInterval(() => {
           percent += Math.random() * 30;

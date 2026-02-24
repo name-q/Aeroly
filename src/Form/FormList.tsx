@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useSyncExternalStore } from 'react';
 import { FormContext } from './FormContext';
-import type { NamePath, FieldState } from './FormStore';
+import type { NamePath } from './FormStore';
 import { toNameKey } from './FormStore';
 
 export interface FormListField {

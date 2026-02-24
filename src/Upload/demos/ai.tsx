@@ -4,7 +4,7 @@ import { Upload as UploadIcon } from 'lucide-react';
 import type { UploadFile } from 'aero-ui';
 
 // 模拟 AI 图片分析
-const analyzeImage = (file: File): Promise<Partial<UploadFile>> => {
+const analyzeImage = (_file: File): Promise<Partial<UploadFile>> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const tags = ['风景', '自然', '高清'][Math.floor(Math.random() * 3)];

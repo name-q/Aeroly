@@ -315,7 +315,6 @@ const Select: React.FC<SelectProps> = ({
           if (multiple && !searchText) {
             const arr = currentValue as (string | number)[];
             if (arr.length > 0) {
-              const last = arr[arr.length - 1];
               const next = arr.slice(0, -1);
               if (!isControlled) setInternalValue(next);
               const selectedOpts = next.map((v) => findOption(v)!).filter(Boolean);
@@ -394,7 +393,6 @@ const Select: React.FC<SelectProps> = ({
     const hasGroup = options.some(isGroupOption);
 
     if (hasGroup && !searchText) {
-      let navIdx = 0;
       return options.map((group, gi) => {
         if (isGroupOption(group)) {
           const items = group.options;

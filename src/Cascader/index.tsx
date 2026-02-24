@@ -240,23 +240,6 @@ const Cascader: React.FC<CascaderProps> = ({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [isOpen, setOpen]);
 
-  // ---- Get options for a column ----
-  const getColumnOptions = useCallback(
-    (level: number): CascaderOption[] => {
-      if (level === 0) return options;
-      let current = options;
-      for (let i = 0; i < level; i++) {
-        const val = activePath[i];
-        if (val === undefined) return [];
-        const found = current.find((o) => o.value === val);
-        if (!found?.children) return [];
-        current = found.children;
-      }
-      return current;
-    },
-    [options, activePath],
-  );
-
   // Calculate number of columns to display
   const columns = useMemo(() => {
     const cols: CascaderOption[][] = [options];
@@ -418,7 +401,7 @@ const Cascader: React.FC<CascaderProps> = ({
 
     return (
       <div className="aero-cascader-selection-overflow">
-        {showArr.map((path, i) => {
+        {showArr.map((path) => {
           const label = getLabels(options, path, displaySeparator);
           return (
             <span key={path.join('-')} className="aero-cascader-tag">

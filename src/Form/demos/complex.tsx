@@ -3,7 +3,7 @@
  * description: 综合示例，展示 `disabled`、`size`、`requiredMark`、`render props`、`Checkbox`、`Radio` 等用法。
  */
 import React, { useState } from 'react';
-import { Form, Input, Select, Switch, Checkbox, Radio, Button, Flex } from 'aero-ui';
+import { Form, Input, Switch, Checkbox, Radio, Button, Flex } from 'aero-ui';
 
 export default () => {
   const [form] = Form.useForm();

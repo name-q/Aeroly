@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { FormInstance, Rule } from './FormStore';
+import type { FormInstance } from './FormStore';
 
 export interface FormContextValue {
   form: FormInstance;

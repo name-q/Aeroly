@@ -4,7 +4,7 @@ import { Upload as UploadIcon } from 'lucide-react';
 import type { UploadFile } from 'aero-ui';
 
 // Simulate AI image analysis
-const analyzeImage = (file: File): Promise<Partial<UploadFile>> => {
+const analyzeImage = (_file: File): Promise<Partial<UploadFile>> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const tags = ['Landscape', 'Nature', 'HD'][Math.floor(Math.random() * 3)];

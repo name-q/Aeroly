@@ -9,7 +9,7 @@ export default () => {
       maxCount={3}
       maxSize={5 * 1024 * 1024}
       accept=".pdf,.doc,.docx"
-      customRequest={({ file, onProgress, onSuccess }) => {
+      customRequest={({ onProgress, onSuccess }) => {
         let percent = 0;
         const timer = setInterval(() => {
           percent += Math.random() * 30;

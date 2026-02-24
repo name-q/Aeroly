@@ -2,8 +2,8 @@
  * title: " "
  * description: Breadcrumb 固定在内容区顶部不随滚动，Content 内部独立滚动。通过 Layout 嵌套实现分层。
  */
-import { Breadcrumb, Button, Menu } from 'aeroui';
-import Layout from 'aeroui/Layout';
+import { Breadcrumb, Button, Menu } from 'aeroly';
+import Layout from 'aeroly/Layout';
 import {
   FileText,
   Home,

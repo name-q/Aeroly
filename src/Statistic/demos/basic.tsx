@@ -3,7 +3,7 @@
  * description: 最基础的用法，展示数值和标题。
  */
 import React from 'react';
-import { Statistic, Flex } from 'aeroui';
+import { Statistic, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap="lg">

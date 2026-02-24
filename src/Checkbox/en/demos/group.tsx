@@ -3,7 +3,7 @@
  * description: Use `Checkbox.Group` to manage a group of checkboxes. Supports the `options` shorthand or nested `Checkbox` children.
  */
 import React from 'react';
-import { Checkbox } from 'aeroui';
+import { Checkbox } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

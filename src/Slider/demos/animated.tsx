@@ -3,7 +3,7 @@
  * description: 默认开启 track 光泽流动效果，设置 `animated={false}` 关闭。
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>

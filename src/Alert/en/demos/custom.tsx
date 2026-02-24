@@ -3,7 +3,7 @@
  * description: Replace the default icon via `icon`, hide the icon with `showIcon={false}`, or disable the shimmer effect with `shimmer={false}`.
  */
 import React from 'react';
-import { Alert } from 'aeroui';
+import { Alert } from 'aeroly';
 import { Sparkles } from 'lucide-react';
 
 export default () => (

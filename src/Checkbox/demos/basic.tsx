@@ -3,7 +3,7 @@
  * description: 基础复选框，支持选中和取消。
  */
 import React from 'react';
-import { Checkbox } from 'aeroui';
+import { Checkbox } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -3,7 +3,7 @@
  * description: 禁用单个选项或整组。
  */
 import React from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

@@ -3,7 +3,7 @@
  * description: Set `labelPlacement="vertical"` to place labels below the icons.
  */
 import React from 'react';
-import { Steps } from 'aeroui';
+import { Steps } from 'aeroly';
 
 export default () => (
   <Steps

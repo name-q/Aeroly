@@ -3,7 +3,7 @@
  * description: 基础用法，包裹子组件即可生效。不传任何配置时等同于默认行为（中文）。
  */
 import React from 'react';
-import { ConfigProvider, Modal, Button, Flex } from 'aeroui';
+import { ConfigProvider, Modal, Button, Flex } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = React.useState(false);

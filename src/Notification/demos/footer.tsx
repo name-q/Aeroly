@@ -3,7 +3,7 @@
  * description: 通过 `footer` 传入底部操作按钮。
  */
 import React from 'react';
-import { notification, Button } from 'aeroui';
+import { notification, Button } from 'aeroly';
 
 export default () => (
   <Button

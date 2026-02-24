@@ -3,7 +3,7 @@
  * description: Click the button to open a dialog with built-in OK/Cancel buttons.
  */
 import React, { useState } from 'react';
-import { Button, Modal, ConfigProvider, enUS } from 'aeroui';
+import { Button, Modal, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

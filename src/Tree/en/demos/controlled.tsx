@@ -3,7 +3,7 @@
  * description: Fully control tree state via `expandedKeys` and `selectedKeys`.
  */
 import React, { useState } from 'react';
-import { Tree, Button } from 'aeroui';
+import { Tree, Button } from 'aeroly';
 
 const treeData = [
   {

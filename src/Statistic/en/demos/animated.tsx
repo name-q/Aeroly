@@ -3,7 +3,7 @@
  * description: Set `animated` to enable value scroll animation with smooth transitions on value changes.
  */
 import React, { useState } from 'react';
-import { Statistic, Button, Flex } from 'aeroui';
+import { Statistic, Button, Flex } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState(100);

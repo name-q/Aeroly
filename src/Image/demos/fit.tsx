@@ -3,7 +3,7 @@
  * description: 通过 `fit` 设置图片适应方式，对应 CSS `object-fit`。
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 const src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600';
 

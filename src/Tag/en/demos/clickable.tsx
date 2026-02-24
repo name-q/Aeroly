@@ -3,7 +3,7 @@
  * description: Add `onClick` to make tags clickable, suitable for filter tags.
  */
 import React, { useState } from 'react';
-import { Tag } from 'aeroui';
+import { Tag } from 'aeroly';
 
 const options = ['All', 'React', 'Vue', 'Angular', 'Svelte'];
 

@@ -3,8 +3,8 @@
  * description: When containing a `Sider`, the layout automatically switches to a horizontal structure. Combined with `Menu` and `Breadcrumb` for navigation. The header button controls sidebar collapse.
  */
 import React, { useState } from 'react';
-import Layout from 'aeroui/Layout';
-import { Menu, Breadcrumb, Button } from 'aeroui';
+import Layout from 'aeroly/Layout';
+import { Menu, Breadcrumb, Button } from 'aeroly';
 import { Home, FileText, Settings, Users, BarChart3, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
 const { Header, Content, Sider } = Layout;

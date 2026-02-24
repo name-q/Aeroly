@@ -3,7 +3,7 @@
  * description: Embed text via children. Use orientation to control text position.
  */
 import React from 'react';
-import { Divider } from 'aeroui';
+import { Divider } from 'aeroly';
 
 export default () => (
   <div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Tabs, Segmented } from 'aeroui';
-import type { TabsVariant } from 'aeroui';
+import { Tabs, Segmented } from 'aeroly';
+import type { TabsVariant } from 'aeroly';
 
 const tabItems = [
   { key: '1', label: 'Music', children: <p>Discover the latest music recommendations.</p> },

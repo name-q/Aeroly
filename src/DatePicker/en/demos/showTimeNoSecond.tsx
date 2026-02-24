@@ -3,7 +3,7 @@
  * description: Use `showTime={{ showSecond: false }}` to hide the seconds column, showing only hours and minutes.
  */
 import React from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aeroui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

@@ -3,7 +3,7 @@
  * description: 通过 `prefixIcon`、`suffixIcon` 添加图标，或通过 `prefix`、`suffix` 添加文字/节点。
  */
 import React from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 import { Search, Mail, DollarSign } from 'lucide-react';
 
 export default () => (

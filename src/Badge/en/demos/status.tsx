@@ -3,7 +3,7 @@
  * description: Standalone status dots. `shimmer` enables the sweep animation.
  */
 import React from 'react';
-import { Badge } from 'aeroui';
+import { Badge } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -3,8 +3,8 @@
  * description: Connects to a local Koa server (localhost:3001) for real uploads. Integrates with form via `valuePropName="fileList"`, validates that exactly 2 images are uploaded.
  */
 import React, { useState } from 'react';
-import { Form, Upload, Button, Flex, Image, ConfigProvider, enUS } from 'aeroui';
-import type { UploadFile } from 'aeroui';
+import { Form, Upload, Button, Flex, Image, ConfigProvider, enUS } from 'aeroly';
+import type { UploadFile } from 'aeroly';
 
 const API = 'http://localhost:3001/api/upload';
 

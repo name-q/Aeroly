@@ -3,7 +3,7 @@
  * description: 设置 `delay` 延迟显示加载指示器，避免短时间加载导致的闪烁。
  */
 import React, { useState } from 'react';
-import { Spin, Button, Alert } from 'aeroui';
+import { Spin, Button, Alert } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(false);

@@ -3,8 +3,8 @@
  * description: `gutter` supports semantic tokens and `[horizontal, vertical]` arrays to control row and column spacing separately.
  */
 import React from 'react';
-import { DemoBox } from 'aeroui';
-import { Row, Col } from 'aeroui';
+import { DemoBox } from 'aeroly';
+import { Row, Col } from 'aeroly';
 
 export default () => (
   <Row gutter={['lg', 'sm']}>

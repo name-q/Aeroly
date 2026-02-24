@@ -3,7 +3,7 @@
  * description: Click the image to open a preview overlay with zoom and rotate support. Press Esc to close.
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 export default () => (
   <Image

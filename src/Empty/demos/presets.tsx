@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty, Row, Col } from 'aeroui';
+import { Empty, Row, Col } from 'aeroly';
 
 export default () => (
   <Row gutter={[16, 16]}>

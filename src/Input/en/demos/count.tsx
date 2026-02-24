@@ -3,7 +3,7 @@
  * description: Use `maxLength` with `showCount` to display character count.
  */
 import React from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 360 }}>

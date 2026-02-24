@@ -3,7 +3,7 @@
  * description: 用 `flex` 控制子元素伸缩比例，实现侧栏 + 内容区经典布局。
  */
 import React from 'react';
-import { Flex } from 'aeroui';
+import { Flex } from 'aeroly';
 
 export default () => (
   <Flex gap="sm" full>

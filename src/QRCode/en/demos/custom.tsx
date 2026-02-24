@@ -3,7 +3,7 @@
  * description: Customize foreground color, background color, and size.
  */
 import React from 'react';
-import { QRCode, ConfigProvider, enUS } from 'aeroui';
+import { QRCode, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

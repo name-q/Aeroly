@@ -3,7 +3,7 @@
  * description: Set `showSearch` to enable search. Type keywords to quickly locate leaf paths.
  */
 import React from 'react';
-import { Cascader } from 'aeroui';
+import { Cascader } from 'aeroly';
 
 export default () => {
   const options = [

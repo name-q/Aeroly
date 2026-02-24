@@ -3,7 +3,7 @@
  * description: 设置 `checkable` 开启勾选框，支持父子联动（勾选父节点自动勾选所有子节点）。
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

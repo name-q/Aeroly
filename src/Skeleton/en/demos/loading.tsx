@@ -3,7 +3,7 @@
  * description: Control the toggle between skeleton and real content via `loading`. Skeleton only renders the placeholder; real content is conditionally rendered externally.
  */
 import React, { useState } from 'react';
-import { Skeleton, Switch, Flex } from 'aeroui';
+import { Skeleton, Switch, Flex } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(true);

@@ -3,7 +3,7 @@
  * description: 通过 `value` 和 `onChange` 实现受控模式。
  */
 import React, { useState } from 'react';
-import { DateRangePicker } from 'aeroui';
+import { DateRangePicker } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState<[string, string]>(['2025-06-01', '2025-06-15']);

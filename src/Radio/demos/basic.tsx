@@ -3,7 +3,7 @@
  * description: 基础单选框，点击切换选中状态。
  */
 import React from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

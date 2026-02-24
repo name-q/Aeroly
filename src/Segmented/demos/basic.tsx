@@ -3,7 +3,7 @@
  * description: 传入字符串数组即可快速创建分段控制器。
  */
 import React from 'react';
-import { Segmented } from 'aeroui';
+import { Segmented } from 'aeroly';
 
 export default () => (
   <Segmented

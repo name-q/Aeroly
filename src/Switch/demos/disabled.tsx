@@ -3,7 +3,7 @@
  * description: 禁用状态下开关不可操作。
  */
 import React from 'react';
-import { Switch } from 'aeroui';
+import { Switch } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>

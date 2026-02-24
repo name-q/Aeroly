@@ -3,7 +3,7 @@
  * description: `loading` 状态下开关不可操作，滑块内显示加载动画。
  */
 import React, { useState } from 'react';
-import { Switch } from 'aeroui';
+import { Switch } from 'aeroly';
 
 export default () => {
   const [checked, setChecked] = useState(false);

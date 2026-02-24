@@ -3,7 +3,7 @@
  * description: Disable specific dates via `disabledDate`, e.g. disable past dates or weekends.
  */
 import React from 'react';
-import { DatePicker, ConfigProvider, enUS } from 'aeroui';
+import { DatePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const disablePast = (date: Date) => {

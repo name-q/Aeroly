@@ -3,7 +3,7 @@
  * description: 设置 `active={false}` 关闭光影动画，显示静态骨架。
  */
 import React from 'react';
-import { Skeleton, Flex } from 'aeroui';
+import { Skeleton, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap={24}>

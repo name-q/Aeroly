@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb } from 'aeroui';
+import { Breadcrumb } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

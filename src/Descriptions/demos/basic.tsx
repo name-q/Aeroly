@@ -3,7 +3,7 @@
  * description: 最基础的用法，通过 `items` 传入描述项列表。
  */
 import React from 'react';
-import { Descriptions } from 'aeroui';
+import { Descriptions } from 'aeroly';
 
 export default () => (
   <Descriptions

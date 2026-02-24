@@ -3,6 +3,6 @@
  * description: 基础分页，只需提供 `total` 即可。
  */
 import React from 'react';
-import { Pagination } from 'aeroui';
+import { Pagination } from 'aeroly';
 
 export default () => <Pagination total={50} />;

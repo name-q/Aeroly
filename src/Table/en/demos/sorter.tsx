@@ -3,7 +3,7 @@
  * description: Column `sorter` enables sorting. Click the header to toggle ascending/descending/none.
  */
 import React from 'react';
-import { Table } from 'aeroui';
+import { Table } from 'aeroly';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

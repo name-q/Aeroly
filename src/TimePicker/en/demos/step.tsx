@@ -3,7 +3,7 @@
  * description: Set step intervals via `hourStep`, `minuteStep`, `secondStep`, e.g. one option every 15 minutes.
  */
 import React from 'react';
-import { TimePicker, ConfigProvider, enUS } from 'aeroui';
+import { TimePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

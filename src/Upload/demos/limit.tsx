@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload } from 'aeroui';
+import { Upload } from 'aeroly';
 
 export default () => {
   return (

@@ -3,7 +3,7 @@
  * description: Disable the entire selector, or disable individual options.
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

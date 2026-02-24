@@ -3,7 +3,7 @@
  * description: 使用 `Statistic.Countdown` 展示倒计时，支持 `onFinish` 回调。
  */
 import React from 'react';
-import { Statistic, Flex } from 'aeroui';
+import { Statistic, Flex } from 'aeroly';
 
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 30;
 

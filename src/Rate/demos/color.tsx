@@ -3,7 +3,7 @@
  * description: 通过 `color` 自定义颜色，支持固定色或根据分值动态变色的函数。
  */
 import React, { useState } from 'react';
-import { Rate } from 'aeroui';
+import { Rate } from 'aeroly';
 
 export default () => {
   const [val, setVal] = useState(2);

@@ -3,8 +3,8 @@
  * description: 通过 `placement` 设置抽屉从上、下、左、右四个方向滑出。
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aeroui';
-import type { DrawerPlacement } from 'aeroui';
+import { Button, Drawer } from 'aeroly';
+import type { DrawerPlacement } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

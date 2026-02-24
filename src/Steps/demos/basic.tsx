@@ -3,7 +3,7 @@
  * description: 最简单的步骤条，通过 `current` 指定当前步骤。
  */
 import React from 'react';
-import { Steps } from 'aeroui';
+import { Steps } from 'aeroly';
 
 export default () => (
   <Steps

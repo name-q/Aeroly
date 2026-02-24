@@ -3,7 +3,7 @@
  * description: Customize color via `color`, supports a fixed color or a function that changes dynamically based on the score.
  */
 import React, { useState } from 'react';
-import { Rate } from 'aeroui';
+import { Rate } from 'aeroly';
 
 export default () => {
   const [val, setVal] = useState(2);

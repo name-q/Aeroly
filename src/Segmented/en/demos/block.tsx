@@ -3,7 +3,7 @@
  * description: Set `block` to make the segmented control fill the parent container width, with options equally distributed.
  */
 import React from 'react';
-import { Segmented } from 'aeroui';
+import { Segmented } from 'aeroly';
 
 export default () => (
   <Segmented

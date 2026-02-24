@@ -3,7 +3,7 @@
  * description: Shows a back-to-top button after scrolling past a specified height. Smooth scrolls to top on click. Try scrolling in the container below.
  */
 import React from 'react';
-import { FloatButton, ConfigProvider, enUS } from 'aeroui';
+import { FloatButton, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const containerRef = React.useRef<HTMLDivElement>(null);

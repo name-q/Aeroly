@@ -3,7 +3,7 @@
  * description: 设置 `tooltipVisible` 控制提示气泡的显示，`tipFormatter` 自定义格式。
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>

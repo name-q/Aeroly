@@ -3,7 +3,7 @@
  * description: 通过 `placement` 控制弹出位置，支持四个角。
  */
 import React from 'react';
-import { notification, Button } from 'aeroui';
+import { notification, Button } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

@@ -3,8 +3,8 @@
  * description: Modal 弹窗中的表单 — 通过 `ref` 让父组件操作子组件的 Form。表单在 Modal 内部，提交按钮在 Modal footer，父组件通过 `ref.current.submit()` 触发校验和提交。
  */
 import React, { useState, useRef } from 'react';
-import { Form, Input, Select, Modal, Button, message } from 'aeroui';
-import type { FormInstance } from 'aeroui';
+import { Form, Input, Select, Modal, Button, message } from 'aeroly';
+import type { FormInstance } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

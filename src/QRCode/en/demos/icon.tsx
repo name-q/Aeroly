@@ -3,7 +3,7 @@
  * description: Pass an image URL via `icon` to display a Logo in the center of the QR code. The component automatically uses high error correction level.
  */
 import React from 'react';
-import { QRCode, ConfigProvider, enUS } from 'aeroui';
+import { QRCode, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

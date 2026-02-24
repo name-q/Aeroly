@@ -3,7 +3,7 @@
  * description: Control QR code status via `status`. Shows a refresh button when `expired`, a loading animation when `loading`, and a scanned state for `scanned`. The last example uses `statusRender` for a fully custom overlay.
  */
 import React, { useState } from 'react';
-import { QRCode, ConfigProvider, enUS } from 'aeroui';
+import { QRCode, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const [status, setStatus] = useState<'active' | 'expired' | 'loading' | 'scanned'>('expired');

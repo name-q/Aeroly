@@ -3,7 +3,7 @@
  * description: Set `multiple` to enable multi-select mode. Selected items are shown as tags; click the close button on a tag to remove it.
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

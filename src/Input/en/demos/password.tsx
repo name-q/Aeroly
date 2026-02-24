@@ -3,7 +3,7 @@
  * description: Set `type="password"` to automatically show a visibility toggle button.
  */
 import React from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 360 }}>

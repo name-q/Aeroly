@@ -3,7 +3,7 @@
  * description: 通过 `format` 自定义输入框中的日期显示格式，值始终为 `YYYY-MM-DD`。
  */
 import React, { useState } from 'react';
-import { DatePicker } from 'aeroui';
+import { DatePicker } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState('');

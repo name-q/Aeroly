@@ -3,7 +3,7 @@
  * description: 设置 `block` 属性使分段控制器撑满父容器宽度，各选项等分。
  */
 import React from 'react';
-import { Segmented } from 'aeroui';
+import { Segmented } from 'aeroly';
 
 export default () => (
   <Segmented

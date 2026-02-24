@@ -3,7 +3,7 @@
  * description: Use `FloatButton.Group` to combine multiple buttons, expandable on click or hover. Supports controlled mode.
  */
 import React from 'react';
-import { FloatButton, Flex } from 'aeroui';
+import { FloatButton, Flex } from 'aeroly';
 import { MessageCircle, Share2, Heart, Star, Plus } from 'lucide-react';
 
 export default () => (

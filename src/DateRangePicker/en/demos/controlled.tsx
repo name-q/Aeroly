@@ -3,7 +3,7 @@
  * description: Use `value` and `onChange` for controlled mode.
  */
 import React, { useState } from 'react';
-import { DateRangePicker, ConfigProvider, enUS } from 'aeroui';
+import { DateRangePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState<[string, string]>(['2025-06-01', '2025-06-15']);

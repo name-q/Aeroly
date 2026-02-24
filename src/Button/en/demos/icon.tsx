@@ -3,7 +3,7 @@
  * description: Pass a Lucide icon via the icon prop. Supports icon + text and icon-only forms.
  */
 import React from 'react';
-import { Button } from 'aeroui';
+import { Button } from 'aeroly';
 import { Search, Plus, Download } from 'lucide-react';
 
 export default () => (

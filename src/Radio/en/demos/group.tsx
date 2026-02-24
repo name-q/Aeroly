@@ -3,7 +3,7 @@
  * description: Use `Radio.Group` to manage a group of radio buttons. Supports the `options` shorthand or nested `Radio` children.
  */
 import React from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

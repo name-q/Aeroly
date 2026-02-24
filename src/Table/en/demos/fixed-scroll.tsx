@@ -3,7 +3,7 @@
  * description: Set `scroll.y` to limit table height with `sticky` header pinning. Supports multiple `fixed: 'left'` / `fixed: 'right'` columns with boundary shadows on scroll.
  */
 import React from 'react';
-import { Table, Button, Tag, Flex } from 'aeroui';
+import { Table, Button, Tag, Flex } from 'aeroly';
 
 const columns = [
   { title: 'ID', dataIndex: 'id', width: 80, fixed: 'left' as const },

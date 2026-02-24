@@ -3,7 +3,7 @@
  * description: Supports `required`, `min/max`, `minLength/maxLength`, `pattern`, `type`, `whitespace`, custom `validator`, and more. `warningOnly` only warns without blocking submission.
  */
 import React from 'react';
-import { Form, Input, InputNumber, Button, Flex, ConfigProvider, enUS } from 'aeroui';
+import { Form, Input, InputNumber, Button, Flex, ConfigProvider, enUS } from 'aeroly';
 
 export default () => {
   const [form] = Form.useForm();

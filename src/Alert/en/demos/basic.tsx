@@ -3,7 +3,7 @@
  * description: Four types of alert messages with a shimmer sweep effect on the text.
  */
 import React from 'react';
-import { Alert } from 'aeroui';
+import { Alert } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

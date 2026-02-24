@@ -3,8 +3,8 @@
  * description: `offset` controls the left offset of a column by grid units.
  */
 import React from 'react';
-import { DemoBox } from 'aeroui';
-import { Row, Col } from 'aeroui';
+import { DemoBox } from 'aeroly';
+import { Row, Col } from 'aeroly';
 
 export default () => (
   <Row gutter={[12, 12]}>

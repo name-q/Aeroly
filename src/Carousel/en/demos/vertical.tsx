@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from 'aeroui';
+import { Carousel } from 'aeroly';
 
 const items = [
   { key: '1', children: <div style={{ height: 240, background: 'linear-gradient(180deg, #e0c3fc, #8ec5fc)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 24 }}>Up 1</div> },

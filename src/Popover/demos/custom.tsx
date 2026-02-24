@@ -3,7 +3,7 @@
  * description: `content` 支持任意 ReactNode，可放置复杂内容。
  */
 import React from 'react';
-import { Popover, Button } from 'aeroui';
+import { Popover, Button } from 'aeroly';
 
 const content = (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 200 }}>

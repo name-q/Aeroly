@@ -3,7 +3,7 @@
  * description: 点击按钮从右侧滑出抽屉。
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aeroui';
+import { Button, Drawer } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

@@ -3,6 +3,6 @@
  * description: The simplest usage.
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => <Slider defaultValue={30} />;

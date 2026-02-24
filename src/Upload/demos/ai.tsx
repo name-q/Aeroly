@@ -1,7 +1,7 @@
 import React from 'react';
-import { Upload, Button } from 'aeroui';
+import { Upload, Button } from 'aeroly';
 import { Upload as UploadIcon } from 'lucide-react';
-import type { UploadFile } from 'aeroui';
+import type { UploadFile } from 'aeroly';
 
 // 模拟 AI 图片分析
 const analyzeImage = (_file: File): Promise<Partial<UploadFile>> => {

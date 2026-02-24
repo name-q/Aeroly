@@ -3,7 +3,7 @@
  * description: `center` 一键双向居中。对比 `full` 开启前后的宽度差异。
  */
 import React, { useState } from 'react';
-import { Flex, Button, DemoBox } from 'aeroui';
+import { Flex, Button, DemoBox } from 'aeroly';
 
 export default () => {
   const [isFull, setIsFull] = useState(false);

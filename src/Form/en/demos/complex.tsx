@@ -3,7 +3,7 @@
  * description: Comprehensive example showcasing `disabled`, `size`, `requiredMark`, `render props`, `Checkbox`, `Radio`, and more.
  */
 import React, { useState } from 'react';
-import { Form, Input, Switch, Checkbox, Radio, Button, Flex } from 'aeroui';
+import { Form, Input, Switch, Checkbox, Radio, Button, Flex } from 'aeroly';
 
 export default () => {
   const [form] = Form.useForm();

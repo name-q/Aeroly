@@ -3,7 +3,7 @@
  * description: 通过 `prefix` 和 `suffix` 添加前缀图标或后缀单位。
  */
 import React from 'react';
-import { Statistic, Flex } from 'aeroui';
+import { Statistic, Flex } from 'aeroly';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export default () => (

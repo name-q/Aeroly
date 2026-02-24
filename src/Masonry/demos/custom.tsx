@@ -3,7 +3,7 @@
  * description: 不仅限于图片，任意不等高内容都可以使用瀑布流排列。
  */
 import React from 'react';
-import { Masonry } from 'aeroui';
+import { Masonry } from 'aeroly';
 
 const cards = [
   { title: '设计系统', desc: '统一的设计语言和组件库，让产品体验一致。' },

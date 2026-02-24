@@ -3,8 +3,8 @@
  * description: Drag nodes to rearrange the tree structure. Drag above/below a node to insert as a sibling, drag to the middle to insert as a child.
  */
 import React, { useState } from 'react';
-import { Tree } from 'aeroui';
-import type { TreeNodeData, DropInfo } from 'aeroui';
+import { Tree } from 'aeroly';
+import type { TreeNodeData, DropInfo } from 'aeroly';
 
 const initialData: TreeNodeData[] = [
   {

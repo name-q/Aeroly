@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty, Button } from 'aeroui';
+import { Empty, Button } from 'aeroly';
 
 export default () => (
   <Empty

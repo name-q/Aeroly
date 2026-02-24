@@ -23,8 +23,8 @@ import {
   Flex,
   ConfigProvider,
   enUS,
-} from 'aeroui';
-import type { UploadFile } from 'aeroui';
+} from 'aeroly';
+import type { UploadFile } from 'aeroly';
 
 const cityOptions = [
   { label: 'Beijing', value: 'beijing' },

@@ -3,7 +3,7 @@
  * description: Three sizes: `small`, `medium` (default), `large`.
  */
 import React from 'react';
-import { Pagination, ConfigProvider, enUS } from 'aeroui';
+import { Pagination, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

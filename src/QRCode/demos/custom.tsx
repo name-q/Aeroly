@@ -3,7 +3,7 @@
  * description: 自定义前景色、背景色和尺寸。
  */
 import React from 'react';
-import { QRCode } from 'aeroui';
+import { QRCode } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>

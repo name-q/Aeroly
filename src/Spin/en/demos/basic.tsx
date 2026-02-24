@@ -3,7 +3,7 @@
  * description: Three sizes of loading indicators.
  */
 import React from 'react';
-import { Spin, Flex } from 'aeroui';
+import { Spin, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap={32} align="center">

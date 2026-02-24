@@ -3,7 +3,7 @@
  * description: 禁用和只读状态。`controls={false}` 可隐藏步进按钮。
  */
 import React from 'react';
-import { InputNumber } from 'aeroui';
+import { InputNumber } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -3,7 +3,7 @@
  * description: 数据项中包含 `children` 字段时自动支持展开行，适用于 SPU/SKU 等父子关联场景。通过 `defaultExpandedRowKeys` 设置默认展开项，或用 `expandedRowKeys` + `onExpandedRowsChange` 受控管理。
  */
 import React from 'react';
-import { Table, Tag, Button, Flex } from 'aeroui';
+import { Table, Tag, Button, Flex } from 'aeroly';
 
 const columns = [
   { title: '编号', dataIndex: 'id', width: 100, fixed: 'left' as const },

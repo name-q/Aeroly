@@ -3,7 +3,7 @@
  * description: Three sizes: `small`, `medium` (default), `large`.
  */
 import React from 'react';
-import { InputNumber } from 'aeroui';
+import { InputNumber } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

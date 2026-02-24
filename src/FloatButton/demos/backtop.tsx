@@ -3,7 +3,7 @@
  * description: 页面滚动超过指定高度后显示回到顶部按钮，点击平滑滚动到顶部。在下方容器内滚动试试。
  */
 import React from 'react';
-import { FloatButton } from 'aeroui';
+import { FloatButton } from 'aeroly';
 
 export default () => {
   const containerRef = React.useRef<HTMLDivElement>(null);

@@ -3,7 +3,7 @@
  * description: Use grouped options to categorize related options. Pass `{ label, options }` format.
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

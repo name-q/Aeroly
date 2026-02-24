@@ -3,7 +3,7 @@
  * description: 三种尺寸 `small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { TreeSelect } from 'aeroui';
+import { TreeSelect } from 'aeroly';
 
 export default () => {
   const treeData = [

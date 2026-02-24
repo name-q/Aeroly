@@ -3,7 +3,7 @@
  * description: 四种类型的警告提示，文字带有光影掠过效果。
  */
 import React from 'react';
-import { Alert } from 'aeroui';
+import { Alert } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

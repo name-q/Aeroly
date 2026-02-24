@@ -3,7 +3,7 @@
  * description: Basic cascading selection. Click to expand submenus level by level, select a leaf node to complete.
  */
 import React from 'react';
-import { Cascader } from 'aeroui';
+import { Cascader } from 'aeroly';
 
 export default () => {
   const options = [

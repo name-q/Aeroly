@@ -3,7 +3,7 @@
  * description: 基础悬浮按钮，支持图标、描述文字、Tooltip、徽标、形状和类型。
  */
 import React from 'react';
-import { FloatButton, Flex } from 'aeroui';
+import { FloatButton, Flex } from 'aeroly';
 import { MessageCircle, Settings, Heart, Bell } from 'lucide-react';
 
 export default () => (

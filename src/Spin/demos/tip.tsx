@@ -3,7 +3,7 @@
  * description: 通过 `tip` 属性添加加载提示文字。
  */
 import React from 'react';
-import { Spin, Flex } from 'aeroui';
+import { Spin, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap={48} align="center">

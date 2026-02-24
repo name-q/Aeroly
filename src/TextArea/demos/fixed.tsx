@@ -3,7 +3,7 @@
  * description: 关闭自适应，使用固定行数，可手动拖拽调整高度。
  */
 import React from 'react';
-import { TextArea } from 'aeroui';
+import { TextArea } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

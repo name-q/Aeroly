@@ -3,7 +3,7 @@
  * description: Click to cycle through the six `justify` distribution modes and observe how the blocks reposition.
  */
 import React, { useState } from 'react';
-import { Flex, Button, DemoBox } from 'aeroui';
+import { Flex, Button, DemoBox } from 'aeroly';
 
 const modes = ['start', 'center', 'end', 'between', 'around', 'evenly'] as const;
 

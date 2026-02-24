@@ -3,7 +3,7 @@
  * description: 禁用单个复选框或整组。
  */
 import React from 'react';
-import { Checkbox } from 'aeroui';
+import { Checkbox } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

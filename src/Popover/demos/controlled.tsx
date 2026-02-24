@@ -2,7 +2,7 @@
  * title: " "
  * description: 通过 `open` 和 `onOpenChange` 完全控制显隐。
  */
-import { Button, Popover } from 'aeroui';
+import { Button, Popover } from 'aeroly';
 import React, { useState } from 'react';
 
 export default () => {

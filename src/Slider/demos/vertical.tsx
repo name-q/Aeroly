@@ -3,7 +3,7 @@
  * description: 设置 `vertical` 垂直展示滑动条。
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 40, height: 200 }}>

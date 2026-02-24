@@ -3,7 +3,7 @@
  * description: 设置 `showLine` 显示层级连接线。
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

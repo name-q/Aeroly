@@ -3,7 +3,7 @@
  * description: 支持 `required`、`min/max`、`minLength/maxLength`、`pattern`、`type`、`whitespace`、自定义 `validator` 等校验规则。`warningOnly` 仅警告不阻止提交。
  */
 import React from 'react';
-import { Form, Input, InputNumber, Button, Flex } from 'aeroui';
+import { Form, Input, InputNumber, Button, Flex } from 'aeroly';
 
 export default () => {
   const [form] = Form.useForm();

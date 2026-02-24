@@ -3,7 +3,7 @@
  * description: 设置 `closable` 允许用户手动关闭提示。
  */
 import React from 'react';
-import { Alert } from 'aeroui';
+import { Alert } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -3,7 +3,7 @@
  * description: Set `loading` to show a loading overlay, useful during data requests.
  */
 import React, { useState } from 'react';
-import { Table, Button, Flex } from 'aeroui';
+import { Table, Button, Flex } from 'aeroly';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

@@ -3,7 +3,7 @@
  * description: 使用 `Checkbox.Group` 管理一组复选框，支持 `options` 快捷写法或嵌套 `Checkbox` 子元素。
  */
 import React from 'react';
-import { Checkbox } from 'aeroui';
+import { Checkbox } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

@@ -3,7 +3,7 @@
  * description: Set validation status via `status`.
  */
 import React from 'react';
-import { TextArea } from 'aeroui';
+import { TextArea } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 420 }}>

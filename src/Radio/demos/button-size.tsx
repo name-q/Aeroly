@@ -3,7 +3,7 @@
  * description: 按钮模式同样支持三种尺寸。
  */
 import React from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 const options = [
   { value: 'day', label: '日' },

@@ -3,7 +3,7 @@
  * description: Disabled and read-only states.
  */
 import React from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 360 }}>

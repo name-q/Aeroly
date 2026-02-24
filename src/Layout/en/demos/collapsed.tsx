@@ -2,8 +2,8 @@
  * title: " "
  * description: Breadcrumb is fixed at the top of the content area and does not scroll with content. Content scrolls independently. Achieved through nested Layout.
  */
-import { Breadcrumb, Button, Menu } from 'aeroui';
-import Layout from 'aeroui/Layout';
+import { Breadcrumb, Button, Menu } from 'aeroly';
+import Layout from 'aeroly/Layout';
 import {
   FileText,
   Home,

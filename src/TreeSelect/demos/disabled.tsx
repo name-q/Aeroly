@@ -3,7 +3,7 @@
  * description: 禁用整个选择器，或禁用单个节点。
  */
 import React from 'react';
-import { TreeSelect } from 'aeroui';
+import { TreeSelect } from 'aeroly';
 
 export default () => {
   const treeData = [

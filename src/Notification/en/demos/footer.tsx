@@ -3,7 +3,7 @@
  * description: Pass action buttons via `footer`.
  */
 import React from 'react';
-import { notification, Button } from 'aeroui';
+import { notification, Button } from 'aeroly';
 
 export default () => (
   <Button

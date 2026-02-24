@@ -3,7 +3,7 @@
  * description: In `loading` state the switch is not operable, and the thumb shows a loading animation.
  */
 import React, { useState } from 'react';
-import { Switch } from 'aeroui';
+import { Switch } from 'aeroly';
 
 export default () => {
   const [checked, setChecked] = useState(false);

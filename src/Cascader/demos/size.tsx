@@ -3,7 +3,7 @@
  * description: 三种尺寸 `small`、`medium`（默认）、`large`。
  */
 import React from 'react';
-import { Cascader } from 'aeroui';
+import { Cascader } from 'aeroly';
 
 export default () => {
   const options = [

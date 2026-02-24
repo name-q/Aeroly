@@ -3,7 +3,7 @@
  * description: 设置 `disabled` 禁用整个选择器。
  */
 import React from 'react';
-import { DatePicker } from 'aeroui';
+import { DatePicker } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 280 }}>

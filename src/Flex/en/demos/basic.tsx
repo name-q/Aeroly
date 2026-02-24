@@ -3,7 +3,7 @@
  * description: Horizontal layout with vertical centering by default. Use `gap` to control spacing — supports numbers (px) and semantic tokens (`xs` `sm` `md` `lg`).
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aeroui';
+import { Flex, DemoBox } from 'aeroly';
 
 export default () => (
   <Flex gap="md">

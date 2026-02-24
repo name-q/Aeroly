@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ColorPicker } from 'aeroui';
+import { ColorPicker } from 'aeroly';
 
 const presets = [
   '#f5222d', '#fa541c', '#fa8c16', '#faad14', '#fadb14',

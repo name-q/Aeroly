@@ -3,7 +3,7 @@
  * description: 使用 `FloatButton.Group` 将多个按钮组合，点击或 hover 展开。支持受控模式。
  */
 import React from 'react';
-import { FloatButton, Flex } from 'aeroui';
+import { FloatButton, Flex } from 'aeroly';
 import { MessageCircle, Share2, Heart, Star, Plus } from 'lucide-react';
 
 export default () => (

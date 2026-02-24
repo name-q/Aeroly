@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Tour } from 'aeroui';
-import type { TourStepConfig } from 'aeroui';
+import { Button, Tour } from 'aeroly';
+import type { TourStepConfig } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

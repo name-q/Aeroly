@@ -3,7 +3,7 @@
  * description: Basic single select. Click to expand the dropdown panel and choose an option.
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

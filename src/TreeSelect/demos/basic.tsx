@@ -3,7 +3,7 @@
  * description: 基础单选树选择器，点击展开下拉面板，选择树节点。
  */
 import React from 'react';
-import { TreeSelect } from 'aeroui';
+import { TreeSelect } from 'aeroly';
 
 export default () => {
   const treeData = [

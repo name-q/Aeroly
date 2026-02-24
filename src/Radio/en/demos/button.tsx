@@ -3,7 +3,7 @@
  * description: Set `optionType="button"` to switch to button style. The selected item is filled with the primary color.
  */
 import React, { useState } from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState<string | number>('beijing');

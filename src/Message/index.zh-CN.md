@@ -34,7 +34,7 @@ toc: content
 命令式调用，直接使用 `message` 对象的方法：
 
 ```ts
-import { message } from 'aeroui';
+import { message } from 'aeroly';
 
 message.info('提示内容');
 message.success('提示内容');

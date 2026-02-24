@@ -3,7 +3,7 @@
  * description: Customize column content via `render`, combined with Tag for status display and action buttons.
  */
 import React from 'react';
-import { Table, Tag, Button, Flex } from 'aeroui';
+import { Table, Tag, Button, Flex } from 'aeroly';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

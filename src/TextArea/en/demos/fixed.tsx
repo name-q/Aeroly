@@ -3,7 +3,7 @@
  * description: Disable auto-resize and use fixed rows. Drag to manually adjust height.
  */
 import React from 'react';
-import { TextArea } from 'aeroui';
+import { TextArea } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 420 }}>

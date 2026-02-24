@@ -3,7 +3,7 @@
  * description: Add prefix icons or suffix units via `prefix` and `suffix`.
  */
 import React from 'react';
-import { Statistic, Flex } from 'aeroui';
+import { Statistic, Flex } from 'aeroly';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export default () => (

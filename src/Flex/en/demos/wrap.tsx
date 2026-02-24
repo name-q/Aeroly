@@ -3,7 +3,7 @@
  * description: `wrap` allows children to wrap, combined with `gap` to control row and column spacing.
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aeroui';
+import { Flex, DemoBox } from 'aeroly';
 
 const colors = [
   '#50b8e7', '#73d13d', '#faad14', '#f5222d', '#722ed1',

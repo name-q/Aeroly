@@ -3,7 +3,7 @@
  * description: 节点设置 `disabled` 禁用单个节点。
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

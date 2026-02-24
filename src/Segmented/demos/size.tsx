@@ -3,7 +3,7 @@
  * description: 三种尺寸的分段控制器。
  */
 import React from 'react';
-import { Segmented } from 'aeroui';
+import { Segmented } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

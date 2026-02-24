@@ -3,7 +3,7 @@
  * description: Hover to trigger dropdown menu, with support for icons, disabled items, and dividers.
  */
 import React from 'react';
-import { Dropdown, Button } from 'aeroui';
+import { Dropdown, Button } from 'aeroly';
 import { Copy, Pencil, Trash2, Share2, Archive } from 'lucide-react';
 
 const items = [

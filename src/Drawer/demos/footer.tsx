@@ -3,7 +3,7 @@
  * description: 通过 `footer` 添加底部操作区，适合表单提交等场景。
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aeroui';
+import { Button, Drawer } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

@@ -3,7 +3,7 @@
  * description: `onOk` 返回 Promise 时，确定按钮自动进入 loading 状态，完成后自动关闭。
  */
 import React, { useState } from 'react';
-import { Button, Modal } from 'aeroui';
+import { Button, Modal } from 'aeroly';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 

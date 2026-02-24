@@ -3,7 +3,7 @@
  * description: 最简用法，传入 `content` 即可生成文字水印。
  */
 import React from 'react';
-import { Watermark } from 'aeroui';
+import { Watermark } from 'aeroly';
 
 export default () => (
   <Watermark content="AeroUI">

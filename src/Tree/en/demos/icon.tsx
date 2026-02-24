@@ -3,7 +3,7 @@
  * description: Customize icons via the node's `icon` property. Set `showIcon` to enable display.
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 import { Folder, FileText, Image, FileCode } from 'lucide-react';
 
 const treeData = [

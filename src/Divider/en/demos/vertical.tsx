@@ -3,7 +3,7 @@
  * description: Used to separate inline elements.
  */
 import React from 'react';
-import { Divider } from 'aeroui';
+import { Divider } from 'aeroly';
 
 export default () => (
   <div>

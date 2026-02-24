@@ -3,7 +3,7 @@
  * description: 使用 `Image.PreviewGroup` 包裹多张图片，预览时可左右箭头切换。
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',

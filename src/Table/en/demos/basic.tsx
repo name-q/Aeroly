@@ -3,7 +3,7 @@
  * description: Basic table usage, rendered via `columns` and `dataSource`.
  */
 import React from 'react';
-import { Table } from 'aeroui';
+import { Table } from 'aeroly';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

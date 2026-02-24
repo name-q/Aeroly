@@ -3,7 +3,7 @@
  * description: Basic float button with support for icon, description text, Tooltip, badge, shape, and type.
  */
 import React from 'react';
-import { FloatButton, Flex } from 'aeroui';
+import { FloatButton, Flex } from 'aeroly';
 import { MessageCircle, Settings, Heart, Bell } from 'lucide-react';
 
 export default () => (

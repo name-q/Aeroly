@@ -3,7 +3,7 @@
  * description: 设置 `trigger="click"` 改为点击触发，配合 `selectedKey` 高亮当前选中项。
  */
 import React, { useState } from 'react';
-import { Dropdown, Button } from 'aeroui';
+import { Dropdown, Button } from 'aeroly';
 import { SortAsc, ArrowUpAZ, ArrowDownAZ, Clock, Star } from 'lucide-react';
 
 const items = [

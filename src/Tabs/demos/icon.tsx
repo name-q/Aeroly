@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'aeroui';
+import { Tabs } from 'aeroly';
 import { Home, Settings, User } from 'lucide-react';
 
 export default () => {

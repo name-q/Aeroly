@@ -3,8 +3,8 @@
  * description: Supports 4 directions, auto-flips when overflowing the viewport.
  */
 import React from 'react';
-import { Tooltip, Button } from 'aeroui';
-import type { TooltipPlacement } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
+import type { TooltipPlacement } from 'aeroly';
 
 const placements: TooltipPlacement[] = ['top', 'bottom', 'left', 'right'];
 

@@ -3,7 +3,7 @@
  * description: Button mode supports both overall and individual option disabling.
  */
 import React from 'react';
-import { Radio } from 'aeroui';
+import { Radio } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

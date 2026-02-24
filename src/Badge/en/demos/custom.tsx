@@ -3,7 +3,7 @@
  * description: Customize color via `color` and display content via `text`.
  */
 import React from 'react';
-import { Badge, Button } from 'aeroui';
+import { Badge, Button } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

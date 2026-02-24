@@ -7,7 +7,7 @@ import {
   ConfigProvider, zhCN, enUS,
   Modal, Button, Flex, Segmented, DatePicker,
   TimePicker, Pagination, Empty, Tour,
-} from 'aeroui';
+} from 'aeroly';
 
 export default () => {
   const [lang, setLang] = useState<'zh' | 'en'>('zh');

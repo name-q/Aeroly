@@ -3,7 +3,7 @@
  * description: Three sizes `small`, `medium` (default), and `large`.
  */
 import React from 'react';
-import { Cascader } from 'aeroui';
+import { Cascader } from 'aeroly';
 
 export default () => {
   const options = [

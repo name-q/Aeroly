@@ -3,7 +3,7 @@
  * description: Set `checkable` to enable checkboxes with parent-child association (checking a parent auto-checks all children).
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

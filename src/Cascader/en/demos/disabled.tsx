@@ -3,7 +3,7 @@
  * description: Disable the entire selector, or disable individual options.
  */
 import React from 'react';
-import { Cascader } from 'aeroui';
+import { Cascader } from 'aeroly';
 
 export default () => {
   const options = [

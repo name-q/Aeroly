@@ -3,7 +3,7 @@
  * description: Three sizes: `small`, `medium` (default), `large`.
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

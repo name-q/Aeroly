@@ -3,7 +3,7 @@
  * description: 通过 `loading` 控制骨架屏与真实内容的切换。Skeleton 只负责渲染骨架，真实内容在外部条件渲染。
  */
 import React, { useState } from 'react';
-import { Skeleton, Switch, Flex } from 'aeroui';
+import { Skeleton, Switch, Flex } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(true);

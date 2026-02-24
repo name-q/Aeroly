@@ -3,7 +3,7 @@
  * description: 显示总数、每页条数切换、快速跳转。
  */
 import React, { useState } from 'react';
-import { Pagination } from 'aeroui';
+import { Pagination } from 'aeroly';
 
 export default () => {
   const [current, setCurrent] = useState(1);

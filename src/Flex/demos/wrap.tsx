@@ -3,7 +3,7 @@
  * description: `wrap` 允许子元素换行，配合 `gap` 控制行列间距。
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aeroui';
+import { Flex, DemoBox } from 'aeroly';
 
 const colors = [
   '#50b8e7', '#73d13d', '#faad14', '#f5222d', '#722ed1',

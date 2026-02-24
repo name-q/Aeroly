@@ -2,7 +2,7 @@
  * inline: true
  */
 import React, { useState, useMemo } from 'react';
-import { Icon } from 'aeroui';
+import { Icon } from 'aeroly';
 import { icons } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import './gallery.less';

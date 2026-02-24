@@ -3,7 +3,7 @@
  * description: Displays fallback content when the image fails to load. Supports custom `fallback`.
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>

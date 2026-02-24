@@ -3,7 +3,7 @@
  * description: 通过 `color` 自定义颜色，`round` 开启胶囊形状，`bordered={false}` 去掉边框。
  */
 import React from 'react';
-import { Tag } from 'aeroui';
+import { Tag } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

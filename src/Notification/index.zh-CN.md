@@ -38,7 +38,7 @@ toc: content
 命令式调用，直接使用 `notification` 对象的方法：
 
 ```ts
-import { notification } from 'aeroui';
+import { notification } from 'aeroly';
 
 notification.info('标题', '描述内容');
 notification.success('标题', '描述内容');

@@ -3,7 +3,7 @@
  * description: Set `loading` to display a skeleton placeholder, suitable for data loading scenarios.
  */
 import React, { useState } from 'react';
-import { Statistic, Button, Flex } from 'aeroui';
+import { Statistic, Button, Flex } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(true);

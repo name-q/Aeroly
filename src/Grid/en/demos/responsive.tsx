@@ -3,8 +3,8 @@
  * description: Use `xs` `sm` `md` `lg` `xl` breakpoint props for responsive layouts. Resize the browser window to see the effect.
  */
 import React from 'react';
-import { DemoBox } from 'aeroui';
-import { Row, Col } from 'aeroui';
+import { DemoBox } from 'aeroly';
+import { Row, Col } from 'aeroly';
 
 export default () => (
   <Row gutter={[12, 12]}>

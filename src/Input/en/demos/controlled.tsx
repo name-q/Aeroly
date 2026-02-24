@@ -3,7 +3,7 @@
  * description: In controlled mode, the value is fully driven by external state.
  */
 import React, { useState } from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState('');

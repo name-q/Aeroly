@@ -3,7 +3,7 @@
  * description: 传入字符串数组实现多行水印，可自定义字体大小、颜色、旋转角度等。
  */
 import React from 'react';
-import { Watermark } from 'aeroui';
+import { Watermark } from 'aeroly';
 
 export default () => (
   <Watermark

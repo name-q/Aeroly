@@ -3,7 +3,7 @@
  * description: Set `range` to enable range selection with two slider handles.
  */
 import React, { useState } from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState<[number, number]>([20, 60]);

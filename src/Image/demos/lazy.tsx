@@ -3,7 +3,7 @@
  * description: 设置 `lazy` 开启原生懒加载，图片进入视口时才开始加载。
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 const images = [
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',

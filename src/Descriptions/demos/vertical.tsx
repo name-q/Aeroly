@@ -3,7 +3,7 @@
  * description: 设置 `layout="vertical"` 使 label 和内容上下排列。
  */
 import React from 'react';
-import { Descriptions } from 'aeroui';
+import { Descriptions } from 'aeroly';
 
 export default () => (
   <Descriptions

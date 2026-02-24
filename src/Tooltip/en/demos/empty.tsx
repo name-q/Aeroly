@@ -3,7 +3,7 @@
  * description: Tooltip is not shown when `title` is empty.
  */
 import React, { useState } from 'react';
-import { Tooltip, Button } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
 
 export default () => {
   const [show, setShow] = useState(true);

@@ -3,7 +3,7 @@
  * description: Set `active={false}` to disable shimmer animation and show a static skeleton.
  */
 import React from 'react';
-import { Skeleton, Flex } from 'aeroui';
+import { Skeleton, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap={24}>

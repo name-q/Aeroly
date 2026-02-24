@@ -3,7 +3,7 @@
  * description: 鼠标移入触发，最基础的用法。
  */
 import React from 'react';
-import { Tooltip, Button } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16 }}>

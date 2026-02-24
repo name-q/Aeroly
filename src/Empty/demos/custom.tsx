@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty } from 'aeroui';
+import { Empty } from 'aeroly';
 import { Ghost } from 'lucide-react';
 
 export default () => (

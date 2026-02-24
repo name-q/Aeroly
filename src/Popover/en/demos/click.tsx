@@ -3,7 +3,7 @@
  * description: Set `trigger="click"` to trigger on click. Clicking outside closes the popover.
  */
 import React from 'react';
-import { Popover, Button } from 'aeroui';
+import { Popover, Button } from 'aeroly';
 
 export default () => (
   <Popover

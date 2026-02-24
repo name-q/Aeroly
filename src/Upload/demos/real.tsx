@@ -3,9 +3,9 @@
  * description: 连接本地 Koa 服务（localhost:3001）进行真实上传。服务端代码位于项目根目录 server/ 下。
  */
 import React, { useState } from 'react';
-import { Upload, Button, Tabs } from 'aeroui';
+import { Upload, Button, Tabs } from 'aeroly';
 import { Upload as UploadIcon } from 'lucide-react';
-import type { UploadFile } from 'aeroui';
+import type { UploadFile } from 'aeroly';
 
 const API = 'http://localhost:3001/api/upload';
 

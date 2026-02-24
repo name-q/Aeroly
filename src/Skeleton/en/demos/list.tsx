@@ -3,7 +3,7 @@
  * description: Simulates a list loading scenario with seamless transition between skeleton and real data.
  */
 import React, { useState, useEffect } from 'react';
-import { Skeleton, Button, Flex } from 'aeroui';
+import { Skeleton, Button, Flex } from 'aeroly';
 
 interface Item {
   id: number;

@@ -34,8 +34,8 @@ import {
   Tree,
   Statistic,
   ColorPicker,
-} from 'aeroui';
-import type { SizeType } from 'aeroui';
+} from 'aeroly';
+import type { SizeType } from 'aeroly';
 
 const presets = {
   default: {

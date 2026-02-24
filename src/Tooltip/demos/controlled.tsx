@@ -3,7 +3,7 @@
  * description: 通过 `open` 和 `onOpenChange` 完全控制显隐。
  */
 import React, { useState } from 'react';
-import { Tooltip, Button } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

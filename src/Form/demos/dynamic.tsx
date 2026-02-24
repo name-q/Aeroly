@@ -3,7 +3,7 @@
  * description: 使用 `Form.List` 实现动态增减表单项，支持 `add`、`remove`、`move` 操作。
  */
 import React from 'react';
-import { Form, Input, Button, Flex } from 'aeroui';
+import { Form, Input, Button, Flex } from 'aeroly';
 
 export default () => {
   const [form] = Form.useForm();

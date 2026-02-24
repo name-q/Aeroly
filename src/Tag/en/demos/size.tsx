@@ -3,7 +3,7 @@
  * description: Three sizes: `small`, `medium` (default), `large`.
  */
 import React from 'react';
-import { Tag } from 'aeroui';
+import { Tag } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>

@@ -3,7 +3,7 @@
  * description: Enable `shimmer` to add a sweep animation to the badge, suitable for strong attention scenarios.
  */
 import React from 'react';
-import { Badge, Button } from 'aeroui';
+import { Badge, Button } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>

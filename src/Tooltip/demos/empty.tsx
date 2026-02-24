@@ -3,7 +3,7 @@
  * description: `title` 为空时不显示 Tooltip。
  */
 import React, { useState } from 'react';
-import { Tooltip, Button } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
 
 export default () => {
   const [show, setShow] = useState(true);

@@ -3,7 +3,7 @@
  * description: `auto` 属性替代手写 `margin: auto`，直接加在子元素上推开相邻元素。
  */
 import React from 'react';
-import { Flex, DemoBox } from 'aeroui';
+import { Flex, DemoBox } from 'aeroly';
 
 export default () => (
   <Flex direction="column" gap="md">

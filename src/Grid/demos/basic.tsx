@@ -3,8 +3,8 @@
  * description: 24 栅格系统，用 `span` 控制每列占比。
  */
 import React from 'react';
-import { DemoBox } from 'aeroui';
-import { Row, Col } from 'aeroui';
+import { DemoBox } from 'aeroly';
+import { Row, Col } from 'aeroly';
 
 export default () => (
   <Row gutter={[12, 12]}>

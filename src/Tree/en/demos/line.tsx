@@ -3,7 +3,7 @@
  * description: Set `showLine` to display connecting lines between levels.
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

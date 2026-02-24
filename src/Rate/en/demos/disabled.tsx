@@ -3,7 +3,7 @@
  * description: `disabled` fully disables interaction, `readOnly` displays only without modification.
  */
 import React from 'react';
-import { Rate } from 'aeroui';
+import { Rate } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

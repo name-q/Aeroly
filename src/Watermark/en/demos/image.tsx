@@ -3,7 +3,7 @@
  * description: Pass an image URL via `image` as the watermark, which takes priority over text.
  */
 import React from 'react';
-import { Watermark } from 'aeroui';
+import { Watermark } from 'aeroly';
 
 export default () => (
   <Watermark

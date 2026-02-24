@@ -3,7 +3,7 @@
  * description: 设置 `multiple` 开启多选模式，已选项以标签形式展示，点击标签上的关闭按钮可移除。
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

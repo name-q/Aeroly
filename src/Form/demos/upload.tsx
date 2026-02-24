@@ -3,8 +3,8 @@
  * description: 连接本地 Koa 服务（localhost:3001）进行真实上传，通过 `valuePropName="fileList"` 接入表单，校验必须上传 2 张图片。
  */
 import React, { useState } from 'react';
-import { Form, Upload, Button, Flex, Image } from 'aeroui';
-import type { UploadFile } from 'aeroui';
+import { Form, Upload, Button, Flex, Image } from 'aeroly';
+import type { UploadFile } from 'aeroly';
 
 const API = 'http://localhost:3001/api/upload';
 

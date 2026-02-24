@@ -3,7 +3,7 @@
  * description: Set `bordered={false}` to remove the card border and action bar, suitable for embedding in other containers.
  */
 import React from 'react';
-import { QRCode, ConfigProvider, enUS } from 'aeroui';
+import { QRCode, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

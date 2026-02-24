@@ -3,7 +3,7 @@
  * description: Ellipsis appears automatically with many pages. Hover over the ellipsis to jump forward/backward 5 pages.
  */
 import React from 'react';
-import { Pagination, ConfigProvider, enUS } from 'aeroui';
+import { Pagination, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

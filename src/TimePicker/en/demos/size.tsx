@@ -3,7 +3,7 @@
  * description: Three sizes: `small`, `medium` (default), `large`.
  */
 import React from 'react';
-import { TimePicker, ConfigProvider, enUS } from 'aeroui';
+import { TimePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

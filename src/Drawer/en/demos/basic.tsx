@@ -3,7 +3,7 @@
  * description: Click the button to slide open a drawer from the right.
  */
 import React, { useState } from 'react';
-import { Button, Drawer } from 'aeroui';
+import { Button, Drawer } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

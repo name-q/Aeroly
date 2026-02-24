@@ -3,7 +3,7 @@
  * description: Disable dates before today via `disabledDate`.
  */
 import React from 'react';
-import { DateRangePicker, ConfigProvider, enUS } from 'aeroui';
+import { DateRangePicker, ConfigProvider, enUS } from 'aeroly';
 
 const disabledDate = (date: Date) => {
   const today = new Date();

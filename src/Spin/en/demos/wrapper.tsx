@@ -3,7 +3,7 @@
  * description: When wrapping content, the loading state overlays a mask on top. Toggle the loading state with the button.
  */
 import React, { useState } from 'react';
-import { Spin, Button, Alert } from 'aeroui';
+import { Spin, Button, Alert } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(true);

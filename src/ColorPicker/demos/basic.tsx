@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ColorPicker } from 'aeroui';
+import { ColorPicker } from 'aeroly';
 
 export default () => {
   const [color, setColor] = useState('#50b8e7');

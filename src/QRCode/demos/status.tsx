@@ -3,7 +3,7 @@
  * description: 通过 `status` 控制二维码状态，`expired` 时显示刷新按钮，`loading` 时显示加载动画，`scanned` 时显示已扫描。最后一个演示通过 `statusRender` 完全自定义覆盖层。
  */
 import React, { useState } from 'react';
-import { QRCode } from 'aeroui';
+import { QRCode } from 'aeroly';
 
 export default () => {
   const [status, setStatus] = useState<'active' | 'expired' | 'loading' | 'scanned'>('expired');

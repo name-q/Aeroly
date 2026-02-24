@@ -3,7 +3,7 @@
  * description: Set the step size via `step`. The slider snaps to step increments when dragging.
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>

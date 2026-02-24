@@ -3,7 +3,7 @@
  * description: 设置 `scroll.y` 限制表格高度，配合 `sticky` 表头吸顶；支持多列 `fixed: 'left'` / `fixed: 'right'` 固定，滚动时显示边界阴影。
  */
 import React from 'react';
-import { Table, Button, Tag, Flex } from 'aeroui';
+import { Table, Button, Tag, Flex } from 'aeroly';
 
 const columns = [
   { title: '编号', dataIndex: 'id', width: 80, fixed: 'left' as const },

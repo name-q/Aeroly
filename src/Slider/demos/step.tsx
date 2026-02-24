@@ -3,7 +3,7 @@
  * description: 通过 `step` 设置步长，拖动时按步长吸附。
  */
 import React from 'react';
-import { Slider } from 'aeroui';
+import { Slider } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>

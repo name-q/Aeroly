@@ -3,8 +3,8 @@
  * description: 拖拽节点可调整树的结构。拖到节点上方/下方插入为兄弟节点，拖到中间区域插入为子节点。
  */
 import React, { useState } from 'react';
-import { Tree } from 'aeroui';
-import type { TreeNodeData, DropInfo } from 'aeroui';
+import { Tree } from 'aeroly';
+import type { TreeNodeData, DropInfo } from 'aeroly';
 
 const initialData: TreeNodeData[] = [
   {

@@ -1,4 +1,4 @@
 import React from 'react';
-import { Empty } from 'aeroui';
+import { Empty } from 'aeroly';
 
 export default () => <Empty />;

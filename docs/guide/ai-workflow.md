@@ -31,7 +31,7 @@ pnpm i -D less
 Then import and use components directly:
 
 ```tsx | pure
-import { Button, Input, Select } from 'aeroui';
+import { Button, Input, Select } from 'aeroly';
 
 export default () => (
   <div>
@@ -113,7 +113,7 @@ All AeroUI components automatically adapt — colors, shadows, and glassmorphism
 Use `ConfigProvider` to override theme colors, locale, and global size at runtime:
 
 ```tsx | pure
-import { ConfigProvider, enUS } from 'aeroui';
+import { ConfigProvider, enUS } from 'aeroly';
 
 <ConfigProvider
   locale={enUS}
@@ -131,7 +131,7 @@ Supported theme keys: `primary-color`, `success-color`, `warning-color`, `error-
 AeroUI ships with English (`enUS`) and Chinese (`zhCN`) locale packs. Components with built-in text (Modal, DatePicker, Pagination, etc.) automatically use the configured locale.
 
 ```tsx | pure
-import { ConfigProvider, zhCN } from 'aeroui';
+import { ConfigProvider, zhCN } from 'aeroly';
 
 <ConfigProvider locale={zhCN}>
   <App />

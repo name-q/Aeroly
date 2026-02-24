@@ -3,7 +3,7 @@
  * description: Pass a string array for multi-line watermarks. Customize font size, color, rotation angle, etc.
  */
 import React from 'react';
-import { Watermark } from 'aeroui';
+import { Watermark } from 'aeroly';
 
 export default () => (
   <Watermark

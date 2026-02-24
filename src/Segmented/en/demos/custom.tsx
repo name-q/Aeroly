@@ -3,7 +3,7 @@
  * description: Pass custom ReactNode via the `label` field in object arrays. Combine icons with text.
  */
 import React from 'react';
-import { Segmented, Icon } from 'aeroui';
+import { Segmented, Icon } from 'aeroly';
 import { List, LayoutGrid, Columns3 } from 'lucide-react';
 
 export default () => (

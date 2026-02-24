@@ -3,7 +3,7 @@
  * description: 图片加载失败时展示兜底内容，支持自定义 `fallback`。
  */
 import React from 'react';
-import { Image } from 'aeroui';
+import { Image } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>

@@ -3,7 +3,7 @@
  * description: 整体禁用或禁用单个选项。
  */
 import React from 'react';
-import { Segmented } from 'aeroui';
+import { Segmented } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

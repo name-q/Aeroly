@@ -3,7 +3,7 @@
  * description: Multiple Affix instances on the same page work independently without interfering with each other. Left and right scroll containers each have their own pinned elements.
  */
 import React from 'react';
-import { Affix, Button, Flex } from 'aeroui';
+import { Affix, Button, Flex } from 'aeroly';
 
 const containerStyle: React.CSSProperties = {
   height: 300,

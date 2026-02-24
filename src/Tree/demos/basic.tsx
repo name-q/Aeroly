@@ -3,7 +3,7 @@
  * description: 最基础的树形结构，点击箭头展开/收起。
  */
 import React from 'react';
-import { Tree } from 'aeroui';
+import { Tree } from 'aeroly';
 
 const treeData = [
   {

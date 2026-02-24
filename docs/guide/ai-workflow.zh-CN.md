@@ -31,7 +31,7 @@ pnpm i -D less
 然后直接导入使用组件：
 
 ```tsx | pure
-import { Button, Input, Select } from 'aeroui';
+import { Button, Input, Select } from 'aeroly';
 
 export default () => (
   <div>
@@ -113,7 +113,7 @@ document.documentElement.setAttribute('data-theme', 'dark');
 使用 `ConfigProvider` 在运行时覆盖主题色、语言和全局尺寸：
 
 ```tsx | pure
-import { ConfigProvider, zhCN } from 'aeroui';
+import { ConfigProvider, zhCN } from 'aeroly';
 
 <ConfigProvider
   locale={zhCN}
@@ -131,7 +131,7 @@ import { ConfigProvider, zhCN } from 'aeroui';
 AeroUI 内置英文（`enUS`）和中文（`zhCN`）语言包。包含默认文案的组件（Modal、DatePicker、Pagination 等）会自动使用配置的语言。
 
 ```tsx | pure
-import { ConfigProvider, enUS } from 'aeroui';
+import { ConfigProvider, enUS } from 'aeroly';
 
 <ConfigProvider locale={enUS}>
   <App />

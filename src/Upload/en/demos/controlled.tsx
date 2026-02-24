@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Upload, ConfigProvider, enUS } from 'aeroui';
-import type { UploadFile } from 'aeroui';
+import { Upload, ConfigProvider, enUS } from 'aeroly';
+import type { UploadFile } from 'aeroly';
 
 const mockFiles: UploadFile[] = [
   { uid: '1', name: 'Project Proposal.pdf', size: 2048000, type: 'application/pdf', status: 'success' },

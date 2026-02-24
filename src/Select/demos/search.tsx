@@ -3,7 +3,7 @@
  * description: 设置 `showSearch` 开启搜索功能，在下拉面板顶部出现搜索框，支持自定义过滤逻辑。
  */
 import React from 'react';
-import { Select } from 'aeroui';
+import { Select } from 'aeroly';
 
 export default () => {
   const options = [

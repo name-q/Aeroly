@@ -3,8 +3,8 @@
  * description: 支持 4 个方向，溢出视口时自动翻转。
  */
 import React from 'react';
-import { Popover, Button } from 'aeroui';
-import type { PopoverPlacement } from 'aeroui';
+import { Popover, Button } from 'aeroly';
+import type { PopoverPlacement } from 'aeroly';
 
 const placements: PopoverPlacement[] = ['top', 'bottom', 'left', 'right'];
 

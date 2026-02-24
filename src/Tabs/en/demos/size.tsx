@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'aeroui';
+import { Tabs } from 'aeroly';
 
 const tabItems = [
   { key: '1', label: 'Tab 1', children: <p>Panel content.</p> },

@@ -3,7 +3,7 @@
  * description: Basic switch, supports on and off.
  */
 import React from 'react';
-import { Switch } from 'aeroui';
+import { Switch } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>

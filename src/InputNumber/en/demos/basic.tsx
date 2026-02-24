@@ -3,7 +3,7 @@
  * description: Basic number input, supports keyboard up/down keys.
  */
 import React, { useState } from 'react';
-import { InputNumber } from 'aeroui';
+import { InputNumber } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState<number | null>(3);

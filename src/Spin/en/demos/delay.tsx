@@ -3,7 +3,7 @@
  * description: Set `delay` to delay showing the loading indicator, preventing flicker for short loading times.
  */
 import React, { useState } from 'react';
-import { Spin, Button, Alert } from 'aeroui';
+import { Spin, Button, Alert } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(false);

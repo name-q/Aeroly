@@ -3,7 +3,7 @@
  * description: 列配置 `sorter` 开启排序，点击表头切换升序/降序/取消。
  */
 import React from 'react';
-import { Table } from 'aeroui';
+import { Table } from 'aeroly';
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },

@@ -3,7 +3,7 @@
  * description: 设置 `centered` 使对话框垂直居中显示。
  */
 import React, { useState } from 'react';
-import { Button, Modal } from 'aeroui';
+import { Button, Modal } from 'aeroly';
 
 export default () => {
   const [open, setOpen] = useState(false);

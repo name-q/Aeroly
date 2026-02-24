@@ -3,7 +3,7 @@
  * description: 通过 `extra` 在标题右侧放置操作按钮。
  */
 import React from 'react';
-import { Descriptions, Button } from 'aeroui';
+import { Descriptions, Button } from 'aeroly';
 
 export default () => (
   <Descriptions

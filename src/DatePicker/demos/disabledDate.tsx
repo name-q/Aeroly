@@ -3,7 +3,7 @@
  * description: 通过 `disabledDate` 禁用特定日期，例如禁用今天之前的日期或周末。
  */
 import React from 'react';
-import { DatePicker } from 'aeroui';
+import { DatePicker } from 'aeroly';
 
 export default () => {
   const disablePast = (date: Date) => {

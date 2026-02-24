@@ -3,7 +3,7 @@
  * description: 受控模式下，值完全由外部状态驱动。
  */
 import React, { useState } from 'react';
-import { Input } from 'aeroui';
+import { Input } from 'aeroly';
 
 export default () => {
   const [value, setValue] = useState('');

@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { UserRound, ShieldCheck, Rocket } from 'lucide-react';
-import { Steps } from 'aeroui';
+import { Steps } from 'aeroly';
 
 export default () => (
   <Steps

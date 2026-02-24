@@ -3,7 +3,7 @@
  * description: Add loading tip text via the `tip` property.
  */
 import React from 'react';
-import { Spin, Flex } from 'aeroui';
+import { Spin, Flex } from 'aeroly';
 
 export default () => (
   <Flex gap={48} align="center">

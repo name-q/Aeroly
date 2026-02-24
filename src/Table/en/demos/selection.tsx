@@ -3,7 +3,7 @@
  * description: Configure `rowSelection` to enable row selection, supporting select-all and indeterminate states.
  */
 import React, { useState } from 'react';
-import { Table } from 'aeroui';
+import { Table } from 'aeroly';
 
 const columns = [
   { title: 'Name', dataIndex: 'name' },

@@ -3,7 +3,7 @@
  * description: 基础日期范围选择，点选两个日期即可。
  */
 import React from 'react';
-import { DateRangePicker } from 'aeroui';
+import { DateRangePicker } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 380 }}>

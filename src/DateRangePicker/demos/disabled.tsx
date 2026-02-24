@@ -3,7 +3,7 @@
  * description: 禁用状态。
  */
 import React from 'react';
-import { DateRangePicker } from 'aeroui';
+import { DateRangePicker } from 'aeroly';
 
 export default () => (
   <div style={{ maxWidth: 380 }}>

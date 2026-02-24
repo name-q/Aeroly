@@ -3,7 +3,7 @@
  * description: Set `showSearch` to enable search. Matching paths are auto-expanded and ancestor nodes are preserved.
  */
 import React from 'react';
-import { TreeSelect } from 'aeroui';
+import { TreeSelect } from 'aeroly';
 
 export default () => {
   const treeData = [

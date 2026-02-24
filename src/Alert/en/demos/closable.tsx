@@ -3,7 +3,7 @@
  * description: Set `closable` to allow users to manually close the alert.
  */
 import React from 'react';
-import { Alert } from 'aeroui';
+import { Alert } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

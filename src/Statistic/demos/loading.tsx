@@ -3,7 +3,7 @@
  * description: 设置 `loading` 显示骨架屏占位，适合数据加载中的场景。
  */
 import React, { useState } from 'react';
-import { Statistic, Button, Flex } from 'aeroui';
+import { Statistic, Button, Flex } from 'aeroly';
 
 export default () => {
   const [loading, setLoading] = useState(true);

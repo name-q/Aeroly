@@ -3,7 +3,7 @@
  * description: Hover to trigger, the most basic usage.
  */
 import React from 'react';
-import { Tooltip, Button } from 'aeroui';
+import { Tooltip, Button } from 'aeroly';
 
 export default () => (
   <div style={{ display: 'flex', gap: 16 }}>

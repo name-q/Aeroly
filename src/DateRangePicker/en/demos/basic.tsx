@@ -3,7 +3,7 @@
  * description: Basic date range selection. Click two dates to select a range.
  */
 import React from 'react';
-import { DateRangePicker, ConfigProvider, enUS } from 'aeroui';
+import { DateRangePicker, ConfigProvider, enUS } from 'aeroly';
 
 export default () => (
   <ConfigProvider locale={enUS}>

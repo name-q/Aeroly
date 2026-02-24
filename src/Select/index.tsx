@@ -404,7 +404,6 @@ const Select: React.FC<SelectProps> = ({
                   ? navigableOptions.indexOf(opt)
                   : -1;
                 const el = renderOptionItem(opt, currentNavIdx);
-                if (!opt.disabled) navIdx++;
                 return el;
               })}
             </div>
@@ -416,7 +415,6 @@ const Select: React.FC<SelectProps> = ({
           ? navigableOptions.indexOf(opt)
           : -1;
         const el = renderOptionItem(opt, currentNavIdx);
-        if (!opt.disabled) navIdx++;
         return el;
       });
     }

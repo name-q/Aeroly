@@ -966,7 +966,7 @@ export class QrCode {
     const result = divisor.map<number>(() => 0);
     for (const b of data) {
       // Polynomial division
-      const factor = b ^ result.shift();
+      const factor = b ^ result.shift()!;
       result.push(0);
       divisor.forEach((coef, i) => {
         result[i] ^= QrCode.reedSolomonMultiply(coef, factor);

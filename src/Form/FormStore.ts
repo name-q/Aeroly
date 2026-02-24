@@ -395,7 +395,7 @@ export class FormStore {
       this.validating.clear();
       this.snapshots.clear();
       // Notify all registered fields
-      for (const key of this.listeners.keys()) {
+      for (const key of Array.from(this.listeners.keys())) {
         this.notifyField(key);
       }
       this.notifyGlobal(this.values);

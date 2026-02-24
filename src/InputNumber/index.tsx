@@ -222,7 +222,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
     const text = displayValue.trim();
     if (text === '') {
       // 仅当值确实有变化时才Notifications（避免聚焦不Input直接 blur 触发Validation）
-      if (currentValue !== null && currentValue !== undefined && currentValue !== '') {
+      if (currentValue !== null && currentValue !== undefined && String(currentValue) !== '') {
         triggerChange(null);
       }
       setDisplayValue('');

@@ -147,17 +147,19 @@ const FormItem: React.FC<FormItemProps> = ({
       ? (rawValue ?? false)
       : (rawValue ?? '');
 
+    const typedChild = child as React.ReactElement<any>;
+
     const injectedProps: Record<string, any> = {
       [isCheckable ? 'checked' : valuePropName]: controlledValue,
       [trigger]: (...args: any[]) => {
         handleChange(...args);
-        child.props[trigger]?.(...args);
+        typedChild.props[trigger]?.(...args);
       },
       onBlur: (...args: any[]) => {
         handleBlur();
-        child.props.onBlur?.(...args);
+        typedChild.props.onBlur?.(...args);
       },
-      disabled: child.props.disabled ?? disabled,
+      disabled: typedChild.props.disabled ?? disabled,
     };
 
     // Inject status
@@ -168,11 +170,11 @@ const FormItem: React.FC<FormItemProps> = ({
     }
 
     // Inject size
-    if (size && child.props.size === undefined) {
+    if (size && typedChild.props.size === undefined) {
       injectedProps.size = size;
     }
 
-    return React.cloneElement(child, injectedProps);
+    return React.cloneElement(typedChild, injectedProps);
   };
 
   // Error / warning messages

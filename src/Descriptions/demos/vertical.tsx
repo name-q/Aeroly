@@ -11,7 +11,7 @@ export default () => (
     layout="vertical"
     bordered
     items={[
-      { label: '项目名称', children: 'AeroUI' },
+      { label: '项目名称', children: 'Aeroly' },
       { label: '负责人', children: '张三' },
       { label: '状态', children: '进行中' },
       { label: '描述', children: '一个为 AI 编码而设计的 React UI 组件库', span: 2 },

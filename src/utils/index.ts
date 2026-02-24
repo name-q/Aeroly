@@ -1,5 +1,5 @@
 /**
- * AeroUI Public utilities
+ * Aeroly Public utilities
  */
 
 export { useDropdownPosition } from './useDropdownPosition';

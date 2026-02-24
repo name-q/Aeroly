@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 // ═══════════════════════════════════════════════════════
-//  "Line Convergence" — 300 lines drift → align to "AeroUI"
+//  "Line Convergence" — 300 lines drift → align to "Aeroly"
 //
 //  Scroll-driven. Cold palette. Shader-interpolated positions.
 //  No particles, no physics, no post-processing.
@@ -51,7 +51,7 @@ const LETTER_STROKES: Record<string, number[][]> = {
   ],
 };
 
-const WORD = 'AeroUI';
+const WORD = 'Aeroly';
 const LETTER_WIDTHS: Record<string, number> = {
   A: 1.0, e: 1.0, r: 1.0, o: 1.0, U: 1.0, I: 1.0,
 };

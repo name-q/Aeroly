@@ -6,7 +6,7 @@ import React from 'react';
 import { Watermark } from 'aeroly';
 
 export default () => (
-  <Watermark content="AeroUI">
+  <Watermark content="Aeroly">
     <div style={{ height: 300 }} />
   </Watermark>
 );

@@ -17,7 +17,7 @@ const i18n = {
       { title: '国际化', desc: '内置中英文语言包，可轻松扩展至任意语言。' },
       { title: '轻量高效', desc: '支持 Tree-shaking，零运行时 CSS-in-JS，Less + CSS Variables 保持包体精简。' },
     ],
-    footer: 'AeroUI — 用心构建。',
+    footer: 'Aeroly — 用心构建。',
   },
   'en-US': {
     tagline: 'Designed for AI collaboration and effortless interface building.',
@@ -32,7 +32,7 @@ const i18n = {
       { title: 'i18n Ready', desc: 'Built-in locale system with Chinese and English support. Easily extensible to any language.' },
       { title: 'Lightweight', desc: 'Tree-shakeable exports, zero runtime CSS-in-JS. Less + CSS Variables keep the bundle lean.' },
     ],
-    footer: 'AeroUI — Built with care.',
+    footer: 'Aeroly — Built with care.',
   },
 };
 

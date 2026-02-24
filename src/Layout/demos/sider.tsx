@@ -62,7 +62,7 @@ export default () => {
           fontWeight: 500,
         }}
       >
-        <span>AeroUI Admin</span>
+        <span>Aeroly Admin</span>
         <Button
           size="small"
           onClick={() => setCollapsed((v) => !v)}

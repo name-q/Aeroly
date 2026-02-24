@@ -338,11 +338,6 @@
               "name": "wd1",
               "rotation": 0.023332857614297858,
               "fill": "$--aero-text-tertiary",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1,
-                "fill": "#000000ff"
-              },
               "textGrowth": "fixed-width",
               "width": "fill_container",
               "content": "日",
@@ -422,11 +417,6 @@
               "name": "wd7",
               "rotation": 0.023332857614297858,
               "fill": "$--aero-text-tertiary",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1,
-                "fill": "#000000ff"
-              },
               "textGrowth": "fixed-width",
               "width": "fill_container",
               "content": "六",
@@ -3258,7 +3248,7 @@
       "id": "Pkli8",
       "x": -440,
       "y": 1276,
-      "name": "AeroUi Component Library",
+      "name": "Aeroly Component Library",
       "width": 1440,
       "fill": "$--aero-bg-page",
       "layout": "vertical",
@@ -3294,7 +3284,7 @@
               "id": "aoyEZ",
               "name": "headerTitle",
               "fill": "$--aero-text",
-              "content": "AeroUi Component Library",
+              "content": "Aeroly Component Library",
               "fontFamily": "Inter",
               "fontSize": 32,
               "fontWeight": "700"
@@ -10386,7 +10376,7 @@
           "name": "wmText1",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10399,7 +10389,7 @@
           "name": "wmText2",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10412,7 +10402,7 @@
           "name": "wmText3",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10425,7 +10415,7 @@
           "name": "wmText4",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10438,7 +10428,7 @@
           "name": "wmText5",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10451,7 +10441,7 @@
           "name": "wmText6",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10464,7 +10454,7 @@
           "name": "wmText7",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10477,7 +10467,7 @@
           "name": "wmText8",
           "rotation": -22,
           "fill": "#00000014",
-          "content": "AeroUi",
+          "content": "Aeroly",
           "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
@@ -10530,7 +10520,7 @@
               "id": "mhnZG",
               "name": "tourTitle",
               "fill": "$--aero-text",
-              "content": "Welcome to AeroUi",
+              "content": "Welcome to Aeroly",
               "fontFamily": "Inter",
               "fontSize": 16,
               "fontWeight": "600"
@@ -10951,7 +10941,7 @@
                           "id": "Dyu3o",
                           "name": "col1ValueText",
                           "fill": "$--aero-text",
-                          "content": "AeroUI",
+                          "content": "Aeroly",
                           "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "normal"
@@ -11173,7 +11163,7 @@
                           "fill": "$--aero-text",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "AeroUI 是一个现代化的 React 组件库，提供丰富的 UI 组件。",
+                          "content": "Aeroly 是一个现代化的 React 组件库，提供丰富的 UI 组件。",
                           "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "normal"

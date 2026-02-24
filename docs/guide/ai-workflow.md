@@ -10,7 +10,7 @@ toc: content
 
 # AI-Driven Design to Code
 
-AeroUI is a React component library designed for AI coding. Combined with the Pencil design tool, it enables a complete workflow: **Design in Pencil → AI generates React code using AeroUI**.
+Aeroly is a React component library designed for AI coding. Combined with the Pencil design tool, it enables a complete workflow: **Design in Pencil → AI generates React code using Aeroly**.
 
 This guide walks you through the entire process.
 
@@ -19,7 +19,7 @@ This guide walks you through the entire process.
 ## Step 1: Install
 
 ```bash
-pnpm i aeroui lucide-react
+pnpm i Aeroly lucide-react
 ```
 
 If your project uses Vite, you also need Less support:
@@ -51,7 +51,7 @@ The only prerequisite is that your bundler supports Less compilation — which w
 
 ## Step 2: Open the Design File
 
-The `AeroUi.pen` file at the project root is a Pencil design file containing **91 reusable components** that mirror the AeroUI component library. Open it in an IDE that supports the Pencil MCP server (such as Kiro or Cursor with the Pencil plugin).
+The `Aeroly.pen` file at the project root is a Pencil design file containing **91 reusable components** that mirror the Aeroly component library. Open it in an IDE that supports the Pencil MCP server (such as Kiro or Cursor with the Pencil plugin).
 
 The design system includes:
 
@@ -68,7 +68,7 @@ The design system includes:
 
 ## Step 3: Design Your Page with AI
 
-Ask the AI to compose a page layout using the components in `AeroUi.pen`. For example:
+Ask the AI to compose a page layout using the components in `Aeroly.pen`. For example:
 
 > "Design a user management dashboard with a sidebar menu, a data table, pagination, and a search input at the top."
 
@@ -90,7 +90,7 @@ Use the screenshot tool to verify the design looks correct before moving to code
 
 Once you're happy with the design, ask the AI to generate React code:
 
-> "Read the dashboard design from AeroUi.pen and generate a React page using AeroUI components."
+> "Read the dashboard design from Aeroly.pen and generate a React page using Aeroly components."
 
 The AI will translate the visual design into working React code
 
@@ -106,7 +106,7 @@ Toggle dark mode by setting the `data-theme` attribute:
 document.documentElement.setAttribute('data-theme', 'dark');
 ```
 
-All AeroUI components automatically adapt — colors, shadows, and glassmorphism effects switch to their dark variants.
+All Aeroly components automatically adapt — colors, shadows, and glassmorphism effects switch to their dark variants.
 
 ### Runtime Theme Override
 
@@ -128,7 +128,7 @@ Supported theme keys: `primary-color`, `success-color`, `warning-color`, `error-
 
 ### Internationalization
 
-AeroUI ships with English (`enUS`) and Chinese (`zhCN`) locale packs. Components with built-in text (Modal, DatePicker, Pagination, etc.) automatically use the configured locale.
+Aeroly ships with English (`enUS`) and Chinese (`zhCN`) locale packs. Components with built-in text (Modal, DatePicker, Pagination, etc.) automatically use the configured locale.
 
 ```tsx | pure
 import { ConfigProvider, zhCN } from 'aeroly';
@@ -144,12 +144,12 @@ import { ConfigProvider, zhCN } from 'aeroly';
 
 ### Why don't I need to import a CSS file?
 
-AeroUI distributes Less source files alongside compiled JavaScript. Each component's Less file imports the global `variables.less` which defines all CSS Variables at `:root`. Your bundler processes these Less files and injects the styles automatically.
+Aeroly distributes Less source files alongside compiled JavaScript. Each component's Less file imports the global `variables.less` which defines all CSS Variables at `:root`. Your bundler processes these Less files and injects the styles automatically.
 
 ### What if my project doesn't support Less?
 
 If you cannot add Less support to your bundler, you can manually compile the styles. However, most modern React setups (Create React App, Vite, Next.js, Umi) support Less either natively or with minimal configuration.
 
-### Can I use AeroUI without the Pencil design file?
+### Can I use Aeroly without the Pencil design file?
 
-Absolutely. The `.pen` file is optional — it enhances the AI workflow but is not required. You can use AeroUI components directly in code just like any other component library.
+Absolutely. The `.pen` file is optional — it enhances the AI workflow but is not required. You can use Aeroly components directly in code just like any other component library.

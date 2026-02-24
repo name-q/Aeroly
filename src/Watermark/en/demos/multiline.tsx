@@ -7,7 +7,7 @@ import { Watermark } from 'aeroly';
 
 export default () => (
   <Watermark
-    content={['AeroUI', '2026-02-14']}
+    content={['Aeroly', '2026-02-14']}
     fontSize={16}
     rotate={-30}
     gap={[120, 120]}

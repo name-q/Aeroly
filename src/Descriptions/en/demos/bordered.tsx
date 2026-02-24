@@ -10,7 +10,7 @@ export default () => (
     title="Order Details"
     bordered
     items={[
-      { label: 'Product', children: 'AeroUI Pro Annual Membership' },
+      { label: 'Product', children: 'Aeroly Pro Annual Membership' },
       { label: 'Order No.', children: '20240101000001' },
       { label: 'Status', children: 'Completed' },
       { label: 'Amount', children: '$299.00' },

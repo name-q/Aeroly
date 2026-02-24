@@ -10,7 +10,7 @@ export default () => (
     title="订单详情"
     bordered
     items={[
-      { label: '商品名称', children: 'AeroUI Pro 年度会员' },
+      { label: '商品名称', children: 'Aeroly Pro 年度会员' },
       { label: '订单编号', children: '20240101000001' },
       { label: '状态', children: '已完成' },
       { label: '金额', children: '¥ 299.00' },

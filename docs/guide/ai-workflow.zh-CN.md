@@ -10,7 +10,7 @@ toc: content
 
 # AI 驱动的设计到代码
 
-AeroUI 是一个为 AI 编码而设计的 React 组件库。结合 Pencil 设计工具，可以实现完整的工作流闭环：**在 Pencil 中设计 → AI 使用 AeroUI 生成 React 代码**。
+Aeroly 是一个为 AI 编码而设计的 React 组件库。结合 Pencil 设计工具，可以实现完整的工作流闭环：**在 Pencil 中设计 → AI 使用 Aeroly 生成 React 代码**。
 
 本指南将带你走完整个流程。
 
@@ -19,7 +19,7 @@ AeroUI 是一个为 AI 编码而设计的 React 组件库。结合 Pencil 设计
 ## 第一步：安装
 
 ```bash
-pnpm i aeroui lucide-react
+pnpm i Aeroly lucide-react
 ```
 
 如果你的项目使用 Vite，还需要安装 Less 支持：
@@ -51,7 +51,7 @@ export default () => (
 
 ## 第二步：打开设计文件
 
-项目根目录下的 `AeroUi.pen` 是一个 Pencil 设计文件，包含 **91 个可复用组件**，与 AeroUI 组件库一一对应。在支持 Pencil MCP 的 IDE（如 Kiro 或配置了 Pencil 插件的 Cursor）中打开它。
+项目根目录下的 `Aeroly.pen` 是一个 Pencil 设计文件，包含 **91 个可复用组件**，与 Aeroly 组件库一一对应。在支持 Pencil MCP 的 IDE（如 Kiro 或配置了 Pencil 插件的 Cursor）中打开它。
 
 设计系统包含以下组件：
 
@@ -68,7 +68,7 @@ export default () => (
 
 ## 第三步：让 AI 设计页面
 
-让 AI 使用 `AeroUi.pen` 中的组件来组合页面布局。例如：
+让 AI 使用 `Aeroly.pen` 中的组件来组合页面布局。例如：
 
 > "设计一个用户管理后台，左侧有菜单栏，顶部有搜索框，中间是数据表格和分页。"
 
@@ -90,7 +90,7 @@ AI 会：
 
 对设计满意后，让 AI 生成 React 代码：
 
-> "读取 AeroUi.pen 中的后台设计稿，使用 AeroUI 组件生成 React 页面。"
+> "读取 Aeroly.pen 中的后台设计稿，使用 Aeroly 组件生成 React 页面。"
 
 AI 会将视觉设计转化为可运行的 React 代码
 
@@ -106,7 +106,7 @@ AI 会将视觉设计转化为可运行的 React 代码
 document.documentElement.setAttribute('data-theme', 'dark');
 ```
 
-所有 AeroUI 组件会自动适配 —— 颜色、阴影、毛玻璃效果都会切换到暗色变体。
+所有 Aeroly 组件会自动适配 —— 颜色、阴影、毛玻璃效果都会切换到暗色变体。
 
 ### 运行时主题覆盖
 
@@ -128,7 +128,7 @@ import { ConfigProvider, zhCN } from 'aeroly';
 
 ### 国际化
 
-AeroUI 内置英文（`enUS`）和中文（`zhCN`）语言包。包含默认文案的组件（Modal、DatePicker、Pagination 等）会自动使用配置的语言。
+Aeroly 内置英文（`enUS`）和中文（`zhCN`）语言包。包含默认文案的组件（Modal、DatePicker、Pagination 等）会自动使用配置的语言。
 
 ```tsx | pure
 import { ConfigProvider, enUS } from 'aeroly';
@@ -144,7 +144,7 @@ import { ConfigProvider, enUS } from 'aeroly';
 
 ### 为什么不需要引入 CSS 文件？
 
-AeroUI 随 JavaScript 一起分发 Less 源文件。每个组件的 Less 文件都引入了全局 `variables.less`，其中在 `:root` 下定义了所有 CSS Variables。你的打包工具处理这些 Less 文件时会自动注入样式。
+Aeroly 随 JavaScript 一起分发 Less 源文件。每个组件的 Less 文件都引入了全局 `variables.less`，其中在 `:root` 下定义了所有 CSS Variables。你的打包工具处理这些 Less 文件时会自动注入样式。
 
 ### 如果我的项目不支持 Less 怎么办？
 
@@ -152,4 +152,4 @@ AeroUI 随 JavaScript 一起分发 Less 源文件。每个组件的 Less 文件�
 
 ### 不用 Pencil 设计文件可以吗？
 
-完全可以。`.pen` 文件是可选的 —— 它增强了 AI 工作流，但不是必需的。你可以像使用其他组件库一样，直接在代码中使用 AeroUI 组件。
+完全可以。`.pen` 文件是可选的 —— 它增强了 AI 工作流，但不是必需的。你可以像使用其他组件库一样，直接在代码中使用 Aeroly 组件。

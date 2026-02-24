@@ -8,9 +8,9 @@ export default defineConfig({
     { id: 'zh-CN', name: '中文', base: '/cn' },
   ],
   themeConfig: {
-    name: 'AeroUi',
+    name: 'Aeroly',
     logo: '/logo.png',
-    footer: 'Powered by AeroUi',
+    footer: 'Powered by Aeroly',
     nav: {
       'en-US': [
         { title: 'Guide', link: '/guide/ai-workflow' },

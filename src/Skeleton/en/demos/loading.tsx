@@ -28,7 +28,7 @@ export default () => {
         style={{ width: 48, height: 48, borderRadius: '50%' }}
       />
       <Flex direction="column" flex={1}>
-        <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>AeroUI Skeleton Component</div>
+        <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Aeroly Skeleton Component</div>
         <div style={{ color: 'rgba(0,0,0,0.55)', lineHeight: 1.6 }}>
           Skeleton provides three atomic shapes: Block, Circle, and Text, which can be freely combined into any skeleton layout.
           Combined with loading state, it enables seamless transitions between loading and real content. The skeleton layout should closely match the real content structure.

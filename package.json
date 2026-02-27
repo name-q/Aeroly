@@ -35,6 +35,7 @@
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "typecheck": "tsc --noEmit -p tsconfig.check.json",
+    "test": "vitest run",
     "prepublishOnly": "father doctor && npm run build"
   },
   "authors": [
@@ -80,6 +81,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/three": "^0.182.0",
@@ -88,6 +91,7 @@
     "eslint": "^8.23.0",
     "father": "^4.1.0",
     "husky": "^8.0.1",
+    "jsdom": "^25.0.1",
     "lint-staged": "^13.0.3",
     "lucide-react": "^0.563.0",
     "prettier": "^2.7.1",
@@ -97,6 +101,7 @@
     "react-dom": "^18.0.0",
     "stylelint": "^14.9.1",
     "three": "^0.182.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }

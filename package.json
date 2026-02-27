@@ -1,6 +1,6 @@
 {
   "name": "aeroly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React UI component library designed for AI collaboration and effortless interface building.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -80,6 +80,8 @@ import { ConfigProvider } from 'aeroly';
 >
   <App />
 </ConfigProvider>
+```
+
 Toggle dark mode:
 
 ```ts

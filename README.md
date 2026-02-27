@@ -13,6 +13,7 @@
   <a href="https://npmjs.org/package/aeroly"><img src="https://img.shields.io/npm/dm/aeroly.svg?style=flat" alt="NPM downloads" /></a>
   <a href="https://github.com/name-q/aeroly/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/aeroly.svg" alt="License" /></a>
   <a href="https://github.com/name-q/aeroly/actions/workflows/ci.yml"><img src="https://github.com/name-q/aeroly/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/name-q/aeroly"><img src="https://codecov.io/gh/name-q/aeroly/branch/main/graph/badge.svg" alt="Coverage" /></a>
 </p>
 
 <p align="center">

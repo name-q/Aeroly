@@ -36,6 +36,7 @@
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "typecheck": "tsc --noEmit -p tsconfig.check.json",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "prepublishOnly": "father doctor && npm run build"
   },
   "authors": [
@@ -87,6 +88,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/three": "^0.182.0",
     "@umijs/lint": "^4.0.0",
+    "@vitest/coverage-v8": "^4.0.18",
     "dumi": "^2.4.21",
     "eslint": "^8.23.0",
     "father": "^4.1.0",

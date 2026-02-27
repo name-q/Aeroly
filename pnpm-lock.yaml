@@ -67,6 +67,9 @@ devDependencies:
   three:
     specifier: ^0.182.0
     version: 0.182.0
+  typescript:
+    specifier: ^5.9.3
+    version: 5.9.3
 
 packages:
 

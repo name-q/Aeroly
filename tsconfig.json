@@ -12,5 +12,6 @@
       "Aeroly/*": ["src/*", "*"]
     }
   },
-  "include": [".dumirc.ts", ".fatherrc.ts", "src/**/*", ".dumi/theme/**/*"]
+  "include": [".dumirc.ts", ".fatherrc.ts", "src/**/*", ".dumi/theme/**/*"],
+  "exclude": ["src/**/demos/**", "src/**/en/**"]
 }

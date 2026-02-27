@@ -8,3 +8,13 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
     disconnect() {}
   } as any;
 }
+
+// Polyfill IntersectionObserver for jsdom
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  globalThis.IntersectionObserver = class IntersectionObserver {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as any;
+}

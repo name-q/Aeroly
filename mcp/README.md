@@ -1,33 +1,19 @@
 # aeroly-mcp
 
-MCP server for Aeroly component retrieval and code validation, designed for Pen-to-code and AI coding workflows.
+MCP server for Aeroly component retrieval and code validation, designed for AI coding workflows.
 
 ## Version Policy
 
 Starting from `aeroly@1.0.1`, `aeroly-mcp` and `aeroly` use **1:1 version mapping**.
 
 - `aeroly@1.0.1` -> `aeroly-mcp@1.0.1`
-- `aeroly@1.1.0` -> `aeroly-mcp@1.1.0`
 - `aeroly@x.y.z` -> `aeroly-mcp@x.y.z`
 
 Use the same version for both packages to avoid API/doc mismatch.
 
-## Install
+## Usage
 
-Project local install (recommended):
-
-```bash
-npm i -D aeroly-mcp
-```
-
-Recommended pair install example:
-
-```bash
-npm i aeroly@1.0.1
-npm i -D aeroly-mcp@1.0.1
-```
-
-## Use in Kiro
+### Demo use in Kiro
 
 Kiro supports MCP server configuration via `mcpServers`.
 
@@ -160,12 +146,3 @@ npm start
 - `get_component_doc`: full markdown doc for a component
 - `validate_generated_code`: validate generated TSX with documented API/rules
 - `refresh_component_index`: rebuild and hot-reload index
-
-## Release Checklist (Maintainers)
-
-1. Keep `aeroly-mcp` version exactly equal to target `aeroly` version.
-2. Ensure `"private": false` in `mcp/package.json`.
-3. Run `npm run build:all`.
-4. Run `npm run smoke`.
-5. Run `npm pack --dry-run` and verify `data/docs` + `data/component-index.json` are included.
-6. Publish to npm.

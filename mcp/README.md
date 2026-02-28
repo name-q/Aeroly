@@ -1,3 +1,5 @@
+[中文](./README.zh-CN.md) | English
+
 # aeroly-mcp
 
 MCP server for Aeroly component retrieval and doc guidance, designed for AI coding workflows.

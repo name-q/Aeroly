@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "type": "module",
-  "description": "MCP server for Aeroly component knowledge retrieval and code validation.",
+  "description": "MCP server for Aeroly component knowledge retrieval and usage guidance.",
   "bin": {
     "aeroly-mcp": "./src/cli.mjs"
   },

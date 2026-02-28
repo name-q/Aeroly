@@ -34,19 +34,11 @@ async function main() {
     arguments: { component: 'Select' },
   });
 
-  const validate = await client.callTool({
-    name: 'validate_generated_code',
-    arguments: {
-      code: "import { Select } from 'aeroly'; export default () => <Select value=\"x\" options={[]} />;",
-    },
-  });
-
   console.log('MCP smoke test passed');
   console.log('tools:', toolNames.join(', '));
   console.log('search content type:', search.content?.[0]?.type || 'none');
   console.log('usage content type:', usage.content?.[0]?.type || 'none');
   console.log('doc content type:', doc.content?.[0]?.type || 'none');
-  console.log('validate content type:', validate.content?.[0]?.type || 'none');
 
   await client.close();
 }

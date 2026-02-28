@@ -1,6 +1,6 @@
 # aeroly-mcp
 
-MCP server for Aeroly component retrieval and code validation, designed for AI coding workflows.
+MCP server for Aeroly component retrieval and usage guidance, designed for AI coding workflows.
 
 ## Version Policy
 
@@ -32,7 +32,6 @@ Workspace-level config (recommended): `.kiro/settings/mcp.json`
         "search_components",
         "get_component_usage",
         "get_component_doc",
-        "validate_generated_code",
         "refresh_component_index"
       ]
     }
@@ -55,7 +54,6 @@ User-level config (all projects): `~/.kiro/settings/mcp.json`
         "search_components",
         "get_component_usage",
         "get_component_doc",
-        "validate_generated_code",
         "refresh_component_index"
       ]
     }
@@ -79,7 +77,6 @@ If your environment blocks npm prompts, use:
         "search_components",
         "get_component_usage",
         "get_component_doc",
-        "validate_generated_code",
         "refresh_component_index"
       ]
     }
@@ -102,7 +99,6 @@ For strict version matching with Aeroly, pin the same version instead of `latest
         "search_components",
         "get_component_usage",
         "get_component_doc",
-        "validate_generated_code",
         "refresh_component_index"
       ]
     }
@@ -116,7 +112,6 @@ After config is loaded, you can ask AI to call tools like:
 - `search_components`
 - `get_component_usage`
 - `get_component_doc`
-- `validate_generated_code`
 - `refresh_component_index`
 
 ## What Is Bundled in npm Package
@@ -144,5 +139,4 @@ npm start
 - `search_components`: retrieve best-fit components by intent
 - `get_component_usage`: usage constraints, props, examples, anti-patterns
 - `get_component_doc`: full markdown doc for a component
-- `validate_generated_code`: validate generated TSX with documented API/rules
 - `refresh_component_index`: rebuild and hot-reload index

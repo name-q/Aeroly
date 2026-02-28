@@ -148,119 +148,6 @@ function resolveComponent(query) {
   };
 }
 
-function parseAerolyImports(code) {
-  const imported = new Set();
-  const importRe = /import\s*\{([^}]+)\}\s*from\s*['"]aeroly['"]/g;
-  let m;
-  while ((m = importRe.exec(code))) {
-    const names = m[1].split(',').map((s) => s.trim()).filter(Boolean);
-    for (const name of names) {
-      const clean = name.split(/\s+as\s+/i)[0].trim();
-      if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(clean)) {
-        imported.add(clean);
-      }
-    }
-  }
-  return imported;
-}
-
-function parseJsxUsages(code) {
-  const usages = [];
-  const tagRe = /<([A-Z][A-Za-z0-9]*)(\s[^<>]*?)?>/g;
-  let m;
-  while ((m = tagRe.exec(code))) {
-    const component = m[1];
-    const attrsText = m[2] || '';
-    const props = new Set();
-    const attrRe = /([A-Za-z_][A-Za-z0-9_]*)\s*(=|\b)/g;
-    let a;
-    while ((a = attrRe.exec(attrsText))) {
-      const prop = a[1];
-      if (prop) props.add(prop);
-    }
-    usages.push({ component, props: [...props] });
-  }
-  return usages;
-}
-
-function validateCode(code) {
-  const issues = [];
-  const imported = parseAerolyImports(code);
-  const usages = parseJsxUsages(code);
-
-  for (const usage of usages) {
-    const name = usage.component;
-    if (!imported.has(name)) continue;
-    const component = resolveComponent(name).component;
-    if (!component) continue;
-
-    const propSet = new Set(usage.props);
-    const allowedProps = new Set(component.props.map((p) => p.name).filter(Boolean));
-
-    for (const prop of propSet) {
-      if (prop.startsWith('data') || prop.startsWith('aria')) continue;
-      if (prop === 'key' || prop === 'ref') continue;
-      if (!allowedProps.has(prop)) {
-        issues.push({
-          severity: 'warning',
-          ruleId: 'unknown-prop',
-          component: name,
-          message: `${name}: prop \`${prop}\` is not in documented API.`,
-          suggestion: `Check ${name} API table or rename/remove this prop.`,
-        });
-      }
-    }
-
-    for (const pair of component.controlledPairs || []) {
-      const [stateProp, eventProp] = pair;
-      if (propSet.has(stateProp) && !propSet.has(eventProp)) {
-        issues.push({
-          severity: 'error',
-          ruleId: `controlled-pair-${stateProp}-${eventProp}`,
-          component: name,
-          message: `${name}: using \`${stateProp}\` without \`${eventProp}\` may break controlled behavior.`,
-          suggestion: `Add \`${eventProp}\` or switch to uncontrolled mode.`,
-        });
-      }
-    }
-
-    if (propSet.has('value') && propSet.has('defaultValue')) {
-      issues.push({
-        severity: 'warning',
-        ruleId: 'mixed-value-defaultValue',
-        component: name,
-        message: `${name}: \`value\` and \`defaultValue\` should not be used together.`,
-        suggestion: 'Choose controlled or uncontrolled mode only.',
-      });
-    }
-    if (propSet.has('open') && propSet.has('defaultOpen')) {
-      issues.push({
-        severity: 'warning',
-        ruleId: 'mixed-open-defaultOpen',
-        component: name,
-        message: `${name}: \`open\` and \`defaultOpen\` should not be used together.`,
-        suggestion: 'Choose controlled or uncontrolled mode only.',
-      });
-    }
-  }
-
-  const errorCount = issues.filter((i) => i.severity === 'error').length;
-  const warningCount = issues.filter((i) => i.severity === 'warning').length;
-  const score = Math.max(0, 100 - errorCount * 20 - warningCount * 8);
-
-  return {
-    score,
-    summary: {
-      importedFromAeroly: [...imported],
-      jsxTagCount: usages.length,
-      issueCount: issues.length,
-      errorCount,
-      warningCount,
-    },
-    issues,
-  };
-}
-
 function toTextResult(data) {
   return {
     content: [
@@ -408,17 +295,6 @@ server.registerTool(
     },
   },
   async ({ component }) => toTextResult(readComponentDoc(component)),
-);
-
-server.registerTool(
-  'validate_generated_code',
-  {
-    description: 'Validate Pen-generated React code against Aeroly documented API and control rules.',
-    inputSchema: {
-      code: z.string().describe('React/TSX source code generated from Pen'),
-    },
-  },
-  async ({ code }) => toTextResult(validateCode(code)),
 );
 
 server.registerTool(

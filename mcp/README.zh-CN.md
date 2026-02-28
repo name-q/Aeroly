@@ -2,7 +2,9 @@
 
 # aeroly-mcp
 
-为 AI 编码工作流设计的 MCP Server，提供 Aeroly 组件检索与文档指引能力。
+为 AI 编码工作流设计的 MCP Server，提供 [Aeroly](https://github.com/name-q/Aeroly) 组件检索与文档指引能力。
+
+[官网文档](https://aeroly.zeroc.top/) | [GitHub](https://github.com/name-q/Aeroly) | [npm](https://www.npmjs.com/package/aeroly)
 
 ## 版本策略
 

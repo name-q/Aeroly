@@ -2,7 +2,9 @@
 
 # aeroly-mcp
 
-MCP server for Aeroly component retrieval and doc guidance, designed for AI coding workflows.
+MCP server for [Aeroly](https://github.com/name-q/Aeroly) component retrieval and doc guidance, designed for AI coding workflows.
+
+[Documentation](https://aeroly.zeroc.top/) | [GitHub](https://github.com/name-q/Aeroly) | [npm](https://www.npmjs.com/package/aeroly)
 
 ## Version Policy
 

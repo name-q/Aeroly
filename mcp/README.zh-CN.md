@@ -1,4 +1,4 @@
-中文 | [English](./README.md)
+中文 | [English](https://github.com/name-q/Aeroly/blob/main/mcp/README.md)
 
 # aeroly-mcp
 

@@ -26,7 +26,7 @@
 
 - **Pencil Support** — Built-in `.pen` design file with 91 reusable components. AI reads the design and generates React code directly.
 - **60+ Components** — From Form to Table, Modal to Masonry — a comprehensive toolkit for production interfaces.
-- **AI-Friendly** — Consistent API patterns (`value`/`onChange`, `open`/`onOpenChange`, `size`, `disabled`) so AI can predict usage across all components.
+- **AI-Friendly** — Ships with [`aeroly-mcp`](https://www.npmjs.com/package/aeroly-mcp), an MCP Server that lets AI query component docs and APIs in real time while you code.
 - **Themeable** — CSS Variables + `ConfigProvider` for runtime theme switching. Dark mode built-in.
 - **i18n Ready** — Built-in English and Chinese locale packs, easily extensible.
 - **Lightweight** — Tree-shakeable ESM exports, zero runtime CSS-in-JS. Less + CSS Variables keep the bundle lean.

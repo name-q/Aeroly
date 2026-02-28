@@ -1,0 +1,25 @@
+{
+  "name": "aeroly-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server for Aeroly component knowledge retrieval and code validation.",
+  "files": [
+    "src",
+    "data",
+    "README.md"
+  ],
+  "scripts": {
+    "build:docs": "node src/build-docs-snapshot.mjs",
+    "build:index": "node src/build-index.mjs",
+    "build:all": "npm run build:docs && npm run build:index",
+    "build:index:check": "node src/build-index.mjs --check",
+    "start": "node src/server.mjs",
+    "smoke": "node src/smoke-client.mjs",
+    "prepack": "npm run build:all"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  }
+}

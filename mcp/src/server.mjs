@@ -160,7 +160,54 @@ function toTextResult(data) {
   };
 }
 
-function readComponentDoc(componentName) {
+function escapeCell(value) {
+  return String(value ?? '')
+    .replace(/\|/g, '\\|')
+    .replace(/\r?\n/g, '<br/>');
+}
+
+function buildApiTableLines(props) {
+  return [
+    '| Property | Description | Type | Default |',
+    '| --- | --- | --- | --- |',
+    ...props.map((p) => `| ${escapeCell(p.name)} | ${escapeCell(p.description)} | ${escapeCell(p.type)} | ${escapeCell(p.default)} |`),
+  ];
+}
+
+function renderBriefDocFromIndex(component) {
+  const lines = [`# ${component.name}`, '', '## API', ''];
+  const sections = Array.isArray(component.apiSections) ? component.apiSections : [];
+
+  if (sections.length > 0) {
+    for (const section of sections) {
+      const title = String(section?.name || '').trim() || component.name;
+      const props = Array.isArray(section?.props) ? section.props : [];
+      lines.push(`### ${title}`);
+      lines.push('');
+      if (props.length > 0) {
+        lines.push(...buildApiTableLines(props));
+      } else {
+        lines.push('_No API rows found._');
+      }
+      lines.push('');
+    }
+    return `${lines.join('\n').trimEnd()}\n`;
+  }
+
+  if (Array.isArray(component.props) && component.props.length > 0) {
+    lines.push(`### ${component.name}`);
+    lines.push('');
+    lines.push(...buildApiTableLines(component.props));
+    lines.push('');
+    return `${lines.join('\n').trimEnd()}\n`;
+  }
+
+  lines.push('_No API section found._');
+  lines.push('');
+  return `${lines.join('\n').trimEnd()}\n`;
+}
+
+function readComponentDoc(componentName, level = 'full') {
   const resolved = resolveComponent(componentName);
   const c = resolved.component;
   if (!c) {
@@ -168,6 +215,33 @@ function readComponentDoc(componentName) {
       found: false,
       message: `Component "${componentName}" not found in component index.`,
       suggestions: resolved.suggestions,
+      level,
+    };
+  }
+
+  if (level === 'brief') {
+    if (c.apiDocPath) {
+      const absApiDocPath = path.resolve(paths.mcpRoot, c.apiDocPath);
+      if (fs.existsSync(absApiDocPath)) {
+        const markdown = fs.readFileSync(absApiDocPath, 'utf8');
+        return {
+          found: true,
+          component: c.name,
+          level,
+          docPath: c.apiDocPath,
+          matchedBy: resolved.matchedBy,
+          markdown,
+        };
+      }
+    }
+
+    return {
+      found: true,
+      component: c.name,
+      level,
+      docPath: c.apiDocPath || c.docPath,
+      matchedBy: resolved.matchedBy,
+      markdown: renderBriefDocFromIndex(c),
     };
   }
 
@@ -177,6 +251,7 @@ function readComponentDoc(componentName) {
       found: false,
       component: c.name,
       message: `Doc file not found: ${c.docPath}`,
+      level,
     };
   }
 
@@ -184,6 +259,7 @@ function readComponentDoc(componentName) {
   return {
     found: true,
     component: c.name,
+    level,
     docPath: c.docPath,
     matchedBy: resolved.matchedBy,
     markdown,
@@ -258,21 +334,39 @@ server.registerTool(
     description: 'Get usage constraints, key props, examples, and anti-pattern rules for one component.',
     inputSchema: {
       component: z.string().describe('Component name, e.g. Select, Modal, Input'),
+      level: z.enum(['brief', 'full']).optional().describe('brief: minimal API-focused response; full: include examples and rules'),
     },
   },
-  async ({ component }) => {
+  async ({ component, level }) => {
+    const responseLevel = level || 'full';
     const resolved = resolveComponent(component);
     const c = resolved.component;
     if (!c) {
       return toTextResult({
         found: false,
+        level: responseLevel,
         message: `Component "${component}" not found in component index.`,
         suggestions: resolved.suggestions,
       });
     }
 
+    if (responseLevel === 'brief') {
+      return toTextResult({
+        found: true,
+        level: responseLevel,
+        component: c.name,
+        matchedBy: resolved.matchedBy,
+        group: c.group,
+        docPath: c.docPath,
+        apiDocPath: c.apiDocPath || '',
+        props: c.props,
+        apiSections: c.apiSections,
+      });
+    }
+
     return toTextResult({
       found: true,
+      level: responseLevel,
       component: c.name,
       matchedBy: resolved.matchedBy,
       group: c.group,
@@ -289,12 +383,13 @@ server.registerTool(
 server.registerTool(
   'get_component_doc',
   {
-    description: 'Get full component markdown doc (snapshot doc with inlined demo code if available).',
+    description: 'Get component markdown doc. level=brief returns API-only doc, level=full returns full doc with demos.',
     inputSchema: {
       component: z.string().describe('Component name, e.g. Select, Modal, Input'),
+      level: z.enum(['brief', 'full']).optional().describe('brief: API-only markdown, full: complete markdown'),
     },
   },
-  async ({ component }) => toTextResult(readComponentDoc(component)),
+  async ({ component, level }) => toTextResult(readComponentDoc(component, level || 'full')),
 );
 
 server.registerTool(

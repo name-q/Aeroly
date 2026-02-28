@@ -114,11 +114,18 @@ After config is loaded, you can ask AI to call tools like:
 - `get_component_doc`
 - `refresh_component_index`
 
+Token optimization (optional):
+
+- default behavior is `level: "full"` (you do not need to set anything)
+- use `level: "brief"` when you only need API-focused output (fewer tokens, faster responses)
+- use `level: "full"` when you need complete docs/usages with examples
+
 ## What Is Bundled in npm Package
 
 This package includes prebuilt docs and index so users do not need Aeroly source docs in their project:
 
 - `data/docs/*.md` (snapshot docs, generated from `src/*/index.md` first)
+- `data/docs-api/*.md` (API-only docs: component title + API section)
 - `data/component-index.json`
 
 `<code src="...">` examples are inlined during build, so demo code is directly readable.
@@ -137,6 +144,6 @@ npm start
 
 - `list_components`: list component metadata from index
 - `search_components`: retrieve best-fit components by intent
-- `get_component_usage`: usage constraints, props, examples, anti-patterns
-- `get_component_doc`: full markdown doc for a component
+- `get_component_usage`: supports `level="brief"` (API-focused) and `level="full"` (includes examples/rules)
+- `get_component_doc`: supports `level="brief"` (API-only markdown) and `level="full"` (full markdown with demos)
 - `refresh_component_index`: rebuild and hot-reload index

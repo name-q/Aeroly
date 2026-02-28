@@ -26,12 +26,12 @@ async function main() {
 
   const usage = await client.callTool({
     name: 'get_component_usage',
-    arguments: { component: 'Select' },
+    arguments: { component: 'Select', level: 'brief' },
   });
 
   const doc = await client.callTool({
     name: 'get_component_doc',
-    arguments: { component: 'Select' },
+    arguments: { component: 'Select', level: 'brief' },
   });
 
   console.log('MCP smoke test passed');

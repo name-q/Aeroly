@@ -9,6 +9,7 @@ const MCP_ROOT = path.resolve(__dirname, '..');
 const REPO_ROOT = path.resolve(MCP_ROOT, '..');
 const REPO_SRC_DIR = path.join(REPO_ROOT, 'src');
 const SNAPSHOT_DOCS_DIR = path.join(MCP_ROOT, 'data', 'docs');
+const SNAPSHOT_API_DOCS_DIR = path.join(MCP_ROOT, 'data', 'docs-api');
 const OUTPUT_PATH = path.join(MCP_ROOT, 'data', 'component-index.json');
 
 const NON_COMPONENT_DIRS = new Set([
@@ -452,6 +453,14 @@ function buildComponentRecord(item, manifestByComponent) {
   const controlledPairs = deriveControlledPairs(props);
   const antiPatterns = deriveAntiPatterns(componentName, props, controlledPairs);
   const group = frontmatter['group.title'] || frontmatter.group || manifestItem?.groupTitle || manifestItem?.group || '';
+  let apiDocPath = String(manifestItem?.outputApiDocPath || '').trim();
+
+  if (!apiDocPath) {
+    const siblingApiDocPath = path.join(path.dirname(path.dirname(item.docPath)), 'docs-api', path.basename(item.docPath));
+    if (exists(siblingApiDocPath)) {
+      apiDocPath = path.relative(MCP_ROOT, siblingApiDocPath);
+    }
+  }
 
   const keywords = tokenize(
     componentName,
@@ -467,6 +476,7 @@ function buildComponentRecord(item, manifestByComponent) {
     slug: item.componentDir.toLowerCase(),
     group,
     docPath: path.relative(MCP_ROOT, item.docPath),
+    apiDocPath,
     description,
     props,
     apiSections,
@@ -507,5 +517,6 @@ export const paths = {
   repoRoot: REPO_ROOT,
   repoSrcDir: REPO_SRC_DIR,
   snapshotDocsDir: SNAPSHOT_DOCS_DIR,
+  snapshotApiDocsDir: SNAPSHOT_API_DOCS_DIR,
   outputPath: OUTPUT_PATH,
 };

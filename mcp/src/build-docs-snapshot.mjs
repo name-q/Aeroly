@@ -4,6 +4,7 @@ import { paths } from './index-builder.mjs';
 
 const SRC_DIR = paths.repoSrcDir;
 const OUTPUT_DIR = paths.snapshotDocsDir;
+const OUTPUT_API_DIR = paths.snapshotApiDocsDir;
 
 const NON_COMPONENT_DIRS = new Set([
   '__tests__',
@@ -194,9 +195,42 @@ function inlineDemoTags(componentDir, markdown, report) {
   return output.join('\n');
 }
 
+function extractApiOnlyMarkdown(markdown, fallbackTitle) {
+  const lines = markdown.split(/\r?\n/);
+  const titleLine = lines.find((line) => /^#\s+/.test(line)) || `# ${fallbackTitle}`;
+
+  let apiStart = -1;
+  for (let i = 0; i < lines.length; i += 1) {
+    if (/^##\s+api\b/i.test(lines[i].trim())) {
+      apiStart = i;
+      break;
+    }
+  }
+
+  if (apiStart === -1) {
+    return `${titleLine.trim()}\n`;
+  }
+
+  let apiEnd = lines.length;
+  for (let i = apiStart + 1; i < lines.length; i += 1) {
+    if (/^##\s+/.test(lines[i])) {
+      apiEnd = i;
+      break;
+    }
+  }
+
+  const apiSection = lines.slice(apiStart, apiEnd).join('\n').trim();
+  if (!apiSection) {
+    return `${titleLine.trim()}\n`;
+  }
+
+  return `${titleLine.trim()}\n\n${apiSection}\n`;
+}
+
 function main() {
   const components = collectComponentDirs();
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  fs.mkdirSync(OUTPUT_API_DIR, { recursive: true });
 
   const manifest = {
     generatedAt: new Date().toISOString(),
@@ -221,6 +255,7 @@ function main() {
       component: componentDir,
       sourceDocPath: path.relative(paths.repoRoot, docPath),
       outputDocPath: path.relative(paths.mcpRoot, path.join(OUTPUT_DIR, `${componentDir}.md`)),
+      outputApiDocPath: path.relative(paths.mcpRoot, path.join(OUTPUT_API_DIR, `${componentDir}.md`)),
       title: frontmatter.title || componentDir,
       groupTitle: frontmatter['group.title'] || frontmatter.group || '',
       navTitle: frontmatter['nav.title'] || '',
@@ -233,7 +268,9 @@ function main() {
     };
 
     const inlined = inlineDemoTags(componentDir, body, report);
+    const apiOnly = extractApiOnlyMarkdown(body, report.title);
     write(path.join(OUTPUT_DIR, `${componentDir}.md`), `${inlined.trimStart().trimEnd()}\n`);
+    write(path.join(OUTPUT_API_DIR, `${componentDir}.md`), `${apiOnly.trimStart().trimEnd()}\n`);
 
     manifest.totalComponents += 1;
     manifest.totalExamples += report.totalExamples;

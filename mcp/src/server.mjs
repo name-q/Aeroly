@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import * as z from 'zod/v4';
 import { buildComponentIndex, readComponentIndex, writeComponentIndex, paths } from './index-builder.mjs';
 
@@ -438,13 +439,18 @@ server.registerTool(
   },
 );
 
-async function main() {
+export async function startServer() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error('[aeroly-mcp] server started on stdio');
 }
 
-main().catch((error) => {
-  console.error('[aeroly-mcp] server error', error);
-  process.exit(1);
-});
+const isDirectRun = process.argv[1]
+  && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+
+if (isDirectRun) {
+  startServer().catch((error) => {
+    console.error('[aeroly-mcp] server error', error);
+    process.exit(1);
+  });
+}

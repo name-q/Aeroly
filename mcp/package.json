@@ -1,9 +1,12 @@
 {
   "name": "aeroly-mcp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "description": "MCP server for Aeroly component knowledge retrieval and code validation.",
+  "bin": {
+    "aeroly-mcp": "./src/cli.mjs"
+  },
   "files": [
     "src",
     "data",

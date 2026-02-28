@@ -24,20 +24,14 @@ async function main() {
     arguments: { query: 'table pagination form', limit: 3 },
   });
 
-  const usage = await client.callTool({
-    name: 'get_component_usage',
-    arguments: { component: 'Select', level: 'brief' },
-  });
-
   const doc = await client.callTool({
     name: 'get_component_doc',
-    arguments: { component: 'Select', level: 'brief' },
+    arguments: { component: 'Select' },
   });
 
   console.log('MCP smoke test passed');
   console.log('tools:', toolNames.join(', '));
   console.log('search content type:', search.content?.[0]?.type || 'none');
-  console.log('usage content type:', usage.content?.[0]?.type || 'none');
   console.log('doc content type:', doc.content?.[0]?.type || 'none');
 
   await client.close();

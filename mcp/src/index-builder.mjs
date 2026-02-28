@@ -291,18 +291,48 @@ function parseMarkdownTables(body) {
   return tables;
 }
 
+function normalizeHeaderKey(header) {
+  return String(header || '')
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[()（）]/g, '');
+}
+
+function findColumnIndex(headers, aliases) {
+  const normalizedHeaders = headers.map((h) => normalizeHeaderKey(h));
+  for (const alias of aliases) {
+    const idx = normalizedHeaders.indexOf(normalizeHeaderKey(alias));
+    if (idx !== -1) return idx;
+  }
+  return -1;
+}
+
 function normalizePropRow(headers, row) {
-  const obj = {};
-  headers.forEach((h, idx) => {
-    obj[h.toLowerCase()] = row[idx] ?? '';
+  const nameIdx = findColumnIndex(headers, ['property', 'prop', 'name', '属性', '参数']);
+  const descIdx = findColumnIndex(headers, ['description', 'desc', '说明']);
+  const typeIdx = findColumnIndex(headers, ['type', '类型']);
+  const defaultIdx = findColumnIndex(headers, ['default', 'defaultvalue', '默认值']);
+
+  const used = new Set([nameIdx, descIdx, typeIdx, defaultIdx].filter((idx) => idx >= 0));
+  const extra = {};
+  headers.forEach((header, idx) => {
+    if (!used.has(idx)) {
+      extra[header] = row[idx] ?? '';
+    }
   });
 
-  return {
-    name: obj.property || obj['属性'] || '',
-    description: obj.description || obj['说明'] || '',
-    type: obj.type || obj['类型'] || '',
-    default: obj.default || obj['默认值'] || '',
+  const result = {
+    name: nameIdx >= 0 ? (row[nameIdx] ?? '') : '',
+    description: descIdx >= 0 ? (row[descIdx] ?? '') : '',
+    type: typeIdx >= 0 ? (row[typeIdx] ?? '') : '',
+    default: defaultIdx >= 0 ? (row[defaultIdx] ?? '') : '',
   };
+
+  if (Object.keys(extra).length > 0) {
+    result.extra = extra;
+  }
+
+  return result;
 }
 
 function parseApiSections(body) {
@@ -310,8 +340,8 @@ function parseApiSections(body) {
   const apiSections = [];
 
   for (const table of tables) {
-    const header0 = (table.headers[0] || '').toLowerCase();
-    if (!(header0 === 'property' || header0 === '属性')) {
+    const hasPropColumn = findColumnIndex(table.headers, ['property', 'prop', 'name', '属性', '参数']) >= 0;
+    if (!hasPropColumn) {
       continue;
     }
 

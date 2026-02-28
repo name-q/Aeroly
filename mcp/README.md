@@ -1,6 +1,6 @@
 # aeroly-mcp
 
-MCP server for Aeroly component retrieval and usage guidance, designed for AI coding workflows.
+MCP server for Aeroly component retrieval and doc guidance, designed for AI coding workflows.
 
 ## Version Policy
 
@@ -30,7 +30,6 @@ Workspace-level config (recommended): `.kiro/settings/mcp.json`
       "autoApprove": [
         "list_components",
         "search_components",
-        "get_component_usage",
         "get_component_doc",
         "refresh_component_index"
       ]
@@ -52,7 +51,6 @@ User-level config (all projects): `~/.kiro/settings/mcp.json`
       "autoApprove": [
         "list_components",
         "search_components",
-        "get_component_usage",
         "get_component_doc",
         "refresh_component_index"
       ]
@@ -75,7 +73,6 @@ If your environment blocks npm prompts, use:
       "autoApprove": [
         "list_components",
         "search_components",
-        "get_component_usage",
         "get_component_doc",
         "refresh_component_index"
       ]
@@ -97,7 +94,6 @@ For strict version matching with Aeroly, pin the same version instead of `latest
       "autoApprove": [
         "list_components",
         "search_components",
-        "get_component_usage",
         "get_component_doc",
         "refresh_component_index"
       ]
@@ -110,15 +106,14 @@ After config is loaded, you can ask AI to call tools like:
 
 - `list_components`
 - `search_components`
-- `get_component_usage`
 - `get_component_doc`
 - `refresh_component_index`
 
 Token optimization (optional):
 
-- default behavior is `level: "full"` (you do not need to set anything)
+- `get_component_doc` default behavior is `level: "brief"` (you do not need to set anything)
 - use `level: "brief"` when you only need API-focused output (fewer tokens, faster responses)
-- use `level: "full"` when you need complete docs/usages with examples
+- use `level: "full"` when you need complete docs with examples
 
 ## What Is Bundled in npm Package
 
@@ -144,6 +139,5 @@ npm start
 
 - `list_components`: list component metadata from index
 - `search_components`: retrieve best-fit components by intent
-- `get_component_usage`: supports `level="brief"` (API-focused) and `level="full"` (includes examples/rules)
-- `get_component_doc`: supports `level="brief"` (API-only markdown) and `level="full"` (full markdown with demos)
+- `get_component_doc`: returns plain markdown text; supports `level="brief"` (default, API-only markdown) and `level="full"` (full markdown with demos)
 - `refresh_component_index`: rebuild and hot-reload index

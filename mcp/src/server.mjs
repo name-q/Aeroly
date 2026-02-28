@@ -148,7 +148,7 @@ function resolveComponent(query) {
   };
 }
 
-function toTextResult(data) {
+function toJsonResult(data) {
   return {
     content: [
       {
@@ -160,6 +160,17 @@ function toTextResult(data) {
   };
 }
 
+function toTextResult(text) {
+  return {
+    content: [
+      {
+        type: 'text',
+        text: String(text || ''),
+      },
+    ],
+  };
+}
+
 function escapeCell(value) {
   return String(value ?? '')
     .replace(/\|/g, '\\|')
@@ -167,10 +178,28 @@ function escapeCell(value) {
 }
 
 function buildApiTableLines(props) {
+  const extraHeaders = [];
+  for (const row of props) {
+    const keys = Object.keys(row?.extra || {});
+    for (const key of keys) {
+      if (!extraHeaders.includes(key)) extraHeaders.push(key);
+    }
+  }
+
+  const headers = ['Property', 'Description', 'Type', 'Default', ...extraHeaders];
   return [
-    '| Property | Description | Type | Default |',
-    '| --- | --- | --- | --- |',
-    ...props.map((p) => `| ${escapeCell(p.name)} | ${escapeCell(p.description)} | ${escapeCell(p.type)} | ${escapeCell(p.default)} |`),
+    `| ${headers.join(' | ')} |`,
+    `| ${headers.map(() => '---').join(' | ')} |`,
+    ...props.map((p) => {
+      const row = [
+        escapeCell(p.name),
+        escapeCell(p.description),
+        escapeCell(p.type),
+        escapeCell(p.default),
+        ...extraHeaders.map((key) => escapeCell(p?.extra?.[key] ?? '')),
+      ];
+      return `| ${row.join(' | ')} |`;
+    }),
   ];
 }
 
@@ -207,16 +236,21 @@ function renderBriefDocFromIndex(component) {
   return `${lines.join('\n').trimEnd()}\n`;
 }
 
-function readComponentDoc(componentName, level = 'full') {
+function formatNotFoundText(componentName, suggestions = []) {
+  const lines = [`Component "${componentName}" not found in component index.`];
+  if (Array.isArray(suggestions) && suggestions.length > 0) {
+    lines.push('');
+    lines.push('Did you mean:');
+    suggestions.slice(0, 5).forEach((name) => lines.push(`- ${name}`));
+  }
+  return `${lines.join('\n')}\n`;
+}
+
+function readComponentDocText(componentName, level = 'brief') {
   const resolved = resolveComponent(componentName);
   const c = resolved.component;
   if (!c) {
-    return {
-      found: false,
-      message: `Component "${componentName}" not found in component index.`,
-      suggestions: resolved.suggestions,
-      level,
-    };
+    return formatNotFoundText(componentName, resolved.suggestions);
   }
 
   if (level === 'brief') {
@@ -224,46 +258,19 @@ function readComponentDoc(componentName, level = 'full') {
       const absApiDocPath = path.resolve(paths.mcpRoot, c.apiDocPath);
       if (fs.existsSync(absApiDocPath)) {
         const markdown = fs.readFileSync(absApiDocPath, 'utf8');
-        return {
-          found: true,
-          component: c.name,
-          level,
-          docPath: c.apiDocPath,
-          matchedBy: resolved.matchedBy,
-          markdown,
-        };
+        return markdown;
       }
     }
 
-    return {
-      found: true,
-      component: c.name,
-      level,
-      docPath: c.apiDocPath || c.docPath,
-      matchedBy: resolved.matchedBy,
-      markdown: renderBriefDocFromIndex(c),
-    };
+    return renderBriefDocFromIndex(c);
   }
 
   const absDocPath = path.resolve(paths.mcpRoot, c.docPath);
   if (!fs.existsSync(absDocPath)) {
-    return {
-      found: false,
-      component: c.name,
-      message: `Doc file not found: ${c.docPath}`,
-      level,
-    };
+    return `Doc file not found: ${c.docPath}\n`;
   }
 
-  const markdown = fs.readFileSync(absDocPath, 'utf8');
-  return {
-    found: true,
-    component: c.name,
-    level,
-    docPath: c.docPath,
-    matchedBy: resolved.matchedBy,
-    markdown,
-  };
+  return fs.readFileSync(absDocPath, 'utf8');
 }
 
 const server = new McpServer({
@@ -292,7 +299,7 @@ server.registerTool(
       docPath: c.docPath,
       description: c.description,
     }));
-    return toTextResult({
+    return toJsonResult({
       total: result.length,
       requestedLimit: limit ?? null,
       limitIgnored: typeof limit === 'number',
@@ -320,7 +327,7 @@ server.registerTool(
       docPath: c.docPath,
     }));
 
-    return toTextResult({
+    return toJsonResult({
       query,
       total: top.length,
       results: top,
@@ -329,67 +336,15 @@ server.registerTool(
 );
 
 server.registerTool(
-  'get_component_usage',
-  {
-    description: 'Get usage constraints, key props, examples, and anti-pattern rules for one component.',
-    inputSchema: {
-      component: z.string().describe('Component name, e.g. Select, Modal, Input'),
-      level: z.enum(['brief', 'full']).optional().describe('brief: minimal API-focused response; full: include examples and rules'),
-    },
-  },
-  async ({ component, level }) => {
-    const responseLevel = level || 'full';
-    const resolved = resolveComponent(component);
-    const c = resolved.component;
-    if (!c) {
-      return toTextResult({
-        found: false,
-        level: responseLevel,
-        message: `Component "${component}" not found in component index.`,
-        suggestions: resolved.suggestions,
-      });
-    }
-
-    if (responseLevel === 'brief') {
-      return toTextResult({
-        found: true,
-        level: responseLevel,
-        component: c.name,
-        matchedBy: resolved.matchedBy,
-        group: c.group,
-        docPath: c.docPath,
-        apiDocPath: c.apiDocPath || '',
-        props: c.props,
-        apiSections: c.apiSections,
-      });
-    }
-
-    return toTextResult({
-      found: true,
-      level: responseLevel,
-      component: c.name,
-      matchedBy: resolved.matchedBy,
-      group: c.group,
-      description: c.description,
-      docPath: c.docPath,
-      controlledPairs: c.controlledPairs,
-      antiPatterns: c.antiPatterns,
-      props: c.props,
-      examples: c.examples,
-    });
-  },
-);
-
-server.registerTool(
   'get_component_doc',
   {
-    description: 'Get component markdown doc. level=brief returns API-only doc, level=full returns full doc with demos.',
+    description: 'Get component markdown doc text. level=brief returns API-only doc (default); level=full returns full doc with demos.',
     inputSchema: {
       component: z.string().describe('Component name, e.g. Select, Modal, Input'),
-      level: z.enum(['brief', 'full']).optional().describe('brief: API-only markdown, full: complete markdown'),
+      level: z.enum(['brief', 'full']).optional().describe('brief: API-only markdown (default), full: complete markdown'),
     },
   },
-  async ({ component, level }) => toTextResult(readComponentDoc(component, level || 'full')),
+  async ({ component, level }) => toTextResult(readComponentDocText(component, level || 'brief')),
 );
 
 server.registerTool(
@@ -402,7 +357,7 @@ server.registerTool(
     const next = buildComponentIndex();
     writeComponentIndex(next);
     indexData = next;
-    return toTextResult({
+    return toJsonResult({
       refreshed: true,
       generatedAt: indexData.generatedAt,
       totalComponents: indexData.totalComponents,

@@ -141,7 +141,7 @@ Obtained via `Form.useForm()`.
 
 **Do not** nest `Row/Col` inside `layout="inline"`. The inline CSS Grid will compress `Row` into a single grid cell, causing controls to collapse to zero width.
 
-```tsx
+```tsx | pure
 // ❌ Wrong — inline + Row/Col conflict, controls have no width
 <Form layout="inline">
   <Row><Col span={8}><Form.Item>...</Form.Item></Col></Row>

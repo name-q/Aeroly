@@ -141,7 +141,7 @@ toc: content
 
 **禁止**：`layout="inline"` 内嵌套 `Row/Col`。`inline` 模式的 CSS Grid 会将 `Row` 压缩到单个 grid cell 中，导致内部控件宽度塌缩。
 
-```tsx
+```tsx | pure
 // ❌ 错误 — inline + Row/Col 冲突，控件无宽度
 <Form layout="inline">
   <Row><Col span={8}><Form.Item>...</Form.Item></Col></Row>

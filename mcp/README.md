@@ -137,7 +137,7 @@ npm start
 
 ## Tool Summary
 
-- `list_components`: list component metadata from index
+- `list_components`: list component metadata from index (supports `group/query/offset/limit`, returns `hasMore/nextOffset`)
 - `search_components`: retrieve best-fit components by intent
 - `get_component_doc`: returns plain markdown text; supports `level="brief"` (default, API-only markdown) and `level="full"` (full markdown with demos)
 - `refresh_component_index`: rebuild and hot-reload index

@@ -284,27 +284,45 @@ server.registerTool(
     description: 'List Aeroly components from index built from src/*/index.md.',
     inputSchema: {
       group: z.string().optional().describe('Optional group filter, e.g. Data Entry, Feedback'),
-      limit: z.number().int().min(1).max(500).optional().describe('Deprecated hint. Ignored to avoid truncating component list.'),
+      query: z.string().optional().describe('Optional keyword filter on name/description/group'),
+      offset: z.number().int().min(0).optional().describe('Pagination offset. Default: 0'),
+      limit: z.number().int().min(1).max(500).optional().describe('Pagination size. Default: 50'),
     },
   },
-  async ({ group, limit }) => {
+  async ({ group, query, offset, limit }) => {
     let components = indexData.components;
     if (group) {
       const g = group.toLowerCase();
       components = components.filter((c) => (c.group || '').toLowerCase().includes(g));
     }
-    const result = components.map((c) => ({
-      name: c.name,
-      group: c.group,
-      docPath: c.docPath,
-      description: c.description,
-    }));
+    if (query) {
+      const q = query.toLowerCase();
+      components = components.filter((c) => {
+        const name = String(c.name || '').toLowerCase();
+        const desc = String(c.description || '').toLowerCase();
+        const grp = String(c.group || '').toLowerCase();
+        return name.includes(q) || desc.includes(q) || grp.includes(q);
+      });
+    }
+
+    const total = components.length;
+    const start = Math.max(0, offset ?? 0);
+    const size = limit ?? 50;
+    const paged = components.slice(start, start + size);
+
     return toJsonResult({
-      total: result.length,
-      requestedLimit: limit ?? null,
-      limitIgnored: typeof limit === 'number',
+      total,
+      offset: start,
+      limit: size,
+      hasMore: start + paged.length < total,
+      nextOffset: start + paged.length < total ? start + paged.length : null,
       generatedAt: indexData.generatedAt,
-      components: result,
+      components: paged.map((c) => ({
+        name: c.name,
+        group: c.group,
+        docPath: c.docPath,
+        description: c.description,
+      })),
     });
   },
 );

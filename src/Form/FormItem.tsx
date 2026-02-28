@@ -202,7 +202,7 @@ const FormItem: React.FC<FormItemProps> = ({
         if (React.isValidElement(child)) {
           const childType = child.type as any;
           const isCheckable = childType?.__AERO_CHECKABLE === true;
-          return React.cloneElement(child, buildInjectedProps(child.props, isCheckable));
+          return React.cloneElement(child, buildInjectedProps(child.props as Record<string, any>, isCheckable));
         }
       } catch {
         // multiple children and none marked — return as-is

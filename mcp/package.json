@@ -1,6 +1,6 @@
 {
   "name": "aeroly-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "type": "module",
   "description": "MCP server for Aeroly component knowledge retrieval and documentation guidance.",

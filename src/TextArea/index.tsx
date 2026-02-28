@@ -180,4 +180,6 @@ const TextArea: React.FC<TextAreaProps> = ({
   );
 };
 
+(TextArea as any).__AERO_FORM_CONTROL = true;
+
 export default TextArea;

@@ -134,47 +134,83 @@ const FormItem: React.FC<FormItemProps> = ({
     // Do not inject props when name is undefined
     if (!nameKey) return children;
 
-    const child = React.Children.only(children) as React.ReactElement<any>;
-    if (!React.isValidElement(child)) return children;
+    // Build the props to inject
+    const buildInjectedProps = (childProps: Record<string, any>, isCheckable: boolean): Record<string, any> => {
+      const controlledValue = isCheckable
+        ? (fieldState.value ?? false)
+        : (fieldState.value ?? '');
 
-    // Detect checkable component
-    const childType = child.type as any;
-    const isCheckable = childType?.__AERO_CHECKABLE === true;
+      const injectedProps: Record<string, any> = {
+        [isCheckable ? 'checked' : valuePropName]: controlledValue,
+        [trigger]: (...args: any[]) => {
+          handleChange(...args);
+          childProps[trigger]?.(...args);
+        },
+        onBlur: (...args: any[]) => {
+          handleBlur();
+          childProps.onBlur?.(...args);
+        },
+        disabled: childProps.disabled ?? disabled,
+      };
 
-    // Ensure injected value is always defined to prevent child falling back to uncontrolled mode
-    const rawValue = fieldState.value;
-    const controlledValue = isCheckable
-      ? (rawValue ?? false)
-      : (rawValue ?? '');
+      if (fieldState.errors.length > 0) {
+        injectedProps.status = 'error';
+      } else if (fieldState.warnings.length > 0) {
+        injectedProps.status = 'warning';
+      }
 
-    const typedChild = child as React.ReactElement<any>;
+      if (size && childProps.size === undefined) {
+        injectedProps.size = size;
+      }
 
-    const injectedProps: Record<string, any> = {
-      [isCheckable ? 'checked' : valuePropName]: controlledValue,
-      [trigger]: (...args: any[]) => {
-        handleChange(...args);
-        typedChild.props[trigger]?.(...args);
-      },
-      onBlur: (...args: any[]) => {
-        handleBlur();
-        typedChild.props.onBlur?.(...args);
-      },
-      disabled: typedChild.props.disabled ?? disabled,
+      return injectedProps;
     };
 
-    // Inject status
-    if (fieldState.errors.length > 0) {
-      injectedProps.status = 'error';
-    } else if (fieldState.warnings.length > 0) {
-      injectedProps.status = 'warning';
+    // Recursively traverse children to find and inject into form controls
+    const injectFormControl = (node: React.ReactNode, injected: { done: boolean }): React.ReactNode => {
+      if (!React.isValidElement(node) || injected.done) return node;
+
+      const nodeType = node.type as any;
+      const isFormControl = nodeType?.__AERO_FORM_CONTROL === true;
+
+      if (isFormControl) {
+        injected.done = true;
+        const isCheckable = nodeType?.__AERO_CHECKABLE === true;
+        return React.cloneElement(node as React.ReactElement<any>, buildInjectedProps((node as React.ReactElement<any>).props, isCheckable));
+      }
+
+      // Not a form control — recurse into its children
+      const nodeProps = (node as React.ReactElement<any>).props;
+      if (nodeProps && nodeProps.children) {
+        const newChildren = React.Children.map(nodeProps.children, (child) => injectFormControl(child, injected));
+        if (newChildren !== nodeProps.children) {
+          return React.cloneElement(node as React.ReactElement<any>, {}, newChildren);
+        }
+      }
+
+      return node;
+    };
+
+    // Try recursive injection first
+    const injected = { done: false };
+    const result = React.Children.map(children, (child) => injectFormControl(child, injected));
+
+    // Fallback: if no __AERO_FORM_CONTROL found, use legacy single-child injection
+    if (!injected.done) {
+      try {
+        const child = React.Children.only(children) as React.ReactElement<any>;
+        if (React.isValidElement(child)) {
+          const childType = child.type as any;
+          const isCheckable = childType?.__AERO_CHECKABLE === true;
+          return React.cloneElement(child, buildInjectedProps(child.props, isCheckable));
+        }
+      } catch {
+        // multiple children and none marked — return as-is
+      }
+      return children;
     }
 
-    // Inject size
-    if (size && typedChild.props.size === undefined) {
-      injectedProps.size = size;
-    }
-
-    return React.cloneElement(typedChild, injectedProps);
+    return result;
   };
 
   // Error / warning messages

@@ -365,4 +365,6 @@ const TimePicker: React.FC<TimePickerProps> = ({
   );
 };
 
+(TimePicker as any).__AERO_FORM_CONTROL = true;
+
 export default TimePicker;

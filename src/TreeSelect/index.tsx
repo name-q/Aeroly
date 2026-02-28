@@ -620,4 +620,6 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   );
 };
 
+(TreeSelect as any).__AERO_FORM_CONTROL = true;
+
 export default TreeSelect;

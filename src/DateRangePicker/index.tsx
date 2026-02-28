@@ -487,4 +487,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   );
 };
 
+(DateRangePicker as any).__AERO_FORM_CONTROL = true;
+
 export default DateRangePicker;

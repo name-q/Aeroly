@@ -570,4 +570,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
   );
 };
 
+(DatePicker as any).__AERO_FORM_CONTROL = true;
+
 export default DatePicker;

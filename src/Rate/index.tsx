@@ -193,4 +193,6 @@ const Rate: React.FC<RateProps> = ({
   );
 };
 
+(Rate as any).__AERO_FORM_CONTROL = true;
+
 export default Rate;

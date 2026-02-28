@@ -17,6 +17,10 @@ toc: content
 
 <code src="./demos/basic.tsx"></code>
 
+## 嵌套布局
+
+<code src="./demos/nested.tsx"></code>
+
 ## 布局模式
 
 <code src="./demos/layout.tsx"></code>

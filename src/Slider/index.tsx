@@ -311,4 +311,6 @@ const Slider: React.FC<SliderProps> = ({
   );
 };
 
+(Slider as any).__AERO_FORM_CONTROL = true;
+
 export default Slider;

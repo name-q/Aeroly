@@ -17,6 +17,10 @@ High-performance form component with built-in data management, validation, and l
 
 <code src="./en/demos/basic.tsx" id="basic-en"></code>
 
+## Nested Layout
+
+<code src="./en/demos/nested.tsx" id="nested-en"></code>
+
 ## Layout Modes
 
 <code src="./en/demos/layout.tsx" id="layout-en"></code>

@@ -102,5 +102,6 @@ const Switch: React.FC<SwitchProps> = ({
 };
 
 (Switch as any).__AERO_CHECKABLE = true;
+(Switch as any).__AERO_FORM_CONTROL = true;
 
 export default Switch;

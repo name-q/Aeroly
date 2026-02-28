@@ -357,4 +357,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
   );
 };
 
+(InputNumber as any).__AERO_FORM_CONTROL = true;
+
 export default InputNumber;

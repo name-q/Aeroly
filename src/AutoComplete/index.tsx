@@ -327,4 +327,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   );
 };
 
+(AutoComplete as any).__AERO_FORM_CONTROL = true;
+
 export default AutoComplete;

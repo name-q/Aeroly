@@ -241,5 +241,7 @@ const Radio: React.FC<RadioProps> & { Group: typeof RadioGroup } = ({
 
 Radio.Group = RadioGroup;
 (Radio as any).__AERO_CHECKABLE = true;
+(Radio as any).__AERO_FORM_CONTROL = true;
+(RadioGroup as any).__AERO_FORM_CONTROL = true;
 
 export default Radio;

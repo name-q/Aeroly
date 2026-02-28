@@ -605,4 +605,6 @@ const Upload: React.FC<UploadProps> = ({
   );
 };
 
+(Upload as any).__AERO_FORM_CONTROL = true;
+
 export default Upload;

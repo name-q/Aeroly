@@ -134,4 +134,6 @@ const Segmented: React.FC<SegmentedProps> = ({
   );
 };
 
+(Segmented as any).__AERO_FORM_CONTROL = true;
+
 export default Segmented;

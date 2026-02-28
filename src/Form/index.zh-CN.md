@@ -130,6 +130,37 @@ toc: content
 | submit | 触发提交 | `() => void` |
 | isFieldTouched | 字段是否被操作过 | `(name: NamePath) => boolean` |
 
+### 布局选择指南
+
+`inline` 和 `Row/Col` 是两套独立的多列布局方案，**不能混用**。
+
+| 场景 | 推荐方案 | 说明 |
+|------|----------|------|
+| 搜索栏、筛选条件等自动排列 | `layout="inline"` | 内置 CSS Grid 自动分列，直接放 `Form.Item` 即可 |
+| 需要精确控制每列宽度 | `layout="horizontal"` + `Row/Col` | 用栅格系统手动控制列宽 |
+
+**禁止**：`layout="inline"` 内嵌套 `Row/Col`。`inline` 模式的 CSS Grid 会将 `Row` 压缩到单个 grid cell 中，导致内部控件宽度塌缩。
+
+```tsx
+// ❌ 错误 — inline + Row/Col 冲突，控件无宽度
+<Form layout="inline">
+  <Row><Col span={8}><Form.Item>...</Form.Item></Col></Row>
+</Form>
+
+// ✅ 正确 — 自动排列用 inline
+<Form layout="inline">
+  <Form.Item>...</Form.Item>
+  <Form.Item>...</Form.Item>
+</Form>
+
+// ✅ 正确 — 精确控制用 horizontal + Row/Col
+<Form layout="horizontal">
+  <Row gutter={[16, 16]}>
+    <Col span={8}><Form.Item>...</Form.Item></Col>
+  </Row>
+</Form>
+```
+
 ### Form.useWatch
 
 订阅指定字段的实时值，字段变化时自动触发组件重渲染。适合根据某个字段值动态生成其他内容（如邮箱后缀补全）。建议将 `useWatch` 及其依赖的渲染逻辑下沉到独立子组件中，避免字段变化导致整个表单重渲染。

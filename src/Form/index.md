@@ -130,6 +130,37 @@ Obtained via `Form.useForm()`.
 | submit | Trigger submit | `() => void` |
 | isFieldTouched | Whether field has been touched | `(name: NamePath) => boolean` |
 
+### Layout Guide
+
+`inline` and `Row/Col` are two independent multi-column layout solutions — **do not combine them**.
+
+| Scenario | Recommended | Notes |
+|----------|-------------|-------|
+| Search bars, filters with auto layout | `layout="inline"` | Built-in CSS Grid auto-columns, place `Form.Item` directly |
+| Precise control over column widths | `layout="horizontal"` + `Row/Col` | Use grid system for manual column control |
+
+**Do not** nest `Row/Col` inside `layout="inline"`. The inline CSS Grid will compress `Row` into a single grid cell, causing controls to collapse to zero width.
+
+```tsx
+// ❌ Wrong — inline + Row/Col conflict, controls have no width
+<Form layout="inline">
+  <Row><Col span={8}><Form.Item>...</Form.Item></Col></Row>
+</Form>
+
+// ✅ Correct — auto layout with inline
+<Form layout="inline">
+  <Form.Item>...</Form.Item>
+  <Form.Item>...</Form.Item>
+</Form>
+
+// ✅ Correct — precise control with horizontal + Row/Col
+<Form layout="horizontal">
+  <Row gutter={[16, 16]}>
+    <Col span={8}><Form.Item>...</Form.Item></Col>
+  </Row>
+</Form>
+```
+
 ### Form.useWatch
 
 Subscribe to a field's real-time value, automatically triggering component re-render on field change. Useful for dynamically generating content based on a field value (e.g., email suffix completion). It's recommended to extract `useWatch` and its dependent rendering logic into a separate child component to avoid re-rendering the entire form on field changes.

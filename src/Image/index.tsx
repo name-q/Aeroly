@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ZoomIn, ZoomOut, RotateCcw, RotateCw, Maximize, ChevronLeft, ChevronRight, ImageOff, Eye, FlipHorizontal2, FlipVertical2 } from 'lucide-react';
 import Icon from '../Icon';
 import './index.less';
@@ -166,7 +167,7 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
     animating ? 'aero-image-preview-root--open' : '',
   ].filter(Boolean).join(' ');
 
-  return (
+  return createPortal(
     <div className={rootCls} onTransitionEnd={handleTransitionEnd}>
       <div className="aero-image-preview-mask" onClick={onClose} />
 
@@ -240,7 +241,8 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
           {current + 1} / {images.length}
         </div>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 };
 

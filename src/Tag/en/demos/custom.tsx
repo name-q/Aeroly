@@ -14,6 +14,16 @@ export default () => (
       <Tag color="#ea580c">Orange</Tag>
     </div>
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <Tag color="red">Owner</Tag>
+      <Tag color="blue">Admin</Tag>
+      <Tag color="green">Member</Tag>
+      <Tag color="orange">Guest</Tag>
+      <Tag color="purple">VIP</Tag>
+      <Tag color="cyan">Intern</Tag>
+      <Tag color="tomato">Tomato</Tag>
+      <Tag color="cornflowerblue">Cornflower</Tag>
+    </div>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
       <Tag round type="info">Pill</Tag>
       <Tag round type="success">Pill</Tag>
       <Tag round type="warning">Pill</Tag>

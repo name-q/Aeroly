@@ -14,6 +14,16 @@ export default () => (
       <Tag color="#ea580c">橙色</Tag>
     </div>
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <Tag color="red">群主</Tag>
+      <Tag color="blue">管理员</Tag>
+      <Tag color="green">成员</Tag>
+      <Tag color="orange">访客</Tag>
+      <Tag color="purple">嘉宾</Tag>
+      <Tag color="cyan">实习</Tag>
+      <Tag color="tomato">番茄色</Tag>
+      <Tag color="cornflowerblue">矢车菊蓝</Tag>
+    </div>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
       <Tag round type="info">胶囊</Tag>
       <Tag round type="success">胶囊</Tag>
       <Tag round type="warning">胶囊</Tag>

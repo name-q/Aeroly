@@ -33,6 +33,42 @@ export interface TagProps {
   style?: React.CSSProperties;
 }
 
+// 运行时解析任意 CSS 颜色值为 "r, g, b"，用于 rgba() 淡化背景
+let _ctx: CanvasRenderingContext2D | null | undefined;
+const rgbCache: Record<string, string | null> = {};
+
+function parseColorToRgb(color: string): string | null {
+  const key = color.toLowerCase();
+  if (key in rgbCache) return rgbCache[key];
+
+  if (_ctx === undefined) {
+    _ctx = typeof document !== 'undefined'
+      ? document.createElement('canvas').getContext('2d')
+      : null;
+  }
+  if (!_ctx) return (rgbCache[key] = null);
+
+  // 两轮检测：区分 "black" 和无效值
+  _ctx.fillStyle = '#000';
+  _ctx.fillStyle = color;
+  const v = _ctx.fillStyle;
+  if (v === '#000000') {
+    _ctx.fillStyle = '#fff';
+    _ctx.fillStyle = color;
+    if (_ctx.fillStyle === '#ffffff') return (rgbCache[key] = null);
+  }
+
+  const hex = _ctx.fillStyle;
+  if (hex.startsWith('#')) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return (rgbCache[key] = `${r}, ${g}, ${b}`);
+  }
+  const m = hex.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  return (rgbCache[key] = m ? `${m[1]}, ${m[2]}, ${m[3]}` : null);
+}
+
 const Tag: React.FC<TagProps> = ({
   children,
   type = 'default',
@@ -60,17 +96,23 @@ const Tag: React.FC<TagProps> = ({
   };
 
   const customStyle: React.CSSProperties = { ...style };
+  const isCustomColor = color !== undefined;
   if (color) {
-    customStyle.backgroundColor = color.startsWith('#') || color.startsWith('rgb')
-      ? `${color}18` : color;
-    customStyle.borderColor = color.startsWith('#') || color.startsWith('rgb')
-      ? `${color}40` : 'transparent';
-    customStyle.color = color;
+    const rgb = parseColorToRgb(color);
+    if (rgb) {
+      customStyle.backgroundColor = `rgba(${rgb}, 0.08)`;
+      customStyle.borderColor = `rgba(${rgb}, 0.2)`;
+      customStyle.color = color;
+    } else {
+      customStyle.backgroundColor = color;
+      customStyle.borderColor = 'transparent';
+      customStyle.color = '#fff';
+    }
   }
 
   const cls = [
     'aero-tag',
-    `aero-tag--${type}`,
+    isCustomColor ? '' : `aero-tag--${type}`,
     `aero-tag--${size}`,
     round ? 'aero-tag--round' : '',
     bordered ? '' : 'aero-tag--borderless',

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import type { LucideIcon } from 'lucide-react';
 import { X, Info, CircleCheck, CircleAlert, CircleX } from 'lucide-react';
@@ -180,7 +181,7 @@ const Modal: React.FC<ModalProps> & {
     );
   };
 
-  return (
+  return createPortal(
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
       {mask && (
         <div
@@ -202,7 +203,8 @@ const Modal: React.FC<ModalProps> & {
           {renderFooter()}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 import './index.less';
@@ -111,7 +112,7 @@ const Drawer: React.FC<DrawerProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  return (
+  return createPortal(
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
       {mask && (
         <div
@@ -143,7 +144,8 @@ const Drawer: React.FC<DrawerProps> = ({
         <div className="aero-drawer-body">{children}</div>
         {footer && <div className="aero-drawer-footer">{footer}</div>}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 

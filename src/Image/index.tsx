@@ -272,10 +272,21 @@ const Image: React.FC<ImageProps> & {
   const [previewOpen, setPreviewOpen] = useState(false);
   const groupContext = useContext(PreviewGroupContext);
   const idRef = useRef(generateId());
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // Reset status when src changes
   useEffect(() => {
-    setStatus(src ? 'loading' : 'error');
+    if (!src) {
+      setStatus('error');
+      return;
+    }
+    // 浏览器缓存命中时 onLoad 会在 useEffect 之前同步触发，
+    // 此时直接检查 img.complete 避免覆盖已经 loaded 的状态
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setStatus('loaded');
+    } else {
+      setStatus('loading');
+    }
   }, [src]);
 
   // Register with group
@@ -326,6 +337,7 @@ const Image: React.FC<ImageProps> & {
         {/* Real image (always rendered for loading detection, hidden when not loaded) */}
         {src && status !== 'error' && (
           <img
+            ref={imgRef}
             className="aero-image-inner"
             src={src}
             alt={alt}

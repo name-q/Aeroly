@@ -186,10 +186,9 @@ const Modal: React.FC<ModalProps> & {
       {mask && (
         <div
           className="aero-modal-mask"
-          onClick={maskClosable ? handleCancel : undefined}
         />
       )}
-      <div className="aero-modal-wrap">
+      <div className="aero-modal-wrap" onClick={maskClosable ? (e: React.MouseEvent) => { if (e.target === e.currentTarget) handleCancel(); } : undefined}>
         <div className={modalClassNames} style={{ width, ...style }}>
           {title && (
             <div className="aero-modal-header">

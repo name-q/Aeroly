@@ -260,8 +260,37 @@ const Popover: React.FC<PopoverProps> = ({
     </div>
   ) : null;
 
-  return (
-    <>
+  // 尝试直接注入 ref + 事件到 children，避免额外 span 包裹导致 absolute 子元素定位失效
+  // 如果 children 不是单个 ReactElement（纯文本、fragment 等），fallback 到 span 包裹
+  let triggerNode: React.ReactNode;
+
+  const isValidSingleElement =
+    React.isValidElement(children) && React.Children.count(children) === 1;
+
+  if (isValidSingleElement) {
+    const child = children as React.ReactElement<any>;
+    triggerNode = React.cloneElement(child, {
+      ref: (node: HTMLElement | null) => {
+        (triggerRef as React.MutableRefObject<HTMLElement | null>).current = node;
+        const { ref } = child as any;
+        if (typeof ref === 'function') ref(node);
+        else if (ref && typeof ref === 'object') (ref as React.MutableRefObject<any>).current = node;
+      },
+      onClick: (e: React.MouseEvent) => {
+        handleClick();
+        child.props.onClick?.(e);
+      },
+      onMouseEnter: (e: React.MouseEvent) => {
+        handleMouseEnter();
+        child.props.onMouseEnter?.(e);
+      },
+      onMouseLeave: (e: React.MouseEvent) => {
+        handleMouseLeave();
+        child.props.onMouseLeave?.(e);
+      },
+    });
+  } else {
+    triggerNode = (
       <span
         ref={triggerRef}
         className="aero-popover-trigger"
@@ -271,6 +300,12 @@ const Popover: React.FC<PopoverProps> = ({
       >
         {children}
       </span>
+    );
+  }
+
+  return (
+    <>
+      {triggerNode}
       {popup && createPortal(popup, document.body)}
     </>
   );

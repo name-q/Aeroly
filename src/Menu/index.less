@@ -47,7 +47,7 @@
         border-radius: 10px;
       }
 
-      > .aero-menu-submenu > .aero-popover-trigger > .aero-menu-submenu__title {
+      > .aero-menu-submenu > .aero-menu-submenu__title {
         justify-content: center;
         padding: 0;
         width: 40px;
@@ -82,7 +82,7 @@
     }
 
     > .aero-menu-item,
-    > .aero-menu-submenu > .aero-popover-trigger > .aero-menu-submenu__title {
+    > .aero-menu-submenu > .aero-menu-submenu__title {
       height: 36px;
       border-radius: 999px;
       padding: 0 16px;
@@ -210,8 +210,8 @@
   position: relative;
   flex-shrink: 0;
 
-  // Popover trigger 在 submenu 内需要 block 显示
-  > .aero-popover-trigger {
+  // Popover trigger（cloneElement 后 title 直接作为子元素）
+  > .aero-menu-submenu__title {
     display: flex;
   }
 
@@ -271,8 +271,7 @@
   }
 
   // 子菜单有选中项时，标题高亮
-  &--child-active > .aero-menu-submenu__title,
-  &--child-active > .aero-popover-trigger > .aero-menu-submenu__title {
+  &--child-active > .aero-menu-submenu__title {
     color: var(--aero-primary-color, @primary-color);
 
     .aero-menu-item__icon {
@@ -282,8 +281,7 @@
   }
 
   // 禁用
-  &--disabled > .aero-menu-submenu__title,
-  &--disabled > .aero-popover-trigger > .aero-menu-submenu__title {
+  &--disabled > .aero-menu-submenu__title {
     opacity: 0.38;
     cursor: not-allowed;
     pointer-events: none;

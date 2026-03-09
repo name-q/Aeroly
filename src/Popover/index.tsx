@@ -105,6 +105,19 @@ function flipIfNeeded(
   return pos;
 }
 
+// 从 trigger wrapper 中获取定位目标：优先用第一个有尺寸的子元素，fallback 到 wrapper 自身
+// 解决 children 为 absolute 定位时 inline wrapper 塌缩为 0 的问题
+function getTriggerRect(wrapper: HTMLElement): DOMRect {
+  const wrapperRect = wrapper.getBoundingClientRect();
+  if (wrapperRect.width > 0 && wrapperRect.height > 0) return wrapperRect;
+  const firstChild = wrapper.firstElementChild as HTMLElement | null;
+  if (firstChild) {
+    const childRect = firstChild.getBoundingClientRect();
+    if (childRect.width > 0 || childRect.height > 0) return childRect;
+  }
+  return wrapperRect;
+}
+
 // ---- Popover ----
 
 const Popover: React.FC<PopoverProps> = ({
@@ -130,7 +143,7 @@ const Popover: React.FC<PopoverProps> = ({
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
 
-  const triggerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLSpanElement>(null);
   const popRef = useRef<HTMLDivElement>(null);
   const hoverTimer = useRef<number>(0);
 
@@ -148,12 +161,11 @@ const Popover: React.FC<PopoverProps> = ({
     const popEl = popRef.current;
     if (!triggerEl || !popEl) return;
 
-    const triggerRect = triggerEl.getBoundingClientRect();
+    const triggerRect = getTriggerRect(triggerEl);
     const popRect = { width: popEl.offsetWidth, height: popEl.offsetHeight };
     const result = flipIfNeeded(triggerRect, popRect, placement, offset);
     setPos(result);
   }, [placement, offset]);
-
   // Mount/unmount animation
   useEffect(() => {
     if (isOpen) {
@@ -222,7 +234,6 @@ const Popover: React.FC<PopoverProps> = ({
     document.addEventListener('mousedown', handleDocClick);
     return () => document.removeEventListener('mousedown', handleDocClick);
   }, [trigger, isOpen, setOpen]);
-
   const actualPlacement = pos?.actualPlacement || 'top';
 
   const popClassNames = [
@@ -260,37 +271,8 @@ const Popover: React.FC<PopoverProps> = ({
     </div>
   ) : null;
 
-  // 尝试直接注入 ref + 事件到 children，避免额外 span 包裹导致 absolute 子元素定位失效
-  // 如果 children 不是单个 ReactElement（纯文本、fragment 等），fallback 到 span 包裹
-  let triggerNode: React.ReactNode;
-
-  const isValidSingleElement =
-    React.isValidElement(children) && React.Children.count(children) === 1;
-
-  if (isValidSingleElement) {
-    const child = children as React.ReactElement<any>;
-    triggerNode = React.cloneElement(child, {
-      ref: (node: HTMLElement | null) => {
-        (triggerRef as React.MutableRefObject<HTMLElement | null>).current = node;
-        const { ref } = child as any;
-        if (typeof ref === 'function') ref(node);
-        else if (ref && typeof ref === 'object') (ref as React.MutableRefObject<any>).current = node;
-      },
-      onClick: (e: React.MouseEvent) => {
-        handleClick();
-        child.props.onClick?.(e);
-      },
-      onMouseEnter: (e: React.MouseEvent) => {
-        handleMouseEnter();
-        child.props.onMouseEnter?.(e);
-      },
-      onMouseLeave: (e: React.MouseEvent) => {
-        handleMouseLeave();
-        child.props.onMouseLeave?.(e);
-      },
-    });
-  } else {
-    triggerNode = (
+  return (
+    <>
       <span
         ref={triggerRef}
         className="aero-popover-trigger"
@@ -300,12 +282,6 @@ const Popover: React.FC<PopoverProps> = ({
       >
         {children}
       </span>
-    );
-  }
-
-  return (
-    <>
-      {triggerNode}
       {popup && createPortal(popup, document.body)}
     </>
   );

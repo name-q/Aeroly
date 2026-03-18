@@ -1,7 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { X, ZoomIn, ZoomOut, RotateCcw, RotateCw, Maximize, ChevronLeft, ChevronRight, ImageOff, Eye, FlipHorizontal2, FlipVertical2 } from 'lucide-react';
+import { ImageOff, Eye } from 'lucide-react';
 import Icon from '../Icon';
+import Preview from './Preview';
+import { openPreview as openGlobalPreview } from './previewManager';
 import './index.less';
 
 // ─── Types ───
@@ -77,175 +78,6 @@ const PreviewGroupContext = createContext<PreviewGroupContextValue | null>(null)
 let idCounter = 0;
 const generateId = () => `aero-img-${++idCounter}`;
 
-// ─── Preview 预览浮层 ───
-
-interface PreviewInternalProps {
-  visible: boolean;
-  images: string[];
-  current: number;
-  onClose: () => void;
-  onChange: (index: number) => void;
-}
-
-const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onClose, onChange }) => {
-  const [mounted, setMounted] = useState(false);
-  const [animating, setAnimating] = useState(false);
-  const [scale, setScale] = useState(1);
-  const [rotate, setRotate] = useState(0);
-  const [flipX, setFlipX] = useState(false);
-  const [flipY, setFlipY] = useState(false);
-
-  useEffect(() => {
-    if (visible) {
-      setMounted(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
-      });
-    } else {
-      setAnimating(false);
-    }
-  }, [visible]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!visible && e.propertyName === 'opacity') {
-      setMounted(false);
-      setScale(1);
-      setRotate(0);
-      setFlipX(false);
-      setFlipY(false);
-    }
-  };
-
-  // Body scroll lock
-  useEffect(() => {
-    if (visible) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => { document.body.style.overflow = prev; };
-    }
-  }, [visible]);
-
-  // Reset transform on image switch
-  useEffect(() => {
-    setScale(1);
-    setRotate(0);
-    setFlipX(false);
-    setFlipY(false);
-  }, [current]);
-
-  // Keyboard
-  useEffect(() => {
-    if (!visible) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'Escape':
-          onClose();
-          break;
-        case 'ArrowLeft':
-          if (current > 0) onChange(current - 1);
-          break;
-        case 'ArrowRight':
-          if (current < images.length - 1) onChange(current + 1);
-          break;
-        case '+':
-        case '=':
-          setScale(s => Math.min(s + 0.5, 5));
-          break;
-        case '-':
-          setScale(s => Math.max(s - 0.5, 0.5));
-          break;
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [visible, current, images.length, onClose, onChange]);
-
-  if (!mounted) return null;
-
-  const rootCls = [
-    'aero-image-preview-root',
-    animating ? 'aero-image-preview-root--open' : '',
-  ].filter(Boolean).join(' ');
-
-  return createPortal(
-    <div className={rootCls} onTransitionEnd={handleTransitionEnd}>
-      <div className="aero-image-preview-mask" onClick={onClose} />
-
-      <div className="aero-image-preview-body">
-        <img
-          className="aero-image-preview-img"
-          src={images[current]}
-          style={{ transform: `scale(${scale}) rotate(${rotate}deg) scaleX(${flipX ? -1 : 1}) scaleY(${flipY ? -1 : 1})` }}
-          alt=""
-          draggable={false}
-        />
-      </div>
-
-      <button type="button" className="aero-image-preview-close" onClick={onClose}>
-        <Icon icon={X} size={20} />
-      </button>
-
-      {/* Toolbar */}
-      <div className="aero-image-preview-toolbar">
-        <button type="button" onClick={() => setScale(s => Math.max(s - 0.5, 0.5))} disabled={scale <= 0.5}>
-          <Icon icon={ZoomOut} size={18} />
-        </button>
-        <button type="button" onClick={() => setScale(s => Math.min(s + 0.5, 5))} disabled={scale >= 5}>
-          <Icon icon={ZoomIn} size={18} />
-        </button>
-        <span className="aero-image-preview-toolbar-divider" />
-        <button type="button" onClick={() => setRotate(r => r - 90)}>
-          <Icon icon={RotateCcw} size={18} />
-        </button>
-        <button type="button" onClick={() => setRotate(r => r + 90)}>
-          <Icon icon={RotateCw} size={18} />
-        </button>
-        <span className="aero-image-preview-toolbar-divider" />
-        <button type="button" onClick={() => setFlipX(f => !f)}>
-          <Icon icon={FlipHorizontal2} size={18} />
-        </button>
-        <button type="button" onClick={() => setFlipY(f => !f)}>
-          <Icon icon={FlipVertical2} size={18} />
-        </button>
-        <span className="aero-image-preview-toolbar-divider" />
-        <button type="button" onClick={() => { setScale(1); setRotate(0); setFlipX(false); setFlipY(false); }}>
-          <Icon icon={Maximize} size={18} />
-        </button>
-      </div>
-
-      {/* Navigation */}
-      {images.length > 1 && (
-        <>
-          <button
-            type="button"
-            className="aero-image-preview-nav aero-image-preview-nav--prev"
-            disabled={current === 0}
-            onClick={() => onChange(current - 1)}
-          >
-            <Icon icon={ChevronLeft} size={24} />
-          </button>
-          <button
-            type="button"
-            className="aero-image-preview-nav aero-image-preview-nav--next"
-            disabled={current === images.length - 1}
-            onClick={() => onChange(current + 1)}
-          >
-            <Icon icon={ChevronRight} size={24} />
-          </button>
-        </>
-      )}
-
-      {/* Counter */}
-      {images.length > 1 && (
-        <div className="aero-image-preview-counter">
-          {current + 1} / {images.length}
-        </div>
-      )}
-    </div>,
-    document.body,
-  );
-};
-
 // ─── Image Main component ───
 
 const Image: React.FC<ImageProps> & {
@@ -269,7 +101,6 @@ const Image: React.FC<ImageProps> & {
   style,
 }) => {
   const [status, setStatus] = useState<ImageStatus>(src ? 'loading' : 'error');
-  const [previewOpen, setPreviewOpen] = useState(false);
   const groupContext = useContext(PreviewGroupContext);
   const idRef = useRef(generateId());
   const imgRef = useRef<HTMLImageElement>(null);
@@ -314,7 +145,7 @@ const Image: React.FC<ImageProps> & {
     if (groupContext) {
       groupContext.openPreview(idRef.current);
     } else {
-      setPreviewOpen(true);
+      openGlobalPreview({ images: [previewSrc || src || ''] });
     }
   };
 
@@ -332,59 +163,46 @@ const Image: React.FC<ImageProps> & {
   };
 
   return (
-    <>
-      <div className={cls} style={wrapStyle} onClick={handleClick}>
-        {/* Real image (always rendered for loading detection, hidden when not loaded) */}
-        {src && status !== 'error' && (
-          <img
-            ref={imgRef}
-            className="aero-image-inner"
-            src={src}
-            alt={alt}
-            style={{ objectFit: fit, opacity: status === 'loaded' ? 1 : 0 }}
-            loading={lazy ? 'lazy' : undefined}
-            onLoad={handleLoad}
-            onError={handleError}
-          />
-        )}
-
-        {/* Loading placeholder */}
-        {status === 'loading' && (
-          <div className="aero-image-placeholder">
-            {placeholder || <Icon icon={ImageOff} size={24} />}
-          </div>
-        )}
-
-        {/* Error fallback */}
-        {status === 'error' && (
-          <div className="aero-image-error">
-            {fallback || (
-              <>
-                <Icon icon={ImageOff} size={24} />
-              </>
-            )}
-          </div>
-        )}
-
-        {/* Hover preview hint */}
-        {canPreview && status === 'loaded' && (
-          <div className="aero-image-hover">
-            <Icon icon={Eye} size={16} />
-          </div>
-        )}
-      </div>
-
-      {/* Standalone preview (no group) */}
-      {!groupContext && (
-        <Preview
-          visible={previewOpen}
-          images={[previewSrc || src || '']}
-          current={0}
-          onClose={() => setPreviewOpen(false)}
-          onChange={() => {}}
+    <div className={cls} style={wrapStyle} onClick={handleClick}>
+      {/* Real image (always rendered for loading detection, hidden when not loaded) */}
+      {src && status !== 'error' && (
+        <img
+          ref={imgRef}
+          className="aero-image-inner"
+          src={src}
+          alt={alt}
+          style={{ objectFit: fit, opacity: status === 'loaded' ? 1 : 0 }}
+          loading={lazy ? 'lazy' : undefined}
+          onLoad={handleLoad}
+          onError={handleError}
         />
       )}
-    </>
+
+      {/* Loading placeholder */}
+      {status === 'loading' && (
+        <div className="aero-image-placeholder">
+          {placeholder || <Icon icon={ImageOff} size={24} />}
+        </div>
+      )}
+
+      {/* Error fallback */}
+      {status === 'error' && (
+        <div className="aero-image-error">
+          {fallback || (
+            <>
+              <Icon icon={ImageOff} size={24} />
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Hover preview hint */}
+      {canPreview && status === 'loaded' && (
+        <div className="aero-image-hover">
+          <Icon icon={Eye} size={16} />
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -407,6 +225,7 @@ const PreviewGroup: React.FC<PreviewGroupProps> = ({ children, preview = true })
     if (!preview) return;
     setCurrentId(id);
     setPreviewOpen(true);
+    document.dispatchEvent(new CustomEvent('aero-overlay-open'));
   }, [preview]);
 
   const images = Array.from(imagesRef.current.values());

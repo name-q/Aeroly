@@ -131,6 +131,17 @@
   justify-content: center;
   opacity: 0;
   transition: opacity @preview-duration @transition-timing;
+
+  &--grab {
+    cursor: grab;
+  }
+  &--grabbing {
+    cursor: grabbing;
+
+    .aero-image-preview-img {
+      transition: none;
+    }
+  }
 }
 
 .aero-image-preview-img {
@@ -141,6 +152,7 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   transition: transform 200ms @transition-timing;
   user-select: none;
+  will-change: transform;
 }
 
 // Glass control mixin

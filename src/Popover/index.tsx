@@ -234,6 +234,15 @@ const Popover: React.FC<PopoverProps> = ({
     document.addEventListener('mousedown', handleDocClick);
     return () => document.removeEventListener('mousedown', handleDocClick);
   }, [trigger, isOpen, setOpen]);
+
+  // 全屏 overlay（如 Image Preview）打开时关闭 hover Popover
+  useEffect(() => {
+    if (trigger !== 'hover' || !isOpen) return;
+    const handleOverlayOpen = () => setOpen(false);
+    document.addEventListener('aero-overlay-open', handleOverlayOpen);
+    return () => document.removeEventListener('aero-overlay-open', handleOverlayOpen);
+  }, [trigger, isOpen, setOpen]);
+
   const actualPlacement = pos?.actualPlacement || 'top';
 
   const popClassNames = [

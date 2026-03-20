@@ -211,12 +211,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   pointer-events: none;
-  animation: aero-slider-tooltip-in 120ms @transition-timing;
-
-  // 当 inline style 覆盖了 left/transform（边缘对齐），禁用默认动画避免冲突
-  &[style*="transform: none"] {
-    animation: none;
-  }
+  transition: left 120ms @transition-timing, right 120ms @transition-timing, transform 120ms @transition-timing, opacity 120ms @transition-timing;
 
   @{dark-selector} & {
     background: rgba(255, 255, 255, 0.18);
@@ -234,16 +229,6 @@
   }
 }
 
-@keyframes aero-slider-tooltip-in {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
 
 // ---- 刻度点 ----
 .aero-slider-dot {

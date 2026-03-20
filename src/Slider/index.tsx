@@ -272,7 +272,16 @@ const Slider: React.FC<SliderProps> = ({
         onKeyDown={handleKeyDown(idx)}
       >
         {showTooltip && !neverShow && (alwaysShow || isActive) && (
-          <div className="aero-slider-tooltip">{tipFormatter!(display[idx])}</div>
+          <div
+            className="aero-slider-tooltip"
+            style={!vertical ? (
+              percent > 92 ? { left: 'auto', right: 0, transform: 'none' } :
+              percent < 8 ? { left: 0, transform: 'none' } :
+              undefined
+            ) : undefined}
+          >
+            {tipFormatter!(display[idx])}
+          </div>
         )}
       </div>
     );

@@ -213,6 +213,11 @@
   pointer-events: none;
   animation: aero-slider-tooltip-in 120ms @transition-timing;
 
+  // 当 inline style 覆盖了 left/transform（边缘对齐），禁用默认动画避免冲突
+  &[style*="transform: none"] {
+    animation: none;
+  }
+
   @{dark-selector} & {
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(12px) saturate(140%);

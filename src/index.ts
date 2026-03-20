@@ -171,3 +171,6 @@ export type { AutoCompleteProps, AutoCompleteOption } from './AutoComplete';
 
 export { default as FloatButton } from './FloatButton';
 export type { FloatButtonProps, FloatButtonGroupProps, BackTopProps } from './FloatButton';
+
+export { default as VideoPlayer } from './VideoPlayer';
+export type { VideoPlayerProps, VideoPlayerRef, VideoSource, DanmakuItem, DanmakuConfig, DanmakuRegion, DanmakuSpeed } from './VideoPlayer';

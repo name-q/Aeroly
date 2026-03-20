@@ -92,6 +92,29 @@ const zhCN: Locale = {
   AutoComplete: {
     searching: '搜索中...',
   },
+
+  VideoPlayer: {
+    play: '播放',
+    pause: '暂停',
+    mute: '静音',
+    unmute: '取消静音',
+    fullscreen: '全屏',
+    exitFullscreen: '退出全屏',
+    speed: '倍速',
+    quality: '清晰度',
+    danmaku: '弹幕',
+    danmakuSettings: '弹幕设置',
+    region: '显示区域',
+    regionTop: '上',
+    regionMiddle: '中',
+    regionBottom: '下',
+    opacity: '透明度',
+    danmakuSpeed: '速度',
+    slow: '慢',
+    normal: '正常',
+    fast: '快',
+    loadError: '视频加载失败',
+  },
 };
 
 export default zhCN;

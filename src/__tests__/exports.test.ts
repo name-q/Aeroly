@@ -65,6 +65,7 @@ const EXPECTED_EXPORTS = [
   'Dropdown',
   'AutoComplete',
   'FloatButton',
+  'VideoPlayer',
 ];
 
 describe('exports integrity', () => {

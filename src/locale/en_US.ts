@@ -92,6 +92,29 @@ const enUS: Locale = {
   AutoComplete: {
     searching: 'Searching...',
   },
+
+  VideoPlayer: {
+    play: 'Play',
+    pause: 'Pause',
+    mute: 'Mute',
+    unmute: 'Unmute',
+    fullscreen: 'Fullscreen',
+    exitFullscreen: 'Exit fullscreen',
+    speed: 'Speed',
+    quality: 'Quality',
+    danmaku: 'Danmaku',
+    danmakuSettings: 'Danmaku settings',
+    region: 'Region',
+    regionTop: 'Top',
+    regionMiddle: 'Mid',
+    regionBottom: 'Bot',
+    opacity: 'Opacity',
+    danmakuSpeed: 'Speed',
+    slow: 'Slow',
+    normal: 'Normal',
+    fast: 'Fast',
+    loadError: 'Failed to load video',
+  },
 };
 
 export default enUS;

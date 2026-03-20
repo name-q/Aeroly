@@ -90,4 +90,27 @@ export interface Locale {
   AutoComplete: {
     searching: string;
   };
+
+  VideoPlayer: {
+    play: string;
+    pause: string;
+    mute: string;
+    unmute: string;
+    fullscreen: string;
+    exitFullscreen: string;
+    speed: string;
+    quality: string;
+    danmaku: string;
+    danmakuSettings: string;
+    region: string;
+    regionTop: string;
+    regionMiddle: string;
+    regionBottom: string;
+    opacity: string;
+    danmakuSpeed: string;
+    slow: string;
+    normal: string;
+    fast: string;
+    loadError: string;
+  };
 }

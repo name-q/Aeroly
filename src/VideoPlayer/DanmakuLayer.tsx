@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef } from 'react';
-import { ThumbsUp } from 'lucide-react';
-import Icon from '../Icon';
 
 // ─── Types ───
 
@@ -92,14 +90,12 @@ const DanmakuLayer = React.forwardRef<DanmakuLayerRef, DanmakuLayerProps>(
       while (tracksRef.current.length < 100) {
         tracksRef.current.push({ freeAt: 0 });
       }
-      let best: number | null = null;
       let bestTime = Infinity;
       for (const t of availTracks) {
         const state = tracksRef.current[t];
         if (state.freeAt <= now) return t; // 立即可用
         if (state.freeAt < bestTime) {
           bestTime = state.freeAt;
-          best = t;
         }
       }
       // 所有轨道都被占用 → 返回 null（丢弃）

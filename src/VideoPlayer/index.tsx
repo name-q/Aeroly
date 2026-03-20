@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Play, Pause, Volume2, VolumeX, Maximize, Minimize,
-  MessageSquareText, Settings, AlertCircle,
+  Settings, AlertCircle,
 } from 'lucide-react';
 import Icon from '../Icon';
 import Slider from '../Slider';
@@ -108,7 +108,8 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
   const [error, setError] = useState(false);
   const [showPoster, setShowPoster] = useState(!!poster);
   const [controlsVisible, setControlsVisible] = useState(true);
-  const [seeking, setSeeking] = useState(false);
+  const seekingRef = useRef(false);
+  const seekTimerRef = useRef<number>(0);
 
   // 清晰度
   const resolvedSources = sources || (src ? [{ label: '', src }] : []);
@@ -141,7 +142,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
     setLoading(false);
   };
   const handleTimeUpdate = () => {
-    if (seeking) return;
+    if (seekingRef.current) return;
     const v = videoRef.current;
     if (!v) return;
     setCurrentTime(v.currentTime);
@@ -233,16 +234,27 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
     const v = videoRef.current;
     if (!v) return;
     const t = val as number;
+    if (!seekingRef.current) {
+      v.muted = true;
+    }
+    seekingRef.current = true;
+    clearTimeout(seekTimerRef.current);
+    seekTimerRef.current = window.setTimeout(() => {
+      seekingRef.current = false;
+      if (v) v.muted = muted;
+    }, 150);
     v.currentTime = t;
     setCurrentTime(t);
-  }, []);
+  }, [muted]);
 
   // ─── Controls auto-hide ───
   const showControls = useCallback(() => {
     setControlsVisible(true);
     clearTimeout(hideTimerRef.current);
     if (playing) {
-      hideTimerRef.current = window.setTimeout(() => setControlsVisible(false), 2500);
+      hideTimerRef.current = window.setTimeout(() => {
+        if (!seekingRef.current) setControlsVisible(false);
+      }, 2500);
     }
   }, [playing]);
 

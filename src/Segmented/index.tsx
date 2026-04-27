@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useSize } from '../ConfigProvider/useConfig';
 import './index.less';
 
@@ -58,7 +58,7 @@ const Segmented: React.FC<SegmentedProps> = ({
   );
   const currentValue = isControlled ? value : internalValue;
 
-  const normalizedOptions = options.map(normalizeOption);
+  const normalizedOptions = useMemo(() => options.map(normalizeOption), [options]);
 
   // Slider positioning
   const containerRef = useRef<HTMLDivElement>(null);

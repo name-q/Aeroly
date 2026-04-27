@@ -78,7 +78,7 @@ function calcPosition(
   return { top, left, actualPlacement: placement };
 }
 
-// 边界翻转
+// 边界翻转 + 水平/垂直 clamp
 function flipIfNeeded(
   triggerRect: DOMRect,
   popRect: { width: number; height: number },
@@ -90,6 +90,7 @@ function flipIfNeeded(
   const scrollY = window.scrollY;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
+  const edgePadding = 8;
 
   let flipped: PopoverPlacement | null = null;
 
@@ -98,24 +99,68 @@ function flipIfNeeded(
   else if (placement === 'left' && pos.left - scrollX < 0) flipped = 'right';
   else if (placement === 'right' && pos.left - scrollX + popRect.width > vw) flipped = 'left';
 
-  if (flipped) {
-    return calcPosition(triggerRect, popRect, flipped, offset);
+  const result = flipped ? calcPosition(triggerRect, popRect, flipped, offset) : pos;
+
+  // 水平方向 clamp（top/bottom placement）
+  if (result.actualPlacement === 'top' || result.actualPlacement === 'bottom') {
+    const minLeft = scrollX + edgePadding;
+    const maxLeft = scrollX + vw - popRect.width - edgePadding;
+    result.left = Math.max(minLeft, Math.min(result.left, maxLeft));
   }
 
-  return pos;
+  // 垂直方向 clamp（left/right placement）
+  if (result.actualPlacement === 'left' || result.actualPlacement === 'right') {
+    const minTop = scrollY + edgePadding;
+    const maxTop = scrollY + vh - popRect.height - edgePadding;
+    result.top = Math.max(minTop, Math.min(result.top, maxTop));
+  }
+
+  return result;
 }
 
-// 从 trigger wrapper 中获取定位目标：优先用第一个有尺寸的子元素，fallback 到 wrapper 自身
-// 解决 children 为 absolute 定位时 inline wrapper 塌缩为 0 的问题
+// 从 trigger wrapper 中获取定位目标，并裁剪到可见区域
 function getTriggerRect(wrapper: HTMLElement): DOMRect {
   const wrapperRect = wrapper.getBoundingClientRect();
-  if (wrapperRect.width > 0 && wrapperRect.height > 0) return wrapperRect;
-  const firstChild = wrapper.firstElementChild as HTMLElement | null;
-  if (firstChild) {
-    const childRect = firstChild.getBoundingClientRect();
-    if (childRect.width > 0 || childRect.height > 0) return childRect;
+  let rect = wrapperRect;
+  if (wrapperRect.width <= 0 || wrapperRect.height <= 0) {
+    const firstChild = wrapper.firstElementChild as HTMLElement | null;
+    if (firstChild) {
+      const childRect = firstChild.getBoundingClientRect();
+      if (childRect.width > 0 || childRect.height > 0) rect = childRect;
+    }
   }
-  return wrapperRect;
+
+  let left = rect.left;
+  let top = rect.top;
+  let right = rect.right;
+  let bottom = rect.bottom;
+
+  // 向上遍历祖先，裁剪到最近的 overflow 容器的可见区域
+  let ancestor = wrapper.parentElement;
+  while (ancestor && ancestor !== document.body && ancestor !== document.documentElement) {
+    const style = getComputedStyle(ancestor);
+    const ox = style.overflowX;
+    const oy = style.overflowY;
+    if (ox === 'hidden' || ox === 'auto' || ox === 'scroll' ||
+        oy === 'hidden' || oy === 'auto' || oy === 'scroll') {
+      const aRect = ancestor.getBoundingClientRect();
+      left = Math.max(left, aRect.left);
+      top = Math.max(top, aRect.top);
+      right = Math.min(right, aRect.right);
+      bottom = Math.min(bottom, aRect.bottom);
+    }
+    ancestor = ancestor.parentElement;
+  }
+
+  // 最终裁剪到视口
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  left = Math.max(0, left);
+  top = Math.max(0, top);
+  right = Math.min(vw, right);
+  bottom = Math.min(vh, bottom);
+
+  return new DOMRect(left, top, Math.max(0, right - left), Math.max(0, bottom - top));
 }
 
 // ---- Popover ----

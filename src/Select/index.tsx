@@ -225,11 +225,11 @@ const Select: React.FC<SelectProps> = ({
         } else {
           next = [...arr, opt.value];
         }
-        if (!isControlled) setInternalValue(next);
+        setInternalValue(next);
         const selectedOpts = next.map((v) => findOption(v)!).filter(Boolean);
         onChange?.(next, selectedOpts);
       } else {
-        if (!isControlled) setInternalValue(opt.value);
+        setInternalValue(opt.value);
         onChange?.(opt.value, opt);
         setOpen(false);
       }
@@ -241,7 +241,7 @@ const Select: React.FC<SelectProps> = ({
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     const next = multiple ? [] : '';
-    if (!isControlled) setInternalValue(next);
+    setInternalValue(next);
     onChange?.(next as any, multiple ? [] : (undefined as any));
     setOpen(false);
   };
@@ -251,7 +251,7 @@ const Select: React.FC<SelectProps> = ({
     e.stopPropagation();
     if (disabled) return;
     const arr = (currentValue as (string | number)[]).filter((v) => v !== val);
-    if (!isControlled) setInternalValue(arr);
+    setInternalValue(arr);
     const selectedOpts = arr.map((v) => findOption(v)!).filter(Boolean);
     onChange?.(arr, selectedOpts);
   };

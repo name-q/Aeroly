@@ -76,16 +76,16 @@ const Drawer: React.FC<DrawerProps> = ({
     if (!open) setMounted(false);
   };
 
-  // Lock background scroll
+  // 仅在有遮罩时锁定 body 滚动；mask=false 时允许底部页面继续滚动
   useEffect(() => {
-    if (open) {
+    if (open && mask) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = prev;
       };
     }
-  }, [open]);
+  }, [open, mask]);
 
   // Esc to close
   useEffect(() => {

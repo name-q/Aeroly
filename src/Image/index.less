@@ -112,14 +112,19 @@
   }
 }
 
-// Mask
+// Mask — 模糊 + 轻暗色 tint（背景被遮暗而非 blur 成灰调）
 .aero-image-preview-mask {
   position: fixed;
   inset: 0;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.18);
   opacity: 0;
   transition: opacity @preview-duration @transition-timing;
+
+  @{dark-selector} & {
+    background: rgba(0, 0, 0, 0.38);
+  }
 }
 
 // Image area

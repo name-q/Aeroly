@@ -31,9 +31,14 @@
   inset: 0;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.18);
   opacity: 0;
   transition: opacity @tour-duration @transition-timing;
   // clip-path is set inline for spotlight cutout
+
+  @{dark-selector} & {
+    background: rgba(0, 0, 0, 0.38);
+  }
 }
 
 // ==================== Spotlight border ====================

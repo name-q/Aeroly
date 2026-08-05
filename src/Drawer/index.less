@@ -15,11 +15,13 @@
   }
 
   // ---- 遮罩 ----
+  // 模糊 + 轻暗色 tint：背景被遮暗而非 blur 成灰调，让玻璃面板亮起
   &-mask {
     position: absolute;
     inset: 0;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.18);
     opacity: 0;
     transition: opacity @drawer-duration @transition-timing;
     pointer-events: none;
@@ -27,6 +29,10 @@
     .aero-drawer--open & {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    @{dark-selector} & {
+      background: rgba(0, 0, 0, 0.38);
     }
   }
 

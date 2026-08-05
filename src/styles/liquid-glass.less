@@ -48,6 +48,8 @@
   filter: var(--aero-lg-filter, none);
   backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
   -webkit-backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
+  // 预建合成层：避免打开瞬间 backdrop-filter 首帧延迟（先灰后正常）、减少滚动/动画时的虚影
+  will-change: backdrop-filter, filter;
 }
 
 // 内容层：用户内容保持清晰

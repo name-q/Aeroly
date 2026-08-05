@@ -28,9 +28,9 @@
   &--full {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    // 模糊完全由 .lg-warp 承担；极淡白底仅作为 warp backdrop-filter 首帧生效前的兜底，
-    // 避免打开瞬间透明背景直接看穿灰 mask（"灰一下"），不稀释玻璃感
-    background: rgba(255, 255, 255, 0.05);
+    // 半透明自身底色：白底下面板有层次不灰、多彩底下与 warp blur 叠加出玻璃感。
+    // 模糊由 .lg-warp 承担，但面板不能纯依赖 backdrop 才有颜色（白底无内容可模糊）
+    background: var(--aero-lg-bg, rgba(255, 255, 255, 0.35));
 
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
       background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.85));

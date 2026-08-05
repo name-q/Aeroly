@@ -26,18 +26,19 @@
 }
 
 // ==================== Mask (backdrop-filter blur with clip-path cutout) ====================
+// 极轻模糊 + 深色遮暗：背景内容保持可辨，避免糊成灰雾
 .aero-tour-mask {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.25);
   opacity: 0;
   transition: opacity @tour-duration @transition-timing;
   // clip-path is set inline for spotlight cutout
 
   @{dark-selector} & {
-    background: rgba(0, 0, 0, 0.38);
+    background: rgba(0, 0, 0, 0.42);
   }
 }
 

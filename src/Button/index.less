@@ -43,21 +43,27 @@
 
   // ---- types ----
   // 液态玻璃胶囊：顶部 sheen + 边缘捕光 ring + 层次阴影（hover/active 联动）
+  // 亮色主题用深玻璃白字（参考 liquid-glass 的 overLight，白底上有液态层次）；
+  // 暗色主题对称换用亮玻璃深字，保证可读
   &--default {
     --aero-lg-blur: 18px;
     position: relative;
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
-    background: rgba(255, 255, 255, 0.10);
+
+    background: rgba(20, 20, 20, 0.35);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
     backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
     -webkit-backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10),
-                inset 0 0 0 0.5px rgba(255, 255, 255, 0.15);
-    color: var(--aero-text-color, #1a1a1a);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18),
+                inset 0 0 0 0.5px rgba(255, 255, 255, 0.20);
 
     @{dark-selector} & {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.10);
+      color: #1a1a1a;
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.30),
+                  inset 0 0 0 0.5px rgba(255, 255, 255, 0.15);
     }
 
     // 顶部 sheen（hover 增强）
@@ -66,8 +72,8 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 45%);
-      opacity: 0.55;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 45%);
+      opacity: 0.5;
       transition: opacity 150ms ease;
       pointer-events: none;
     }
@@ -83,48 +89,61 @@
       -webkit-mask-composite: xor;
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       mask-composite: exclude;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.35));
-      opacity: 0.65;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.4));
+      opacity: 0.7;
       transition: opacity 150ms ease;
       pointer-events: none;
     }
 
     &:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(255, 255, 255, 0.24);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14),
-                  inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
+      background: rgba(20, 20, 20, 0.48);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24),
+                  inset 0 0 0 0.5px rgba(255, 255, 255, 0.3);
       transform: translateY(-1px);
 
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.24);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.34),
+                    inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
+      }
+
       &::before {
-        opacity: 1;
+        opacity: 0.85;
       }
 
       &::after {
-        opacity: 0.9;
+        opacity: 0.95;
       }
     }
 
     &:active:not(:disabled) {
       transform: translateY(1px) scale(0.98);
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(20, 20, 20, 0.55);
+      border-color: rgba(255, 255, 255, 0.36);
       backdrop-filter: blur(12px) saturate(120%);
       -webkit-backdrop-filter: blur(12px) saturate(120%);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+
+      @{dark-selector} & {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
 
       &::before {
-        opacity: 0.3;
+        opacity: 0.25;
       }
 
       &::after {
-        opacity: 0.45;
+        opacity: 0.5;
         inset: 1px;
       }
     }
 
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18), 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.18);
     }
   }
 

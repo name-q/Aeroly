@@ -44,6 +44,18 @@ export function LiquidGlassDecor({ refs, zIndex = 1050 }: LiquidGlassDecorProps)
     if (typeof document === 'undefined') return undefined;
     applyRect();
 
+    // 打开动画（transform scale/translate）期间持续同步 rect——
+    // ResizeObserver 只看 layout 尺寸、不响应 transform，否则 ring 会冻结在动画起始帧
+    let animRaf = 0;
+    const animStart = performance.now();
+    const animLoop = () => {
+      applyRect();
+      if (performance.now() - animStart < 400) {
+        animRaf = requestAnimationFrame(animLoop);
+      }
+    };
+    animRaf = requestAnimationFrame(animLoop);
+
     const el = refsRef.current.surfaceRef.current;
     let ro: ResizeObserver | null = null;
     if (typeof ResizeObserver !== 'undefined' && el) {
@@ -54,6 +66,7 @@ export function LiquidGlassDecor({ refs, zIndex = 1050 }: LiquidGlassDecorProps)
     window.addEventListener('resize', schedule);
 
     return () => {
+      cancelAnimationFrame(animRaf);
       if (ro) ro.disconnect();
       window.removeEventListener('scroll', schedule, true);
       window.removeEventListener('resize', schedule);

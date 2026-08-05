@@ -112,18 +112,18 @@
   }
 }
 
-// Mask — 模糊 + 轻暗色 tint（背景被遮暗而非 blur 成灰调）
+// Mask — 极轻模糊 + 深色遮暗（背景内容保持可辨，避免糊成灰雾）
 .aero-image-preview-mask {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.25);
   opacity: 0;
   transition: opacity @preview-duration @transition-timing;
 
   @{dark-selector} & {
-    background: rgba(0, 0, 0, 0.38);
+    background: rgba(0, 0, 0, 0.42);
   }
 }
 

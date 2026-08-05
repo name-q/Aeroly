@@ -32,18 +32,19 @@
 }
 
 // ---- 遮罩 ----
-// 模糊 + 轻暗色 tint：背景被遮暗而非 blur 成灰调，让玻璃面板亮起
+// 参考 liquid-glass：不 blur 背景（避免糊成灰雾），仅极轻模糊 + 深色遮暗，
+// 让背景内容保持可辨，玻璃面板 blur 的是清晰内容而非灰雾
 .aero-modal-mask {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.25);
   opacity: 0;
   transition: opacity @modal-duration @transition-timing;
 
   @{dark-selector} & {
-    background: rgba(0, 0, 0, 0.38);
+    background: rgba(0, 0, 0, 0.42);
   }
 }
 

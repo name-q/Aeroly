@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import type { LucideIcon } from 'lucide-react';
 import { CircleCheck, CircleAlert, CircleX, Info, X } from 'lucide-react';
 import Icon from '../Icon';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
@@ -57,6 +58,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   footer,
   onClose,
 }) => {
+  const lg = useLiquidGlass({ zIndex: 9999 });
   const [visible, setVisible] = React.useState(false);
   const [closing, setClosing] = React.useState(false);
 
@@ -86,33 +88,42 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 
   return (
     <div
+      ref={lg.refs.surfaceRef}
       className={[
         'aero-notification-item',
         `aero-notification-item--${type}`,
+        'aero-lg-surface',
+        lg.isFull ? 'aero-lg-surface--full' : '',
         visible ? 'aero-notification-item--visible' : '',
         isRight ? 'aero-notification-item--right' : 'aero-notification-item--left',
       ].filter(Boolean).join(' ')}
+      style={lg.vars}
       onTransitionEnd={handleTransitionEnd}
+      {...lg.surfaceProps}
     >
-      <span className="aero-notification-item-icon">
-        <Icon icon={IconComp} size={20} />
-      </span>
-      <div className="aero-notification-item-body">
-        <div className="aero-notification-item-title">{title}</div>
-        {description && (
-          <div className="aero-notification-item-desc">{description}</div>
-        )}
-        {footer && (
-          <div className="aero-notification-item-footer">{footer}</div>
-        )}
+      {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+      <div className="aero-lg-content">
+        <span className="aero-notification-item-icon">
+          <Icon icon={IconComp} size={20} />
+        </span>
+        <div className="aero-notification-item-body">
+          <div className="aero-notification-item-title">{title}</div>
+          {description && (
+            <div className="aero-notification-item-desc">{description}</div>
+          )}
+          {footer && (
+            <div className="aero-notification-item-footer">{footer}</div>
+          )}
+        </div>
+        <button
+          type="button"
+          className="aero-notification-item-close"
+          onClick={handleClose}
+        >
+          <Icon icon={X} size={14} />
+        </button>
       </div>
-      <button
-        type="button"
-        className="aero-notification-item-close"
-        onClick={handleClose}
-      >
-        <Icon icon={X} size={14} />
-      </button>
+      <LiquidGlassDecor refs={lg.refs} zIndex={9999} />
     </div>
   );
 };

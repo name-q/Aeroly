@@ -1,5 +1,6 @@
 @import '../styles/variables.less';
 @import '../styles/mixins.less';
+@import '../styles/liquid-glass.less';
 
 .aero-message-container {
   position: fixed;
@@ -14,6 +15,7 @@
   pointer-events: none;
 }
 
+// 玻璃表面基础由 .aero-lg-surface 提供（blur 16px 由 hook 注入，圆角用 base 覆盖）
 .aero-message-item {
   display: inline-flex;
   align-items: center;
@@ -23,7 +25,6 @@
   font-size: 14px;
   line-height: 1.4;
   pointer-events: auto;
-  .glass-effect(rgba(255, 255, 255, 0), 16px);
   .shadow-default();
   border: 1px solid rgba(0, 0, 0, 0.06);
 
@@ -39,8 +40,6 @@
   }
 
   @{dark-selector} & {
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }

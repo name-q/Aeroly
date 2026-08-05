@@ -42,64 +42,66 @@
   }
 
   // ---- types ----
-  // 液态玻璃胶囊：顶部 sheen + 边缘捕光 ring + 层次阴影（hover/active 联动）
-  // 亮色主题用深玻璃白字（参考 liquid-glass 的 overLight，白底上有液态层次）；
-  // 暗色主题对称换用亮玻璃深字，保证可读
+  // 液态玻璃胶囊：完全参考 liquid-glass —— 深蓝灰玻璃 + 白字 + 强烈白色边缘光 + 顶部 sheen
+  // 亮色主题：深蓝灰玻璃白字（有蓝色调，不是中性脏灰）；暗色主题对称换亮玻璃深字保证可读
   &--default {
-    --aero-lg-blur: 18px;
+    --aero-lg-blur: 20px;
     position: relative;
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
 
-    background: rgba(20, 20, 20, 0.35);
+    // 参考项目按钮主体色 rgb(50,62,92) 的深蓝玻璃，白底混合后依然保持蓝色调而非中性灰
+    background: rgba(28, 36, 62, 0.88);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.20);
-    backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
-    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18),
-                inset 0 0 0 0.5px rgba(255, 255, 255, 0.20);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(var(--aero-lg-blur, 20px)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 20px)) saturate(140%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22),
+                inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
 
     @{dark-selector} & {
       background: rgba(255, 255, 255, 0.10);
       color: #1a1a1a;
+      text-shadow: none;
       border-color: rgba(255, 255, 255, 0.16);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.30),
                   inset 0 0 0 0.5px rgba(255, 255, 255, 0.15);
     }
 
-    // 顶部 sheen（hover 增强）
+    // 顶部 sheen（参考项目的高光，hover 增强）
     &::before {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 45%);
-      opacity: 0.5;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.40), rgba(255, 255, 255, 0) 45%);
+      opacity: 0.6;
       transition: opacity 150ms ease;
       pointer-events: none;
     }
 
-    // 边缘捕光 ring（渐变描边，随按压内收）
+    // 边缘捕光 ring（参考项目的白色光晕描边，随按压内收）
     &::after {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      padding: 1px;
+      padding: 1.5px;
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       mask-composite: exclude;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.4));
-      opacity: 0.7;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.5));
+      opacity: 0.85;
       transition: opacity 150ms ease;
       pointer-events: none;
     }
 
     &:hover:not(:disabled) {
-      background: rgba(20, 20, 20, 0.48);
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24),
-                  inset 0 0 0 0.5px rgba(255, 255, 255, 0.3);
+      background: rgba(22, 28, 50, 0.92);
+      border-color: rgba(255, 255, 255, 0.32);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28),
+                  inset 0 0 0 0.5px rgba(255, 255, 255, 0.32);
       transform: translateY(-1px);
 
       @{dark-selector} & {
@@ -110,21 +112,21 @@
       }
 
       &::before {
-        opacity: 0.85;
+        opacity: 0.9;
       }
 
       &::after {
-        opacity: 0.95;
+        opacity: 1;
       }
     }
 
     &:active:not(:disabled) {
       transform: translateY(1px) scale(0.98);
-      background: rgba(20, 20, 20, 0.55);
-      border-color: rgba(255, 255, 255, 0.36);
+      background: rgba(16, 21, 38, 0.95);
+      border-color: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(12px) saturate(120%);
       -webkit-backdrop-filter: blur(12px) saturate(120%);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
 
       @{dark-selector} & {
         background: rgba(255, 255, 255, 0.18);
@@ -137,13 +139,13 @@
       }
 
       &::after {
-        opacity: 0.5;
+        opacity: 0.55;
         inset: 1px;
       }
     }
 
     &:focus-visible {
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3), 0 8px 32px rgba(0, 0, 0, 0.22);
     }
   }
 

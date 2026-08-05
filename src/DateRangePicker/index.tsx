@@ -9,6 +9,7 @@ import {
 import Column from '../DatePicker/Column';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -125,8 +126,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // 左Panel年月
@@ -461,26 +463,35 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          <div className={`${PREFIX}-panels`}>
-            {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}
-            <div className={`${PREFIX}-divider`} />
-            {renderCalendarPanel(rightDays, rightYear, rightMonth, 'right')}
-          </div>
-
-          {hasTime ? (
-            <div className={`${PREFIX}-footer ${PREFIX}-footer--showtime`}>
-              <button type="button" className={`${PREFIX}-now`} onClick={handleNow}>
-                {localeDRP.now}
-              </button>
-              <button type="button" className={`${PREFIX}-ok`} onClick={handleConfirm}>
-                {localeDRP.confirm}
-              </button>
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            <div className={`${PREFIX}-panels`}>
+              {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}
+              <div className={`${PREFIX}-divider`} />
+              {renderCalendarPanel(rightDays, rightYear, rightMonth, 'right')}
             </div>
-          ) : null}
+
+            {hasTime ? (
+              <div className={`${PREFIX}-footer ${PREFIX}-footer--showtime`}>
+                <button type="button" className={`${PREFIX}-now`} onClick={handleNow}>
+                  {localeDRP.now}
+                </button>
+                <button type="button" className={`${PREFIX}-ok`} onClick={handleConfirm}>
+                  {localeDRP.confirm}
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

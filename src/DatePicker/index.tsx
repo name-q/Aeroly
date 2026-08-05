@@ -9,6 +9,7 @@ import {
 import Column from './Column';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface DatePickerProps {
@@ -319,8 +320,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [view, setView] = useState<ViewType>('day');
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   // Parse selected value (including time part)
@@ -488,82 +490,91 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          {view === 'day' && (
-            <DayView
-              viewYear={viewYear}
-              viewMonth={viewMonth}
-              selectedYear={hasTime ? tempYear : selY}
-              selectedMonth={hasTime ? tempMonth : selM}
-              selectedDay={hasTime ? tempDay : selD}
-              disabledDate={disabledDate}
-              onSelect={selectDate}
-              onPrevMonth={() => {
-                if (viewMonth === 0) {
-                  setViewYear((y) => y - 1);
-                  setViewMonth(11);
-                } else {
-                  setViewMonth((m) => m - 1);
-                }
-              }}
-              onNextMonth={() => {
-                if (viewMonth === 11) {
-                  setViewYear((y) => y + 1);
-                  setViewMonth(0);
-                } else {
-                  setViewMonth((m) => m + 1);
-                }
-              }}
-              onTitleClick={() => setView('month')}
-              onToday={handleToday}
-              showTime={hasTime}
-              showSecond={withSecond}
-              hour={tempHour}
-              minute={tempMinute}
-              second={tempSecond}
-              onHourChange={setTempHour}
-              onMinuteChange={setTempMinute}
-              onSecondChange={setTempSecond}
-              onNow={handleNow}
-              onConfirm={handleConfirm}
-              weekdays={localeDatePicker.weekdays}
-              yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
-              monthLabel={localeDatePicker.monthFormat.replace('{month}', String(viewMonth + 1))}
-              todayText={localeDatePicker.today}
-              nowText={localeDatePicker.now}
-              confirmText={localeDatePicker.confirm}
-            />
-          )}
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {view === 'day' && (
+              <DayView
+                viewYear={viewYear}
+                viewMonth={viewMonth}
+                selectedYear={hasTime ? tempYear : selY}
+                selectedMonth={hasTime ? tempMonth : selM}
+                selectedDay={hasTime ? tempDay : selD}
+                disabledDate={disabledDate}
+                onSelect={selectDate}
+                onPrevMonth={() => {
+                  if (viewMonth === 0) {
+                    setViewYear((y) => y - 1);
+                    setViewMonth(11);
+                  } else {
+                    setViewMonth((m) => m - 1);
+                  }
+                }}
+                onNextMonth={() => {
+                  if (viewMonth === 11) {
+                    setViewYear((y) => y + 1);
+                    setViewMonth(0);
+                  } else {
+                    setViewMonth((m) => m + 1);
+                  }
+                }}
+                onTitleClick={() => setView('month')}
+                onToday={handleToday}
+                showTime={hasTime}
+                showSecond={withSecond}
+                hour={tempHour}
+                minute={tempMinute}
+                second={tempSecond}
+                onHourChange={setTempHour}
+                onMinuteChange={setTempMinute}
+                onSecondChange={setTempSecond}
+                onNow={handleNow}
+                onConfirm={handleConfirm}
+                weekdays={localeDatePicker.weekdays}
+                yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
+                monthLabel={localeDatePicker.monthFormat.replace('{month}', String(viewMonth + 1))}
+                todayText={localeDatePicker.today}
+                nowText={localeDatePicker.now}
+                confirmText={localeDatePicker.confirm}
+              />
+            )}
 
-          {view === 'month' && (
-            <MonthView
-              viewYear={viewYear}
-              onSelect={(m) => {
-                setViewMonth(m);
-                setView('day');
-              }}
-              onPrevYear={() => setViewYear((y) => y - 1)}
-              onNextYear={() => setViewYear((y) => y + 1)}
-              onTitleClick={() => setView('year')}
-              yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
-              months={localeDatePicker.months}
-            />
-          )}
+            {view === 'month' && (
+              <MonthView
+                viewYear={viewYear}
+                onSelect={(m) => {
+                  setViewMonth(m);
+                  setView('day');
+                }}
+                onPrevYear={() => setViewYear((y) => y - 1)}
+                onNextYear={() => setViewYear((y) => y + 1)}
+                onTitleClick={() => setView('year')}
+                yearLabel={localeDatePicker.yearFormat.replace('{year}', String(viewYear))}
+                months={localeDatePicker.months}
+              />
+            )}
 
-          {view === 'year' && (
-            <YearView
-              viewYear={viewYear}
-              onSelect={(y) => {
-                setViewYear(y);
-                setView('month');
-              }}
-              onPrevDecade={() => setViewYear((y) => y - 10)}
-              onNextDecade={() => setViewYear((y) => y + 10)}
-            />
-          )}
+            {view === 'year' && (
+              <YearView
+                viewYear={viewYear}
+                onSelect={(y) => {
+                  setViewYear(y);
+                  setView('month');
+                }}
+                onPrevDecade={() => setViewYear((y) => y - 10)}
+                onNextDecade={() => setViewYear((y) => y + 10)}
+              />
+            )}
+          </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

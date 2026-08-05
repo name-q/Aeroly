@@ -4,6 +4,7 @@ import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -237,8 +238,9 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
 
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
@@ -590,30 +592,39 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          {showSearch && (
-            <div className="aero-tree-select-search">
-              <Icon icon={Search} size={14} className="aero-tree-select-search-icon" />
-              <input
-                ref={searchRef}
-                className="aero-tree-select-search-input"
-                placeholder={searchPlaceholder}
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-          )}
-          <div className="aero-tree-select-tree-wrapper">
-            {filteredTreeData.length === 0 ? (
-              <div className="aero-tree-select-empty">{notFoundContent}</div>
-            ) : (
-              renderTreeNodes(filteredTreeData, 0)
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {showSearch && (
+              <div className="aero-tree-select-search">
+                <Icon icon={Search} size={14} className="aero-tree-select-search-icon" />
+                <input
+                  ref={searchRef}
+                  className="aero-tree-select-search-input"
+                  placeholder={searchPlaceholder}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
             )}
+            <div className="aero-tree-select-tree-wrapper">
+              {filteredTreeData.length === 0 ? (
+                <div className="aero-tree-select-empty">{notFoundContent}</div>
+              ) : (
+                renderTreeNodes(filteredTreeData, 0)
+              )}
+            </div>
           </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

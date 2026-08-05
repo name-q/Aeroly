@@ -3,6 +3,7 @@ import { Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize, useLocale } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -95,9 +96,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const [animating, setAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
@@ -275,52 +277,63 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
           className={[
             'aero-autocomplete-dropdown',
             `aero-autocomplete-dropdown--${placement}`,
             `aero-autocomplete-dropdown--${alignment}`,
+            'aero-lg-surface',
+            lg.isFull ? 'aero-lg-surface--full' : '',
             animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',
           ]
             .filter(Boolean)
             .join(' ')}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          <div className="aero-autocomplete-options" ref={optionsRef}>
-            {loading ? (
-              <div className="aero-autocomplete-loading">
-                <Icon icon={Loader} size={14} spin />
-                <span>{localeAutoComplete.searching}</span>
-              </div>
-            ) : filteredOptions.length > 0 ? (
-              filteredOptions.map((opt) => {
-                const navIdx = navigable.indexOf(opt);
-                const active = navIdx >= 0 && navIdx === activeIndex;
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            <div className="aero-autocomplete-options" ref={optionsRef}>
+              {loading ? (
+                <div className="aero-autocomplete-loading">
+                  <Icon icon={Loader} size={14} spin />
+                  <span>{localeAutoComplete.searching}</span>
+                </div>
+              ) : filteredOptions.length > 0 ? (
+                filteredOptions.map((opt) => {
+                  const navIdx = navigable.indexOf(opt);
+                  const active = navIdx >= 0 && navIdx === activeIndex;
 
-                return (
-                  <div
-                    key={opt.value}
-                    data-selectable={!opt.disabled ? '' : undefined}
-                    className={[
-                      'aero-autocomplete-option',
-                      active ? 'aero-autocomplete-option--active' : '',
-                      opt.disabled ? 'aero-autocomplete-option--disabled' : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    onClick={() => handleSelect(opt)}
-                    onMouseEnter={() => {
-                      if (!opt.disabled && navIdx >= 0) setActiveIndex(navIdx);
-                    }}
-                  >
-                    {opt.label ?? opt.value}
-                  </div>
-                );
-              })
-            ) : notFoundContent ? (
-              <div className="aero-autocomplete-empty">{notFoundContent}</div>
-            ) : null}
+                  return (
+                    <div
+                      key={opt.value}
+                      data-selectable={!opt.disabled ? '' : undefined}
+                      className={[
+                        'aero-autocomplete-option',
+                        active ? 'aero-autocomplete-option--active' : '',
+                        opt.disabled ? 'aero-autocomplete-option--disabled' : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                      onClick={() => handleSelect(opt)}
+                      onMouseEnter={() => {
+                        if (!opt.disabled && navIdx >= 0) setActiveIndex(navIdx);
+                      }}
+                    >
+                      {opt.label ?? opt.value}
+                    </div>
+                  );
+                })
+              ) : notFoundContent ? (
+                <div className="aero-autocomplete-empty">{notFoundContent}</div>
+              ) : null}
+            </div>
           </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

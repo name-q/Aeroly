@@ -3,6 +3,7 @@ import { Clock, X } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface TimePickerProps {
@@ -235,8 +236,9 @@ const TimePicker: React.FC<TimePickerProps> = ({
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
   const [h, m, s] = currentValue ? parseTime(currentValue) : [0, 0, 0];
@@ -323,42 +325,51 @@ const TimePicker: React.FC<TimePickerProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment}${animating ? ' aero-time-picker-dropdown--open' : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-time-picker-dropdown--open' : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          <div className="aero-time-picker-panel">
-            <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />
-            <Column items={minutes} selected={m} onSelect={(v) => updateValue(h, v, s)} />
-            {showSecond && (
-              <Column items={seconds} selected={s} onSelect={(v) => updateValue(h, m, v)} />
-            )}
-            <div className="aero-time-picker-indicator" />
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            <div className="aero-time-picker-panel">
+              <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />
+              <Column items={minutes} selected={m} onSelect={(v) => updateValue(h, v, s)} />
+              {showSecond && (
+                <Column items={seconds} selected={s} onSelect={(v) => updateValue(h, m, v)} />
+              )}
+              <div className="aero-time-picker-indicator" />
+            </div>
+            <div className="aero-time-picker-footer">
+              <button
+                type="button"
+                className="aero-time-picker-now"
+                onClick={() => {
+                  const now = new Date();
+                  updateValue(now.getHours(), now.getMinutes(), now.getSeconds());
+                }}
+              >
+                {localeTime.now}
+              </button>
+              <button
+                type="button"
+                className="aero-time-picker-ok"
+                onClick={() => {
+                  if (!currentValue) {
+                    updateValue(h, m, s);
+                  }
+                  setOpen(false);
+                }}
+              >
+                {localeTime.confirm}
+              </button>
+            </div>
           </div>
-          <div className="aero-time-picker-footer">
-            <button
-              type="button"
-              className="aero-time-picker-now"
-              onClick={() => {
-                const now = new Date();
-                updateValue(now.getHours(), now.getMinutes(), now.getSeconds());
-              }}
-            >
-              {localeTime.now}
-            </button>
-            <button
-              type="button"
-              className="aero-time-picker-ok"
-              onClick={() => {
-                if (!currentValue) {
-                  updateValue(h, m, s);
-                }
-                setOpen(false);
-              }}
-            >
-              {localeTime.confirm}
-            </button>
-          </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

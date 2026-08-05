@@ -3,6 +3,7 @@ import { ChevronDown, ChevronRight, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -184,8 +185,9 @@ const Cascader: React.FC<CascaderProps> = ({
   // Currently expanded path (for multi-column panel display)
   const [activePath, setActivePath] = useState<CascaderValueType>([]);
 
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
 
@@ -538,24 +540,33 @@ const Cascader: React.FC<CascaderProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment}${animating ? ' aero-cascader-dropdown--open' : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-cascader-dropdown--open' : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          {showSearch && (
-            <div className="aero-cascader-search">
-              <Icon icon={Search} size={14} className="aero-cascader-search-icon" />
-              <input
-                ref={searchRef}
-                className="aero-cascader-search-input"
-                placeholder={searchPlaceholder}
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-          )}
-          {showSearch && searchText ? renderSearchResults() : renderColumns()}
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {showSearch && (
+              <div className="aero-cascader-search">
+                <Icon icon={Search} size={14} className="aero-cascader-search-icon" />
+                <input
+                  ref={searchRef}
+                  className="aero-cascader-search-input"
+                  placeholder={searchPlaceholder}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+            )}
+            {showSearch && searchText ? renderSearchResults() : renderColumns()}
+          </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

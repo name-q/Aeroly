@@ -3,6 +3,7 @@ import { ChevronDown, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -142,8 +143,9 @@ const Select: React.FC<SelectProps> = ({
   const [searchText, setSearchText] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
 
+  const lg = useLiquidGlass({ zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
@@ -496,29 +498,38 @@ const Select: React.FC<SelectProps> = ({
 
       {mounted && (
         <div
-          ref={dropdownRef}
-          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment}${animating ? ' aero-select-dropdown--open' : ''}`}
+          ref={(node: HTMLDivElement | null) => {
+            dropdownRef.current = node;
+            lg.refs.surfaceRef.current = node;
+          }}
+          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
+          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
+          {...lg.surfaceProps}
         >
-          {showSearch && (
-            <div className="aero-select-search">
-              <Icon icon={Search} size={14} className="aero-select-search-icon" />
-              <input
-                ref={searchRef}
-                className="aero-select-search-input"
-                placeholder={searchPlaceholder}
-                value={searchText}
-                onChange={(e) => {
-                  setSearchText(e.target.value);
-                  setActiveIndex(-1);
-                }}
-                onKeyDown={handleKeyDown}
-              />
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {showSearch && (
+              <div className="aero-select-search">
+                <Icon icon={Search} size={14} className="aero-select-search-icon" />
+                <input
+                  ref={searchRef}
+                  className="aero-select-search-input"
+                  placeholder={searchPlaceholder}
+                  value={searchText}
+                  onChange={(e) => {
+                    setSearchText(e.target.value);
+                    setActiveIndex(-1);
+                  }}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+            )}
+            <div className="aero-select-options" ref={optionsRef}>
+              {renderOptions()}
             </div>
-          )}
-          <div className="aero-select-options" ref={optionsRef}>
-            {renderOptions()}
           </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       )}
     </div>

@@ -316,7 +316,7 @@ function openConfirm(config: ConfirmConfig) {
         <div className="aero-modal-wrap">
           <div
             ref={lg.refs.surfaceRef}
-            className="aero-modal aero-modal--confirm aero-lg-surface"
+            className={`aero-modal aero-modal--confirm aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
             style={lg.vars}
             {...lg.surfaceProps}
           >

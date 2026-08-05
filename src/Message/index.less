@@ -17,6 +17,7 @@
 
 // 玻璃表面基础由 .aero-lg-surface 提供（blur 16px 由 hook 注入，圆角用 base 覆盖）
 .aero-message-item {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -27,6 +28,13 @@
   pointer-events: auto;
   .shadow-default();
   border: 1px solid rgba(0, 0, 0, 0.06);
+
+  // content 层继承横排布局（icon 与文字水平对齐、保留间距）
+  .aero-lg-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   // 入场/出场动画
   opacity: 0;

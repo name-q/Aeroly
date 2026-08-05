@@ -9,11 +9,11 @@
 
 @import './variables.less';
 
-// 玻璃表面：定位上下文 + 圆角 + 半透明底 + 裁剪 + 兜底模糊
+// 玻璃表面：圆角 + 半透明底 + 裁剪 + 兜底模糊
 // 背景走 --aero-lg-bg，暗色由 CSS 变量层叠自动切换（无需单独 override）
-// full 模式（--full）下模糊移交给 .lg-warp
+// 注意：不设 position——定位由组件自身保证（Modal relative / Drawer、下拉 absolute 等），
+// 避免 .aero-lg-surface 的 relative 与组件 absolute 在 CSS 合并顺序下互相覆盖
 .lg-surface(@radius: var(--aero-border-radius-lg, @border-radius-lg)) {
-  position: relative;
   border-radius: @radius;
   overflow: hidden;
   background: var(--aero-lg-bg, rgba(255, 255, 255, 0.35));
@@ -28,6 +28,13 @@
   &--full {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    // 模糊完全由 .lg-warp 承担；极淡白底仅作为 warp backdrop-filter 首帧生效前的兜底，
+    // 避免打开瞬间透明背景直接看穿灰 mask（"灰一下"），不稀释玻璃感
+    background: rgba(255, 255, 255, 0.05);
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.85));
+    }
   }
 }
 

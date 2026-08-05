@@ -12,7 +12,7 @@ export interface LiquidGlassRefs {
 }
 
 export interface UseLiquidGlassOptions {
-  /** 表面模糊半径（px），默认 40 */
+  /** 表面模糊半径（px），默认 20（40px 双层模糊会糊成色块，削弱玻璃感） */
   blur?: number;
   /** 饱和度（%），默认 140 */
   saturation?: number;
@@ -181,7 +181,7 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
 
   const scale = options.displacementScale ?? 60;
   const vars = {
-    '--aero-lg-blur': `${options.blur ?? 40}px`,
+    '--aero-lg-blur': `${options.blur ?? 20}px`,
     '--aero-lg-sat': `${options.saturation ?? 140}%`,
     '--aero-lg-filter': isFull ? `url(#${scale > 75 ? FILTER_ID_STRONG : FILTER_ID})` : 'none',
   } as React.CSSProperties;

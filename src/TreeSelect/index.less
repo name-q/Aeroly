@@ -208,6 +208,10 @@
 
   &-dropdown {
     position: absolute;
+    // 非 portal 下拉嵌套在浮层内时半透明兜底（full 模式默认透明）
+    &.aero-lg-surface--full {
+      background: var(--aero-lg-bg, rgba(255, 255, 255, 0.45));
+    }
     right: 0;
     z-index: 1050;
     border: 1px solid rgba(255, 255, 255, 0.22);

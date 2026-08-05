@@ -40,6 +40,7 @@
 
 // 玻璃表面基础由 .aero-lg-surface 提供（圆角/半透明底/blur，暗色变量层叠）
 .aero-notification-item {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -51,6 +52,14 @@
   opacity: 0;
   transition: opacity @notification-duration @transition-timing,
               transform @notification-duration @transition-timing;
+
+  // content 层继承横向布局（icon / body / close 对齐、保留间距）
+  .aero-lg-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
 
   // 从右侧滑入
   &--right {

@@ -40,6 +40,14 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     transition: transform @drawer-duration @transition-timing;
 
+    // content 层继承纵向布局（header / body / footer 填满面板）
+    .aero-lg-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+
     @{dark-selector} & {
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);

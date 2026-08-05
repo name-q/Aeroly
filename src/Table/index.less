@@ -201,8 +201,9 @@
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  --aero-lg-blur: 2px;
+  backdrop-filter: blur(var(--aero-lg-blur, 2px));
+  -webkit-backdrop-filter: blur(var(--aero-lg-blur, 2px));
   border-radius: var(--aero-border-radius, @border-radius-base);
 
   @{dark-selector} & {

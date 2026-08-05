@@ -75,6 +75,9 @@
   mix-blend-mode: @blend;
   opacity: 0.25;
   transition: opacity 200ms ease-out;
+  // box-sizing: border-box——hook 设置的 width/height 即 border-box 总尺寸，
+  // .lg-mask 的 padding 1.5px 不会让元素实际尺寸比 surface 大（否则 ring 外偏 3px）
+  box-sizing: border-box;
   .lg-mask();
   background: linear-gradient(
     var(--aero-lg-angle, 135deg),

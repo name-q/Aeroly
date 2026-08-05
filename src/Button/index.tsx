@@ -3,6 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useSize } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface ButtonProps {
@@ -66,11 +67,14 @@ const Button: React.FC<ButtonProps> = ({
 
   const iconSize = size === 'small' ? 14 : size === 'large' ? 18 : 16;
 
-  return (
+  // 参考项目按钮：default 类型用液态玻璃（warp 折射 + 边缘捕光 + hover/active 高光）
+  const lg = useLiquidGlass({ zIndex: 1050, disabled: isDisabled, blur: 20 });
+
+  const inner = (
     <button
       type={htmlType}
       className={classNames}
-      style={style}
+      style={type === 'default' ? undefined : style}
       disabled={isDisabled}
       onClick={handleClick}
     >
@@ -82,6 +86,23 @@ const Button: React.FC<ButtonProps> = ({
       {children && <span className="aero-button-content">{children}</span>}
     </button>
   );
+
+  if (type === 'default') {
+    return (
+      <div
+        ref={lg.refs.surfaceRef}
+        className={`aero-button-glass aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${pill ? ' aero-button-glass--pill' : ''}`}
+        style={{ ...style, ...lg.vars }}
+        {...lg.surfaceProps}
+      >
+        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        <div className="aero-lg-content">{inner}</div>
+        {!isDisabled && <LiquidGlassDecor refs={lg.refs} zIndex={1050} />}
+      </div>
+    );
+  }
+
+  return inner;
 };
 
 export default Button;

@@ -4,7 +4,7 @@ import { getLiquidGlassSupport } from './support';
 import { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';
 
 export interface LiquidGlassRefs {
-  surfaceRef: React.RefObject<HTMLElement>;
+  surfaceRef: React.RefObject<HTMLDivElement>;
   warpRef: React.RefObject<HTMLSpanElement>;
   edgeScreenRef: React.RefObject<HTMLSpanElement>;
   edgeOverlayRef: React.RefObject<HTMLSpanElement>;
@@ -58,7 +58,7 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   const support = getLiquidGlassSupport();
   const isFull = support.displacement && !options.disabled && !options.displacementDisabled;
 
-  const surfaceRef = useRef<HTMLElement>(null);
+  const surfaceRef = useRef<HTMLDivElement>(null);
   const warpRef = useRef<HTMLSpanElement>(null);
   const edgeScreenRef = useRef<HTMLSpanElement>(null);
   const edgeOverlayRef = useRef<HTMLSpanElement>(null);

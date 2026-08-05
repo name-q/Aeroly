@@ -117,3 +117,36 @@
     opacity: 0.5;
   }
 }
+
+// ============================================================
+//  全局类（组件 @import 本文件后直接使用，React 侧挂这些类名）
+//  --aero-lg-blur/sat/filter 等由 useLiquidGlass 以 inline style 注入
+// ============================================================
+
+.aero-lg-surface {
+  .lg-surface();
+}
+
+.aero-lg-warp {
+  .lg-warp();
+}
+
+.aero-lg-content {
+  .lg-content();
+}
+
+.aero-lg-edge--screen {
+  .lg-edge(screen);
+}
+
+.aero-lg-edge--overlay {
+  .lg-edge(overlay);
+}
+
+.aero-lg-sheen {
+  .lg-sheen();
+}
+
+.aero-lg-hover {
+  .lg-hover();
+}

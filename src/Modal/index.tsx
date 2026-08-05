@@ -5,6 +5,7 @@ import type { LucideIcon } from 'lucide-react';
 import { X, Info, CircleCheck, CircleAlert, CircleX } from 'lucide-react';
 import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface ModalProps {
@@ -72,6 +73,7 @@ const Modal: React.FC<ModalProps> & {
   const localeModal = useLocale('Modal');
   const finalOkText = okText ?? localeModal.okText;
   const finalCancelText = cancelText ?? localeModal.cancelText;
+  const lg = useLiquidGlass({ zIndex: 1000 });
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [okLoading, setOkLoading] = useState(false);
@@ -189,19 +191,28 @@ const Modal: React.FC<ModalProps> & {
         />
       )}
       <div className="aero-modal-wrap" onClick={maskClosable ? (e: React.MouseEvent) => { if (e.target === e.currentTarget) handleCancel(); } : undefined}>
-        <div className={modalClassNames} style={{ width, ...style }}>
-          {title && (
-            <div className="aero-modal-header">
-              <div className="aero-modal-title">{title}</div>
-            </div>
-          )}
-          <button type="button" className="aero-modal-close" onClick={handleCancel}>
-            {closeIcon ?? <Icon icon={X} size={16} />}
-          </button>
-          <div className="aero-modal-body">{children}</div>
-          {renderFooter()}
+        <div
+          ref={lg.refs.surfaceRef}
+          className={`${modalClassNames} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+          style={{ width, ...style, ...lg.vars }}
+          {...lg.surfaceProps}
+        >
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {title && (
+              <div className="aero-modal-header">
+                <div className="aero-modal-title">{title}</div>
+              </div>
+            )}
+            <button type="button" className="aero-modal-close" onClick={handleCancel}>
+              {closeIcon ?? <Icon icon={X} size={16} />}
+            </button>
+            <div className="aero-modal-body">{children}</div>
+            {renderFooter()}
+          </div>
         </div>
       </div>
+      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1000} />}
     </div>,
     document.body,
   );
@@ -254,6 +265,7 @@ function openConfirm(config: ConfirmConfig) {
 
   const ConfirmModal = () => {
     const localeModal = useLocale('Modal');
+    const lg = useLiquidGlass({ zIndex: 1000 });
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
     const [mounted, setMounted] = useState(true);
@@ -302,38 +314,47 @@ function openConfirm(config: ConfirmConfig) {
       >
         {config.mask !== false && <div className="aero-modal-mask" />}
         <div className="aero-modal-wrap">
-          <div className="aero-modal aero-modal--confirm">
-            <div className="aero-modal-confirm-body">
-              <span className={`aero-modal-confirm-icon aero-modal-confirm-icon--${type}`}>
-                <Icon icon={IconComp} size={22} />
-              </span>
-              <div className="aero-modal-confirm-content">
-                {config.title && (
-                  <div className="aero-modal-confirm-title">{config.title}</div>
-                )}
-                {config.content && (
-                  <div className="aero-modal-confirm-text">{config.content}</div>
-                )}
+          <div
+            ref={lg.refs.surfaceRef}
+            className="aero-modal aero-modal--confirm aero-lg-surface"
+            style={lg.vars}
+            {...lg.surfaceProps}
+          >
+            {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+            <div className="aero-lg-content">
+              <div className="aero-modal-confirm-body">
+                <span className={`aero-modal-confirm-icon aero-modal-confirm-icon--${type}`}>
+                  <Icon icon={IconComp} size={22} />
+                </span>
+                <div className="aero-modal-confirm-content">
+                  {config.title && (
+                    <div className="aero-modal-confirm-title">{config.title}</div>
+                  )}
+                  {config.content && (
+                    <div className="aero-modal-confirm-text">{config.content}</div>
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="aero-modal-footer">
-              {showCancel && (
-                <button type="button" className="aero-modal-btn aero-modal-btn--cancel" onClick={handleCancel}>
-                  {config.cancelText || localeModal.cancelText}
+              <div className="aero-modal-footer">
+                {showCancel && (
+                  <button type="button" className="aero-modal-btn aero-modal-btn--cancel" onClick={handleCancel}>
+                    {config.cancelText || localeModal.cancelText}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className={`aero-modal-btn aero-modal-btn--ok${loading ? ' aero-modal-btn--loading' : ''}`}
+                  onClick={handleOk}
+                  disabled={loading}
+                >
+                  {loading && <span className="aero-modal-btn-spinner" />}
+                  {config.okText || localeModal.okText}
                 </button>
-              )}
-              <button
-                type="button"
-                className={`aero-modal-btn aero-modal-btn--ok${loading ? ' aero-modal-btn--loading' : ''}`}
-                onClick={handleOk}
-                disabled={loading}
-              >
-                {loading && <span className="aero-modal-btn-spinner" />}
-                {config.okText || localeModal.okText}
-              </button>
+              </div>
             </div>
           </div>
         </div>
+        <LiquidGlassDecor refs={lg.refs} zIndex={1000} />
       </div>
     );
   };

@@ -1,5 +1,6 @@
 @import '../styles/variables.less';
 @import '../styles/mixins.less';
+@import '../styles/liquid-glass.less';
 
 @modal-duration: 240ms;
 
@@ -58,13 +59,11 @@
 }
 
 // ---- 对话框 ----
+// 玻璃表面基础由 .aero-lg-surface 提供（圆角/半透明底/blur，暗色变量层叠）
 .aero-modal {
   display: inline-block;
-  position: relative;
   text-align: left;
   vertical-align: middle;
-  border-radius: var(--aero-border-radius-lg, @border-radius-lg);
-  .glass-effect(rgba(255, 255, 255, 0), 40px);
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
 
@@ -75,8 +74,6 @@
               transform @modal-duration @transition-timing;
 
   @{dark-selector} & {
-    backdrop-filter: blur(40px) saturate(140%);
-    -webkit-backdrop-filter: blur(40px) saturate(140%);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
   }

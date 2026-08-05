@@ -1,5 +1,6 @@
 @import '../styles/variables.less';
 @import '../styles/mixins.less';
+@import '../styles/liquid-glass.less';
 
 @drawer-duration: 240ms;
 
@@ -30,18 +31,16 @@
   }
 
   // ---- 面板 ----
+  // 玻璃表面基础由 .aero-lg-surface 提供（圆角/半透明底/blur，暗色变量层叠）
   &-panel {
     position: absolute;
     display: flex;
     flex-direction: column;
-    .glass-effect(rgba(255, 255, 255, 0), 40px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     transition: transform @drawer-duration @transition-timing;
 
     @{dark-selector} & {
-      backdrop-filter: blur(40px) saturate(140%);
-      -webkit-backdrop-filter: blur(40px) saturate(140%);
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }

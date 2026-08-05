@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
@@ -53,6 +54,8 @@ const Drawer: React.FC<DrawerProps> = ({
   className,
   style,
 }) => {
+  const lg = useLiquidGlass({ zIndex: 1000 });
+
   // mounted controls DOM mount, animating controls enter animation
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
@@ -120,30 +123,39 @@ const Drawer: React.FC<DrawerProps> = ({
           onClick={maskClosable ? () => onOpenChange(false) : undefined}
         />
       )}
-      <div className="aero-drawer-panel" style={panelStyle}>
-        {title ? (
-          <div className="aero-drawer-header">
-            <div className="aero-drawer-title">{title}</div>
+      <div
+        ref={lg.refs.surfaceRef}
+        className={`aero-drawer-panel aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        style={{ ...panelStyle, ...lg.vars }}
+        {...lg.surfaceProps}
+      >
+        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        <div className="aero-lg-content">
+          {title ? (
+            <div className="aero-drawer-header">
+              <div className="aero-drawer-title">{title}</div>
+              <button
+                type="button"
+                className="aero-drawer-close"
+                onClick={() => onOpenChange(false)}
+              >
+                {closeIcon ?? <Icon icon={X} size={16} />}
+              </button>
+            </div>
+          ) : (
             <button
               type="button"
-              className="aero-drawer-close"
+              className="aero-drawer-close aero-drawer-close--float"
               onClick={() => onOpenChange(false)}
             >
               {closeIcon ?? <Icon icon={X} size={16} />}
             </button>
-          </div>
-        ) : (
-          <button
-            type="button"
-            className="aero-drawer-close aero-drawer-close--float"
-            onClick={() => onOpenChange(false)}
-          >
-            {closeIcon ?? <Icon icon={X} size={16} />}
-          </button>
-        )}
-        <div className="aero-drawer-body">{children}</div>
-        {footer && <div className="aero-drawer-footer">{footer}</div>}
+          )}
+          <div className="aero-drawer-body">{children}</div>
+          {footer && <div className="aero-drawer-footer">{footer}</div>}
+        </div>
       </div>
+      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1000} />}
     </div>,
     document.body,
   );

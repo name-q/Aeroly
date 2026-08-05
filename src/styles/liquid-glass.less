@@ -1,0 +1,119 @@
+// ============================================================
+//  Liquid Glass 液态玻璃 mixin 族
+//  两级接入：
+//    Full    浮层面板（Chromium）— warp 位移折射 + 表面模糊 + body 级装饰层
+//    Surface 内联控件（全浏览器）— 玻璃底 + 模糊，可选 .lg-hover 高光
+//  装饰层（.lg-edge/.lg-sheen）由 LiquidGlassDecor createPortal 到 body，
+//  与面板是兄弟节点，保证 mix-blend 与页面背板混色。
+// ============================================================
+
+@import './variables.less';
+
+// 玻璃表面：定位上下文 + 圆角 + 半透明底 + 裁剪 + 兜底模糊
+// 背景走 --aero-lg-bg，暗色由 CSS 变量层叠自动切换（无需单独 override）
+// full 模式（--full）下模糊移交给 .lg-warp
+.lg-surface(@radius: var(--aero-border-radius-lg, @border-radius-lg)) {
+  position: relative;
+  border-radius: @radius;
+  overflow: hidden;
+  background: var(--aero-lg-bg, rgba(255, 255, 255, 0.35));
+  backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
+  -webkit-backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
+
+  // 无 backdrop-filter 的浏览器兜底纯色
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.85));
+  }
+
+  &--full {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+// 位移折射层（Chromium only，isFull 时条件渲染）
+.lg-warp() {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  filter: var(--aero-lg-filter, none);
+  backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
+  -webkit-backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
+}
+
+// 内容层：用户内容保持清晰
+.lg-content() {
+  position: relative;
+  z-index: 1;
+}
+
+// 1.5px 环形遮罩（画在元素自身的 padding 环上）
+.lg-mask() {
+  padding: 1.5px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+// 边缘捕光环（body 级 decor，混色脱离表面堆叠上下文）
+// @blend: screen（亮层）/ overlay（强光层），两层叠加出捕光效果
+.lg-edge(@blend: screen) {
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: @blend;
+  opacity: 0.25;
+  transition: opacity 200ms ease-out;
+  .lg-mask();
+  background: linear-gradient(
+    var(--aero-lg-angle, 135deg),
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.42) 62%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.5) inset,
+              0 1px 3px rgba(255, 255, 255, 0.25) inset,
+              0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+// hover/active 高光（body 级 decor，opacity 由 hook 直写）
+.lg-sheen() {
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  background: radial-gradient(
+    circle at var(--aero-lg-glow-x, 50%) var(--aero-lg-glow-y, 0%),
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+}
+
+// 内联控件 hover 高光（surface 内真实 span，配合 surface 上的
+// aero-lg-hovered / aero-lg-active 类联动，由 hook classList 切换）
+.lg-hover() {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+  background: radial-gradient(
+    circle at var(--aero-lg-glow-x, 50%) 0%,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  .aero-lg-hovered & {
+    opacity: 1;
+  }
+
+  .aero-lg-active & {
+    opacity: 0.5;
+  }
+}

@@ -4,6 +4,7 @@ import type { PopoverPlacement } from '../Popover';
 import Icon from '../Icon';
 import { ChevronRight, Check } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -57,6 +58,7 @@ const SubMenu: React.FC<{
   selectedKey?: string;
   onSelect: (key: string) => void;
 }> = ({ item, selectedKey, onSelect }) => {
+  const lg = useLiquidGlass({ zIndex: 1050 });
   return (
     <Popover
       trigger="hover"
@@ -64,15 +66,24 @@ const SubMenu: React.FC<{
       offset={4}
       raw
       content={
-        <div className="aero-dropdown-menu">
-          {item.children!.map((child) => (
-            <DropdownMenuItem
-              key={child.key}
-              item={child}
-              selectedKey={selectedKey}
-              onSelect={onSelect}
-            />
-          ))}
+        <div
+          ref={lg.refs.surfaceRef}
+          className={`aero-dropdown-menu aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+          style={lg.vars}
+          {...lg.surfaceProps}
+        >
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
+            {item.children!.map((child) => (
+              <DropdownMenuItem
+                key={child.key}
+                item={child}
+                selectedKey={selectedKey}
+                onSelect={onSelect}
+              />
+            ))}
+          </div>
+          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
         </div>
       }
     >
@@ -154,20 +165,31 @@ const Dropdown: React.FC<DropdownProps> = ({
     [onSelect, onOpenChange],
   );
 
+  const lg = useLiquidGlass({ zIndex: 1050 });
+
   if (disabled) {
     return <>{children}</>;
   }
 
   const menu = (
-    <div className={['aero-dropdown-menu', className].filter(Boolean).join(' ')} style={style}>
-      {items.map((item, index) => (
-        <DropdownMenuItem
-          key={item.key || `divider-${index}`}
-          item={item}
-          selectedKey={selectedKey}
-          onSelect={handleSelect}
-        />
-      ))}
+    <div
+      ref={lg.refs.surfaceRef}
+      className={`aero-dropdown-menu aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''} ${className || ''}`}
+      style={{ ...style, ...lg.vars }}
+      {...lg.surfaceProps}
+    >
+      {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+      <div className="aero-lg-content">
+        {items.map((item, index) => (
+          <DropdownMenuItem
+            key={item.key || `divider-${index}`}
+            item={item}
+            selectedKey={selectedKey}
+            onSelect={handleSelect}
+          />
+        ))}
+      </div>
+      <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
     </div>
   );
 

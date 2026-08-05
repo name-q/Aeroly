@@ -4,11 +4,11 @@ import { getLiquidGlassSupport } from './support';
 import { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';
 
 export interface LiquidGlassRefs {
-  surfaceRef: React.RefObject<HTMLDivElement>;
-  warpRef: React.RefObject<HTMLSpanElement>;
-  edgeScreenRef: React.RefObject<HTMLSpanElement>;
-  edgeOverlayRef: React.RefObject<HTMLSpanElement>;
-  sheenRef: React.RefObject<HTMLSpanElement>;
+  surfaceRef: React.MutableRefObject<HTMLDivElement | null>;
+  warpRef: React.MutableRefObject<HTMLSpanElement | null>;
+  edgeScreenRef: React.MutableRefObject<HTMLSpanElement | null>;
+  edgeOverlayRef: React.MutableRefObject<HTMLSpanElement | null>;
+  sheenRef: React.MutableRefObject<HTMLSpanElement | null>;
 }
 
 export interface UseLiquidGlassOptions {
@@ -58,11 +58,11 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   const support = getLiquidGlassSupport();
   const isFull = support.displacement && !options.disabled && !options.displacementDisabled;
 
-  const surfaceRef = useRef<HTMLDivElement>(null);
-  const warpRef = useRef<HTMLSpanElement>(null);
-  const edgeScreenRef = useRef<HTMLSpanElement>(null);
-  const edgeOverlayRef = useRef<HTMLSpanElement>(null);
-  const sheenRef = useRef<HTMLSpanElement>(null);
+  const surfaceRef = useRef<HTMLDivElement | null>(null);
+  const warpRef = useRef<HTMLSpanElement | null>(null);
+  const edgeScreenRef = useRef<HTMLSpanElement | null>(null);
+  const edgeOverlayRef = useRef<HTMLSpanElement | null>(null);
+  const sheenRef = useRef<HTMLSpanElement | null>(null);
 
   const optionsRef = useRef(options);
   optionsRef.current = options;

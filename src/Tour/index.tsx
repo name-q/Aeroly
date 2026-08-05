@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
+import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type TourPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -156,12 +157,13 @@ const Tour: React.FC<TourProps> = (props) => {
   const [internalCurrent, setInternalCurrent] = useState(0);
   const activeCurrent = isControlled ? controlledCurrent! : internalCurrent;
 
+  const lg = useLiquidGlass({ zIndex: 1061 });
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
   const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
 
-  const popRef = useRef<HTMLDivElement>(null);
+  const popRef = useRef<HTMLDivElement | null>(null);
 
   const step = steps[activeCurrent];
   const total = steps.length;
@@ -380,52 +382,61 @@ const Tour: React.FC<TourProps> = (props) => {
 
       {/* Popover card */}
       <div
-        ref={popRef}
-        className={popCls}
+        ref={(node: HTMLDivElement | null) => {
+          popRef.current = node;
+          lg.refs.surfaceRef.current = node;
+        }}
+        className={`${popCls} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
         style={{
           top: pos ? pos.top : -9999,
           left: pos ? pos.left : -9999,
+          ...lg.vars,
         }}
+        {...lg.surfaceProps}
       >
-        <button className="aero-tour-close" onClick={handleClose} tabIndex={-1}>
-          <Icon icon={X} size={14} />
-        </button>
+        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        <div className="aero-lg-content">
+          <button className="aero-tour-close" onClick={handleClose} tabIndex={-1}>
+            <Icon icon={X} size={14} />
+          </button>
 
-        {step?.content ? (
-          <div className="aero-tour-custom">{step.content}</div>
-        ) : (
-          <>
-            {step?.title && <div className="aero-tour-title">{step.title}</div>}
-            {step?.description && (
-              <div className="aero-tour-description">{step.description}</div>
-            )}
-          </>
-        )}
-
-        {/* Footer */}
-        <div className="aero-tour-footer">
-          {total > 1 && (
-            <div className="aero-tour-indicators">
-              {steps.map((_, i) => (
-                <span
-                  key={i}
-                  className={`aero-tour-indicator ${i === activeCurrent ? 'aero-tour-indicator--active' : ''}`}
-                />
-              ))}
-            </div>
+          {step?.content ? (
+            <div className="aero-tour-custom">{step.content}</div>
+          ) : (
+            <>
+              {step?.title && <div className="aero-tour-title">{step.title}</div>}
+              {step?.description && (
+                <div className="aero-tour-description">{step.description}</div>
+              )}
+            </>
           )}
-          <div className="aero-tour-actions">
-            {!isFirst && (
-              <button className="aero-tour-btn aero-tour-btn--prev" onClick={handlePrev}>
-                {localeTour.prevStep}
-              </button>
+
+          {/* Footer */}
+          <div className="aero-tour-footer">
+            {total > 1 && (
+              <div className="aero-tour-indicators">
+                {steps.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`aero-tour-indicator ${i === activeCurrent ? 'aero-tour-indicator--active' : ''}`}
+                  />
+                ))}
+              </div>
             )}
-            <button className="aero-tour-btn aero-tour-btn--next" onClick={handleNext}>
-              {isLast ? localeTour.finish : localeTour.nextStep}
-            </button>
+            <div className="aero-tour-actions">
+              {!isFirst && (
+                <button className="aero-tour-btn aero-tour-btn--prev" onClick={handlePrev}>
+                  {localeTour.prevStep}
+                </button>
+              )}
+              <button className="aero-tour-btn aero-tour-btn--next" onClick={handleNext}>
+                {isLast ? localeTour.finish : localeTour.nextStep}
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1061} />}
     </div>,
     document.body,
   );

@@ -201,8 +201,6 @@ const Preview: React.FC<PreviewInternalProps> = ({ visible, images, current, onC
 
   return createPortal(
     <div className={rootCls} onTransitionEnd={handleTransitionEnd}>
-      <div className="aero-image-preview-mask" />
-
       <div
         ref={bodyRef}
         className={`aero-image-preview-body${scale > 1 ? (dragging ? ' aero-image-preview-body--grabbing' : ' aero-image-preview-body--grab') : ''}`}

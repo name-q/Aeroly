@@ -47,8 +47,6 @@ const Drawer: React.FC<DrawerProps> = ({
   width = 378,
   height = 378,
   footer,
-  mask = true,
-  maskClosable = true,
   keyboard = true,
   closeIcon,
   className,
@@ -76,16 +74,7 @@ const Drawer: React.FC<DrawerProps> = ({
     if (!open) setMounted(false);
   };
 
-  // 仅在有遮罩时锁定 body 滚动；mask=false 时允许底部页面继续滚动
-  useEffect(() => {
-    if (open && mask) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open, mask]);
+  // 无遮罩（参考 liquid-glass）：不锁定 body 滚动，打开时底部页面可继续滚动
 
   // Esc to close
   useEffect(() => {
@@ -117,12 +106,6 @@ const Drawer: React.FC<DrawerProps> = ({
 
   return createPortal(
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
-      {mask && (
-        <div
-          className="aero-drawer-mask"
-          onClick={maskClosable ? () => onOpenChange(false) : undefined}
-        />
-      )}
       <div
         ref={lg.refs.surfaceRef}
         className={`aero-drawer-panel aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}

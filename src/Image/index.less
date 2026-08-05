@@ -85,6 +85,7 @@
 
 // ==================== Preview 浮层 ====================
 
+// 参考 liquid-glass：无遮罩，图片直接浮在页面内容上查看
 .aero-image-preview-root {
   position: fixed;
   inset: 0;
@@ -93,10 +94,6 @@
 
   &--open {
     pointer-events: auto;
-
-    .aero-image-preview-mask {
-      opacity: 1;
-    }
 
     .aero-image-preview-body,
     .aero-image-preview-toolbar,
@@ -109,21 +106,6 @@
     .aero-image-preview-img {
       transform: scale(1);
     }
-  }
-}
-
-// Mask — 极轻模糊 + 深色遮暗（背景内容保持可辨，避免糊成灰雾）
-.aero-image-preview-mask {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  background: rgba(0, 0, 0, 0.25);
-  opacity: 0;
-  transition: opacity @preview-duration @transition-timing;
-
-  @{dark-selector} & {
-    background: rgba(0, 0, 0, 0.42);
   }
 }
 

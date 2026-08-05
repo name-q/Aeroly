@@ -4,6 +4,8 @@
 
 @drawer-duration: 240ms;
 
+// 参考 liquid-glass：无遮罩，root 始终不拦截页面交互（点击/滚动穿透到页面），
+// 只有面板自身可交互；打开后滚动底部页面即可看到玻璃面板模糊背景
 .aero-drawer {
   position: fixed;
   inset: 0;
@@ -11,29 +13,7 @@
   pointer-events: none;
 
   &--open {
-    pointer-events: auto;
-  }
-
-  // ---- 遮罩 ----
-  // 参考 liquid-glass：不 blur 背景（避免糊成灰雾），仅极轻模糊 + 深色遮暗
-  &-mask {
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.25);
-    opacity: 0;
-    transition: opacity @drawer-duration @transition-timing;
     pointer-events: none;
-
-    .aero-drawer--open & {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    @{dark-selector} & {
-      background: rgba(0, 0, 0, 0.42);
-    }
   }
 
   // ---- 面板 ----
@@ -42,6 +22,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    pointer-events: auto;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     transition: transform @drawer-duration @transition-timing;

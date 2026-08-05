@@ -5,63 +5,22 @@
 @modal-duration: 240ms;
 
 // ---- 根容器 ----
+// 参考 liquid-glass：无遮罩，root 始终穿透（不拦截页面点击/滚动），只有面板可交互；
+// 打开后滚动底部页面即可从玻璃面板看到背景内容被模糊（毛玻璃效果）
 .aero-modal-root {
   position: fixed;
   inset: 0;
   z-index: 1000;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &--open {
-    pointer-events: auto;
-
-    .aero-modal-mask {
-      opacity: 1;
-    }
-
     .aero-modal {
       opacity: 1;
       transform: scale(1);
     }
-  }
-
-  &--centered .aero-modal-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-// ---- 遮罩 ----
-// 参考 liquid-glass：不 blur 背景（避免糊成灰雾），仅极轻模糊 + 深色遮暗，
-// 让背景内容保持可辨，玻璃面板 blur 的是清晰内容而非灰雾
-.aero-modal-mask {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  background: rgba(0, 0, 0, 0.25);
-  opacity: 0;
-  transition: opacity @modal-duration @transition-timing;
-
-  @{dark-selector} & {
-    background: rgba(0, 0, 0, 0.42);
-  }
-}
-
-// ---- 滚动容器 ----
-.aero-modal-wrap {
-  position: fixed;
-  inset: 0;
-  overflow: auto;
-  padding: 72px 0;
-  text-align: center;
-
-  // 垂直居中辅助
-  &::before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
   }
 }
 
@@ -70,6 +29,7 @@
 .aero-modal {
   position: relative;
   display: inline-block;
+  pointer-events: auto;
   text-align: left;
   vertical-align: middle;
   border: 1px solid rgba(255, 255, 255, 0.22);

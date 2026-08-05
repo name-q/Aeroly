@@ -62,8 +62,6 @@ const Modal: React.FC<ModalProps> & {
   onOk,
   onCancel,
   width = 420,
-  mask = true,
-  maskClosable = true,
   keyboard = true,
   closeIcon,
   centered = false,
@@ -95,16 +93,7 @@ const Modal: React.FC<ModalProps> & {
     }
   };
 
-  // 仅在有遮罩时锁定 body 滚动；mask=false 时允许底部页面继续滚动
-  useEffect(() => {
-    if (open && mask) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open, mask]);
+  // 无遮罩（参考 liquid-glass）：不锁定 body 滚动，打开时底部页面可继续滚动以体现毛玻璃
 
   useEffect(() => {
     if (!open || !keyboard) return;
@@ -186,31 +175,24 @@ const Modal: React.FC<ModalProps> & {
 
   return createPortal(
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
-      {mask && (
-        <div
-          className="aero-modal-mask"
-        />
-      )}
-      <div className="aero-modal-wrap" onClick={maskClosable ? (e: React.MouseEvent) => { if (e.target === e.currentTarget) handleCancel(); } : undefined}>
-        <div
-          ref={lg.refs.surfaceRef}
-          className={`${modalClassNames} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
-          style={{ width, ...style, ...lg.vars }}
-          {...lg.surfaceProps}
-        >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
-            {title && (
-              <div className="aero-modal-header">
-                <div className="aero-modal-title">{title}</div>
-              </div>
-            )}
-            <button type="button" className="aero-modal-close" onClick={handleCancel}>
-              {closeIcon ?? <Icon icon={X} size={16} />}
-            </button>
-            <div className="aero-modal-body">{children}</div>
-            {renderFooter()}
-          </div>
+      <div
+        ref={lg.refs.surfaceRef}
+        className={`${modalClassNames} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        style={{ width, ...style, ...lg.vars }}
+        {...lg.surfaceProps}
+      >
+        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        <div className="aero-lg-content">
+          {title && (
+            <div className="aero-modal-header">
+              <div className="aero-modal-title">{title}</div>
+            </div>
+          )}
+          <button type="button" className="aero-modal-close" onClick={handleCancel}>
+            {closeIcon ?? <Icon icon={X} size={16} />}
+          </button>
+          <div className="aero-modal-body">{children}</div>
+          {renderFooter()}
         </div>
       </div>
       {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1000} />}
@@ -310,19 +292,17 @@ function openConfirm(config: ConfirmConfig) {
 
     return (
       <div
-        className={`aero-modal-root aero-modal-root--centered${open ? ' aero-modal-root--open' : ''}`}
+        className={`aero-modal-root${open ? ' aero-modal-root--open' : ''}`}
         onTransitionEnd={handleTransitionEnd}
       >
-        {config.mask !== false && <div className="aero-modal-mask" />}
-        <div className="aero-modal-wrap">
-          <div
-            ref={lg.refs.surfaceRef}
-            className={`aero-modal aero-modal--confirm aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
-            style={lg.vars}
-            {...lg.surfaceProps}
-          >
-            {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
-            <div className="aero-lg-content">
+        <div
+          ref={lg.refs.surfaceRef}
+          className={`aero-modal aero-modal--confirm aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+          style={lg.vars}
+          {...lg.surfaceProps}
+        >
+          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          <div className="aero-lg-content">
               <div className="aero-modal-confirm-body">
                 <span className={`aero-modal-confirm-icon aero-modal-confirm-icon--${type}`}>
                   <Icon icon={IconComp} size={22} />
@@ -354,7 +334,6 @@ function openConfirm(config: ConfirmConfig) {
               </div>
             </div>
           </div>
-        </div>
         <LiquidGlassDecor refs={lg.refs} zIndex={1000} />
       </div>
     );

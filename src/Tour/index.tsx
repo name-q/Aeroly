@@ -146,8 +146,6 @@ const Tour: React.FC<TourProps> = (props) => {
     current: controlledCurrent,
     onChange,
     onFinish,
-    mask = true,
-    maskClosable = false,
     keyboard = true,
     spotlightPadding = 6,
     offset = 12,
@@ -161,7 +159,6 @@ const Tour: React.FC<TourProps> = (props) => {
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
-  const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
 
   const popRef = useRef<HTMLDivElement | null>(null);
 
@@ -169,7 +166,6 @@ const Tour: React.FC<TourProps> = (props) => {
   const total = steps.length;
   const isLast = activeCurrent === total - 1;
   const isFirst = activeCurrent === 0;
-  const stepMask = step?.mask ?? mask;
 
   // 设置Current step
   const setCurrent = useCallback(
@@ -203,7 +199,6 @@ const Tour: React.FC<TourProps> = (props) => {
     if (!open && e.propertyName === 'opacity') {
       setMounted(false);
       setPos(null);
-      setSpotlightRect(null);
     }
   };
 
@@ -215,7 +210,6 @@ const Tour: React.FC<TourProps> = (props) => {
 
     if (targetEl) {
       const rect = targetEl.getBoundingClientRect();
-      setSpotlightRect(rect);
 
       // 滚动到可视区域
       const vh = window.innerHeight;
@@ -224,7 +218,6 @@ const Tour: React.FC<TourProps> = (props) => {
         // 滚动后重新计算
         requestAnimationFrame(() => {
           const newRect = targetEl.getBoundingClientRect();
-          setSpotlightRect(newRect);
           if (popEl) {
             const popRect = { width: popEl.offsetWidth, height: popEl.offsetHeight };
             setPos(flipIfNeeded(newRect, popRect, step.placement || 'bottom', offset, spotlightPadding));
@@ -239,7 +232,6 @@ const Tour: React.FC<TourProps> = (props) => {
       }
     } else {
       // 无目标：居中显示
-      setSpotlightRect(null);
       if (popEl) {
         const pW = popEl.offsetWidth;
         const pH = popEl.offsetHeight;
@@ -319,33 +311,7 @@ const Tour: React.FC<TourProps> = (props) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, keyboard, handleNext, handlePrev, handleClose]);
 
-  const handleMaskClick = () => {
-    if (maskClosable) onOpenChange(false);
-  };
-
   if (!mounted) return null;
-
-  // Spotlight: clip-path 在 mask 上挖洞，让目标区域不被模糊
-  const getMaskClipPath = (): string | undefined => {
-    if (!spotlightRect) return undefined;
-    const pad = spotlightPadding;
-    const x = spotlightRect.left - pad;
-    const y = spotlightRect.top - pad;
-    const w = spotlightRect.width + pad * 2;
-    const h = spotlightRect.height + pad * 2;
-    const r = 8; // border-radius
-    // polygon: 外框(全屏) → 内框(圆角矩形近似，用8段折线模拟圆角)
-    return `path(evenodd, 'M0 0H${window.innerWidth}V${window.innerHeight}H0V0Z M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z')`;
-  };
-
-  const spotlightStyle: React.CSSProperties = spotlightRect
-    ? {
-        top: spotlightRect.top - spotlightPadding,
-        left: spotlightRect.left - spotlightPadding,
-        width: spotlightRect.width + spotlightPadding * 2,
-        height: spotlightRect.height + spotlightPadding * 2,
-      }
-    : { display: 'none' };
 
   const actualPlacement = pos?.actualPlacement || 'bottom';
 
@@ -367,18 +333,6 @@ const Tour: React.FC<TourProps> = (props) => {
 
   return createPortal(
     <div className={rootCls} onTransitionEnd={handleTransitionEnd}>
-      {/* Mask */}
-      {stepMask && (
-        <div
-          className="aero-tour-mask"
-          onClick={handleMaskClick}
-          style={{ clipPath: getMaskClipPath() }}
-        />
-      )}
-      {/* Spotlight border hint */}
-      {stepMask && spotlightRect && (
-        <div className="aero-tour-spotlight" style={spotlightStyle} />
-      )}
 
       {/* Popover card */}
       <div

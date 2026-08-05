@@ -1,5 +1,6 @@
 @import '../styles/variables.less';
 @import '../styles/mixins.less';
+@import '../styles/liquid-glass.less';
 
 // ---- Size tokens ----
 @input-height-sm: 28px;
@@ -18,16 +19,15 @@
 //  Input Wrapper — 毛玻璃输入框容器
 // ============================================================
 
+// 玻璃表面基础由 .lg-surface 提供（背景走 --aero-lg-bg，blur 走 --aero-lg-blur）
 .aero-input-wrapper {
+  --aero-lg-blur: 14px;
   position: relative;
   display: inline-flex;
   align-items: center;
   width: 100%;
-  border-radius: var(--aero-border-radius, @border-radius-base);
+  .lg-surface(var(--aero-border-radius, @border-radius-base));
   border: 1px solid rgba(0, 0, 0, 0.10);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: border-color @transition-duration @transition-timing,
               box-shadow @transition-duration @transition-timing,
@@ -35,7 +35,6 @@
 
   @{dark-selector} & {
     border-color: rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   }
 

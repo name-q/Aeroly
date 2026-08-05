@@ -52,11 +52,12 @@
     place-items: center;
     flex-shrink: 0;
     overflow: hidden;
+    --aero-lg-blur: 14px;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(var(--aero-lg-blur, 14px)) saturate(var(--aero-lg-sat, 140%));
+    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 14px)) saturate(var(--aero-lg-sat, 140%));
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: background @transition-duration @transition-timing,
                 border-color @transition-duration @transition-timing,

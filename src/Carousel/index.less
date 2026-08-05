@@ -83,8 +83,8 @@
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.05);
     --aero-lg-blur: 20px;
-    backdrop-filter: blur(var(--aero-lg-blur, 20px));
-    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 20px));
+    backdrop-filter: blur(var(--aero-lg-blur));
+    -webkit-backdrop-filter: blur(var(--aero-lg-blur));
     color: #fff;
     cursor: pointer;
     z-index: 2;
@@ -110,8 +110,8 @@
 
     @{dark-selector} & {
       --aero-lg-blur: 20px;
-      backdrop-filter: blur(var(--aero-lg-blur, 20px)) saturate(140%);
-      -webkit-backdrop-filter: blur(var(--aero-lg-blur, 20px)) saturate(140%);
+      backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
+      -webkit-backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
       background: rgba(0, 0, 0, 0.15);
       border-color: rgba(255, 255, 255, 0.08);
     }

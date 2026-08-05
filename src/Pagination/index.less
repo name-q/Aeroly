@@ -84,8 +84,8 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.10);
   --aero-lg-blur: 18px;
-  backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
+  backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   outline: none;
@@ -171,8 +171,8 @@
     border-color: rgba(255, 255, 255, 0.16);
     color: var(--aero-primary-color, @primary-color);
     --aero-lg-blur: 18px;
-    backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
-    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 18px)) saturate(140%);
+    backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
 
     @{dark-selector} & {
       background: rgba(255, 255, 255, 0.06);

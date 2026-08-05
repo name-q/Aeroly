@@ -209,16 +209,16 @@
   color: #fff;
   background: rgba(0, 0, 0, 0.72);
   --aero-lg-blur: 8px;
-  backdrop-filter: blur(var(--aero-lg-blur, 8px));
-  -webkit-backdrop-filter: blur(var(--aero-lg-blur, 8px));
+  backdrop-filter: blur(var(--aero-lg-blur));
+  -webkit-backdrop-filter: blur(var(--aero-lg-blur));
   pointer-events: none;
   transition: left 120ms @transition-timing, right 120ms @transition-timing, transform 120ms @transition-timing, opacity 120ms @transition-timing;
 
   @{dark-selector} & {
     background: rgba(255, 255, 255, 0.18);
     --aero-lg-blur: 12px;
-    backdrop-filter: blur(var(--aero-lg-blur, 12px)) saturate(140%);
-    -webkit-backdrop-filter: blur(var(--aero-lg-blur, 12px)) saturate(140%);
+    backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--aero-lg-blur)) saturate(140%);
     color: #f0f0f0;
   }
 

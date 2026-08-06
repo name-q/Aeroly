@@ -141,7 +141,7 @@
 }
 
 // ---- 液态玻璃外层表面（default 专用） ----
-// 参考项目：玻璃是透明的，靠 warp blur 模糊背景产生质感，而不是不透明深色块。
+// 玻璃是透明的，靠 warp blur 模糊背景产生质感，而不是不透明深色块。
 // 文字白 + 柔和投影保证白底可读；边缘光/阴影淡小
 .aero-button-glass {
   position: relative;
@@ -150,10 +150,10 @@
   transition: box-shadow 200ms ease;
 
   // 组合选择器：确保圆角/背景不被 .aero-lg-surface 的默认值覆盖（CSS 合并顺序不稳定）
-  // 半透明渐变：顶部亮（玻璃反射）底部深，能看到背景被模糊，不是不透明色块
+  // 深蓝玻璃渐变：顶部亮（玻璃反射）底部深，主体色 rgb(53,66,99)
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
-    background: linear-gradient(180deg, rgba(66, 82, 128, 0.5), rgba(24, 32, 56, 0.7));
+    background: linear-gradient(180deg, rgba(78, 96, 148, 0.92), rgba(24, 32, 60, 0.95));
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
@@ -161,7 +161,7 @@
   }
 
   &.aero-lg-surface--full {
-    background: linear-gradient(180deg, rgba(66, 82, 128, 0.5), rgba(24, 32, 56, 0.7));
+    background: linear-gradient(180deg, rgba(78, 96, 148, 0.92), rgba(24, 32, 60, 0.95));
   }
 
   &:hover {

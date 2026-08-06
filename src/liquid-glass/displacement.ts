@@ -1,5 +1,5 @@
 // 位移贴图：canvas 惰性生成一次并缓存 data URL
-// 边缘聚焦的径向位移（参考 liquid-glass 的 roundedRect shader），
+// 边缘聚焦的径向位移（roundedRect shader），
 // R/G/B 通道编码 X/Y 位移，供 SVG feDisplacementMap 消费
 
 let mapUrl: string | null = null;

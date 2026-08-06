@@ -67,7 +67,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const iconSize = size === 'small' ? 14 : size === 'large' ? 18 : 16;
 
-  // 参考项目按钮：default 类型用液态玻璃（warp 折射 + 边缘捕光 + hover/active 高光）
+  // default 类型用液态玻璃（warp 折射 + 边缘捕光 + hover/active 高光）
   const lg = useLiquidGlass({ zIndex: 1050, disabled: isDisabled, blur: 20 });
 
   const inner = (

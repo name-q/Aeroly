@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Preview from './Preview';
 
 // ─── 全局 Preview 管理器 ───
-// 参考 Message/Notification 的 createRoot 命令式渲染模式
+// createRoot 命令式渲染模式（与 Message/Notification 一致）
 // Preview 渲染在独立 React root 中，不依赖任何组件树
 
 let containerEl: HTMLDivElement | null = null;

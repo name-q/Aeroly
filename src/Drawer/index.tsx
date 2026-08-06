@@ -74,7 +74,7 @@ const Drawer: React.FC<DrawerProps> = ({
     if (!open) setMounted(false);
   };
 
-  // 无遮罩（参考 liquid-glass）：不锁定 body 滚动，打开时底部页面可继续滚动
+  // 无遮罩：不锁定 body 滚动，打开时底部页面可继续滚动
 
   // Esc to close
   useEffect(() => {

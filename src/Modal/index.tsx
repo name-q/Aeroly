@@ -93,7 +93,7 @@ const Modal: React.FC<ModalProps> & {
     }
   };
 
-  // 无遮罩（参考 liquid-glass）：不锁定 body 滚动，打开时底部页面可继续滚动以体现毛玻璃
+  // 无遮罩：不锁定 body 滚动，打开时底部页面可继续滚动以体现毛玻璃
 
   useEffect(() => {
     if (!open || !keyboard) return;

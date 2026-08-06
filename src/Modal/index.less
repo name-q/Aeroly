@@ -43,12 +43,28 @@
   pointer-events: auto;
   text-align: left;
   vertical-align: middle;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid transparent;
 
-  // Modal 使用公共 surface 材质，不叠加外部阴影，避免多层弹窗变脏。
-  &.aero-lg-surface,
+  // 低透明材质让背景折射保持可见，多层弹窗也不会叠出灰块。
+  &.aero-lg-surface {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
   &.aero-lg-surface--full {
-    background: var(--aero-lg-bg);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  // 主题色只绘制在玻璃边缘，面板内容区保持通透。
+  &.aero-lg-surface::before {
+    opacity: 0.9;
+    mix-blend-mode: normal;
+    background: linear-gradient(
+      var(--aero-lg-angle, 135deg),
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.12) 28%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.18) 52%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.1) 92%
+    );
     box-shadow: none;
   }
 
@@ -59,8 +75,7 @@
               transform @modal-duration @transition-timing;
 
   @{dark-selector} & {
-    border-color: rgba(255, 255, 255, 0.08);
-
+    border-color: transparent;
   }
 
   // ---- 头部 ----

@@ -35,8 +35,9 @@ export function attachLiquidGlassFilter(
 
   const update = () => {
     const rect = surface.getBoundingClientRect();
-    const width = Math.max(1, Math.ceil(rect.width));
-    const height = Math.max(1, Math.ceil(rect.height));
+    // 入场缩放只改变视觉尺寸，位移图始终按稳定的布局尺寸生成。
+    const width = Math.max(1, Math.ceil(surface.offsetWidth || rect.width));
+    const height = Math.max(1, Math.ceil(surface.offsetHeight || rect.height));
     const displacement = getDisplacementMap(width, height);
     const edge = getDisplacementEdgeMap(width, height);
     if (!displacement || !edge) return;

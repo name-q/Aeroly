@@ -24,8 +24,39 @@ function enhance(node: HTMLElement): void {
   const rect = node.getBoundingClientRect();
   if (!rect.width && !rect.height) return;
 
+  const styles = getComputedStyle(node);
+  const warp = document.createElement('div');
+  warp.className = 'aero-lg-warp aero-lg-auto-warp';
+  warp.setAttribute('aria-hidden', 'true');
+  Object.assign(warp.style, {
+    position: 'absolute',
+    inset: '0',
+    zIndex: '-1',
+    borderRadius: 'inherit',
+    overflow: 'hidden',
+    clipPath: `inset(0 round ${styles.borderRadius})`,
+    webkitClipPath: `inset(0 round ${styles.borderRadius})`,
+    pointerEvents: 'none',
+    backdropFilter: styles.backdropFilter,
+    webkitBackdropFilter: (styles as CSSStyleDeclaration & { webkitBackdropFilter?: string }).webkitBackdropFilter || styles.backdropFilter,
+  });
+
+  const originalPosition = node.style.position;
+  const originalIsolation = node.style.isolation;
+  if (styles.position === 'static') node.style.position = 'relative';
+  node.style.isolation = 'isolate';
+  node.classList.add('aero-lg-auto-surface');
+  node.prepend(warp);
+
   const id = `aero-lg-auto-${++sequence}`;
-  managed.set(node, attachLiquidGlassFilter(node, node, id, 36));
+  const detachFilter = attachLiquidGlassFilter(node, warp, id, 36, 0, true);
+  managed.set(node, () => {
+    detachFilter();
+    warp.remove();
+    node.classList.remove('aero-lg-auto-surface');
+    node.style.position = originalPosition;
+    node.style.isolation = originalIsolation;
+  });
 }
 
 function refresh(node: HTMLElement): void {

@@ -10,6 +10,7 @@ function filterMarkup(
   map: string,
   edgeMap: string,
   aberrationIntensity: number,
+  edgeOnly: boolean,
 ): string {
   const aberration = Math.max(0, Math.min(3, aberrationIntensity));
   const channelDisplacement = aberration > 0
@@ -33,6 +34,16 @@ function filterMarkup(
       <feDisplacementMap in="SourceGraphic" in2="DISPLACEMENT_MAP" scale="${scale}"
         xChannelSelector="R" yChannelSelector="B" result="EDGE_SOURCE"/>`;
 
+  const output = edgeOnly
+    ? '<feComposite in="EDGE_SOURCE" in2="EDGE_ALPHA" operator="in"/>'
+    : `
+      <feComposite in="EDGE_SOURCE" in2="EDGE_ALPHA" operator="in" result="EDGE_GLASS"/>
+      <feComponentTransfer in="EDGE_ALPHA" result="CENTER_MASK">
+        <feFuncA type="table" tableValues="1 0"/>
+      </feComponentTransfer>
+      <feComposite in="SourceGraphic" in2="CENTER_MASK" operator="in" result="CENTER_GLASS"/>
+      <feComposite in="EDGE_GLASS" in2="CENTER_GLASS" operator="over"/>`;
+
   return `
     <filter id="${id}" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
       <feImage x="0" y="0" width="${width}" height="${height}" href="${map}" preserveAspectRatio="none" result="DISPLACEMENT_MAP"/>
@@ -41,12 +52,7 @@ function filterMarkup(
         values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
         result="EDGE_ALPHA"/>
       ${channelDisplacement}
-      <feComposite in="EDGE_SOURCE" in2="EDGE_ALPHA" operator="in" result="EDGE_GLASS"/>
-      <feComponentTransfer in="EDGE_ALPHA" result="CENTER_MASK">
-        <feFuncA type="table" tableValues="1 0"/>
-      </feComponentTransfer>
-      <feComposite in="SourceGraphic" in2="CENTER_MASK" operator="in" result="CENTER_GLASS"/>
-      <feComposite in="EDGE_GLASS" in2="CENTER_GLASS" operator="over"/>
+      ${output}
     </filter>`;
 }
 
@@ -56,6 +62,7 @@ export function attachLiquidGlassFilter(
   id: string,
   scale: number,
   aberrationIntensity = 0,
+  edgeOnly = false,
 ): () => void {
   const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('class', 'aero-lg-filter-defs');
@@ -75,7 +82,7 @@ export function attachLiquidGlassFilter(
     svg.setAttribute('width', String(width));
     svg.setAttribute('height', String(height));
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    svg.innerHTML = `<defs>${filterMarkup(id, width, height, Math.max(18, Math.min(72, scale)), displacement, edge, aberrationIntensity)}</defs>`;
+    svg.innerHTML = `<defs>${filterMarkup(id, width, height, Math.max(18, Math.min(72, scale)), displacement, edge, aberrationIntensity, edgeOnly)}</defs>`;
   };
 
   update();

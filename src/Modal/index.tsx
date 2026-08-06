@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> & {
   const localeModal = useLocale('Modal');
   const finalOkText = okText ?? localeModal.okText;
   const finalCancelText = cancelText ?? localeModal.cancelText;
-  const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 42 });
+  const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 58, aberrationIntensity: 2 });
   const layer = useModalLayer(open);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
@@ -258,7 +258,7 @@ function openConfirm(config: ConfirmConfig) {
 
   const ConfirmModal = () => {
     const localeModal = useLocale('Modal');
-    const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 42 });
+    const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 58, aberrationIntensity: 2 });
     const layer = useModalLayer(true);
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);

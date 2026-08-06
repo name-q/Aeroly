@@ -15,7 +15,7 @@ export interface UseLiquidGlassOptions {
   saturation?: number;
   /** 位移折射强度，>75 用强折射滤镜，默认 60 */
   displacementScale?: number;
-  /** 色差强度，默认 2 */
+  /** 色差强度，默认 0 */
   aberrationIntensity?: number;
   /** 弹性形变强度（0 关闭），默认 0。仅低频独立浮层启用 */
   elasticity?: number;
@@ -75,8 +75,14 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
     const surface = surfaceRef.current;
     const warp = warpRef.current;
     if (!surface || !warp) return undefined;
-    return attachLiquidGlassFilter(surface, warp, filterId, options.displacementScale ?? 42);
-  }, [filterId, isFull, options.displacementScale]);
+    return attachLiquidGlassFilter(
+      surface,
+      warp,
+      filterId,
+      options.displacementScale ?? 42,
+      options.aberrationIntensity ?? 0,
+    );
+  }, [filterId, isFull, options.aberrationIntensity, options.displacementScale]);
 
   useEffect(() => () => cancelAnimationFrame(state.current.raf), []);
 

@@ -8,8 +8,9 @@ const edgeMapCache = new Map<string, string>();
 function createMap(width: number, height: number, edgeOnly: boolean): string {
   if (typeof document === 'undefined') return '';
 
-  const mapWidth = Math.max(32, Math.min(320, Math.round(width)));
-  const mapHeight = Math.max(24, Math.min(240, Math.round(height)));
+  const mapScale = Math.min(1, 320 / width, 240 / height);
+  const mapWidth = Math.max(32, Math.round(width * mapScale));
+  const mapHeight = Math.max(24, Math.round(height * mapScale));
   const canvas = document.createElement('canvas');
   canvas.width = mapWidth;
   canvas.height = mapHeight;

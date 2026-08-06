@@ -48,8 +48,8 @@
     background: transparent;
     border: none;
     color: #fff;
-    // 防纯白底色下看不清字体：给文字投影
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+    // 防纯白底色下看不清字体：给文字投影（柔和）
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.38);
     cursor: pointer;
 
     @{dark-selector} & {
@@ -141,35 +141,39 @@
 }
 
 // ---- 液态玻璃外层表面（default 专用） ----
-// 参考项目按钮主体 rgb(50,62,92) 的深蓝玻璃；投影刻意淡小（用户要求），hover 增强但克制
+// 参考项目：玻璃是透明的，靠 warp blur 模糊背景产生质感，而不是不透明深色块。
+// 文字白 + 柔和投影保证白底可读；边缘光/阴影淡小
 .aero-button-glass {
   position: relative;
   display: inline-flex;
-  background: rgba(28, 36, 62, 0.85);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   transition: box-shadow 200ms ease;
 
   // 组合选择器：确保圆角/背景不被 .aero-lg-surface 的默认值覆盖（CSS 合并顺序不稳定）
+  // 半透明渐变：顶部亮（玻璃反射）底部深，能看到背景被模糊，不是不透明色块
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
+    background: linear-gradient(180deg, rgba(66, 82, 128, 0.5), rgba(24, 32, 56, 0.7));
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
     border-radius: 999px;
   }
 
-  // full 模式背景由 .aero-lg-surface--full 提供 --aero-lg-bg，这里覆盖为参考项目深蓝
   &.aero-lg-surface--full {
-    background: rgba(28, 36, 62, 0.85);
+    background: linear-gradient(180deg, rgba(66, 82, 128, 0.5), rgba(24, 32, 56, 0.7));
   }
 
   &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   }
 
   @{dark-selector} & {
-    background: rgba(255, 255, 255, 0.12);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.30);
+
+    &.aero-lg-surface {
+      background: rgba(255, 255, 255, 0.12);
+    }
 
     &.aero-lg-surface--full {
       background: rgba(255, 255, 255, 0.12);

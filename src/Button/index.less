@@ -177,6 +177,12 @@
     box-shadow: none;
   }
 
+  // 按钮的颜色变化由边框和背景采样完成，避免 hover 光斑覆盖文字区域。
+  &.aero-lg-surface::after {
+    opacity: 0;
+    background: transparent;
+  }
+
   &:hover {
     transform: translateY(-1px);
   }

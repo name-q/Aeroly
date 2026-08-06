@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useId, useRef } from 'react';
 import type React from 'react';
 import { getLiquidGlassSupport } from './support';
-import { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';
+import { attachLiquidGlassFilter } from './filter';
 
 export interface LiquidGlassRefs {
   surfaceRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -25,8 +25,6 @@ export interface UseLiquidGlassOptions {
   disabled?: boolean;
   /** 单独关闭位移折射（保留表面模糊与装饰层） */
   displacementDisabled?: boolean;
-  /** 开启 SVG 边缘位移，默认关闭以避免透明覆盖层被合成为色块。 */
-  enableDisplacement?: boolean;
   /** 兼容旧调用保留；装饰层现在在 surface 内部，不再使用 z-index */
   zIndex?: number;
 }
@@ -36,6 +34,8 @@ export interface UseLiquidGlassResult {
   /** 是否走完整位移折射（Chromium only） */
   isFull: boolean;
   support: { backdrop: boolean; displacement: boolean };
+  filterId: string;
+  filterStyle: string;
   /** 静态 CSS 变量，spread 到表面元素 style */
   vars: React.CSSProperties;
   /** 鼠标事件回调，spread 到表面或 pointerTarget */
@@ -57,21 +57,28 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   const support = getLiquidGlassSupport();
   const isFull =
     support.displacement &&
-    options.enableDisplacement === true &&
     !options.disabled &&
     !options.displacementDisabled;
 
   const surfaceRef = useRef<HTMLDivElement | null>(null);
   const warpRef = useRef<HTMLDivElement | null>(null);
+  const rawFilterId = useId();
+  const filterId = `aero-lg-${rawFilterId.replace(/[^a-zA-Z0-9_-]/g, '')}-filter`;
 
   const optionsRef = useRef(options);
   optionsRef.current = options;
 
-  const state = useRef({ hovered: false, active: false, raf: 0 });
+  const state = useRef({ hovered: false, active: false, raf: 0, input: null as FrameInput | null });
 
   useEffect(() => {
-    if (options.enableDisplacement) ensureLiquidGlassFilter();
-  }, [options.enableDisplacement]);
+    if (!isFull) return undefined;
+    const surface = surfaceRef.current;
+    const warp = warpRef.current;
+    if (!surface || !warp) return undefined;
+    return attachLiquidGlassFilter(surface, warp, filterId, options.displacementScale ?? 42);
+  }, [filterId, isFull, options.displacementScale]);
+
+  useEffect(() => () => cancelAnimationFrame(state.current.raf), []);
 
   const writeFrameVars = useCallback((angle: string, glowX: string, glowY: string) => {
     const node = surfaceRef.current;
@@ -123,13 +130,15 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
     [writeFrameVars, writeElastic],
   );
 
-  const scheduleFrame = useCallback(
-    (input: FrameInput) => {
-      cancelAnimationFrame(state.current.raf);
-      state.current.raf = requestAnimationFrame(() => applyFrame(input));
-    },
-    [applyFrame],
-  );
+  const scheduleFrame = useCallback((input: FrameInput) => {
+    state.current.input = input;
+    if (state.current.raf) return;
+    state.current.raf = requestAnimationFrame(() => {
+      state.current.raf = 0;
+      const next = state.current.input;
+      if (next) applyFrame(next);
+    });
+  }, [applyFrame]);
 
   const syncDecorState = useCallback(() => {
     const { hovered, active } = state.current;
@@ -172,17 +181,17 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
     syncDecorState();
   }, [syncDecorState]);
 
-  const scale = options.displacementScale ?? 60;
   const vars = {
     '--aero-lg-blur': `${options.blur ?? 20}px`,
     '--aero-lg-sat': `${options.saturation ?? 140}%`,
-    ...(isFull ? { '--aero-lg-filter': `url(#${scale > 75 ? FILTER_ID_STRONG : FILTER_ID})` } : {}),
   } as React.CSSProperties;
 
   return {
     refs: { surfaceRef, warpRef },
     isFull,
     support,
+    filterId,
+    filterStyle: isFull ? `url(#${filterId})` : 'none',
     vars,
     surfaceProps: { onMouseEnter, onMouseMove, onMouseLeave, onMouseDown, onMouseUp },
   };

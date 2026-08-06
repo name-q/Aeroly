@@ -5,9 +5,8 @@
 // 玻璃表面基础由 Popover 的 .aero-lg-surface 提供，这里仅定制 Tooltip 的深色观感
 .aero-tooltip {
 
-  // 内容面板：深色半透明，禁用折射滤镜、blur 用 8px（覆盖 hook 默认 40px）
+  // 内容面板：深色半透明，blur 用 8px（覆盖 hook 默认 40px）
   .aero-popover-inner {
-    --aero-lg-filter: none !important;
     --aero-lg-blur: 8px !important;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.06);

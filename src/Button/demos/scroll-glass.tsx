@@ -21,7 +21,7 @@ export default () => (
       height: 280,
       overflow: 'hidden',
       borderRadius: 16,
-      background: '#102033',
+      background: '#fff',
       isolation: 'isolate',
     }}
   >
@@ -42,7 +42,7 @@ export default () => (
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
-        color: '#fff',
+        color: '#111827',
         fontSize: 18,
         fontWeight: 600,
         lineHeight: 1.55,
@@ -69,7 +69,7 @@ export default () => (
       }}
     >
       <div style={{ pointerEvents: 'auto' }}>
-        <Button glassDisplacement pill style={{ '--aero-lg-blur': '12px' } as React.CSSProperties}>
+        <Button pill style={{ '--aero-lg-blur': '12px' } as React.CSSProperties}>
           查看详情
         </Button>
       </div>

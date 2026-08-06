@@ -7,4 +7,3 @@ export type {
 } from './useLiquidGlass';
 export { LiquidGlassDecor } from './LiquidGlassDecor';
 export { getLiquidGlassSupport } from './support';
-export { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';

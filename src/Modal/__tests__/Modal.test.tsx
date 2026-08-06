@@ -29,8 +29,8 @@ describe('Modal liquid glass layering', () => {
     render(<Button>Default</Button>);
 
     expect(screen.getByRole('button', { name: 'Default' })).toBeTruthy();
-    expect(document.querySelector('.aero-button-glass')?.getAttribute('style') || '').not.toContain('aero-lg-filter');
-    expect(document.body.querySelector('svg[aria-hidden="true"]')).toBeNull();
+    expect(document.querySelector('.aero-lg-warp')?.getAttribute('style') || '').toContain('url(#aero-lg-');
+    expect(document.body.querySelectorAll('svg[aria-hidden="true"]')).toHaveLength(0);
     expect(document.body.querySelectorAll('.aero-lg-edge')).toHaveLength(0);
     expect(document.body.querySelectorAll('.aero-lg-sheen')).toHaveLength(0);
   });

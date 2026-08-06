@@ -43,7 +43,6 @@ Interactive element for triggering actions. Provides three styles: pill, primary
 | pill | Whether to keep pill-shaped border radius; follows global border radius by default | `boolean` | `false` |
 | disabled | Whether the button is disabled | `boolean` | `false` |
 | loading | Whether the button is in loading state | `boolean` | `false` |
-| glassDisplacement | Whether to enable displacement refraction | `boolean` | `false` |
 | icon | Icon (Lucide icon component) | `LucideIcon` | - |
 | onClick | Click event handler | `(e: MouseEvent) => void` | - |
 | htmlType | Native button type | `'button' \| 'submit' \| 'reset'` | `'button'` |

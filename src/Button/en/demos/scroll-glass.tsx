@@ -69,7 +69,7 @@ export default () => (
       }}
     >
       <div style={{ pointerEvents: 'auto' }}>
-        <Button pill style={{ '--aero-lg-blur': '12px' } as React.CSSProperties}>
+        <Button glassDisplacement pill style={{ '--aero-lg-blur': '12px' } as React.CSSProperties}>
           View details
         </Button>
       </div>

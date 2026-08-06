@@ -161,7 +161,7 @@
   }
 
   &.aero-lg-surface--full {
-    background: var(--aero-lg-bg);
+    background: rgba(255, 255, 255, 0.08);
   }
 
   // 只在环形边缘叠加主题色，保留内部玻璃材质不变。
@@ -170,9 +170,9 @@
     mix-blend-mode: normal;
     background: linear-gradient(
       var(--aero-lg-angle, 135deg),
-      rgba(255, 255, 255, 0.34) 8%,
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.2) 52%,
-      rgba(255, 255, 255, 0.16) 92%
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.12) 28%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.18) 52%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.1) 92%
     );
     box-shadow: none;
   }

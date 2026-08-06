@@ -19,6 +19,8 @@ export interface ButtonProps {
   disabled?: boolean;
   /** Whether loading */
   loading?: boolean;
+  /** Whether to enable displacement refraction */
+  glassDisplacement?: boolean;
   /** Icon（Lucide Iconcomponent) */
   icon?: LucideIcon;
   /** 点击事件 */
@@ -38,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
   pill = false,
   disabled = false,
   loading = false,
+  glassDisplacement = false,
   icon,
   onClick,
   htmlType = 'button',
@@ -68,7 +71,7 @@ const Button: React.FC<ButtonProps> = ({
   const iconSize = size === 'small' ? 14 : size === 'large' ? 18 : 16;
 
   // default 类型用液态玻璃（warp 折射 + 边缘捕光 + hover/active 高光）
-  const lg = useLiquidGlass({ zIndex: 1050, disabled: isDisabled, blur: 20 });
+  const lg = useLiquidGlass({ zIndex: 1050, disabled: isDisabled, blur: 20, enableDisplacement: glassDisplacement });
 
   const inner = (
     <button

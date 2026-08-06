@@ -43,6 +43,7 @@ toc: content
 | pill | 是否保持胶囊圆角，默认跟随全局圆角 | `boolean` | `false` |
 | disabled | 是否禁用 | `boolean` | `false` |
 | loading | 是否加载中 | `boolean` | `false` |
+| glassDisplacement | 是否启用位移折射 | `boolean` | `false` |
 | icon | 图标（Lucide 图标组件） | `LucideIcon` | - |
 | onClick | 点击事件 | `(e: MouseEvent) => void` | - |
 | htmlType | 原生 button type | `'button' \| 'submit' \| 'reset'` | `'button'` |

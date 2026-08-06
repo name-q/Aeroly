@@ -8,7 +8,10 @@ import React, {
 } from 'react';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
 import Icon from '../Icon';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 export type CarouselEffect = 'slide' | 'fade';
 export type CarouselDirection = 'horizontal' | 'vertical';

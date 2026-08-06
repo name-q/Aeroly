@@ -6,7 +6,10 @@ import Tooltip from '../Tooltip';
 import Badge from '../Badge';
 import { throttle } from '../utils';
 import { useLocale } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ---- Types ----
 

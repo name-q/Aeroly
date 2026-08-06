@@ -3,7 +3,10 @@ import type { LucideIcon } from 'lucide-react';
 import { Check, X } from 'lucide-react';
 import Icon from '../Icon';
 import { useSize } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ---- Types ----
 

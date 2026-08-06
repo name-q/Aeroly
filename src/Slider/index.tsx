@@ -1,6 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { throttle } from '../utils';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ---- Types ----
 

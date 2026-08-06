@@ -1,5 +1,8 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 export interface AffixProps {
   /** 距顶部固定距离（px） */

@@ -3,7 +3,10 @@ import { RefreshCw, Download, Copy, Check } from 'lucide-react';
 import { QrCode, QrSegment, Ecc } from './qrcodegen';
 import Spin from '../Spin';
 import { useLocale } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 export type QRCodeStatus = 'active' | 'expired' | 'loading' | 'scanned';
 

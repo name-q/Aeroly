@@ -4,7 +4,10 @@ import Icon from '../Icon';
 import InputNumber from '../InputNumber';
 import Select from '../Select';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ---- Types ----
 

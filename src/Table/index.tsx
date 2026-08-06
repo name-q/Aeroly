@@ -4,7 +4,10 @@ import Checkbox from '../Checkbox';
 import Pagination from '../Pagination';
 import Empty from '../Empty';
 import { useSize } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ---- Types ----
 

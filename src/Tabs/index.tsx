@@ -3,7 +3,10 @@ import { X } from 'lucide-react';
 import Icon from '../Icon';
 import type { LucideIcon } from 'lucide-react';
 import { useSize } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 export type TabsVariant = 'line' | 'card' | 'pill';
 export type TabsSize = 'small' | 'medium' | 'large';

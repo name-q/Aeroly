@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ZoomIn, ZoomOut, RotateCcw, RotateCw, Maximize, ChevronLeft, ChevronRight, FlipHorizontal2, FlipVertical2 } from 'lucide-react';
 import Icon from '../Icon';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
+
+ensureLiquidGlassAuto();
 
 // ─── Preview 预览浮层 ───
 

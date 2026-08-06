@@ -22,8 +22,8 @@ function filterMarkup(id: string, width: number, height: number, scale: number, 
 }
 
 export function attachLiquidGlassFilter(
-  surface: HTMLDivElement,
-  warp: HTMLDivElement,
+  surface: HTMLElement,
+  warp: HTMLElement,
   id: string,
   scale: number,
 ): () => void {

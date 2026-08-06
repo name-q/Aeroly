@@ -4,7 +4,10 @@ import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import type { LucideIcon } from 'lucide-react';
 import { useLocale } from '../ConfigProvider/useConfig';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 export type UploadStatus = 'pending' | 'uploading' | 'success' | 'error';
 

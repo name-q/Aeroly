@@ -10,7 +10,10 @@ import Spin from '../Spin';
 import { useLocale } from '../ConfigProvider/useConfig';
 import DanmakuLayer from './DanmakuLayer';
 import type { DanmakuItem, DanmakuConfig, DanmakuRegion, DanmakuSpeed, DanmakuLayerRef } from './DanmakuLayer';
+import { ensureLiquidGlassAuto } from '../liquid-glass/auto';
 import './index.less';
+
+ensureLiquidGlassAuto();
 
 // ─── Types ───
 

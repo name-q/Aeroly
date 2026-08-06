@@ -92,7 +92,7 @@ const Button: React.FC<ButtonProps> = ({
       <div
         ref={lg.refs.surfaceRef}
         className={`aero-button-glass aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${pill ? ' aero-button-glass--pill' : ''}${isDisabled ? ' aero-button-glass--disabled' : ''}`}
-        style={{ ...style, ...lg.vars }}
+        style={{ ...lg.vars, ...style }}
         {...lg.surfaceProps}
       >
         {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}

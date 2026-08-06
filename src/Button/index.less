@@ -153,6 +153,7 @@
 
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
+    border-color: transparent;
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
@@ -161,6 +162,19 @@
 
   &.aero-lg-surface--full {
     background: var(--aero-lg-bg);
+  }
+
+  // 只在环形边缘叠加主题色，保留内部玻璃材质不变。
+  &.aero-lg-surface::before {
+    opacity: 0.9;
+    mix-blend-mode: normal;
+    background: linear-gradient(
+      var(--aero-lg-angle, 135deg),
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.72) 0%,
+      rgba(var(--aero-warning-color-rgb, 250, 173, 20), 0.78) 52%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.46) 100%
+    );
+    box-shadow: none;
   }
 
   &:hover {

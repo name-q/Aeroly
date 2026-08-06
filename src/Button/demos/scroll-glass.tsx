@@ -5,13 +5,14 @@
 import React from 'react';
 import { Button } from 'aeroly';
 
-const paragraphs = [
-  '向下滚动内容，文字会穿过固定在中央的玻璃按钮。',
-  '按钮保持自己的尺寸，背景图片和内容始终在玻璃层下方流动。',
-  '透明表面、边缘光和背景模糊共同形成轻量的液态玻璃效果。',
-  '在不同背景和主题下，按钮文字会自动使用清晰的对比色。',
-  '继续滚动可以观察图片细节、文字和按钮边缘光的变化。',
-];
+const imageUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
+const scrollItems = [
+  { type: 'image', src: `${imageUrl}?auto=format&fit=crop&w=900&h=180&q=80`, alt: '山谷湖泊' },
+  { type: 'text', text: '向下滚动内容，图片和文字会穿过固定在中央的玻璃按钮。' },
+  { type: 'space' },
+  { type: 'image', src: `${imageUrl}?auto=format&fit=crop&w=900&h=220&crop=entropy&q=80`, alt: '湖畔山景' },
+  { type: 'text', text: '观察图片细节、文字和按钮边缘光在玻璃层下方交替经过。' },
+] as const;
 
 export default () => (
   <div
@@ -20,9 +21,7 @@ export default () => (
       height: 280,
       overflow: 'hidden',
       borderRadius: 16,
-      backgroundImage: 'url(https://images.unsplash.com/photo-1506744038136-46273834b3fb)',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
+      background: '#102033',
       isolation: 'isolate',
     }}
   >
@@ -49,11 +48,15 @@ export default () => (
         lineHeight: 1.55,
       }}
     >
-      {[...paragraphs, ...paragraphs].map((text, index) => (
-        <p key={`${text}-${index}`} style={{ margin: 0 }}>
-          {text}
-        </p>
-      ))}
+      {[...scrollItems, ...scrollItems].map((item, index) => {
+        if (item.type === 'image') {
+          return <img key={`${item.type}-${index}`} src={item.src} alt={item.alt} style={{ display: 'block', width: '100%', height: 150, flexShrink: 0, objectFit: 'cover', borderRadius: 14 }} />;
+        }
+        if (item.type === 'space') {
+          return <div key={`${item.type}-${index}`} aria-hidden="true" style={{ height: 72, flexShrink: 0 }} />;
+        }
+        return <p key={`${item.type}-${index}`} style={{ margin: 0 }}>{item.text}</p>;
+      })}
     </div>
     <div
       style={{
@@ -66,7 +69,7 @@ export default () => (
       }}
     >
       <div style={{ pointerEvents: 'auto' }}>
-        <Button pill style={{ minWidth: 132 }}>
+        <Button pill>
           查看详情
         </Button>
       </div>

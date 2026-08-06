@@ -5,13 +5,14 @@
 import React from 'react';
 import { Button } from 'aeroly';
 
-const paragraphs = [
-  'Scroll the content to move text through the glass button.',
-  'The button keeps its size while the image and text move behind it.',
-  'The transparent surface, edge light, and backdrop blur create the liquid glass effect.',
-  'Button text keeps a clear contrast across light and dark themes.',
-  'Keep scrolling to inspect the image, text, and edge light together.',
-];
+const imageUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
+const scrollItems = [
+  { type: 'image', src: `${imageUrl}?auto=format&fit=crop&w=900&h=180&q=80`, alt: 'Mountain lake' },
+  { type: 'text', text: 'Scroll the content to move images and text through the fixed glass button.' },
+  { type: 'space' },
+  { type: 'image', src: `${imageUrl}?auto=format&fit=crop&w=900&h=220&crop=entropy&q=80`, alt: 'Lakeside mountains' },
+  { type: 'text', text: 'Watch the image details, text, and edge light pass through the glass surface.' },
+] as const;
 
 export default () => (
   <div
@@ -20,9 +21,7 @@ export default () => (
       height: 280,
       overflow: 'hidden',
       borderRadius: 16,
-      backgroundImage: 'url(https://images.unsplash.com/photo-1506744038136-46273834b3fb)',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
+      background: '#102033',
       isolation: 'isolate',
     }}
   >
@@ -49,11 +48,15 @@ export default () => (
         lineHeight: 1.55,
       }}
     >
-      {[...paragraphs, ...paragraphs].map((text, index) => (
-        <p key={`${text}-${index}`} style={{ margin: 0 }}>
-          {text}
-        </p>
-      ))}
+      {[...scrollItems, ...scrollItems].map((item, index) => {
+        if (item.type === 'image') {
+          return <img key={`${item.type}-${index}`} src={item.src} alt={item.alt} style={{ display: 'block', width: '100%', height: 150, flexShrink: 0, objectFit: 'cover', borderRadius: 14 }} />;
+        }
+        if (item.type === 'space') {
+          return <div key={`${item.type}-${index}`} aria-hidden="true" style={{ height: 72, flexShrink: 0 }} />;
+        }
+        return <p key={`${item.type}-${index}`} style={{ margin: 0 }}>{item.text}</p>;
+      })}
     </div>
     <div
       style={{
@@ -66,7 +69,7 @@ export default () => (
       }}
     >
       <div style={{ pointerEvents: 'auto' }}>
-        <Button pill style={{ minWidth: 132 }}>
+        <Button pill>
           View details
         </Button>
       </div>

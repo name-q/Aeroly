@@ -596,7 +596,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

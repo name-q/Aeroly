@@ -6,9 +6,6 @@ import { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';
 export interface LiquidGlassRefs {
   surfaceRef: React.MutableRefObject<HTMLDivElement | null>;
   warpRef: React.MutableRefObject<HTMLSpanElement | null>;
-  edgeScreenRef: React.MutableRefObject<HTMLSpanElement | null>;
-  edgeOverlayRef: React.MutableRefObject<HTMLSpanElement | null>;
-  sheenRef: React.MutableRefObject<HTMLSpanElement | null>;
 }
 
 export interface UseLiquidGlassOptions {
@@ -28,7 +25,7 @@ export interface UseLiquidGlassOptions {
   disabled?: boolean;
   /** 单独关闭位移折射（保留表面模糊与装饰层） */
   displacementDisabled?: boolean;
-  /** 装饰层 z-index，默认 1050 */
+  /** 兼容旧调用保留；装饰层现在在 surface 内部，不再使用 z-index */
   zIndex?: number;
 }
 
@@ -60,9 +57,6 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
 
   const surfaceRef = useRef<HTMLDivElement | null>(null);
   const warpRef = useRef<HTMLSpanElement | null>(null);
-  const edgeScreenRef = useRef<HTMLSpanElement | null>(null);
-  const edgeOverlayRef = useRef<HTMLSpanElement | null>(null);
-  const sheenRef = useRef<HTMLSpanElement | null>(null);
 
   const optionsRef = useRef(options);
   optionsRef.current = options;
@@ -74,23 +68,19 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   }, []);
 
   const writeFrameVars = useCallback((angle: string, glowX: string, glowY: string) => {
-    const nodes = [surfaceRef.current, edgeScreenRef.current, edgeOverlayRef.current, sheenRef.current];
-    for (const node of nodes) {
-      if (!node) continue;
-      node.style.setProperty('--aero-lg-angle', angle);
-      node.style.setProperty('--aero-lg-glow-x', glowX);
-      node.style.setProperty('--aero-lg-glow-y', glowY);
-    }
+    const node = surfaceRef.current;
+    if (!node) return;
+    node.style.setProperty('--aero-lg-angle', angle);
+    node.style.setProperty('--aero-lg-glow-x', glowX);
+    node.style.setProperty('--aero-lg-glow-y', glowY);
   }, []);
 
   const writeElastic = useCallback(
     (sx: number, sy: number, tx: number, ty: number) => {
-      const nodes = [surfaceRef.current, edgeScreenRef.current, edgeOverlayRef.current, sheenRef.current];
-      for (const node of nodes) {
-        if (!node) continue;
-        node.style.transformOrigin = 'center';
-        node.style.transform = `translate(${tx}px, ${ty}px) scaleX(${sx}) scaleY(${sy})`;
-      }
+      const node = surfaceRef.current;
+      if (!node) return;
+      node.style.transformOrigin = 'center';
+      node.style.transform = `translate(${tx}px, ${ty}px) scaleX(${sx}) scaleY(${sy})`;
     },
     [],
   );
@@ -141,10 +131,8 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
     el?.classList.toggle('aero-lg-hovered', hovered);
     el?.classList.toggle('aero-lg-active', active);
 
-    const edgeBase = 0.25;
-    if (edgeScreenRef.current) edgeScreenRef.current.style.opacity = hovered ? '0.5' : String(edgeBase);
-    if (edgeOverlayRef.current) edgeOverlayRef.current.style.opacity = hovered ? '0.55' : String(edgeBase);
-    if (sheenRef.current) sheenRef.current.style.opacity = active ? '0.6' : hovered ? '1' : '0';
+    el?.style.setProperty('--aero-lg-edge-opacity', hovered ? '0.5' : '0.25');
+    el?.style.setProperty('--aero-lg-sheen-opacity', active ? '0.6' : hovered ? '1' : '0');
   }, []);
 
   const onMouseEnter = useCallback(() => {
@@ -164,8 +152,7 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
     state.current.active = false;
     syncDecorState();
     if (optionsRef.current.elasticity) {
-      const nodes = [surfaceRef.current, edgeScreenRef.current, edgeOverlayRef.current, sheenRef.current];
-      for (const node of nodes) if (node) node.style.transform = '';
+      if (surfaceRef.current) surfaceRef.current.style.transform = '';
     }
   }, [syncDecorState]);
 
@@ -187,7 +174,7 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   } as React.CSSProperties;
 
   return {
-    refs: { surfaceRef, warpRef, edgeScreenRef, edgeOverlayRef, sheenRef },
+    refs: { surfaceRef, warpRef },
     isFull,
     support,
     vars,

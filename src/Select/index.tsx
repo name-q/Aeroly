@@ -502,7 +502,7 @@ const Select: React.FC<SelectProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
+          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

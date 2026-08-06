@@ -286,6 +286,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
             `aero-autocomplete-dropdown--${placement}`,
             `aero-autocomplete-dropdown--${alignment}`,
             'aero-lg-surface',
+            'aero-lg-popup',
             lg.isFull ? 'aero-lg-surface--full' : '',
             animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',
           ]

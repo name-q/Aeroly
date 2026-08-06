@@ -47,7 +47,7 @@ A modal dialog that opens a floating layer on the current page for confirmations
 | onOk | OK callback, button shows loading automatically when returning a Promise | `() => void \| Promise<void>` | - |
 | onCancel | Cancel callback | `() => void` | - |
 | width | Width | `number \| string` | `420` |
-| mask | Whether to show the mask | `boolean` | `true` |
+| mask | Whether to show the mask | `boolean` | `false` |
 | maskClosable | Whether clicking the mask closes the modal | `boolean` | `true` |
 | keyboard | Whether pressing Esc closes the modal | `boolean` | `true` |
 | closeIcon | Custom close icon | `ReactNode` | - |
@@ -75,5 +75,5 @@ A modal dialog that opens a floating layer on the current page for confirmations
 | cancelText | Cancel button text | `ReactNode` | `'Cancel'` |
 | onOk | OK callback | `() => void \| Promise<void>` | - |
 | onCancel | Cancel callback | `() => void` | - |
-| mask | Whether to show the mask | `boolean` | `true` |
+| mask | Whether to show the mask | `boolean` | `false` |
 | icon | Custom icon | `LucideIcon` | - |

@@ -494,7 +494,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

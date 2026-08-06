@@ -30,6 +30,10 @@ Interactive element for triggering actions. Provides three styles: pill, primary
 
 <code src="./en/demos/loading.tsx" id="loading-en"></code>
 
+## Scrolling Glass
+
+<code src="./en/demos/scroll-glass.tsx" id="scroll-glass-en"></code>
+
 ## API
 
 | Property | Description | Type | Default |

@@ -91,7 +91,7 @@ const Button: React.FC<ButtonProps> = ({
     return (
       <div
         ref={lg.refs.surfaceRef}
-        className={`aero-button-glass aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${pill ? ' aero-button-glass--pill' : ''}`}
+        className={`aero-button-glass aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${pill ? ' aero-button-glass--pill' : ''}${isDisabled ? ' aero-button-glass--disabled' : ''}`}
         style={{ ...style, ...lg.vars }}
         {...lg.surfaceProps}
       >

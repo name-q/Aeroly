@@ -544,7 +544,7 @@ const Cascader: React.FC<CascaderProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-cascader-dropdown--open' : ''}`}
+          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-cascader-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

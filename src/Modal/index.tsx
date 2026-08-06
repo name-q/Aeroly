@@ -6,6 +6,7 @@ import { X, Info, CircleCheck, CircleAlert, CircleX } from 'lucide-react';
 import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
 import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { useModalLayer } from './stack';
 import './index.less';
 
 export interface ModalProps {
@@ -62,6 +63,8 @@ const Modal: React.FC<ModalProps> & {
   onOk,
   onCancel,
   width = 420,
+  mask = false,
+  maskClosable = true,
   keyboard = true,
   closeIcon,
   centered = false,
@@ -72,6 +75,7 @@ const Modal: React.FC<ModalProps> & {
   const finalOkText = okText ?? localeModal.okText;
   const finalCancelText = cancelText ?? localeModal.cancelText;
   const lg = useLiquidGlass({ zIndex: 1000 });
+  const layer = useModalLayer(open);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [okLoading, setOkLoading] = useState(false);
@@ -96,7 +100,7 @@ const Modal: React.FC<ModalProps> & {
   // 无遮罩：不锁定 body 滚动，打开时底部页面可继续滚动以体现毛玻璃
 
   useEffect(() => {
-    if (!open || !keyboard) return;
+    if (!open || !keyboard || !layer.isTop) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onCancel?.();
@@ -105,7 +109,7 @@ const Modal: React.FC<ModalProps> & {
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [open, keyboard, onOpenChange, onCancel]);
+  }, [open, keyboard, layer.isTop, onOpenChange, onCancel]);
 
   const handleOk = async () => {
     if (!onOk) {
@@ -174,7 +178,13 @@ const Modal: React.FC<ModalProps> & {
   };
 
   return createPortal(
-    <div className={classNames} onTransitionEnd={handleTransitionEnd}>
+    <div className={classNames} style={{ zIndex: layer.zIndex }} onTransitionEnd={handleTransitionEnd}>
+      {mask && layer.isTop && (
+        <div
+          className="aero-modal-mask"
+          onClick={maskClosable ? handleCancel : undefined}
+        />
+      )}
       <div
         ref={lg.refs.surfaceRef}
         className={`${modalClassNames} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
@@ -195,7 +205,7 @@ const Modal: React.FC<ModalProps> & {
           {renderFooter()}
         </div>
       </div>
-      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1000} />}
+      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={layer.zIndex} />}
     </div>,
     document.body,
   );
@@ -249,6 +259,7 @@ function openConfirm(config: ConfirmConfig) {
   const ConfirmModal = () => {
     const localeModal = useLocale('Modal');
     const lg = useLiquidGlass({ zIndex: 1000 });
+    const layer = useModalLayer(true);
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
     const [mounted, setMounted] = useState(true);
@@ -281,20 +292,28 @@ function openConfirm(config: ConfirmConfig) {
     };
 
     useEffect(() => {
+      if (!layer.isTop) return undefined;
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') handleCancel();
       };
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [layer.isTop]);
 
     if (!mounted) return null;
 
     return (
       <div
         className={`aero-modal-root${open ? ' aero-modal-root--open' : ''}`}
+        style={{ zIndex: layer.zIndex }}
         onTransitionEnd={handleTransitionEnd}
       >
+        {config.mask === true && layer.isTop && (
+          <div
+            className="aero-modal-mask"
+            onClick={handleCancel}
+          />
+        )}
         <div
           ref={lg.refs.surfaceRef}
           className={`aero-modal aero-modal--confirm aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
@@ -334,7 +353,7 @@ function openConfirm(config: ConfirmConfig) {
               </div>
             </div>
           </div>
-        <LiquidGlassDecor refs={lg.refs} zIndex={1000} />
+        <LiquidGlassDecor refs={lg.refs} zIndex={layer.zIndex} />
       </div>
     );
   };

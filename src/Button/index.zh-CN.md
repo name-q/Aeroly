@@ -30,6 +30,10 @@ toc: content
 
 <code src="./demos/loading.tsx"></code>
 
+## 滚动玻璃
+
+<code src="./demos/scroll-glass.tsx"></code>
+
 ## API
 
 | 属性 | 说明 | 类型 | 默认值 |

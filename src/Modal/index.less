@@ -10,7 +10,6 @@
 .aero-modal-root {
   position: fixed;
   inset: 0;
-  z-index: 1000;
   pointer-events: none;
   display: flex;
   align-items: center;
@@ -24,6 +23,18 @@
   }
 }
 
+.aero-modal-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  background: rgba(13, 18, 28, 0.34);
+  animation: aero-modal-mask-in @modal-duration @transition-timing both;
+
+  @{dark-selector} & {
+    background: rgba(0, 0, 0, 0.48);
+  }
+}
+
 // ---- 对话框 ----
 // 玻璃表面基础由 .aero-lg-surface 提供（圆角/半透明底/blur，暗色变量层叠）
 .aero-modal {
@@ -33,7 +44,12 @@
   text-align: left;
   vertical-align: middle;
   border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  // 面板保留极轻的透明底，避免内容悬空，同时让背景折射保持可见。
+  &.aero-lg-surface,
+  &.aero-lg-surface--full {
+    background: rgba(255, 255, 255, 0.1);
+  }
 
   // 入场动画
   opacity: 0;
@@ -43,7 +59,11 @@
 
   @{dark-selector} & {
     border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    &.aero-lg-surface,
+    &.aero-lg-surface--full {
+      background: rgba(255, 255, 255, 0.06);
+    }
   }
 
   // ---- 头部 ----
@@ -236,4 +256,9 @@
 
 @keyframes aero-modal-spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes aero-modal-mask-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

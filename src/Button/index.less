@@ -4,6 +4,8 @@
 
 .aero-button {
   display: inline-flex;
+  flex: 0 0 auto;
+  min-width: max-content;
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -45,16 +47,16 @@
   // 液态玻璃：玻璃由外层 .aero-button-glass 提供（warp 折射 + 边缘捕光 + hover/active 高光），
   // 内层 button 透明，只负责文字与点击
   &--default {
+    appearance: none;
+    -webkit-appearance: none;
     background: transparent;
+    background-image: none;
     border: none;
-    color: #fff;
-    // 防纯白底色下看不清字体：给文字投影（柔和）
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.38);
+    color: #111827;
     cursor: pointer;
 
     @{dark-selector} & {
-      color: #1a1a1a;
-      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.25);
+      color: #fff;
     }
   }
 
@@ -146,14 +148,15 @@
 .aero-button-glass {
   position: relative;
   display: inline-flex;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 200ms ease;
+  flex: 0 0 auto;
+  min-width: max-content;
+  white-space: nowrap;
+  transition: transform 150ms ease;
 
-  // 组合选择器：确保圆角/背景不被 .aero-lg-surface 的默认值覆盖（CSS 合并顺序不稳定）
-  // 深蓝玻璃渐变：顶部亮（玻璃反射）底部深，主体色 rgb(53,66,99)
+  // 外层保持透明，玻璃质感由背景模糊和边缘光提供。
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
-    background: linear-gradient(180deg, rgba(78, 96, 148, 0.92), rgba(24, 32, 60, 0.95));
+    background: transparent;
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
@@ -161,26 +164,28 @@
   }
 
   &.aero-lg-surface--full {
-    background: linear-gradient(180deg, rgba(78, 96, 148, 0.92), rgba(24, 32, 60, 0.95));
+    background: transparent;
   }
 
   &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    transform: translateY(-1px);
   }
 
   @{dark-selector} & {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.30);
-
     &.aero-lg-surface {
-      background: rgba(255, 255, 255, 0.12);
+      background: transparent;
     }
 
     &.aero-lg-surface--full {
-      background: rgba(255, 255, 255, 0.12);
+      background: transparent;
     }
 
     &:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.34);
+      transform: translateY(-1px);
     }
+  }
+
+  &--disabled {
+    pointer-events: none;
   }
 }

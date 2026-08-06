@@ -1,39 +1,37 @@
 // ============================================================
 //  Liquid Glass 液态玻璃 mixin 族
 //  两级接入：
-//    Full    浮层面板（Chromium）— warp 位移折射 + 表面模糊 + body 级装饰层
-//    Surface 内联控件（全浏览器）— 玻璃底 + 模糊，可选 .lg-hover 高光
-//  装饰层（.lg-edge/.lg-sheen）由 LiquidGlassDecor createPortal 到 body，
-//  与面板是兄弟节点，保证 mix-blend 与页面背板混色。
+//    Full    浮层面板（Chromium）— warp 位移折射 + 表面模糊 + surface 内装饰层
+//    Surface 内联控件（全浏览器）— 玻璃底 + 模糊 + 内部高光
+//  边缘光和 sheen 由 surface 伪元素绘制，避免每个实例向 body 追加 fixed span。
 // ============================================================
 
 @import './variables.less';
 
-// 玻璃表面：圆角 + 半透明底 + 裁剪 + 兜底模糊
-// 背景走 --aero-lg-bg，暗色由 CSS 变量层叠自动切换（无需单独 override）
-// 注意：不设 position——定位由组件自身保证（Modal relative / Drawer、下拉 absolute 等），
-// 避免 .aero-lg-surface 的 relative 与组件 absolute 在 CSS 合并顺序下互相覆盖
+// 玻璃表面：透明容器 + 裁剪 + 兜底模糊。
+// 主体不依赖灰白填充，颜色来自背景、模糊和边缘光。
 .lg-surface(@radius: var(--aero-border-radius-lg, @border-radius-lg)) {
+  position: relative;
   border-radius: @radius;
   overflow: hidden;
-  background: var(--aero-lg-bg, rgba(255, 255, 255, 0.35));
+  isolation: isolate;
+  background: var(--aero-lg-bg, transparent);
   backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
   -webkit-backdrop-filter: blur(var(--aero-lg-blur, 40px)) saturate(var(--aero-lg-sat, 140%));
 
   // 无 backdrop-filter 的浏览器兜底纯色
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.85));
+    background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.12));
   }
 
   &--full {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    // 半透明自身底色：白底下面板有层次不灰、多彩底下与 warp blur 叠加出玻璃感。
-    // 模糊由 .lg-warp 承担，但面板不能纯依赖 backdrop 才有颜色（白底无内容可模糊）
-    background: var(--aero-lg-bg, rgba(255, 255, 255, 0.35));
+    // full 模式的模糊由 warp 承担，surface 本身保持透明，避免双层灰色填充。
+    background: var(--aero-lg-bg, transparent);
 
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-      background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.85));
+      background: var(--aero-lg-bg-fallback, rgba(255, 255, 255, 0.12));
     }
   }
 }
@@ -67,13 +65,13 @@
   mask-composite: exclude;
 }
 
-// 边缘捕光环（body 级 decor，混色脱离表面堆叠上下文）
-// @blend: screen（亮层）/ overlay（强光层），两层叠加出捕光效果
+// 边缘捕光环（surface 内部伪元素）
 .lg-edge(@blend: screen) {
-  position: fixed;
+  position: absolute;
+  inset: 0;
   pointer-events: none;
   mix-blend-mode: @blend;
-  opacity: 0.25;
+  opacity: var(--aero-lg-edge-opacity, 0.25);
   transition: opacity 200ms ease-out;
   // box-sizing: border-box——hook 设置的 width/height 即 border-box 总尺寸，
   // .lg-mask 的 padding 1.5px 不会让元素实际尺寸比 surface 大（否则 ring 外偏 3px）
@@ -87,47 +85,22 @@
     rgba(255, 255, 255, 0) 100%
   );
   box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.5) inset,
-              0 1px 3px rgba(255, 255, 255, 0.25) inset,
-              0 1px 4px rgba(0, 0, 0, 0.35);
+              0 1px 3px rgba(255, 255, 255, 0.2) inset;
 }
 
-// hover/active 高光（body 级 decor，opacity 由 hook 直写）
+// hover/active 高光（surface 内部伪元素，opacity 由 hook 直写）
 .lg-sheen() {
-  position: fixed;
+  position: absolute;
+  inset: 0;
   pointer-events: none;
   mix-blend-mode: overlay;
-  opacity: 0;
+  opacity: var(--aero-lg-sheen-opacity, 0);
   transition: opacity 200ms ease-out;
   background: radial-gradient(
     circle at var(--aero-lg-glow-x, 50%) var(--aero-lg-glow-y, 0%),
     rgba(255, 255, 255, 0.5) 0%,
     rgba(255, 255, 255, 0) 55%
   );
-}
-
-// 内联控件 hover 高光（surface 内真实 span，配合 surface 上的
-// aero-lg-hovered / aero-lg-active 类联动，由 hook classList 切换）
-.lg-hover() {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0;
-  transition: opacity 150ms ease-out;
-  background: radial-gradient(
-    circle at var(--aero-lg-glow-x, 50%) 0%,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(255, 255, 255, 0) 60%
-  );
-
-  .aero-lg-hovered & {
-    opacity: 1;
-  }
-
-  .aero-lg-active & {
-    opacity: 0.5;
-  }
 }
 
 // ============================================================
@@ -139,6 +112,11 @@
   .lg-surface();
 }
 
+.aero-lg-surface.aero-lg-popup {
+  position: absolute;
+  z-index: 1050;
+}
+
 .aero-lg-warp {
   .lg-warp();
 }
@@ -147,18 +125,30 @@
   .lg-content();
 }
 
-.aero-lg-edge--screen {
+.aero-lg-surface::before {
+  content: '';
   .lg-edge(screen);
+  z-index: 2;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--aero-lg-angle, 135deg),
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.42) 62%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.45) inset,
+              0 1px 3px rgba(255, 255, 255, 0.2) inset;
 }
 
-.aero-lg-edge--overlay {
-  .lg-edge(overlay);
-}
-
-.aero-lg-sheen {
+.aero-lg-surface::after {
+  content: '';
   .lg-sheen();
-}
-
-.aero-lg-hover {
-  .lg-hover();
+  z-index: 2;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--aero-lg-glow-x, 50%) var(--aero-lg-glow-y, 0%),
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
 }

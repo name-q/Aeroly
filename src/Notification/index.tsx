@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import type { LucideIcon } from 'lucide-react';
 import { CircleCheck, CircleAlert, CircleX, Info, X } from 'lucide-react';
 import Icon from '../Icon';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
@@ -58,7 +58,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   footer,
   onClose,
 }) => {
-  const lg = useLiquidGlass({ zIndex: 9999 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 9999 });
   const [visible, setVisible] = React.useState(false);
   const [closing, setClosing] = React.useState(false);
 
@@ -93,6 +93,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
         'aero-notification-item',
         `aero-notification-item--${type}`,
         'aero-lg-surface',
+        'aero-lg-panel',
         lg.isFull ? 'aero-lg-surface--full' : '',
         visible ? 'aero-notification-item--visible' : '',
         isRight ? 'aero-notification-item--right' : 'aero-notification-item--left',

@@ -3,7 +3,7 @@ import { Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize, useLocale } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -96,7 +96,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const [animating, setAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  const lg = useLiquidGlass({ zIndex: 1050 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -286,6 +286,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
             `aero-autocomplete-dropdown--${placement}`,
             `aero-autocomplete-dropdown--${alignment}`,
             'aero-lg-surface',
+            'aero-lg-panel',
             'aero-lg-popup',
             lg.isFull ? 'aero-lg-surface--full' : '',
             animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',

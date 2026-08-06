@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -185,7 +185,7 @@ const Popover: React.FC<PopoverProps> = ({
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isOpen = isControlled ? open! : internalOpen;
 
-  const lg = useLiquidGlass({ zIndex: 1050 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
@@ -325,22 +325,24 @@ const Popover: React.FC<PopoverProps> = ({
         if (trigger === 'hover') handleMouseLeave();
       }}
     >
-      {raw ? (
-        content
-      ) : (
-        <div
-          ref={lg.refs.surfaceRef}
-          className={`aero-popover-inner aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
-          style={lg.vars}
-        >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
-            {title && <div className="aero-popover-title">{title}</div>}
-            <div className="aero-popover-content">{content}</div>
-          </div>
+      <div
+        ref={lg.refs.surfaceRef}
+        className={`aero-popover-inner${raw ? ' aero-popover-inner--raw' : ''} aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        style={lg.vars}
+      >
+        {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        <div className="aero-lg-content">
+          {raw ? (
+            content
+          ) : (
+            <>
+              {title && <div className="aero-popover-title">{title}</div>}
+              <div className="aero-popover-content">{content}</div>
+            </>
+          )}
         </div>
-      )}
-      {!raw && <LiquidGlassDecor refs={lg.refs} zIndex={1050} />}
+      </div>
+      <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
     </div>
   ) : null;
 

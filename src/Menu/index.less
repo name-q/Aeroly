@@ -111,10 +111,6 @@
   min-width: 160px;
   width: max-content;
   padding: 4px;
-  border-radius: var(--aero-border-radius-lg, @border-radius-lg);
-  .glass-effect(rgba(255, 255, 255, 0.72), 20px);
-  .shadow-default();
-  border: 1px solid rgba(0, 0, 0, 0.06);
   font-size: 14px;
   color: rgba(0, 0, 0, 0.78);
   display: flex;
@@ -129,8 +125,6 @@
   }
 
   @{dark-selector} & {
-    .glass-effect(rgba(255, 255, 255, 0.08), 20px);
-    border-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.82);
   }
 }

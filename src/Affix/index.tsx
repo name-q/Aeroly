@@ -43,6 +43,7 @@ const Affix: React.FC<AffixProps> = ({
   const sentinelRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const [affixed, setAffixed] = useState(false);
+  const affixedRef = useRef(false);
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
@@ -77,12 +78,10 @@ const Affix: React.FC<AffixProps> = ({
       ([entry]) => {
         // 哨兵不可见 = sticky 已生效
         const fixed = !entry.isIntersecting;
-        setAffixed((prev) => {
-          if (prev !== fixed) {
-            onChangeRef.current?.(fixed);
-          }
-          return fixed;
-        });
+        if (affixedRef.current === fixed) return;
+        affixedRef.current = fixed;
+        setAffixed(fixed);
+        onChangeRef.current?.(fixed);
       },
       {
         root: root,

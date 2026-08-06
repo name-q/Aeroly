@@ -5,7 +5,7 @@ import type { LucideIcon } from 'lucide-react';
 import { X, Info, CircleCheck, CircleAlert, CircleX } from 'lucide-react';
 import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import { useModalLayer } from './stack';
 import './index.less';
 
@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> & {
   const localeModal = useLocale('Modal');
   const finalOkText = okText ?? localeModal.okText;
   const finalCancelText = cancelText ?? localeModal.cancelText;
-  const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 58, aberrationIntensity: 2 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
   const layer = useModalLayer(open);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
@@ -187,7 +187,7 @@ const Modal: React.FC<ModalProps> & {
       )}
       <div
         ref={lg.refs.surfaceRef}
-        className={`${modalClassNames} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        className={`${modalClassNames} aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
         style={{ width, ...style, ...lg.vars }}
         {...lg.surfaceProps}
       >
@@ -258,7 +258,7 @@ function openConfirm(config: ConfirmConfig) {
 
   const ConfirmModal = () => {
     const localeModal = useLocale('Modal');
-    const lg = useLiquidGlass({ zIndex: 1000, blur: 20, displacementScale: 58, aberrationIntensity: 2 });
+    const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
     const layer = useModalLayer(true);
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -316,7 +316,7 @@ function openConfirm(config: ConfirmConfig) {
         )}
         <div
           ref={lg.refs.surfaceRef}
-          className={`aero-modal aero-modal--confirm aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+          className={`aero-modal aero-modal--confirm aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
           style={lg.vars}
           {...lg.surfaceProps}
         >

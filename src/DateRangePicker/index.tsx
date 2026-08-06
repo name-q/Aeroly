@@ -9,7 +9,7 @@ import {
 import Column from '../DatePicker/Column';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -126,7 +126,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
-  const lg = useLiquidGlass({ zIndex: 1050 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
@@ -467,7 +467,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

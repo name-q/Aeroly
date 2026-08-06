@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
@@ -52,7 +52,7 @@ const Drawer: React.FC<DrawerProps> = ({
   className,
   style,
 }) => {
-  const lg = useLiquidGlass({ zIndex: 1000 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
 
   // mounted controls DOM mount, animating controls enter animation
   const [mounted, setMounted] = useState(false);
@@ -108,7 +108,7 @@ const Drawer: React.FC<DrawerProps> = ({
     <div className={classNames} onTransitionEnd={handleTransitionEnd}>
       <div
         ref={lg.refs.surfaceRef}
-        className={`aero-drawer-panel aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        className={`aero-drawer-panel aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
         style={{ ...panelStyle, ...lg.vars }}
         {...lg.surfaceProps}
       >

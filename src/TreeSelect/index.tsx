@@ -4,7 +4,7 @@ import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -238,7 +238,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
 
-  const lg = useLiquidGlass({ zIndex: 1050 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -596,7 +596,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

@@ -29,6 +29,13 @@ export interface UseLiquidGlassOptions {
   zIndex?: number;
 }
 
+export const liquidGlassPanelOptions = {
+  blur: 20,
+  saturation: 140,
+  displacementScale: 58,
+  aberrationIntensity: 2,
+} as const;
+
 export interface UseLiquidGlassResult {
   refs: LiquidGlassRefs;
   /** 是否走完整位移折射（Chromium only） */

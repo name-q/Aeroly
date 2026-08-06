@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 import { useLocale } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type TourPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -155,7 +155,7 @@ const Tour: React.FC<TourProps> = (props) => {
   const [internalCurrent, setInternalCurrent] = useState(0);
   const activeCurrent = isControlled ? controlledCurrent! : internalCurrent;
 
-  const lg = useLiquidGlass({ zIndex: 1061 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1061 });
   const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
@@ -340,7 +340,7 @@ const Tour: React.FC<TourProps> = (props) => {
           popRef.current = node;
           lg.refs.surfaceRef.current = node;
         }}
-        className={`${popCls} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
+        className={`${popCls} aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
         style={{
           top: pos ? pos.top : -9999,
           left: pos ? pos.left : -9999,

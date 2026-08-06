@@ -119,6 +119,27 @@
   .lg-content();
 }
 
+.aero-lg-panel.aero-lg-surface--full {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.aero-lg-panel.aero-lg-surface {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.aero-lg-panel.aero-lg-surface::before {
+  opacity: 0.9;
+  mix-blend-mode: normal;
+  background: linear-gradient(
+    var(--aero-lg-angle, 135deg),
+    rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.12) 28%,
+    rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.18) 52%,
+    rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.1) 92%
+  );
+  box-shadow: none;
+}
+
 .aero-lg-surface::before {
   content: '';
   .lg-edge(screen);

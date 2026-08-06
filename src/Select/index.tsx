@@ -3,7 +3,7 @@ import { ChevronDown, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -143,7 +143,7 @@ const Select: React.FC<SelectProps> = ({
   const [searchText, setSearchText] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  const lg = useLiquidGlass({ zIndex: 1050 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -502,7 +502,7 @@ const Select: React.FC<SelectProps> = ({
             dropdownRef.current = node;
             lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
+          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
           style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}

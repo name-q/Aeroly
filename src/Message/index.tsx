@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import type { LucideIcon } from 'lucide-react';
 import { CircleCheck, CircleAlert, CircleX, Info } from 'lucide-react';
 import Icon from '../Icon';
-import { useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
 import './index.less';
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error';
@@ -43,7 +43,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   icon,
   onClose,
 }) => {
-  const lg = useLiquidGlass({ zIndex: 9999, blur: 16 });
+  const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 9999, blur: 16 });
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -67,7 +67,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   return (
     <div
       ref={lg.refs.surfaceRef}
-      className={`aero-message-item aero-message-item--${type} aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''} ${visible ? 'aero-message-item--visible' : ''}`}
+      className={`aero-message-item aero-message-item--${type} aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''} ${visible ? 'aero-message-item--visible' : ''}`}
       style={lg.vars}
       onTransitionEnd={handleAnimationEnd}
       {...lg.surfaceProps}

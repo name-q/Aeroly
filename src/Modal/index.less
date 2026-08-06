@@ -51,23 +51,6 @@
     box-shadow: none;
   }
 
-  &.aero-lg-surface--full {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  // 主题色只绘制在玻璃边缘，面板内容区保持通透。
-  &.aero-lg-surface::before {
-    opacity: 0.9;
-    mix-blend-mode: normal;
-    background: linear-gradient(
-      var(--aero-lg-angle, 135deg),
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.12) 28%,
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.18) 52%,
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.1) 92%
-    );
-    box-shadow: none;
-  }
-
   // 入场动画
   opacity: 0;
   transform: scale(0.92);

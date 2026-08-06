@@ -5,8 +5,13 @@ const managed = new WeakMap<HTMLElement, () => void>();
 let started = false;
 let sequence = 0;
 
+function isAerolyNode(node: HTMLElement): boolean {
+  return Array.from(node.classList).some((className) => className.startsWith('aero-'));
+}
+
 function isGlassNode(node: Element): node is HTMLElement {
   if (!(node instanceof HTMLElement)) return false;
+  if (!isAerolyNode(node)) return false;
   if (node.classList.contains('aero-lg-surface') || node.classList.contains('aero-lg-warp')) return false;
   if (node.classList.contains('aero-lg-filter-defs')) return false;
   const styles = getComputedStyle(node);

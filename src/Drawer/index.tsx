@@ -112,7 +112,7 @@ const Drawer: React.FC<DrawerProps> = ({
         style={{ ...panelStyle, ...lg.vars }}
         {...lg.surfaceProps}
       >
-        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
         <div className="aero-lg-content">
           {title ? (
             <div className="aero-drawer-header">

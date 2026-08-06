@@ -94,9 +94,10 @@
   // 液态玻璃（Liquid Glass）
   --aero-lg-blur: 40px;
   --aero-lg-sat: 140%;
-  // Liquid Glass 主体保持透明，视觉来自 backdrop blur / warp，而不是灰白色填充。
-  --aero-lg-bg: transparent;
-  --aero-lg-bg-fallback: rgba(255, 255, 255, 0.12);
+  // 保留低透明度材质底，平色背景下也能看到玻璃边缘和层次。
+  --aero-lg-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.28) 48%, rgba(255, 255, 255, 0.5));
+  --aero-lg-bg-fallback: rgba(255, 255, 255, 0.9);
+  --aero-lg-border: rgba(255, 255, 255, 0.72);
 
   // 阴影
   --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -147,8 +148,9 @@
   --aero-glass-bg: rgba(0, 0, 0, 0.3);
 
   // 液态玻璃（Liquid Glass）
-  --aero-lg-bg: transparent;
-  --aero-lg-bg-fallback: rgba(0, 0, 0, 0.16);
+  --aero-lg-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(15, 23, 42, 0.52) 48%, rgba(0, 0, 0, 0.3));
+  --aero-lg-bg-fallback: rgba(15, 23, 42, 0.92);
+  --aero-lg-border: rgba(255, 255, 255, 0.2);
 
   // 阴影
   --aero-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);

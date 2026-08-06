@@ -348,7 +348,7 @@ const Tour: React.FC<TourProps> = (props) => {
         }}
         {...lg.surfaceProps}
       >
-        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
         <div className="aero-lg-content">
           <button className="aero-tour-close" onClick={handleClose} tabIndex={-1}>
             <Icon icon={X} size={14} />

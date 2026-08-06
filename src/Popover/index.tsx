@@ -333,7 +333,7 @@ const Popover: React.FC<PopoverProps> = ({
           className={`aero-popover-inner aero-lg-surface${lg.isFull ? ' aero-lg-surface--full' : ''}`}
           style={lg.vars}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
             {title && <div className="aero-popover-title">{title}</div>}
             <div className="aero-popover-content">{content}</div>

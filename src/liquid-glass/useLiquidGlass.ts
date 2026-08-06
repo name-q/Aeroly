@@ -5,7 +5,7 @@ import { ensureLiquidGlassFilter, FILTER_ID, FILTER_ID_STRONG } from './inject';
 
 export interface LiquidGlassRefs {
   surfaceRef: React.MutableRefObject<HTMLDivElement | null>;
-  warpRef: React.MutableRefObject<HTMLSpanElement | null>;
+  warpRef: React.MutableRefObject<HTMLDivElement | null>;
 }
 
 export interface UseLiquidGlassOptions {
@@ -25,6 +25,8 @@ export interface UseLiquidGlassOptions {
   disabled?: boolean;
   /** 单独关闭位移折射（保留表面模糊与装饰层） */
   displacementDisabled?: boolean;
+  /** 开启 SVG 边缘位移，默认关闭以避免透明覆盖层被合成为色块。 */
+  enableDisplacement?: boolean;
   /** 兼容旧调用保留；装饰层现在在 surface 内部，不再使用 z-index */
   zIndex?: number;
 }
@@ -53,10 +55,14 @@ interface FrameInput {
 
 export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGlassResult {
   const support = getLiquidGlassSupport();
-  const isFull = support.displacement && !options.disabled && !options.displacementDisabled;
+  const isFull =
+    support.displacement &&
+    options.enableDisplacement === true &&
+    !options.disabled &&
+    !options.displacementDisabled;
 
   const surfaceRef = useRef<HTMLDivElement | null>(null);
-  const warpRef = useRef<HTMLSpanElement | null>(null);
+  const warpRef = useRef<HTMLDivElement | null>(null);
 
   const optionsRef = useRef(options);
   optionsRef.current = options;
@@ -64,8 +70,8 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   const state = useRef({ hovered: false, active: false, raf: 0 });
 
   useEffect(() => {
-    ensureLiquidGlassFilter();
-  }, []);
+    if (options.enableDisplacement) ensureLiquidGlassFilter();
+  }, [options.enableDisplacement]);
 
   const writeFrameVars = useCallback((angle: string, glowX: string, glowY: string) => {
     const node = surfaceRef.current;
@@ -170,7 +176,7 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   const vars = {
     '--aero-lg-blur': `${options.blur ?? 20}px`,
     '--aero-lg-sat': `${options.saturation ?? 140}%`,
-    '--aero-lg-filter': isFull ? `url(#${scale > 75 ? FILTER_ID_STRONG : FILTER_ID})` : 'none',
+    ...(isFull ? { '--aero-lg-filter': `url(#${scale > 75 ? FILTER_ID_STRONG : FILTER_ID})` } : {}),
   } as React.CSSProperties;
 
   return {

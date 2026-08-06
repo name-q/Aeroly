@@ -191,7 +191,7 @@ const Modal: React.FC<ModalProps> & {
         style={{ width, ...style, ...lg.vars }}
         {...lg.surfaceProps}
       >
-        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
         <div className="aero-lg-content">
           {title && (
             <div className="aero-modal-header">
@@ -320,7 +320,7 @@ function openConfirm(config: ConfirmConfig) {
           style={lg.vars}
           {...lg.surfaceProps}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
               <div className="aero-modal-confirm-body">
                 <span className={`aero-modal-confirm-icon aero-modal-confirm-icon--${type}`}>

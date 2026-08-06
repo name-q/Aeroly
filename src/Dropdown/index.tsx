@@ -72,7 +72,7 @@ const SubMenu: React.FC<{
           style={lg.vars}
           {...lg.surfaceProps}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
             {item.children!.map((child) => (
               <DropdownMenuItem
@@ -178,7 +178,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       style={{ ...style, ...lg.vars }}
       {...lg.surfaceProps}
     >
-      {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+      {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
       <div className="aero-lg-content">
         {items.map((item, index) => (
           <DropdownMenuItem

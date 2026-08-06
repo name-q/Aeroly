@@ -472,7 +472,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
             <div className={`${PREFIX}-panels`}>
               {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}

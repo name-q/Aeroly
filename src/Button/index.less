@@ -44,8 +44,7 @@
   }
 
   // ---- types ----
-  // 液态玻璃：玻璃由外层 .aero-button-glass 提供（warp 折射 + 边缘捕光 + hover/active 高光），
-  // 内层 button 透明，只负责文字与点击
+  // 玻璃材质由外层 surface 提供，内层只负责文字和交互。
   &--default {
     appearance: none;
     -webkit-appearance: none;
@@ -143,8 +142,7 @@
 }
 
 // ---- 液态玻璃外层表面（default 专用） ----
-// 玻璃是透明的，靠 warp blur 模糊背景产生质感，而不是不透明深色块。
-// 文字白 + 柔和投影保证白底可读；边缘光/阴影淡小
+// 文字颜色跟随主题，surface 负责透光和边缘层次。
 .aero-button-glass {
   position: relative;
   display: inline-flex;
@@ -153,10 +151,8 @@
   white-space: nowrap;
   transition: transform 150ms ease;
 
-  // 外层保持透明，玻璃质感由背景模糊和边缘光提供。
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
-    background: transparent;
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
@@ -164,7 +160,7 @@
   }
 
   &.aero-lg-surface--full {
-    background: transparent;
+    background: var(--aero-lg-bg);
   }
 
   &:hover {
@@ -172,14 +168,6 @@
   }
 
   @{dark-selector} & {
-    &.aero-lg-surface {
-      background: transparent;
-    }
-
-    &.aero-lg-surface--full {
-      background: transparent;
-    }
-
     &:hover {
       transform: translateY(-1px);
     }

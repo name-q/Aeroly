@@ -334,7 +334,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
             <div className="aero-time-picker-panel">
               <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />

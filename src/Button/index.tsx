@@ -95,7 +95,7 @@ const Button: React.FC<ButtonProps> = ({
         style={{ ...style, ...lg.vars }}
         {...lg.surfaceProps}
       >
-        {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+        {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
         <div className="aero-lg-content">{inner}</div>
         {!isDisabled && <LiquidGlassDecor refs={lg.refs} zIndex={1050} />}
       </div>

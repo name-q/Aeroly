@@ -499,7 +499,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
           onTransitionEnd={handleTransitionEnd}
           {...lg.surfaceProps}
         >
-          {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
           <div className="aero-lg-content">
             {view === 'day' && (
               <DayView

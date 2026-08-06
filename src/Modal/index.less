@@ -45,10 +45,11 @@
   vertical-align: middle;
   border: 1px solid rgba(255, 255, 255, 0.22);
 
-  // 面板保留极轻的透明底，避免内容悬空，同时让背景折射保持可见。
+  // Modal 使用公共 surface 材质，不叠加外部阴影，避免多层弹窗变脏。
   &.aero-lg-surface,
   &.aero-lg-surface--full {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--aero-lg-bg);
+    box-shadow: none;
   }
 
   // 入场动画
@@ -60,10 +61,6 @@
   @{dark-selector} & {
     border-color: rgba(255, 255, 255, 0.08);
 
-    &.aero-lg-surface,
-    &.aero-lg-surface--full {
-      background: rgba(255, 255, 255, 0.06);
-    }
   }
 
   // ---- 头部 ----

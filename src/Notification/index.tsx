@@ -101,7 +101,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
       onTransitionEnd={handleTransitionEnd}
       {...lg.surfaceProps}
     >
-      {lg.isFull && <span ref={lg.refs.warpRef} className="aero-lg-warp" />}
+      {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
       <div className="aero-lg-content">
         <span className="aero-notification-item-icon">
           <Icon icon={IconComp} size={20} />

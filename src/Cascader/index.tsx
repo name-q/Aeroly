@@ -543,7 +543,7 @@ const Cascader: React.FC<CascaderProps> = ({
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
           }}
-          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-cascader-dropdown--open' : ''}`}
+          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-cascader-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <LiquidGlassPopupSurface glass={lg}>

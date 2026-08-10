@@ -35,6 +35,30 @@
   }
 }
 
+.aero-modal-root.aero-lg-host-preparing {
+  // 保持极低不透明度，让浏览器继续合成内部稳定的遮罩和玻璃层。
+  opacity: 0.001;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.aero-modal-root.aero-lg-host-preparing .aero-modal.aero-lg-preparing {
+  // 根层负责隐藏，面板自身保持完整绘制以预热 backdrop 合成层。
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+.aero-modal-root.aero-lg-host-ready {
+  opacity: 1;
+  transition: opacity @modal-duration @transition-timing;
+}
+
+.aero-modal-root.aero-lg-host-preparing .aero-modal-mask,
+.aero-modal-root.aero-lg-host-ready .aero-modal-mask {
+  opacity: 1;
+  animation: none;
+}
+
 // ---- 对话框 ----
 // 玻璃表面基础由 .aero-lg-surface 提供（圆角/半透明底/blur，暗色变量层叠）
 .aero-modal {

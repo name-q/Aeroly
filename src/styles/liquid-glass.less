@@ -120,12 +120,22 @@
 }
 
 .aero-lg-panel.aero-lg-surface--full {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
 }
 
 .aero-lg-panel.aero-lg-surface {
   border-color: transparent !important;
   box-shadow: none !important;
+}
+
+.aero-lg-panel.aero-lg-preparing {
+  // 非零透明度确保浏览器在正式显示前持续合成 backdrop 层。
+  opacity: 0.001 !important;
+  pointer-events: none !important;
+}
+
+.aero-lg-panel.aero-lg-content-pending > .aero-lg-content {
+  opacity: 0 !important;
 }
 
 .aero-lg-panel.aero-lg-surface::before {

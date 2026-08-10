@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef } from 'react';
+import { useCallback, useEffect, useId, useLayoutEffect, useRef } from 'react';
 import type React from 'react';
 import { getLiquidGlassSupport } from './support';
 import { attachLiquidGlassFilter } from './filter';
@@ -60,6 +60,18 @@ interface FrameInput {
   clientY: number;
 }
 
+interface FilterAttachment {
+  surface: HTMLDivElement;
+  warp: HTMLDivElement;
+  host: HTMLElement | null;
+  signature: string;
+  readyFrame: number;
+  contentFrame: number;
+  detach: () => void;
+}
+
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
 export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGlassResult {
   const support = getLiquidGlassSupport();
   const isFull =
@@ -76,20 +88,98 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
   optionsRef.current = options;
 
   const state = useRef({ hovered: false, active: false, raf: 0, input: null as FrameInput | null });
+  const attachmentRef = useRef<FilterAttachment | null>(null);
 
-  useEffect(() => {
-    if (!isFull) return undefined;
+  const detachFilter = useCallback(() => {
+    const attachment = attachmentRef.current;
+    if (!attachment) return;
+    cancelAnimationFrame(attachment.readyFrame);
+    cancelAnimationFrame(attachment.contentFrame);
+    attachment.surface.classList.remove(
+      'aero-lg-preparing',
+      'aero-lg-ready',
+      'aero-lg-content-pending',
+    );
+    attachment.host?.classList.remove('aero-lg-host-preparing', 'aero-lg-host-ready');
+    attachment.detach();
+    attachmentRef.current = null;
+  }, []);
+
+  // 条件渲染的弹层在 ref 就绪后才绑定滤镜；相同节点不会重复初始化。
+  useBrowserLayoutEffect(() => {
     const surface = surfaceRef.current;
     const warp = warpRef.current;
-    if (!surface || !warp) return undefined;
-    return attachLiquidGlassFilter(
+    if (!isFull || !surface || !warp) {
+      if (attachmentRef.current) detachFilter();
+      return;
+    }
+
+    const signature = `${filterId}:${options.displacementScale ?? 42}:${options.aberrationIntensity ?? 0}`;
+    const current = attachmentRef.current;
+    if (current?.surface === surface && current.warp === warp && current.signature === signature) {
+      return;
+    }
+
+    detachFilter();
+    const waitsForGlass = surface.classList.contains('aero-lg-panel');
+    const host = waitsForGlass ? surface.parentElement : null;
+    if (waitsForGlass) {
+      surface.classList.add('aero-lg-preparing', 'aero-lg-content-pending');
+      surface.classList.remove('aero-lg-ready');
+      host?.classList.add('aero-lg-host-preparing');
+      host?.classList.remove('aero-lg-host-ready');
+    }
+
+    let startReadyCheck = () => {};
+    const detach = attachLiquidGlassFilter(
       surface,
       warp,
       filterId,
       options.displacementScale ?? 42,
       options.aberrationIntensity ?? 0,
+      false,
+      () => startReadyCheck(),
     );
-  }, [filterId, isFull, options.aberrationIntensity, options.displacementScale]);
+    const attachment: FilterAttachment = {
+      surface,
+      warp,
+      host,
+      signature,
+      readyFrame: 0,
+      contentFrame: 0,
+      detach,
+    };
+    attachmentRef.current = attachment;
+
+    if (!waitsForGlass) return;
+
+    // 位移图完成解码后再经过两次完整绘制，确保合成层已经生效。
+    startReadyCheck = () => {
+      let paintedFrames = 0;
+      const waitForPaint = () => {
+        attachment.readyFrame = requestAnimationFrame(() => {
+          if (attachmentRef.current !== attachment) return;
+          if (paintedFrames < 2) {
+            paintedFrames += 1;
+            waitForPaint();
+            return;
+          }
+          surface.classList.remove('aero-lg-preparing');
+          surface.classList.add('aero-lg-ready');
+          host?.classList.remove('aero-lg-host-preparing');
+          host?.classList.add('aero-lg-host-ready');
+          attachment.contentFrame = requestAnimationFrame(() => {
+            if (attachmentRef.current === attachment) {
+              surface.classList.remove('aero-lg-content-pending');
+            }
+          });
+        });
+      };
+      waitForPaint();
+    };
+  });
+
+  useBrowserLayoutEffect(() => () => detachFilter(), [detachFilter]);
 
   useEffect(() => () => cancelAnimationFrame(state.current.raf), []);
 

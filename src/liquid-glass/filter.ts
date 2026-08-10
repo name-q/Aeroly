@@ -2,6 +2,18 @@ import { getDisplacementEdgeMap, getDisplacementMap } from './displacement';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
+function decodeImage(source: string): Promise<void> {
+  const image = new Image();
+  image.src = source;
+  if (typeof image.decode === 'function') {
+    return image.decode().catch(() => undefined);
+  }
+  return new Promise((resolve) => {
+    image.onload = () => resolve();
+    image.onerror = () => resolve();
+  });
+}
+
 function filterMarkup(
   id: string,
   width: number,
@@ -63,34 +75,49 @@ export function attachLiquidGlassFilter(
   scale: number,
   aberrationIntensity = 0,
   edgeOnly = false,
+  onPrepared?: () => void,
 ): () => void {
   const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('class', 'aero-lg-filter-defs');
   svg.setAttribute('aria-hidden', 'true');
   surface.appendChild(svg);
-  warp.style.filter = `url(#${id})`;
 
-  const update = () => {
+  const update = (): [string, string] | null => {
     const rect = surface.getBoundingClientRect();
     // 入场缩放只改变视觉尺寸，位移图始终按稳定的布局尺寸生成。
     const width = Math.max(1, Math.ceil(surface.offsetWidth || rect.width));
     const height = Math.max(1, Math.ceil(surface.offsetHeight || rect.height));
     const displacement = getDisplacementMap(width, height);
     const edge = getDisplacementEdgeMap(width, height);
-    if (!displacement || !edge) return;
+    if (!displacement || !edge) return null;
 
     svg.setAttribute('width', String(width));
     svg.setAttribute('height', String(height));
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.innerHTML = `<defs>${filterMarkup(id, width, height, Math.max(18, Math.min(72, scale)), displacement, edge, aberrationIntensity, edgeOnly)}</defs>`;
+    return [displacement, edge];
   };
 
-  update();
+  const initialMaps = update();
+  // defs 完整写入后再引用，避免首帧解析到空滤镜。
+  warp.style.filter = `url(#${id})`;
+  let disposed = false;
+  if (onPrepared) {
+    const notifyPrepared = () => {
+      if (!disposed) onPrepared();
+    };
+    if (initialMaps) {
+      Promise.all(initialMaps.map(decodeImage)).then(notifyPrepared);
+    } else {
+      Promise.resolve().then(notifyPrepared);
+    }
+  }
   const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
   observer?.observe(surface);
   window.addEventListener('resize', update);
 
   return () => {
+    disposed = true;
     observer?.disconnect();
     window.removeEventListener('resize', update);
     warp.style.filter = '';

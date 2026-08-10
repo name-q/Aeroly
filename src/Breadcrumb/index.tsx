@@ -102,7 +102,14 @@ const BreadcrumbItemWithMenu: React.FC<{
   );
 
   return (
-    <Popover content={menuContent} trigger="hover" placement="bottom" offset={4} raw>
+    <Popover
+      content={menuContent}
+      trigger="hover"
+      placement="bottom"
+      offset={4}
+      raw
+      popupClassName="aero-lg-popup-staged"
+    >
       <span className="aero-breadcrumb-item__trigger">
         <BreadcrumbItem item={item} isLast={isLast} />
       </span>
@@ -139,7 +146,14 @@ const BreadcrumbEllipsis: React.FC<{ items: BreadcrumbItemType[] }> = ({ items }
   );
 
   return (
-    <Popover content={menuContent} trigger="hover" placement="bottom" offset={4} raw>
+    <Popover
+      content={menuContent}
+      trigger="hover"
+      placement="bottom"
+      offset={4}
+      raw
+      popupClassName="aero-lg-popup-staged"
+    >
       <span className="aero-breadcrumb-item__link aero-breadcrumb-ellipsis">
         <Icon icon={Ellipsis} size={16} />
       </span>

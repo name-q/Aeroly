@@ -466,7 +466,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
           }}
-          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <LiquidGlassPopupSurface glass={lg}>

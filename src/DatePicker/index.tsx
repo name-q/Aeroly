@@ -493,7 +493,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
           }}
-          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-date-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <LiquidGlassPopupSurface glass={lg}>

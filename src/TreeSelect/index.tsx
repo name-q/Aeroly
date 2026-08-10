@@ -595,7 +595,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
           }}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-tree-select-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <LiquidGlassPopupSurface glass={lg}>

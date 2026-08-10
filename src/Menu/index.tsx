@@ -253,7 +253,7 @@ const SubMenuPopover: React.FC<{ item: MenuItemType }> = ({ item }) => {
         raw
         open={popOpen}
         onOpenChange={setPopOpen}
-        popupClassName="aero-menu-popup-popover"
+        popupClassName="aero-menu-popup-popover aero-lg-popup-staged"
       >
         {titleContent}
       </Popover>

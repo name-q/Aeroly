@@ -63,6 +63,7 @@ const SubMenu: React.FC<{
       placement="right"
       offset={4}
       raw
+      popupClassName="aero-lg-popup-staged"
       content={
         <div className="aero-dropdown-menu">
           {item.children!.map((child) => (
@@ -183,6 +184,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       onOpenChange={onOpenChange}
       raw
       offset={6}
+      popupClassName="aero-lg-popup-staged"
     >
       {children}
     </Popover>

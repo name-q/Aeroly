@@ -3,7 +3,7 @@ import { Loader } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize, useLocale } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -279,26 +279,20 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
           className={[
             'aero-autocomplete-dropdown',
             `aero-autocomplete-dropdown--${placement}`,
             `aero-autocomplete-dropdown--${alignment}`,
-            'aero-lg-surface',
-            'aero-lg-panel',
+            'aero-lg-popup-host',
             'aero-lg-popup',
-            lg.isFull ? 'aero-lg-surface--full' : '',
             animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',
           ]
             .filter(Boolean)
             .join(' ')}
-          style={lg.vars}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             <div className="aero-autocomplete-options" ref={optionsRef}>
               {loading ? (
                 <div className="aero-autocomplete-loading">
@@ -334,8 +328,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
                 <div className="aero-autocomplete-empty">{notFoundContent}</div>
               ) : null}
             </div>
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

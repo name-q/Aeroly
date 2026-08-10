@@ -6,4 +6,5 @@ export type {
   LiquidGlassRefs,
 } from './useLiquidGlass';
 export { LiquidGlassDecor } from './LiquidGlassDecor';
+export { LiquidGlassPopupSurface } from './LiquidGlassPopupSurface';
 export { getLiquidGlassSupport } from './support';

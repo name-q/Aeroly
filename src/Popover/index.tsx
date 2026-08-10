@@ -294,6 +294,7 @@ const Popover: React.FC<PopoverProps> = ({
 
   const popClassNames = [
     'aero-popover',
+    'aero-lg-popup-host',
     raw ? 'aero-popover--raw' : '',
     animating ? 'aero-popover--open' : '',
     `aero-popover--${actualPlacement}`,

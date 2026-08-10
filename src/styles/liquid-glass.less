@@ -138,6 +138,30 @@
   opacity: 0 !important;
 }
 
+.aero-lg-popup-host {
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.aero-lg-popup-host.aero-lg-host-preparing {
+  opacity: 0.001 !important;
+  pointer-events: none !important;
+  will-change: opacity, transform;
+}
+
+.aero-lg-popup-host.aero-lg-host-preparing > .aero-lg-popup-surface.aero-lg-preparing {
+  opacity: 1 !important;
+}
+
+.aero-lg-popup-host > .aero-lg-popup-surface {
+  display: block;
+  box-sizing: border-box;
+  min-width: 100%;
+}
+
 .aero-lg-panel.aero-lg-surface::before {
   opacity: 0.9;
   mix-blend-mode: normal;

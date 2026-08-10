@@ -9,7 +9,7 @@ import {
 import Column from '../DatePicker/Column';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 export interface DateRangePickerProps {
@@ -465,15 +465,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
-          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
-          style={lg.vars}
+          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             <div className={`${PREFIX}-panels`}>
               {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}
               <div className={`${PREFIX}-divider`} />
@@ -490,8 +486,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 </button>
               </div>
             ) : null}
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

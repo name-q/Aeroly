@@ -4,7 +4,7 @@ import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -594,15 +594,11 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
-          style={lg.vars}
+          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-tree-select-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             {showSearch && (
               <div className="aero-tree-select-search">
                 <Icon icon={Search} size={14} className="aero-tree-select-search-icon" />
@@ -623,8 +619,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
                 renderTreeNodes(filteredTreeData, 0)
               )}
             </div>
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

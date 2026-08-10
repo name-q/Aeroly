@@ -3,7 +3,7 @@ import { ChevronDown, X, Check, Search } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useSize } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 // ---- Types ----
@@ -500,15 +500,11 @@ const Select: React.FC<SelectProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
-          style={lg.vars}
+          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-select-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             {showSearch && (
               <div className="aero-select-search">
                 <Icon icon={Search} size={14} className="aero-select-search-icon" />
@@ -528,8 +524,7 @@ const Select: React.FC<SelectProps> = ({
             <div className="aero-select-options" ref={optionsRef}>
               {renderOptions()}
             </div>
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

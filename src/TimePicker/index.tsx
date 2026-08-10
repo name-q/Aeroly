@@ -3,7 +3,7 @@ import { Clock, X } from 'lucide-react';
 import Icon from '../Icon';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 export interface TimePickerProps {
@@ -327,15 +327,11 @@ const TimePicker: React.FC<TimePickerProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-time-picker-dropdown--open' : ''}`}
-          style={lg.vars}
+          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-time-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             <div className="aero-time-picker-panel">
               <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />
               <Column items={minutes} selected={m} onSelect={(v) => updateValue(h, v, s)} />
@@ -368,8 +364,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
                 {localeTime.confirm}
               </button>
             </div>
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

@@ -9,7 +9,7 @@ import {
 import Column from './Column';
 import { useDropdownPosition } from '../utils';
 import { useLocale, useSize } from '../ConfigProvider/useConfig';
-import { liquidGlassPanelOptions, useLiquidGlass, LiquidGlassDecor } from '../liquid-glass';
+import { liquidGlassPanelOptions, LiquidGlassPopupSurface, useLiquidGlass } from '../liquid-glass';
 import './index.less';
 
 export interface DatePickerProps {
@@ -492,15 +492,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
         <div
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
-            lg.refs.surfaceRef.current = node;
           }}
-          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-surface aero-lg-panel aero-lg-popup${lg.isFull ? ' aero-lg-surface--full' : ''}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
-          style={lg.vars}
+          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-date-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
-          {...lg.surfaceProps}
         >
-          {lg.isFull && <div ref={lg.refs.warpRef} className="aero-lg-warp" />}
-          <div className="aero-lg-content">
+          <LiquidGlassPopupSurface glass={lg}>
             {view === 'day' && (
               <DayView
                 viewYear={viewYear}
@@ -573,8 +569,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 onNextDecade={() => setViewYear((y) => y + 10)}
               />
             )}
-          </div>
-          <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
+          </LiquidGlassPopupSurface>
         </div>
       )}
     </div>

@@ -426,6 +426,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       placement={placement}
       open={open}
       onOpenChange={setOpen}
+      popupClassName="aero-lg-popup-staged"
     >
       {trigger}
     </Popover>

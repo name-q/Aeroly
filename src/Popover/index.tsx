@@ -291,10 +291,12 @@ const Popover: React.FC<PopoverProps> = ({
   }, [trigger, isOpen, setOpen]);
 
   const actualPlacement = pos?.actualPlacement || 'top';
+  const hasStagedClass = popupClassName?.split(/\s+/).includes('aero-lg-popup-staged');
 
   const popClassNames = [
     'aero-popover',
     'aero-lg-popup-host',
+    hasStagedClass ? '' : 'aero-lg-popup-staged',
     raw ? 'aero-popover--raw' : '',
     animating ? 'aero-popover--open' : '',
     `aero-popover--${actualPlacement}`,

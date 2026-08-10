@@ -412,6 +412,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
                 trigger="click"
                 placement="top"
                 raw
+                popupClassName="aero-lg-popup-staged"
                 content={
                   <div className={`${P}-danmaku-settings`}>
                     <div className={`${P}-danmaku-row`}>
@@ -471,6 +472,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
               trigger="click"
               placement="top"
               raw
+              popupClassName="aero-lg-popup-staged"
               content={
                 <div className={`${P}-panel`}>
                   {RATES.map(r => (
@@ -496,6 +498,7 @@ const VideoPlayer = forwardRef<VideoPlayerRef, VideoPlayerProps>(({
                 trigger="click"
                 placement="top"
                 raw
+                popupClassName="aero-lg-popup-staged"
                 content={
                   <div className={`${P}-panel`}>
                     {sources!.map(s => (

@@ -328,7 +328,7 @@ const TimePicker: React.FC<TimePickerProps> = ({
           ref={(node: HTMLDivElement | null) => {
             dropdownRef.current = node;
           }}
-          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup${animating ? ' aero-time-picker-dropdown--open' : ''}`}
+          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-time-picker-dropdown--open' : ''}`}
           onTransitionEnd={handleTransitionEnd}
         >
           <LiquidGlassPopupSurface glass={lg}>

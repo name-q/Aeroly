@@ -261,8 +261,20 @@ function openConfirm(config: ConfirmConfig) {
     const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
     const layer = useModalLayer(true);
     const [open, setOpen] = useState(true);
+    const [animating, setAnimating] = useState(false);
     const [loading, setLoading] = useState(false);
     const [mounted, setMounted] = useState(true);
+
+    useEffect(() => {
+      let enterFrame = 0;
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
+      });
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+      };
+    }, []);
 
     const handleOk = async () => {
       if (config.onOk) {
@@ -276,11 +288,13 @@ function openConfirm(config: ConfirmConfig) {
           }
         }
       }
+      setAnimating(false);
       setOpen(false);
     };
 
     const handleCancel = () => {
       config.onCancel?.();
+      setAnimating(false);
       setOpen(false);
     };
 
@@ -304,7 +318,7 @@ function openConfirm(config: ConfirmConfig) {
 
     return (
       <div
-        className={`aero-modal-root${open ? ' aero-modal-root--open' : ''}`}
+        className={`aero-modal-root${animating ? ' aero-modal-root--open' : ''}`}
         style={{ zIndex: layer.zIndex }}
         onTransitionEnd={handleTransitionEnd}
       >
@@ -358,7 +372,7 @@ function openConfirm(config: ConfirmConfig) {
     );
   };
 
-  // 挂载后下一帧触发动画
+  // 挂载后触发入场动画
   root.render(<ConfirmModal />);
 }
 

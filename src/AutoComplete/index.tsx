@@ -92,7 +92,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const currentValue = isControlled ? value! : internalValue;
 
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -101,7 +100,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, open);
 
   // ---- Filter options ----
   const filteredOptions = useMemo(() => {
@@ -122,7 +121,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   // ---- Open/close animation ----
   useEffect(() => {
     if (open) {
-      setMounted(true);
       setActiveIndex(-1);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
@@ -131,12 +129,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
       setAnimating(false);
     }
   }, [open]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // ---- Click outside to close ----
   useEffect(() => {
@@ -275,24 +267,25 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
         )}
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={[
-            'aero-autocomplete-dropdown',
-            `aero-autocomplete-dropdown--${placement}`,
-            `aero-autocomplete-dropdown--${alignment}`,
-            'aero-lg-popup-host',
-            'aero-lg-popup-staged',
-            'aero-lg-popup',
-            animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',
-          ]
-            .filter(Boolean)
-            .join(' ')}
-          onTransitionEnd={handleTransitionEnd}
-        >
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={[
+          'aero-autocomplete-dropdown',
+          `aero-autocomplete-dropdown--${placement}`,
+          `aero-autocomplete-dropdown--${alignment}`,
+          'aero-lg-popup-host',
+          'aero-lg-popup-staged',
+          'aero-lg-popup-prewarmed',
+          'aero-lg-popup',
+          !showDropdown ? 'aero-lg-popup-idle' : '',
+          animating && showDropdown ? 'aero-autocomplete-dropdown--open' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+        aria-hidden={!showDropdown}
+      >
           <LiquidGlassPopupSurface glass={lg}>
             <div className="aero-autocomplete-options" ref={optionsRef}>
               {loading ? (
@@ -330,8 +323,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
               ) : null}
             </div>
           </LiquidGlassPopupSurface>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

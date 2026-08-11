@@ -234,12 +234,11 @@ const TimePicker: React.FC<TimePickerProps> = ({
   const currentValue = isControlled ? value! : internalValue;
 
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, open);
 
   const [h, m, s] = currentValue ? parseTime(currentValue) : [0, 0, 0];
 
@@ -257,7 +256,6 @@ const TimePicker: React.FC<TimePickerProps> = ({
   // Open/close animation
   useEffect(() => {
     if (open) {
-      setMounted(true);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
       });
@@ -265,12 +263,6 @@ const TimePicker: React.FC<TimePickerProps> = ({
       setAnimating(false);
     }
   }, [open]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // Click outside to close
   useEffect(() => {
@@ -323,50 +315,49 @@ const TimePicker: React.FC<TimePickerProps> = ({
         )}
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-time-picker-dropdown--open' : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          <LiquidGlassPopupSurface glass={lg}>
-            <div className="aero-time-picker-panel">
-              <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />
-              <Column items={minutes} selected={m} onSelect={(v) => updateValue(h, v, s)} />
-              {showSecond && (
-                <Column items={seconds} selected={s} onSelect={(v) => updateValue(h, m, v)} />
-              )}
-              <div className="aero-time-picker-indicator" />
-            </div>
-            <div className="aero-time-picker-footer">
-              <button
-                type="button"
-                className="aero-time-picker-now"
-                onClick={() => {
-                  const now = new Date();
-                  updateValue(now.getHours(), now.getMinutes(), now.getSeconds());
-                }}
-              >
-                {localeTime.now}
-              </button>
-              <button
-                type="button"
-                className="aero-time-picker-ok"
-                onClick={() => {
-                  if (!currentValue) {
-                    updateValue(h, m, s);
-                  }
-                  setOpen(false);
-                }}
-              >
-                {localeTime.confirm}
-              </button>
-            </div>
-          </LiquidGlassPopupSurface>
-        </div>
-      )}
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`aero-time-picker-dropdown aero-time-picker-dropdown--${placement} aero-time-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!open ? ' aero-lg-popup-idle' : ''}${animating ? ' aero-time-picker-dropdown--open' : ''}`}
+        aria-hidden={!open}
+        {...(!open ? { inert: '' } : {})}
+      >
+        <LiquidGlassPopupSurface glass={lg}>
+          <div className="aero-time-picker-panel">
+            <Column items={hours} selected={h} onSelect={(v) => updateValue(v, m, s)} />
+            <Column items={minutes} selected={m} onSelect={(v) => updateValue(h, v, s)} />
+            {showSecond && (
+              <Column items={seconds} selected={s} onSelect={(v) => updateValue(h, m, v)} />
+            )}
+            <div className="aero-time-picker-indicator" />
+          </div>
+          <div className="aero-time-picker-footer">
+            <button
+              type="button"
+              className="aero-time-picker-now"
+              onClick={() => {
+                const now = new Date();
+                updateValue(now.getHours(), now.getMinutes(), now.getSeconds());
+              }}
+            >
+              {localeTime.now}
+            </button>
+            <button
+              type="button"
+              className="aero-time-picker-ok"
+              onClick={() => {
+                if (!currentValue) {
+                  updateValue(h, m, s);
+                }
+                setOpen(false);
+              }}
+            >
+              {localeTime.confirm}
+            </button>
+          </div>
+        </LiquidGlassPopupSurface>
+      </div>
     </div>
   );
 };

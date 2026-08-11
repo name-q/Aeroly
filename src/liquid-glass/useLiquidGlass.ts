@@ -155,29 +155,22 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
 
     if (!waitsForGlass) return;
 
-    // 位移图完成解码后再经过两次完整绘制，确保合成层已经生效。
+    // 滤镜完成内部预热后再等一帧，确保面板与最新尺寸同步显示。
     startReadyCheck = () => {
-      let paintedFrames = 0;
-      const waitForPaint = () => {
-        attachment.readyFrame = requestAnimationFrame(() => {
-          if (attachmentRef.current !== attachment) return;
-          if (paintedFrames < 2) {
-            paintedFrames += 1;
-            waitForPaint();
-            return;
+      cancelAnimationFrame(attachment.readyFrame);
+      cancelAnimationFrame(attachment.contentFrame);
+      attachment.readyFrame = requestAnimationFrame(() => {
+        if (attachmentRef.current !== attachment) return;
+        surface.classList.remove('aero-lg-preparing');
+        surface.classList.add('aero-lg-ready');
+        host?.classList.remove('aero-lg-host-preparing');
+        host?.classList.add('aero-lg-host-ready');
+        attachment.contentFrame = requestAnimationFrame(() => {
+          if (attachmentRef.current === attachment) {
+            surface.classList.remove('aero-lg-content-pending');
           }
-          surface.classList.remove('aero-lg-preparing');
-          surface.classList.add('aero-lg-ready');
-          host?.classList.remove('aero-lg-host-preparing');
-          host?.classList.add('aero-lg-host-ready');
-          attachment.contentFrame = requestAnimationFrame(() => {
-            if (attachmentRef.current === attachment) {
-              surface.classList.remove('aero-lg-content-pending');
-            }
-          });
         });
-      };
-      waitForPaint();
+      });
     };
   });
 

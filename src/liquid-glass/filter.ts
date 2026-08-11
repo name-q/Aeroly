@@ -98,7 +98,8 @@ function filterMarkup(
         <feFuncA type="table" tableValues="1 0"/>
       </feComponentTransfer>
       <feComposite in="${source}" in2="CENTER_MASK" operator="in" result="CENTER_GLASS"/>
-      <feComposite in="EDGE_GLASS" in2="CENTER_GLASS" operator="over"/>`;
+      <feComposite in="EDGE_GLASS" in2="CENTER_GLASS" operator="arithmetic"
+        k1="0" k2="1" k3="1" k4="0"/>`;
 
   return `
     <filter id="${id}" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
@@ -128,6 +129,26 @@ export function attachLiquidGlassFilter(
   svg.setAttribute('aria-hidden', 'true');
   surface.appendChild(svg);
 
+  let disposed = false;
+  let renderSignature = '';
+  let renderRevision = 0;
+  let prepareFrame = 0;
+  let settleFrame = 0;
+
+  const schedulePrepared = (maps: [string, string], revision: number) => {
+    if (!onPrepared) return;
+    Promise.all(maps.map(decodeImage)).then(() => {
+      if (disposed || revision !== renderRevision) return;
+      cancelAnimationFrame(prepareFrame);
+      cancelAnimationFrame(settleFrame);
+      prepareFrame = requestAnimationFrame(() => {
+        settleFrame = requestAnimationFrame(() => {
+          if (!disposed && revision === renderRevision) onPrepared();
+        });
+      });
+    });
+  };
+
   const update = (): [string, string] | null => {
     const rect = surface.getBoundingClientRect();
     // 入场缩放只改变视觉尺寸，位移图始终按稳定的布局尺寸生成。
@@ -136,6 +157,12 @@ export function attachLiquidGlassFilter(
     const displacement = getDisplacementMap(width, height);
     const edge = getDisplacementEdgeMap(width, height);
     if (!displacement || !edge) return null;
+
+    const darkMaterial = isolateContent && usesDarkMaterial(surface);
+    const nextSignature = `${width}:${height}:${darkMaterial}`;
+    if (nextSignature === renderSignature) return null;
+    renderSignature = nextSignature;
+    renderRevision += 1;
 
     svg.setAttribute('width', String(width));
     svg.setAttribute('height', String(height));
@@ -150,25 +177,26 @@ export function attachLiquidGlassFilter(
       aberrationIntensity,
       edgeOnly,
       isolateContent,
-      isolateContent && usesDarkMaterial(surface),
+      darkMaterial,
     )}</defs>`;
-    return [displacement, edge];
+    const maps: [string, string] = [displacement, edge];
+    schedulePrepared(maps, renderRevision);
+    return maps;
   };
 
   const initialMaps = update();
+  if (!initialMaps && onPrepared) {
+    renderRevision += 1;
+    const revision = renderRevision;
+    Promise.resolve().then(() => {
+      if (disposed || revision !== renderRevision) return;
+      prepareFrame = requestAnimationFrame(() => {
+        if (!disposed && revision === renderRevision) onPrepared();
+      });
+    });
+  }
   // defs 完整写入后再引用，避免首帧解析到空滤镜。
   warp.style.filter = `url(#${id})`;
-  let disposed = false;
-  if (onPrepared) {
-    const notifyPrepared = () => {
-      if (!disposed) onPrepared();
-    };
-    if (initialMaps) {
-      Promise.all(initialMaps.map(decodeImage)).then(notifyPrepared);
-    } else {
-      Promise.resolve().then(notifyPrepared);
-    }
-  }
   const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
   observer?.observe(surface);
   const themeObserver = isolateContent && typeof MutationObserver !== 'undefined'
@@ -182,6 +210,8 @@ export function attachLiquidGlassFilter(
 
   return () => {
     disposed = true;
+    cancelAnimationFrame(prepareFrame);
+    cancelAnimationFrame(settleFrame);
     observer?.disconnect();
     themeObserver?.disconnect();
     window.removeEventListener('resize', update);

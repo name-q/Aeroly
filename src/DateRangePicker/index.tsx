@@ -124,12 +124,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const currentValue = normalizedValue;
 
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, open);
 
   // 左Panel年月
   const [viewYear, setViewYear] = useState(() => new Date().getFullYear());
@@ -194,7 +193,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   // 动画
   useEffect(() => {
     if (open) {
-      setMounted(true);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
       });
@@ -202,12 +200,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       setAnimating(false);
     }
   }, [open]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // Click outside to close
   useEffect(() => {
@@ -461,34 +453,33 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         )}
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          <LiquidGlassPopupSurface glass={lg}>
-            <div className={`${PREFIX}-panels`}>
-              {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}
-              <div className={`${PREFIX}-divider`} />
-              {renderCalendarPanel(rightDays, rightYear, rightMonth, 'right')}
-            </div>
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`${PREFIX}-dropdown ${PREFIX}-dropdown--${placement} ${PREFIX}-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!open ? ' aero-lg-popup-idle' : ''}${animating ? ` ${PREFIX}-dropdown--open` : ''}`}
+        aria-hidden={!open}
+        {...(!open ? { inert: '' } : {})}
+      >
+        <LiquidGlassPopupSurface glass={lg}>
+          <div className={`${PREFIX}-panels`}>
+            {renderCalendarPanel(leftDays, viewYear, viewMonth, 'left')}
+            <div className={`${PREFIX}-divider`} />
+            {renderCalendarPanel(rightDays, rightYear, rightMonth, 'right')}
+          </div>
 
-            {hasTime ? (
-              <div className={`${PREFIX}-footer ${PREFIX}-footer--showtime`}>
-                <button type="button" className={`${PREFIX}-now`} onClick={handleNow}>
-                  {localeDRP.now}
-                </button>
-                <button type="button" className={`${PREFIX}-ok`} onClick={handleConfirm}>
-                  {localeDRP.confirm}
-                </button>
-              </div>
-            ) : null}
-          </LiquidGlassPopupSurface>
-        </div>
-      )}
+          {hasTime ? (
+            <div className={`${PREFIX}-footer ${PREFIX}-footer--showtime`}>
+              <button type="button" className={`${PREFIX}-now`} onClick={handleNow}>
+                {localeDRP.now}
+              </button>
+              <button type="button" className={`${PREFIX}-ok`} onClick={handleConfirm}>
+                {localeDRP.confirm}
+              </button>
+            </div>
+          ) : null}
+        </LiquidGlassPopupSurface>
+      </div>
     </div>
   );
 };

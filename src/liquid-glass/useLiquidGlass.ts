@@ -114,14 +114,15 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
       return;
     }
 
-    const signature = `${filterId}:${options.displacementScale ?? 42}:${options.aberrationIntensity ?? 0}`;
+    const waitsForGlass = surface.classList.contains('aero-lg-panel');
+    const nestedInPanel = !waitsForGlass && Boolean(surface.parentElement?.closest('.aero-lg-panel'));
+    const signature = `${filterId}:${options.displacementScale ?? 42}:${options.aberrationIntensity ?? 0}:${nestedInPanel}`;
     const current = attachmentRef.current;
     if (current?.surface === surface && current.warp === warp && current.signature === signature) {
       return;
     }
 
     detachFilter();
-    const waitsForGlass = surface.classList.contains('aero-lg-panel');
     const host = waitsForGlass ? surface.parentElement : null;
     if (waitsForGlass) {
       surface.classList.add('aero-lg-preparing', 'aero-lg-content-pending');
@@ -137,8 +138,9 @@ export function useLiquidGlass(options: UseLiquidGlassOptions = {}): UseLiquidGl
       filterId,
       options.displacementScale ?? 42,
       options.aberrationIntensity ?? 0,
-      false,
+      nestedInPanel,
       () => startReadyCheck(),
+      waitsForGlass,
     );
     const attachment: FilterAttachment = {
       surface,

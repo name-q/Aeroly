@@ -54,24 +54,30 @@ const Drawer: React.FC<DrawerProps> = ({
 }) => {
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
 
-  // mounted controls DOM mount, animating controls enter animation
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const [idle, setIdle] = useState(!open);
 
   useEffect(() => {
+    let enterFrame = 0;
     if (open) {
-      setMounted(true);
-      // Trigger enter animation on next frame to ensure DOM is mounted
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      setIdle(false);
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+      };
     } else {
       setAnimating(false);
     }
+    return undefined;
   }, [open]);
 
-  const handleTransitionEnd = () => {
-    if (!open) setMounted(false);
+  const handleTransitionEnd = (e: React.TransitionEvent) => {
+    if (!open && e.target === lg.refs.surfaceRef.current && e.propertyName === 'transform') {
+      setIdle(true);
+    }
   };
 
   // 无遮罩：不锁定 body 滚动，打开时底部页面可继续滚动
@@ -86,7 +92,7 @@ const Drawer: React.FC<DrawerProps> = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, keyboard, onOpenChange]);
 
-  if (!mounted) return null;
+  if (typeof document === 'undefined') return null;
 
   const isHorizontal = placement === 'left' || placement === 'right';
 
@@ -97,15 +103,24 @@ const Drawer: React.FC<DrawerProps> = ({
 
   const classNames = [
     'aero-drawer',
+    'aero-lg-popup-host',
+    'aero-lg-popup-staged',
+    'aero-lg-popup-prewarmed',
     `aero-drawer--${placement}`,
     animating ? 'aero-drawer--open' : '',
+    idle ? 'aero-lg-popup-idle' : '',
     className || '',
   ]
     .filter(Boolean)
     .join(' ');
 
   return createPortal(
-    <div className={classNames} onTransitionEnd={handleTransitionEnd}>
+    <div
+      className={classNames}
+      aria-hidden={!open}
+      {...(!open ? { inert: '' } : {})}
+      onTransitionEnd={handleTransitionEnd}
+    >
       <div
         ref={lg.refs.surfaceRef}
         className={`aero-drawer-panel aero-lg-surface aero-lg-panel${lg.isFull ? ' aero-lg-surface--full' : ''}`}
@@ -138,7 +153,7 @@ const Drawer: React.FC<DrawerProps> = ({
           {footer && <div className="aero-drawer-footer">{footer}</div>}
         </div>
       </div>
-      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1000} />}
+      <LiquidGlassDecor refs={lg.refs} zIndex={1000} />
     </div>,
     document.body,
   );

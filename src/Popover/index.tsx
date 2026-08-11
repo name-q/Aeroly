@@ -186,7 +186,6 @@ const Popover: React.FC<PopoverProps> = ({
   const isOpen = isControlled ? open! : internalOpen;
 
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [pos, setPos] = useState<Pos | null>(null);
 
@@ -213,24 +212,27 @@ const Popover: React.FC<PopoverProps> = ({
     const result = flipIfNeeded(triggerRect, popRect, placement, offset);
     setPos(result);
   }, [placement, offset]);
-  // Mount/unmount animation
+  // Keep the popup mounted so its glass surface is ready before interaction.
   useEffect(() => {
+    let enterFrame = 0;
     if (isOpen) {
-      setMounted(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+      };
     } else {
       setAnimating(false);
     }
+    return undefined;
   }, [isOpen]);
 
-  // 挂载后Calculate position
+  // Position the already-mounted popup with its real dimensions.
   useEffect(() => {
-    if (mounted) {
-      updatePosition();
-    }
-  }, [mounted, updatePosition]);
+    updatePosition();
+  }, [updatePosition, content, title, raw]);
 
   // 滚动/resize 时更新位置
   useEffect(() => {
@@ -243,13 +245,6 @@ const Popover: React.FC<PopoverProps> = ({
       window.removeEventListener('resize', handleUpdate);
     };
   }, [isOpen, updatePosition]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!isOpen && e.propertyName === 'opacity') {
-      setMounted(false);
-      setPos(null);
-    }
-  };
 
   // ---- 触发逻辑 ----
 
@@ -297,8 +292,10 @@ const Popover: React.FC<PopoverProps> = ({
     'aero-popover',
     'aero-lg-popup-host',
     hasStagedClass ? '' : 'aero-lg-popup-staged',
+    'aero-lg-popup-prewarmed',
+    !isOpen ? 'aero-lg-popup-idle' : '',
     raw ? 'aero-popover--raw' : '',
-    animating ? 'aero-popover--open' : '',
+    animating && isOpen ? 'aero-popover--open' : '',
     `aero-popover--${actualPlacement}`,
     popupClassName || '',
     className || '',
@@ -306,7 +303,7 @@ const Popover: React.FC<PopoverProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  const popup = mounted ? (
+  const popup = (
     <div
       ref={popRef}
       className={popClassNames}
@@ -315,7 +312,8 @@ const Popover: React.FC<PopoverProps> = ({
         top: pos ? pos.top : -9999,
         left: pos ? pos.left : -9999,
       }}
-      onTransitionEnd={handleTransitionEnd}
+      aria-hidden={!isOpen}
+      {...(!isOpen ? { inert: '' } : {})}
       onMouseEnter={(e) => {
         lg.surfaceProps.onMouseEnter(e);
         if (trigger === 'hover') handleMouseEnter();
@@ -347,7 +345,7 @@ const Popover: React.FC<PopoverProps> = ({
       </div>
       <LiquidGlassDecor refs={lg.refs} zIndex={1050} />
     </div>
-  ) : null;
+  );
 
   return (
     <>
@@ -360,7 +358,7 @@ const Popover: React.FC<PopoverProps> = ({
       >
         {children}
       </span>
-      {popup && createPortal(popup, document.body)}
+      {typeof document !== 'undefined' && createPortal(popup, document.body)}
     </>
   );
 };

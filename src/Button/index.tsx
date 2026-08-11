@@ -31,19 +31,20 @@ export interface ButtonProps {
   style?: React.CSSProperties;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  type = 'default',
-  size: sizeProp,
-  pill = false,
-  disabled = false,
-  loading = false,
-  icon,
-  onClick,
-  htmlType = 'button',
-  className,
-  style,
-}) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const {
+    children,
+    type = 'default',
+    size: sizeProp,
+    pill = false,
+    disabled = false,
+    loading = false,
+    icon,
+    onClick,
+    htmlType = 'button',
+    className,
+    style,
+  } = props;
   const size = useSize(sizeProp);
   const isDisabled = disabled || loading;
 
@@ -72,6 +73,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const inner = (
     <button
+      ref={ref}
       type={htmlType}
       className={classNames}
       style={type === 'default' ? undefined : style}
@@ -103,6 +105,8 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return inner;
-};
+});
+
+Button.displayName = 'Button';
 
 export default Button;

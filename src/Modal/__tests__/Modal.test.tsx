@@ -26,9 +26,10 @@ describe('Modal liquid glass layering', () => {
   });
 
   it('keeps default buttons free of body-level glass decoration nodes', () => {
-    render(<Button>Default</Button>);
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<Button ref={ref}>Default</Button>);
 
-    expect(screen.getByRole('button', { name: 'Default' })).toBeTruthy();
+    expect(ref.current).toBe(screen.getByRole('button', { name: 'Default' }));
     expect(document.querySelector('.aero-lg-warp')?.getAttribute('style') || '').toContain('url(#aero-lg-');
     expect(document.body.querySelectorAll('svg[aria-hidden="true"]')).toHaveLength(0);
     expect(document.body.querySelectorAll('.aero-lg-edge')).toHaveLength(0);

@@ -317,13 +317,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const currentValue = isControlled ? value! : internalValue;
 
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [view, setView] = useState<ViewType>('day');
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1050 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, open);
 
   // Parse selected value (including time part)
   const [selY, selM, selD, selH, selMi, selS] = currentValue ? parseDateTime(currentValue) : [0, -1, 0, 0, 0, 0];
@@ -371,7 +370,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
   // Open/close animation
   useEffect(() => {
     if (open) {
-      setMounted(true);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
       });
@@ -379,12 +377,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
       setAnimating(false);
     }
   }, [open]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // Click outside to close
   useEffect(() => {
@@ -488,14 +480,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
         )}
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-date-picker-dropdown--open' : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`aero-date-picker-dropdown aero-date-picker-dropdown--${placement} aero-date-picker-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!open ? ' aero-lg-popup-idle' : ''}${animating ? ' aero-date-picker-dropdown--open' : ''}`}
+        aria-hidden={!open}
+        {...(!open ? { inert: '' } : {})}
+      >
           <LiquidGlassPopupSurface glass={lg}>
             {view === 'day' && (
               <DayView
@@ -570,8 +562,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               />
             )}
           </LiquidGlassPopupSurface>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

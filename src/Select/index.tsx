@@ -138,7 +138,6 @@ const Select: React.FC<SelectProps> = ({
     [isOpenControlled, onOpenChange],
   );
 
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -148,7 +147,7 @@ const Select: React.FC<SelectProps> = ({
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, isOpen);
 
   // ---- 展平选项 ----
   const flatOptions = useMemo(() => flattenOptions(options), [options]);
@@ -172,24 +171,25 @@ const Select: React.FC<SelectProps> = ({
 
   // ---- Open/close animation ----
   useEffect(() => {
+    let enterFrame = 0;
+    let focusTimer = 0;
     if (isOpen) {
-      setMounted(true);
       setSearchText('');
       setActiveIndex(-1);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
-      setTimeout(() => searchRef.current?.focus(), 50);
+      focusTimer = window.setTimeout(() => searchRef.current?.focus(), 50);
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+        clearTimeout(focusTimer);
+      };
     } else {
       setAnimating(false);
     }
+    return undefined;
   }, [isOpen]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!isOpen && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // ---- Click outside to close ----
   useEffect(() => {
@@ -496,37 +496,36 @@ const Select: React.FC<SelectProps> = ({
         </span>
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-select-dropdown--open' : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          <LiquidGlassPopupSurface glass={lg}>
-            {showSearch && (
-              <div className="aero-select-search">
-                <Icon icon={Search} size={14} className="aero-select-search-icon" />
-                <input
-                  ref={searchRef}
-                  className="aero-select-search-input"
-                  placeholder={searchPlaceholder}
-                  value={searchText}
-                  onChange={(e) => {
-                    setSearchText(e.target.value);
-                    setActiveIndex(-1);
-                  }}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-            )}
-            <div className="aero-select-options" ref={optionsRef}>
-              {renderOptions()}
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`aero-select-dropdown aero-select-dropdown--${placement} aero-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!isOpen ? ' aero-lg-popup-idle' : ''}${animating ? ' aero-select-dropdown--open' : ''}`}
+        aria-hidden={!isOpen}
+      >
+        <LiquidGlassPopupSurface glass={lg}>
+          {showSearch && (
+            <div className="aero-select-search">
+              <Icon icon={Search} size={14} className="aero-select-search-icon" />
+              <input
+                ref={searchRef}
+                className="aero-select-search-input"
+                placeholder={searchPlaceholder}
+                value={searchText}
+                tabIndex={isOpen ? 0 : -1}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                  setActiveIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
+              />
             </div>
-          </LiquidGlassPopupSurface>
-        </div>
-      )}
+          )}
+          <div className="aero-select-options" ref={optionsRef}>
+            {renderOptions()}
+          </div>
+        </LiquidGlassPopupSurface>
+      </div>
     </div>
   );
 };

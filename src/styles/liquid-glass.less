@@ -152,6 +152,17 @@
   will-change: opacity, transform;
 }
 
+.aero-lg-popup-host.aero-lg-popup-idle {
+  opacity: 0.0001 !important;
+  pointer-events: none !important;
+  will-change: opacity, transform;
+}
+
+.aero-lg-popup-host.aero-lg-popup-prewarmed {
+  transition-property: transform !important;
+  transition-delay: 0ms !important;
+}
+
 .aero-lg-popup-host.aero-lg-host-preparing > .aero-lg-popup-surface.aero-lg-preparing {
   opacity: 1 !important;
 }

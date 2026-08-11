@@ -178,7 +178,6 @@ const Cascader: React.FC<CascaderProps> = ({
     [isOpenControlled, onOpenChange],
   );
 
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
 
@@ -189,7 +188,7 @@ const Cascader: React.FC<CascaderProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, isOpen);
 
   // ---- Search ----
   const allPaths = useMemo(() => flattenPaths(options), [options]);
@@ -205,8 +204,9 @@ const Cascader: React.FC<CascaderProps> = ({
 
   // ---- Open/close animation ----
   useEffect(() => {
+    let enterFrame = 0;
+    let focusTimer = 0;
     if (isOpen) {
-      setMounted(true);
       setSearchText('');
       // Initialize activePath to current selected value path
       if (!multiple) {
@@ -215,20 +215,20 @@ const Cascader: React.FC<CascaderProps> = ({
       } else {
         setActivePath([]);
       }
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
-      setTimeout(() => searchRef.current?.focus(), 50);
+      focusTimer = window.setTimeout(() => searchRef.current?.focus(), 50);
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+        clearTimeout(focusTimer);
+      };
     } else {
       setAnimating(false);
     }
+    return undefined;
   }, [isOpen]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!isOpen && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // ---- Click outside to close ----
   useEffect(() => {
@@ -538,32 +538,31 @@ const Cascader: React.FC<CascaderProps> = ({
         </span>
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-cascader-dropdown--open' : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          <LiquidGlassPopupSurface glass={lg}>
-            {showSearch && (
-              <div className="aero-cascader-search">
-                <Icon icon={Search} size={14} className="aero-cascader-search-icon" />
-                <input
-                  ref={searchRef}
-                  className="aero-cascader-search-input"
-                  placeholder={searchPlaceholder}
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-            )}
-            {showSearch && searchText ? renderSearchResults() : renderColumns()}
-          </LiquidGlassPopupSurface>
-        </div>
-      )}
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`aero-cascader-dropdown aero-cascader-dropdown--${placement} aero-cascader-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!isOpen ? ' aero-lg-popup-idle' : ''}${animating ? ' aero-cascader-dropdown--open' : ''}`}
+        aria-hidden={!isOpen}
+      >
+        <LiquidGlassPopupSurface glass={lg}>
+          {showSearch && (
+            <div className="aero-cascader-search">
+              <Icon icon={Search} size={14} className="aero-cascader-search-icon" />
+              <input
+                ref={searchRef}
+                className="aero-cascader-search-input"
+                placeholder={searchPlaceholder}
+                value={searchText}
+                tabIndex={isOpen ? 0 : -1}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+          )}
+          {showSearch && searchText ? renderSearchResults() : renderColumns()}
+        </LiquidGlassPopupSurface>
+      </div>
     </div>
   );
 };

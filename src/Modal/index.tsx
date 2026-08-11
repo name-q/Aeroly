@@ -76,13 +76,13 @@ const Modal: React.FC<ModalProps> & {
   const finalCancelText = cancelText ?? localeModal.cancelText;
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1000 });
   const layer = useModalLayer(open);
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const [idle, setIdle] = useState(!open);
   const [okLoading, setOkLoading] = useState(false);
 
   useEffect(() => {
     if (open) {
-      setMounted(true);
+      setIdle(false);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimating(true));
       });
@@ -92,8 +92,8 @@ const Modal: React.FC<ModalProps> & {
   }, [open]);
 
   const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
+    if (!open && e.target === lg.refs.surfaceRef.current && e.propertyName === 'opacity') {
+      setIdle(true);
     }
   };
 
@@ -137,11 +137,10 @@ const Modal: React.FC<ModalProps> & {
     onOpenChange(false);
   };
 
-  if (!mounted) return null;
-
   const classNames = [
     'aero-modal-root',
     animating ? 'aero-modal-root--open' : '',
+    idle ? 'aero-lg-host-idle' : '',
     centered ? 'aero-modal-root--centered' : '',
   ]
     .filter(Boolean)
@@ -178,7 +177,12 @@ const Modal: React.FC<ModalProps> & {
   };
 
   return createPortal(
-    <div className={classNames} style={{ zIndex: layer.zIndex }} onTransitionEnd={handleTransitionEnd}>
+    <div
+      className={classNames}
+      style={{ zIndex: layer.zIndex }}
+      aria-hidden={!open}
+      onTransitionEnd={handleTransitionEnd}
+    >
       {mask && layer.isTop && (
         <div
           className="aero-modal-mask"
@@ -205,7 +209,7 @@ const Modal: React.FC<ModalProps> & {
           {renderFooter()}
         </div>
       </div>
-      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={layer.zIndex} />}
+      <LiquidGlassDecor refs={lg.refs} zIndex={layer.zIndex} />
     </div>,
     document.body,
   );

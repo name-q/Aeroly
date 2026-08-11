@@ -234,7 +234,6 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     [isOpenControlled, onOpenChange],
   );
 
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [searchText, setSearchText] = useState('');
 
@@ -242,7 +241,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, mounted);
+  const { placement, alignment } = useDropdownPosition(wrapRef, dropdownRef, isOpen);
 
   // ---- Expand state ----
   const allKeys = useMemo(() => collectAllKeys(treeData), [treeData]);
@@ -287,23 +286,24 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
 
   // ---- Open/close animation ----
   useEffect(() => {
+    let enterFrame = 0;
+    let focusTimer = 0;
     if (isOpen) {
-      setMounted(true);
       setSearchText('');
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
-      setTimeout(() => searchRef.current?.focus(), 50);
+      focusTimer = window.setTimeout(() => searchRef.current?.focus(), 50);
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+        clearTimeout(focusTimer);
+      };
     } else {
       setAnimating(false);
     }
+    return undefined;
   }, [isOpen]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!isOpen && e.propertyName === 'opacity') {
-      setMounted(false);
-    }
-  };
 
   // ---- Click outside to close ----
   useEffect(() => {
@@ -590,38 +590,38 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
         </span>
       </div>
 
-      {mounted && (
-        <div
-          ref={(node: HTMLDivElement | null) => {
-            dropdownRef.current = node;
-          }}
-          className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup${animating ? ' aero-tree-select-dropdown--open' : ''}`}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          <LiquidGlassPopupSurface glass={lg}>
-            {showSearch && (
-              <div className="aero-tree-select-search">
-                <Icon icon={Search} size={14} className="aero-tree-select-search-icon" />
-                <input
-                  ref={searchRef}
-                  className="aero-tree-select-search-input"
-                  placeholder={searchPlaceholder}
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-            )}
-            <div className="aero-tree-select-tree-wrapper">
-              {filteredTreeData.length === 0 ? (
-                <div className="aero-tree-select-empty">{notFoundContent}</div>
-              ) : (
-                renderTreeNodes(filteredTreeData, 0)
-              )}
+      <div
+        ref={(node: HTMLDivElement | null) => {
+          dropdownRef.current = node;
+        }}
+        className={`aero-tree-select-dropdown aero-tree-select-dropdown--${placement} aero-tree-select-dropdown--${alignment} aero-lg-popup-host aero-lg-popup-staged aero-lg-popup-prewarmed aero-lg-popup${!isOpen ? ' aero-lg-popup-idle' : ''}${animating ? ' aero-tree-select-dropdown--open' : ''}`}
+        aria-hidden={!isOpen}
+        {...(!isOpen ? { inert: '' } : {})}
+      >
+        <LiquidGlassPopupSurface glass={lg}>
+          {showSearch && (
+            <div className="aero-tree-select-search">
+              <Icon icon={Search} size={14} className="aero-tree-select-search-icon" />
+              <input
+                ref={searchRef}
+                className="aero-tree-select-search-input"
+                placeholder={searchPlaceholder}
+                value={searchText}
+                tabIndex={isOpen ? 0 : -1}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
             </div>
-          </LiquidGlassPopupSurface>
-        </div>
-      )}
+          )}
+          <div className="aero-tree-select-tree-wrapper">
+            {filteredTreeData.length === 0 ? (
+              <div className="aero-tree-select-empty">{notFoundContent}</div>
+            ) : (
+              renderTreeNodes(filteredTreeData, 0)
+            )}
+          </div>
+        </LiquidGlassPopupSurface>
+      </div>
     </div>
   );
 };

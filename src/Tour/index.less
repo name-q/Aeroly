@@ -35,6 +35,10 @@
   transition: opacity @tour-duration @transition-timing,
               transform @tour-duration @transition-timing;
 
+  &.aero-lg-popup-prewarmed {
+    transition-property: transform;
+  }
+
   @{dark-selector} & {
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),

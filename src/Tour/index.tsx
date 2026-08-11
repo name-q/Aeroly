@@ -156,8 +156,8 @@ const Tour: React.FC<TourProps> = (props) => {
   const activeCurrent = isControlled ? controlledCurrent! : internalCurrent;
 
   const lg = useLiquidGlass({ ...liquidGlassPanelOptions, zIndex: 1061 });
-  const [mounted, setMounted] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const [idle, setIdle] = useState(!open);
   const [pos, setPos] = useState<Pos | null>(null);
 
   const popRef = useRef<HTMLDivElement | null>(null);
@@ -183,22 +183,28 @@ const Tour: React.FC<TourProps> = (props) => {
     }
   }, [open]);
 
-  // Mount/unmount animation
+  // Keep the glass surface mounted while preserving the exit movement.
   useEffect(() => {
+    let enterFrame = 0;
     if (open) {
-     setMounted(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+      setIdle(false);
+      const mountFrame = requestAnimationFrame(() => {
+        enterFrame = requestAnimationFrame(() => setAnimating(true));
       });
+      return () => {
+        cancelAnimationFrame(mountFrame);
+        cancelAnimationFrame(enterFrame);
+      };
     } else {
       setAnimating(false);
+      const idleTimer = window.setTimeout(() => setIdle(true), 260);
+      return () => clearTimeout(idleTimer);
     }
   }, [open]);
 
   const handleTransitionEnd = (e: React.TransitionEvent) => {
-    if (!open && e.propertyName === 'opacity') {
-      setMounted(false);
-      setPos(null);
+    if (!open && e.target === popRef.current && e.propertyName === 'transform') {
+      setIdle(true);
     }
   };
 
@@ -245,11 +251,10 @@ const Tour: React.FC<TourProps> = (props) => {
   }, [step, offset, spotlightPadding]);
 
   useEffect(() => {
-    if (mounted) {
-      // 延迟一帧让 popRef Render
-      requestAnimationFrame(() => updatePosition());
-    }
-  }, [mounted, activeCurrent, updatePosition]);
+    if (!open) return undefined;
+    const frame = requestAnimationFrame(() => updatePosition());
+    return () => cancelAnimationFrame(frame);
+  }, [open, activeCurrent, updatePosition]);
 
   // 滚动/resize 更新
   useEffect(() => {
@@ -311,13 +316,17 @@ const Tour: React.FC<TourProps> = (props) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, keyboard, handleNext, handlePrev, handleClose]);
 
-  if (!mounted) return null;
+  if (typeof document === 'undefined') return null;
 
   const actualPlacement = pos?.actualPlacement || 'bottom';
 
   const rootCls = [
     'aero-tour-root',
+    'aero-lg-popup-host',
+    'aero-lg-popup-staged',
+    'aero-lg-popup-prewarmed',
     animating ? 'aero-tour-root--open' : '',
+    idle ? 'aero-lg-popup-idle' : '',
     className || '',
   ]
     .filter(Boolean)
@@ -325,6 +334,7 @@ const Tour: React.FC<TourProps> = (props) => {
 
   const popCls = [
     'aero-tour-popover',
+    'aero-lg-popup-prewarmed',
     `aero-tour-popover--${actualPlacement}`,
     animating ? 'aero-tour-popover--open' : '',
   ]
@@ -332,7 +342,12 @@ const Tour: React.FC<TourProps> = (props) => {
     .join(' ');
 
   return createPortal(
-    <div className={rootCls} onTransitionEnd={handleTransitionEnd}>
+    <div
+      className={rootCls}
+      aria-hidden={!open}
+      {...(!open ? { inert: '' } : {})}
+      onTransitionEnd={handleTransitionEnd}
+    >
 
       {/* Popover card */}
       <div
@@ -390,7 +405,7 @@ const Tour: React.FC<TourProps> = (props) => {
           </div>
         </div>
       </div>
-      {mounted && <LiquidGlassDecor refs={lg.refs} zIndex={1061} />}
+      <LiquidGlassDecor refs={lg.refs} zIndex={1061} />
     </div>,
     document.body,
   );

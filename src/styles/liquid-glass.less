@@ -157,17 +157,13 @@
 }
 
 .aero-lg-popup-host.aero-lg-popup-staged.aero-lg-host-ready {
-  --aero-lg-popup-settle-delay: 64ms;
-  --aero-lg-popup-enter-duration: 200ms;
-
-  transition-delay: var(--aero-lg-popup-settle-delay);
+  transition-delay: 0ms;
 }
 
 .aero-lg-popup-host.aero-lg-popup-staged.aero-lg-host-ready
   > .aero-lg-popup-surface
   > .aero-lg-content {
-  animation: aero-lg-popup-content-in 60ms ease-out
-    calc(var(--aero-lg-popup-settle-delay) + var(--aero-lg-popup-enter-duration)) both;
+  animation: aero-lg-popup-content-in 100ms ease-out both;
 }
 
 .aero-lg-popup-host > .aero-lg-popup-surface {

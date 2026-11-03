@@ -49,10 +49,14 @@
 
     @{dark-selector} & {
       background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.06);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
                   0 1px 4px rgba(0, 0, 0, 0.15);
       color: #f0f0f0;
+
+      > .aero-lg-auto-warp {
+        opacity: 0.4;
+      }
     }
 
     &:hover {
@@ -64,7 +68,7 @@
 
       @{dark-selector} & {
         background: rgba(255, 255, 255, 0.10);
-        border-color: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.10);
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4),
                     0 2px 6px rgba(0, 0, 0, 0.2);
       }

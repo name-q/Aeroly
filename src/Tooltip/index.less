@@ -6,7 +6,9 @@
 .aero-tooltip {
 
   // 内容面板：深色半透明，blur 用 8px（覆盖 hook 默认 40px）
-  .aero-popover-inner {
+  // 叠加 .aero-lg-surface 提升优先级：liquid-glass.less 被多个组件重复引入，
+  // 其 `.aero-lg-panel.aero-lg-surface--full { background: transparent }` 可能后加载覆盖深色底
+  .aero-popover-inner.aero-lg-surface {
     --aero-lg-blur: 8px !important;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.06);

@@ -16,7 +16,7 @@ const containerStyle: React.CSSProperties = {
 
 export default () => {
   return (
-    <Flex gap={16}>
+    <Flex gap={16} align="center">
       <div style={containerStyle}>
         <p style={{ color: '#999', fontSize: 13 }}>容器 A</p>
         <div style={{ height: 60 }} />

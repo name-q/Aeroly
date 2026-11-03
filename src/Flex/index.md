@@ -11,23 +11,19 @@ toc: content
 
 # Flex
 
-Intent-driven flex layout component. Defaults to horizontal direction with vertical centering. Uses semantic props instead of hand-written flex CSS, making common layouts a one-liner for both AI and humans.
+Flex layout container for setting alignment and spacing between children.
 
 ## Basic Usage
 
 <code src="./en/demos/basic.tsx" id="basic-en"></code>
 
-## Vertical Direction
+## Vertical
 
 <code src="./en/demos/vertical.tsx" id="vertical-en"></code>
 
-## Main Axis Distribution
+## Alignment
 
 <code src="./en/demos/justify.tsx" id="justify-en"></code>
-
-## Centering
-
-<code src="./en/demos/center.tsx" id="center-en"></code>
 
 ## Wrapping
 
@@ -37,34 +33,27 @@ Intent-driven flex layout component. Defaults to horizontal direction with verti
 
 <code src="./en/demos/flex.tsx" id="flex-en"></code>
 
-## Auto Spacing
-
-<code src="./en/demos/auto.tsx" id="auto-en"></code>
-
 ## API
+
+Flex lays out horizontally with top alignment by default; with `vertical`, children stretch horizontally. The API matches antd Flex.
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
-| direction | Main axis direction | `'row' \| 'column'` | `'row'` |
-| justify | Main axis distribution | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
-| align | Cross axis alignment | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'center'` |
-| gap | Gap size, number in px | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | - |
-| wrap | Whether to wrap | `boolean` | `false` |
-| center | Horizontal + vertical centering | `boolean` | `false` |
-| full | Fill parent container width | `boolean` | `false` |
-| inline | Inline flex box | `boolean` | `false` |
-| flex | Flex control: number for flex ratio, `"100px"` for fixed width, also supports full syntax like `"0 0 100px"` | `number \| string` | - |
-| auto | Margin auto abstraction | `boolean \| 'left' \| 'right' \| 'top' \| 'bottom'` | - |
-| component | HTML tag to render | `React.ElementType` | `'div'` |
-| children | Child elements | `ReactNode` | - |
-| className | Custom class name | `string` | - |
-| style | Custom style | `CSSProperties` | - |
+| vertical | Whether the main axis is vertical, i.e. `flex-direction: column` | `boolean` | `false` |
+| orientation | Main axis orientation, takes precedence over `vertical` | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| wrap | Wrapping behavior, `true` equals `'wrap'` | `boolean \| CSSProperties['flexWrap']` | `'nowrap'` |
+| justify | Main axis alignment, i.e. `justify-content` | `CSSProperties['justifyContent']` | `normal` |
+| align | Cross axis alignment, i.e. `align-items` | `CSSProperties['alignItems']` | `normal` |
+| flex | `flex` CSS shorthand | `CSSProperties['flex']` | - |
+| gap | Gap between children | `'small' \| 'medium' \| 'large' \| string \| number` | - |
+| component | Custom element type | `React.ElementType` | `'div'` |
 
-### gap Semantic Tokens
+Other HTML attributes (`className`, `style`, `onClick`, etc.) are passed to the root element.
 
-| Token | Value |
-|-------|-------|
-| `xs` | 4px |
-| `sm` | 8px |
-| `md` | 12px |
-| `lg` | 16px |
+### gap presets
+
+| Value | Gap |
+|-------|-----|
+| `small` | 8px |
+| `medium` | 16px |
+| `large` | 24px |

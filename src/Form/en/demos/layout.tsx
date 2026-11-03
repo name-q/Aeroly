@@ -159,7 +159,7 @@ export default () => {
         </Form.Item>
 
         <Form.Item>
-          <Flex gap={12}>
+          <Flex gap={12} align="center">
             <Button type="primary" htmlType="submit">Search</Button>
             {isInline && (
               <Button onClick={() => setExpanded(!expanded)}>

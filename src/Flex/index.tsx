@@ -1,146 +1,78 @@
 import React from 'react';
 import './index.less';
 
-// ---- Types ----
+export type FlexOrientation = 'horizontal' | 'vertical';
 
-export interface FlexProps {
-  /** 主轴Direction */
-  direction?: 'row' | 'column';
-  /** 主轴分布 */
-  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  /** Cross-axis alignment */
-  align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-  /** Gap，数字为 px，支持语义化 token */
-  gap?: number | 'xs' | 'sm' | 'md' | 'lg';
-  /** Whether to wrap */
-  wrap?: boolean;
-  /** 水平+垂直双向居中的快捷方式 */
-  center?: boolean;
-  /** 撑满父容器Width */
-  full?: boolean;
-  /** Whether为行内弹性盒 */
-  inline?: boolean;
-  /** CSS flex 属性（用于作为Children时控制伸缩） */
-  flex?: number | string;
-  /** margin auto 抽象，用于推开相邻元素 */
-  auto?: boolean | 'left' | 'right' | 'top' | 'bottom';
-  /** Render的 HTML 标签 */
+export type FlexGapSize = 'small' | 'medium' | 'large';
+
+export interface FlexProps extends Omit<React.HTMLAttributes<HTMLElement>, 'wrap'> {
+  /** Whether the main axis is vertical (`flex-direction: column`) */
+  vertical?: boolean;
+  /** Main axis orientation, takes precedence over `vertical` */
+  orientation?: FlexOrientation;
+  /** Wrapping behavior; `true` equals `'wrap'` */
+  wrap?: boolean | React.CSSProperties['flexWrap'];
+  /** Main axis alignment (`justify-content`) */
+  justify?: React.CSSProperties['justifyContent'];
+  /** Cross axis alignment (`align-items`) */
+  align?: React.CSSProperties['alignItems'];
+  /** `flex` CSS shorthand */
+  flex?: React.CSSProperties['flex'];
+  /** Gap between items */
+  gap?: FlexGapSize | React.CSSProperties['gap'];
+  /** Custom element type */
   component?: React.ElementType;
-  /** Children */
-  children?: React.ReactNode;
-  /** Custom class name */
-  className?: string;
-  /** Custom style */
-  style?: React.CSSProperties;
 }
 
-// ---- Maps ----
+const presetGaps: FlexGapSize[] = ['small', 'medium', 'large'];
 
-const gapTokens: Record<string, number> = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-};
+const Flex = React.forwardRef<HTMLElement, FlexProps>(
+  (
+    {
+      vertical,
+      orientation,
+      wrap,
+      justify,
+      align,
+      flex,
+      gap,
+      component: Component = 'div',
+      className,
+      style,
+      children,
+      ...rest
+    },
+    ref,
+  ) => {
+    const isVertical = orientation ? orientation === 'vertical' : !!vertical;
+    const isPresetGap = presetGaps.includes(gap as FlexGapSize);
+    const mergedWrap = wrap === true ? 'wrap' : wrap || undefined;
 
-const justifyMap: Record<string, string> = {
-  start: 'flex-start',
-  center: 'center',
-  end: 'flex-end',
-  between: 'space-between',
-  around: 'space-around',
-  evenly: 'space-evenly',
-};
+    const cls = [
+      'aero-flex',
+      isVertical ? 'aero-flex-vertical' : '',
+      isPresetGap ? `aero-flex-gap-${gap}` : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-const alignMap: Record<string, string> = {
-  start: 'flex-start',
-  center: 'center',
-  end: 'flex-end',
-  stretch: 'stretch',
-  baseline: 'baseline',
-};
+    const s: React.CSSProperties = {};
+    if (mergedWrap) s.flexWrap = mergedWrap;
+    if (justify) s.justifyContent = justify;
+    if (align) s.alignItems = align;
+    else if (isVertical) s.alignItems = 'stretch';
+    if (flex !== undefined && flex !== null) s.flex = flex;
+    if (gap !== undefined && gap !== null && !isPresetGap) s.gap = gap;
 
-// ---- Component ----
+    return (
+      <Component ref={ref} className={cls} style={{ ...s, ...style }} {...rest}>
+        {children}
+      </Component>
+    );
+  },
+);
 
-const Flex: React.FC<FlexProps> = ({
-  direction,
-  justify,
-  align,
-  gap,
-  wrap = false,
-  center = false,
-  full = false,
-  inline = false,
-  flex,
-  auto,
-  component: Component = 'div',
-  children,
-  className,
-  style,
-}) => {
-  const s: React.CSSProperties = {};
-
-  // direction
-  if (direction === 'column') s.flexDirection = 'column';
-
-  // center 快捷方式（优先级低于显式 justify/align）
-  if (center) {
-    s.justifyContent = 'center';
-    s.alignItems = 'center';
-  }
-
-  // justify / align 显式覆盖
-  if (justify) s.justifyContent = justifyMap[justify] || justify;
-  if (align) s.alignItems = alignMap[align] || align;
-
-  // gap
-  if (gap !== undefined) {
-    s.gap = typeof gap === 'number' ? gap : gapTokens[gap];
-  }
-
-  // wrap
-  if (wrap) s.flexWrap = 'wrap';
-
-  // full
-  if (full) s.width = '100%';
-
-  // flex（作为Children时）
-  if (flex !== undefined) {
-    if (typeof flex === 'number') {
-      s.flex = `${flex} 1 0%`;
-    } else if (/^\d+(\.\d+)?(px|%)$/.test(flex)) {
-      s.flex = `0 0 ${flex}`;
-    } else {
-      s.flex = flex;
-    }
-  }
-
-  // auto margin
-  if (auto === true) {
-    s.margin = 'auto';
-  } else if (auto === 'left') {
-    s.marginLeft = 'auto';
-  } else if (auto === 'right') {
-    s.marginRight = 'auto';
-  } else if (auto === 'top') {
-    s.marginTop = 'auto';
-  } else if (auto === 'bottom') {
-    s.marginBottom = 'auto';
-  }
-
-  const cls = [
-    'aero-flex',
-    inline ? 'aero-flex--inline' : '',
-    className || '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <Component className={cls} style={{ ...s, ...style }}>
-      {children}
-    </Component>
-  );
-};
+Flex.displayName = 'Flex';
 
 export default Flex;

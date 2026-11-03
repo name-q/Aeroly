@@ -47,7 +47,7 @@ export default () => {
         name="code"
         rules={[{ required: true, message: '请输入验证码' }]}
       >
-        <Flex gap="sm" align="center">
+        <Flex gap={8} align="center">
           <Input
             prefix={<Lock size={16} />}
             placeholder="请输入验证码"

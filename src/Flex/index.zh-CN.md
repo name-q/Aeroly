@@ -11,7 +11,7 @@ toc: content
 
 # Flex 弹性布局
 
-意图驱动的弹性布局组件。默认水平排列、垂直居中，用语义化 props 代替手写 flex CSS，让 AI 和人类都能一行搞定常见布局。
+弹性布局组件，用于设置子元素之间的对齐和间距。
 
 ## 基础用法
 
@@ -21,13 +21,9 @@ toc: content
 
 <code src="./demos/vertical.tsx"></code>
 
-## 主轴分布
+## 对齐方式
 
 <code src="./demos/justify.tsx"></code>
-
-## 居中
-
-<code src="./demos/center.tsx"></code>
 
 ## 自动换行
 
@@ -37,34 +33,27 @@ toc: content
 
 <code src="./demos/flex.tsx"></code>
 
-## Auto 间距
-
-<code src="./demos/auto.tsx"></code>
-
 ## API
+
+Flex 默认水平排列、顶部对齐；`vertical` 时子元素默认横向拉伸。API 与 antd Flex 一致。
 
 | 属性 | 说明 | 类型 | 默认值 |
 |------|------|------|--------|
-| direction | 主轴方向 | `'row' \| 'column'` | `'row'` |
-| justify | 主轴分布 | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - |
-| align | 交叉轴对齐 | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'center'` |
-| gap | 间距，数字为 px | `number \| 'xs' \| 'sm' \| 'md' \| 'lg'` | - |
-| wrap | 是否换行 | `boolean` | `false` |
-| center | 水平+垂直双向居中 | `boolean` | `false` |
-| full | 撑满父容器宽度 | `boolean` | `false` |
-| inline | 行内弹性盒 | `boolean` | `false` |
-| flex | 弹性控制：数字为伸缩比例，`"100px"` 为固定宽度，也支持完整写法如 `"0 0 100px"` | `number \| string` | - |
-| auto | margin auto 抽象 | `boolean \| 'left' \| 'right' \| 'top' \| 'bottom'` | - |
-| component | 渲染的 HTML 标签 | `React.ElementType` | `'div'` |
-| children | 子元素 | `ReactNode` | - |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| vertical | 主轴方向是否垂直，即 `flex-direction: column` | `boolean` | `false` |
+| orientation | 主轴方向，优先级高于 `vertical` | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| wrap | 换行方式，`true` 等同 `'wrap'` | `boolean \| CSSProperties['flexWrap']` | `'nowrap'` |
+| justify | 主轴对齐方式，即 `justify-content` | `CSSProperties['justifyContent']` | `normal` |
+| align | 交叉轴对齐方式，即 `align-items` | `CSSProperties['alignItems']` | `normal` |
+| flex | flex CSS 简写属性 | `CSSProperties['flex']` | - |
+| gap | 子元素间距 | `'small' \| 'medium' \| 'large' \| string \| number` | - |
+| component | 自定义元素类型 | `React.ElementType` | `'div'` |
 
-### gap 语义 token
+其余 HTML 属性（`className`、`style`、`onClick` 等）透传到根元素。
 
-| Token | 值 |
-|-------|-----|
-| `xs` | 4px |
-| `sm` | 8px |
-| `md` | 12px |
-| `lg` | 16px |
+### gap 预设
+
+| 值 | 间距 |
+|----|------|
+| `small` | 8px |
+| `medium` | 16px |
+| `large` | 24px |

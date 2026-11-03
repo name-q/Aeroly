@@ -13,7 +13,7 @@ export default () => (
       <Col span={4}><DemoBox w="100%" h={36} color="#36a3d4">居中</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#2b8ab5">居中</DemoBox></Col>
     </Row>
-    <Row gutter={12} justify="between">
+    <Row gutter={12} justify="space-between">
       <Col span={4}><DemoBox w="100%" h={36}>两端</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#36a3d4">两端</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#2b8ab5">两端</DemoBox></Col>

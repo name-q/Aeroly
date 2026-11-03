@@ -11,7 +11,7 @@ const colors = [
 ];
 
 export default () => (
-  <Flex wrap gap="sm" style={{ maxWidth: 400 }}>
+  <Flex wrap gap="small" style={{ maxWidth: 400 }}>
     {colors.map((c, i) => (
       <DemoBox key={i} w={64} h={36} color={c} />
     ))}

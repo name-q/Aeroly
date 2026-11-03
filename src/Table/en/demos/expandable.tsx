@@ -22,7 +22,7 @@ const columns = [
     width: 120,
     fixed: 'right' as const,
     render: () => (
-      <Flex gap="xs">
+      <Flex gap={4} align="center">
         <Button size="small" type="text">Edit</Button>
         <Button size="small" type="text">Delete</Button>
       </Flex>

@@ -11,14 +11,14 @@ export default () => {
 
   return (
     <ConfigProvider locale={enUS}>
-      <Flex direction="column" gap={16}>
-        <Flex gap={12}>
+      <Flex vertical gap={16} align="center">
+        <Flex gap={12} align="center">
           <Button onClick={() => setOpen1(true)}>English Modal</Button>
           <DatePicker />
         </Flex>
 
         <ConfigProvider locale={zhCN}>
-          <Flex gap={12}>
+          <Flex gap={12} align="center">
             <Button onClick={() => setOpen2(true)}>中文 Modal（嵌套覆盖）</Button>
             <DatePicker />
           </Flex>

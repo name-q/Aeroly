@@ -2,10 +2,26 @@
 
 .aero-flex {
   display: flex;
-  align-items: center;
-  min-width: 0;
+  margin: 0;
+  padding: 0;
 
-  &--inline {
-    display: inline-flex;
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  &-gap-small {
+    gap: 8px;
+  }
+
+  &-gap-medium {
+    gap: 16px;
+  }
+
+  &-gap-large {
+    gap: 24px;
   }
 }

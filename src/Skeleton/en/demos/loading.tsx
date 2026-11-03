@@ -10,9 +10,9 @@ export default () => {
 
   const skeleton = (
     <Skeleton>
-      <Flex gap={12} align="start" full>
+      <Flex gap={12} align="start" style={{ width: '100%' }}>
         <Skeleton.Circle size={48} />
-        <Flex direction="column" gap={8} flex={1} align="start">
+        <Flex vertical gap={8} flex={1} align="start">
           <Skeleton.Block width="50%" height={20} />
           <Skeleton.Text rows={3} />
         </Flex>
@@ -21,13 +21,13 @@ export default () => {
   );
 
   const content = (
-    <Flex gap={12} align="start" full>
+    <Flex gap={12} align="start" style={{ width: '100%' }}>
       <img
         src="https://api.dicebear.com/7.x/avataaars/svg?seed=aero"
         alt="avatar"
         style={{ width: 48, height: 48, borderRadius: '50%' }}
       />
-      <Flex direction="column" flex={1}>
+      <Flex vertical flex={1} align="center">
         <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Aeroly Skeleton Component</div>
         <div style={{ color: 'rgba(0,0,0,0.55)', lineHeight: 1.6 }}>
           Skeleton provides three atomic shapes: Block, Circle, and Text, which can be freely combined into any skeleton layout.
@@ -38,7 +38,7 @@ export default () => {
   );
 
   return (
-    <Flex direction="column" gap={16}>
+    <Flex vertical gap={16} align="center">
       <Flex align="center" gap={8}>
         <Switch checked={loading} onChange={setLoading} />
         <span>Loading</span>

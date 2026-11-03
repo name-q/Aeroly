@@ -1,252 +1,270 @@
 import React from 'react';
 import './index.less';
 
-// ---- Types ----
+export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 
-type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ScreenMap = Partial<Record<Breakpoint, boolean>>;
 
-interface ColResponsive {
-  span?: number;
-  offset?: number;
-}
+const responsiveArray: Breakpoint[] = ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
-export interface RowProps {
-  /** Grid gutter，数字为 px，支持语义 token；传数组 [水平, 垂直] 分别控制 */
-  gutter?: number | 'xs' | 'sm' | 'md' | 'lg' | [number | 'xs' | 'sm' | 'md' | 'lg', number | 'xs' | 'sm' | 'md' | 'lg'];
-  /** Main axis alignment */
-  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
-  /** Cross-axis alignment */
-  align?: 'start' | 'center' | 'end' | 'stretch';
-  /** Children */
-  children?: React.ReactNode;
-  /** Custom class name */
-  className?: string;
-  /** Custom style */
-  style?: React.CSSProperties;
-}
-
-export interface ColProps {
-  /** Grid column span（共 24 格），0 表示隐藏 */
-  span?: number;
-  /** 左侧偏移格数 */
-  offset?: number;
-  /** CSS flex 属性，设置后 span 失效 */
-  flex?: number | string;
-  /** ≥0px Responsive config */
-  xs?: number | ColResponsive;
-  /** ≥576px Responsive config */
-  sm?: number | ColResponsive;
-  /** ≥768px Responsive config */
-  md?: number | ColResponsive;
-  /** ≥992px Responsive config */
-  lg?: number | ColResponsive;
-  /** ≥1200px Responsive config */
-  xl?: number | ColResponsive;
-  /** Children */
-  children?: React.ReactNode;
-  /** Custom class name */
-  className?: string;
-  /** Custom style */
-  style?: React.CSSProperties;
-}
-
-// ---- Constants ----
-
-const TOTAL_COLS = 24;
-
-const gapTokens: Record<string, number> = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
+const responsiveMap: Record<Breakpoint, string> = {
+  xs: '(max-width: 575px)',
+  sm: '(min-width: 576px)',
+  md: '(min-width: 768px)',
+  lg: '(min-width: 992px)',
+  xl: '(min-width: 1200px)',
+  xxl: '(min-width: 1600px)',
+  xxxl: '(min-width: 1920px)',
 };
 
-const justifyMap: Record<string, string> = {
-  start: 'flex-start',
-  center: 'center',
-  end: 'flex-end',
-  between: 'space-between',
-  around: 'space-around',
-  evenly: 'space-evenly',
-};
+const RowAligns = ['top', 'middle', 'bottom', 'stretch'] as const;
+const RowJustify = ['start', 'end', 'center', 'space-around', 'space-between', 'space-evenly'] as const;
 
-const alignMap: Record<string, string> = {
-  start: 'flex-start',
-  center: 'center',
-  end: 'flex-end',
-  stretch: 'stretch',
-};
+type RowAlign = (typeof RowAligns)[number];
+type RowJustifyType = (typeof RowJustify)[number];
+type ResponsiveLike<T> = Partial<Record<Breakpoint, T>>;
 
-const breakpoints: Record<Breakpoint, number> = {
-  xs: 0,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200,
-};
+export type Gutter = number | string | undefined | Partial<Record<Breakpoint, number>>;
 
-// ---- Helpers ----
-
-function resolveGap(val: number | string): number {
-  return typeof val === 'number' ? val : (gapTokens[val] ?? 0);
+export interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Grid spacing; `[horizontal, vertical]`, supports responsive objects */
+  gutter?: Gutter | [Gutter, Gutter];
+  /** Vertical alignment */
+  align?: RowAlign | ResponsiveLike<RowAlign>;
+  /** Horizontal arrangement */
+  justify?: RowJustifyType | ResponsiveLike<RowJustifyType>;
+  /** Whether to wrap automatically */
+  wrap?: boolean;
 }
 
-function useBreakpoint(): Breakpoint {
-  const [bp, setBp] = React.useState<Breakpoint>(() => {
-    if (typeof window === 'undefined') return 'md';
-    const w = window.innerWidth;
-    if (w >= breakpoints.xl) return 'xl';
-    if (w >= breakpoints.lg) return 'lg';
-    if (w >= breakpoints.md) return 'md';
-    if (w >= breakpoints.sm) return 'sm';
-    return 'xs';
-  });
+type ColSpanType = number | string;
+type FlexType = number | 'none' | 'auto' | (string & {});
+
+export interface ColSize {
+  flex?: FlexType;
+  span?: ColSpanType;
+  order?: ColSpanType;
+  offset?: ColSpanType;
+  push?: ColSpanType;
+  pull?: ColSpanType;
+}
+
+export interface ColProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    Partial<Record<Breakpoint, ColSpanType | ColSize>> {
+  /** Flex layout style */
+  flex?: FlexType;
+  /** Number of cells to occupy, 0 means `display: none` */
+  span?: ColSpanType;
+  /** Raster order */
+  order?: ColSpanType;
+  /** Number of cells to the left of the grid */
+  offset?: ColSpanType;
+  /** Number of cells that raster is moved to the right */
+  push?: ColSpanType;
+  /** Number of cells that raster is moved to the left */
+  pull?: ColSpanType;
+}
+
+const isPlainObject = (v: unknown): v is Record<string, any> =>
+  typeof v === 'object' && v !== null && !Array.isArray(v);
+
+export function useBreakpoint(): ScreenMap | null {
+  const [screens, setScreens] = React.useState<ScreenMap | null>(null);
 
   React.useEffect(() => {
-    const calc = () => {
-      const w = window.innerWidth;
-      let next: Breakpoint = 'xs';
-      if (w >= breakpoints.xl) next = 'xl';
-      else if (w >= breakpoints.lg) next = 'lg';
-      else if (w >= breakpoints.md) next = 'md';
-      else if (w >= breakpoints.sm) next = 'sm';
-      setBp(next);
+    if (typeof window === 'undefined' || !window.matchMedia) return undefined;
+    const entries = (Object.keys(responsiveMap) as Breakpoint[]).map(
+      (bp) => [bp, window.matchMedia(responsiveMap[bp])] as const,
+    );
+    const update = () => {
+      const next: ScreenMap = {};
+      entries.forEach(([bp, mql]) => {
+        next[bp] = mql.matches;
+      });
+      setScreens(next);
     };
-    window.addEventListener('resize', calc);
-    return () => window.removeEventListener('resize', calc);
+    update();
+    entries.forEach(([, mql]) => mql.addEventListener?.('change', update));
+    return () => entries.forEach(([, mql]) => mql.removeEventListener?.('change', update));
   }, []);
 
-  return bp;
+  return screens;
 }
 
-// ---- Context ----
-
-const RowContext = React.createContext<{ gutterH: number }>({ gutterH: 0 });
-
-// ---- Row ----
-
-const Row: React.FC<RowProps> = ({
-  gutter,
-  justify,
-  align,
-  children,
-  className,
-  style,
-}) => {
-  let gutterH = 0;
-  let gutterV = 0;
-
-  if (gutter !== undefined) {
-    if (Array.isArray(gutter)) {
-      gutterH = resolveGap(gutter[0]);
-      gutterV = resolveGap(gutter[1]);
-    } else {
-      gutterH = resolveGap(gutter);
+function getMergedPropByScreen<T extends string>(
+  prop: T | ResponsiveLike<T> | undefined,
+  screens: ScreenMap | null,
+): T | '' {
+  if (typeof prop === 'string') return prop;
+  if (isPlainObject(prop)) {
+    for (const bp of responsiveArray) {
+      if (screens?.[bp] && prop[bp] !== undefined) return prop[bp] as T;
     }
   }
+  return '';
+}
 
-  const s: React.CSSProperties = { ...style };
-  if (gutterH > 0) s.columnGap = gutterH;
-  if (gutterV > 0) s.rowGap = gutterV;
-  if (justify) s.justifyContent = justifyMap[justify];
-  if (align) s.alignItems = alignMap[align];
+type Gap = number | string | undefined;
 
-  const cls = ['aero-row', className || ''].filter(Boolean).join(' ');
+function useGutter(gutter: RowProps['gutter'], screens: ScreenMap | null): [Gap, Gap] {
+  const results: [Gap, Gap] = [undefined, undefined];
+  const normalized = Array.isArray(gutter) ? gutter : [gutter, undefined];
+  const merged: ScreenMap = screens || {
+    xs: true, sm: true, md: true, lg: true, xl: true, xxl: true, xxxl: true,
+  };
 
-  return (
-    <RowContext.Provider value={{ gutterH }}>
-      <div className={cls} style={s}>
-        {children}
-      </div>
-    </RowContext.Provider>
-  );
-};
-
-// ---- Col ----
-
-const bpOrder: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl'];
-
-const Col: React.FC<ColProps> = ({
-  span,
-  offset,
-  flex,
-  xs,
-  sm,
-  md,
-  lg,
-  xl,
-  children,
-  className,
-  style,
-}) => {
-  const { gutterH } = React.useContext(RowContext);
-  const currentBp = useBreakpoint();
-
-  // 解析Responsive config
-  const responsiveMap: Partial<Record<Breakpoint, ColResponsive>> = {};
-  const rawMap = { xs, sm, md, lg, xl };
-  for (const key of bpOrder) {
-    const val = rawMap[key];
-    if (val !== undefined) {
-      responsiveMap[key] = typeof val === 'number' ? { span: val } : val;
-    }
-  }
-
-  let resolvedSpan = span;
-  let resolvedOffset = offset;
-  const hasResponsive = Object.keys(responsiveMap).length > 0;
-
-  if (hasResponsive) {
-    const idx = bpOrder.indexOf(currentBp);
-    for (let i = idx; i >= 0; i--) {
-      const cfg = responsiveMap[bpOrder[i]];
-      if (cfg) {
-        if (cfg.span !== undefined) resolvedSpan = cfg.span;
-        if (cfg.offset !== undefined) resolvedOffset = cfg.offset;
-        break;
+  normalized.forEach((g, index) => {
+    if (isPlainObject(g)) {
+      for (const bp of responsiveArray) {
+        if (merged[bp] && g[bp] !== undefined) {
+          results[index] = g[bp] as number;
+          break;
+        }
       }
-    }
-  }
-
-  const s: React.CSSProperties = { ...style };
-
-  if (flex !== undefined) {
-    if (typeof flex === 'number') {
-      s.flex = `${flex} 1 0%`;
-    } else if (/^\d+(\.\d+)?(px|%)$/.test(flex)) {
-      s.flex = `0 0 ${flex}`;
     } else {
-      s.flex = flex;
+      results[index] = g as Gap;
     }
-  } else if (resolvedSpan !== undefined) {
-    if (resolvedSpan === 0) {
-      s.display = 'none';
-    } else {
-      // 用 calc 扣除 gap 占用的空间
-      const colCount = TOTAL_COLS / resolvedSpan;
-      const gapTotal = gutterH * (colCount - 1) / colCount;
-      s.flex = `0 0 calc(${(resolvedSpan / TOTAL_COLS) * 100}% - ${gapTotal}px)`;
-      s.maxWidth = `calc(${(resolvedSpan / TOTAL_COLS) * 100}% - ${gapTotal}px)`;
+  });
+  return results;
+}
+
+const half = (g: Gap, sign: 1 | -1) =>
+  typeof g === 'number' ? `${(g / 2) * sign}px` : `calc(${g} / ${2 * sign})`;
+
+interface RowContextState {
+  gutter?: [Gap, Gap];
+  wrap?: boolean;
+}
+
+const RowContext = React.createContext<RowContextState>({});
+
+export const Row = React.forwardRef<HTMLDivElement, RowProps>(
+  ({ gutter = 0, align, justify, wrap, className, style, children, ...rest }, ref) => {
+    const hasResponsive =
+      isPlainObject(align) ||
+      isPlainObject(justify) ||
+      (Array.isArray(gutter) ? gutter : [gutter]).some(isPlainObject);
+    const screens = useBreakpoint();
+    const activeScreens = hasResponsive ? screens : null;
+
+    const mergedAlign = getMergedPropByScreen(align, activeScreens);
+    const mergedJustify = getMergedPropByScreen(justify, activeScreens);
+    const [gutterH, gutterV] = useGutter(gutter, activeScreens);
+
+    const cls = [
+      'aero-row',
+      wrap === false ? 'aero-row-no-wrap' : '',
+      mergedJustify ? `aero-row-${mergedJustify}` : '',
+      mergedAlign ? `aero-row-${mergedAlign}` : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const rowStyle: React.CSSProperties = {};
+    if (gutterH) rowStyle.marginInline = half(gutterH, -1);
+    if (gutterV) rowStyle.rowGap = gutterV;
+
+    const ctx = React.useMemo<RowContextState>(
+      () => ({ gutter: [gutterH, gutterV], wrap }),
+      [gutterH, gutterV, wrap],
+    );
+
+    return (
+      <RowContext.Provider value={ctx}>
+        <div ref={ref} className={cls} style={{ ...rowStyle, ...style }} {...rest}>
+          {children}
+        </div>
+      </RowContext.Provider>
+    );
+  },
+);
+
+Row.displayName = 'Row';
+
+function parseFlex(flex: FlexType): string {
+  if (flex === 'auto') return '1 1 auto';
+  if (typeof flex === 'number') return `${flex} ${flex} auto`;
+  if (/^\d+(\.\d+)?(px|em|rem|%)$/.test(flex)) return `0 0 ${flex}`;
+  return flex;
+}
+
+const sizes: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
+
+const isSet = (v: unknown) => v !== undefined && v !== null && v !== '';
+
+export const Col = React.forwardRef<HTMLDivElement, ColProps>((props, ref) => {
+  const { gutter, wrap } = React.useContext(RowContext);
+  const {
+    span,
+    order,
+    offset,
+    push,
+    pull,
+    flex,
+    className,
+    style,
+    children,
+    xs,
+    sm,
+    md,
+    lg,
+    xl,
+    xxl,
+    xxxl,
+    ...rest
+  } = props;
+
+  const sizeProps = { xs, sm, md, lg, xl, xxl, xxxl };
+  const sizeCls: string[] = [];
+  const sizeStyle: Record<string, string> = {};
+
+  sizes.forEach((size) => {
+    const raw = sizeProps[size];
+    let cfg: ColSize = {};
+    if (typeof raw === 'number' || typeof raw === 'string') cfg = { span: raw };
+    else if (isPlainObject(raw)) cfg = raw;
+
+    if (isSet(cfg.span)) sizeCls.push(`aero-col-${size}-${cfg.span}`);
+    if (isSet(cfg.order)) sizeCls.push(`aero-col-${size}-order-${cfg.order}`);
+    if (isSet(cfg.offset)) sizeCls.push(`aero-col-${size}-offset-${cfg.offset}`);
+    if (isSet(cfg.push)) sizeCls.push(`aero-col-${size}-push-${cfg.push}`);
+    if (isSet(cfg.pull)) sizeCls.push(`aero-col-${size}-pull-${cfg.pull}`);
+    if (isSet(cfg.flex)) {
+      sizeCls.push(`aero-col-${size}-flex`);
+      sizeStyle[`--aero-col-${size}-flex`] = parseFlex(cfg.flex!);
     }
-  }
+  });
 
-  if (resolvedOffset && resolvedOffset > 0) {
-    s.marginLeft = `${(resolvedOffset / TOTAL_COLS) * 100}%`;
-  }
+  const cls = [
+    'aero-col',
+    isSet(span) ? `aero-col-${span}` : '',
+    order ? `aero-col-order-${order}` : '',
+    offset ? `aero-col-offset-${offset}` : '',
+    push ? `aero-col-push-${push}` : '',
+    pull ? `aero-col-pull-${pull}` : '',
+    ...sizeCls,
+    className || '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const cls = ['aero-col', className || ''].filter(Boolean).join(' ');
+  const mergedStyle: React.CSSProperties = {};
+  if (gutter?.[0]) mergedStyle.paddingInline = half(gutter[0], 1);
+  if (flex || flex === 0) {
+    mergedStyle.flex = parseFlex(flex);
+    if (wrap === false) mergedStyle.minWidth = 0;
+  }
 
   return (
-    <div className={cls} style={s}>
+    <div ref={ref} className={cls} style={{ ...mergedStyle, ...style, ...sizeStyle }} {...rest}>
       {children}
     </div>
   );
-};
+});
 
-// ---- Export ----
+Col.displayName = 'Col';
 
-export type { Breakpoint, ColResponsive };
-
-const Grid = { Row, Col };
+const Grid = { Row, Col, useBreakpoint };
 export default Grid;
-export { Row, Col };

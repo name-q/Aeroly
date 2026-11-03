@@ -18,7 +18,7 @@ const mockData: Item[] = [
 ];
 
 const ListItem: React.FC<{ item: Item }> = ({ item }) => (
-  <Flex gap={12} align="start" full style={{ padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+  <Flex gap={12} align="start" style={{ width: '100%', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
     <div style={{
       width: 44, height: 44, borderRadius: 8, flexShrink: 0,
       background: 'linear-gradient(135deg, #50b8e7, #7dd3fc)',
@@ -27,7 +27,7 @@ const ListItem: React.FC<{ item: Item }> = ({ item }) => (
     }}>
       {item.title[0]}
     </div>
-    <Flex direction="column" flex={1} align="start">
+    <Flex vertical flex={1} align="start">
       <div style={{ fontWeight: 600, marginBottom: 4 }}>{item.title}</div>
       <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.55)', lineHeight: 1.5 }}>{item.desc}</div>
     </Flex>
@@ -35,9 +35,9 @@ const ListItem: React.FC<{ item: Item }> = ({ item }) => (
 );
 
 const SkeletonItem = () => (
-  <Flex gap={12} align="start" full style={{ padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+  <Flex gap={12} align="start" style={{ width: '100%', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
     <Skeleton.Block width={44} height={44} borderRadius={8} />
-    <Flex direction="column" gap={6} flex={1} align="start">
+    <Flex vertical gap={6} flex={1} align="start">
       <Skeleton.Block width="45%" height={18} />
       <Skeleton.Text rows={1} lineHeight={13} />
     </Flex>
@@ -60,7 +60,7 @@ export default () => {
   useEffect(() => { load(); }, []);
 
   return (
-    <Flex direction="column" gap={12}>
+    <Flex vertical gap={12} align="center">
       <Button onClick={load} disabled={loading}>重新加载</Button>
       {loading ? (
         <Skeleton>

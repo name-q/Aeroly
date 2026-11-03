@@ -10,7 +10,7 @@ export default () => {
 
   return (
     <ConfigProvider>
-      <Flex gap={12}>
+      <Flex gap={12} align="center">
         <Button onClick={() => setOpen(true)}>Open Modal</Button>
         <Button onClick={() => Modal.confirm({ title: 'Confirm Action', content: 'Are you sure you want to continue?' })}>
           Imperative Confirm

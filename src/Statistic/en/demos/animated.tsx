@@ -9,9 +9,9 @@ export default () => {
   const [value, setValue] = useState(100);
 
   return (
-    <Flex direction="column" gap="md">
+    <Flex vertical gap={12} align="center">
       <Statistic title="Transaction Amount" value={value} precision={2} prefix="$" animated />
-      <Flex gap="sm">
+      <Flex gap={8} align="center">
         <Button size="small" onClick={() => setValue((v) => v + Math.floor(Math.random() * 1000))}>
           Increase
         </Button>

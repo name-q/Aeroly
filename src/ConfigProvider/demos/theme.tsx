@@ -171,9 +171,9 @@ export default () => {
   };
 
   return (
-    <Flex direction="column" gap={16}>
+    <Flex vertical gap={16} align="center">
       {/* 控制面板 */}
-      <Flex direction="column" gap={12} style={panelStyle}>
+      <Flex vertical gap={12} style={panelStyle} align="center">
         {/* 预设 + 颜色 */}
         <Flex gap={16} wrap align="center">
           <Flex gap={8} align="center">
@@ -268,7 +268,7 @@ export default () => {
 
       {/* 组件展示区 */}
       <ConfigProvider theme={theme} size={size}>
-        <Flex direction="column" gap={20}>
+        <Flex vertical gap={20} align="center">
           {/* Button */}
           <Flex gap={12} wrap align="center">
             <Button type="primary">主色按钮</Button>
@@ -345,7 +345,7 @@ export default () => {
           </Flex>
 
           {/* Alert */}
-          <Flex direction="column" gap={8}>
+          <Flex vertical gap={8} align="center">
             <Alert type="info">这是一条信息提示</Alert>
             <Alert type="success">操作成功完成</Alert>
             <Alert type="warning">请注意操作风险</Alert>
@@ -353,7 +353,7 @@ export default () => {
           </Flex>
 
           {/* Statistic */}
-          <Flex gap={24} wrap>
+          <Flex gap={24} wrap align="center">
             <Statistic title="增长率" value="12.5%" status="success" />
             <Statistic title="错误率" value="3.2%" status="error" />
             <Statistic title="告警数" value={28} status="warning" />

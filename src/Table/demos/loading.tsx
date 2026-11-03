@@ -21,9 +21,9 @@ export default () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <Flex direction="column" gap="md">
+    <Flex vertical gap={12} align="center">
       <Table columns={columns} dataSource={dataSource} loading={loading} pagination={false} />
-      <Flex>
+      <Flex align="center">
         <Button size="small" onClick={() => setLoading((v) => !v)}>
           {loading ? '加载完成' : '重新加载'}
         </Button>

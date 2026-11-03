@@ -1,24 +1,18 @@
 /**
  * title: " "
- * description: 用 `flex` 控制子元素伸缩比例，实现侧栏 + 内容区经典布局。
+ * description: 用 `flex` 设置 CSS flex 简写，实现侧栏 + 内容区经典布局。
  */
 import React from 'react';
 import { Flex } from 'aeroly';
 
+const box: React.CSSProperties = { height: 80, borderRadius: 8, color: '#fff', fontSize: 12 };
+
 export default () => (
-  <Flex gap="sm" full>
-    <Flex
-      center
-      flex="100px"
-      style={{ height: 80, borderRadius: 8, background: '#50b8e7', color: '#fff', fontSize: 12 }}
-    >
+  <Flex gap="small">
+    <Flex flex="0 0 100px" justify="center" align="center" style={{ ...box, background: '#50b8e7' }}>
       侧栏
     </Flex>
-    <Flex
-      center
-      flex={1}
-      style={{ height: 80, borderRadius: 8, background: '#36a3d4', color: '#fff', fontSize: 12 }}
-    >
+    <Flex flex={1} justify="center" align="center" style={{ ...box, background: '#36a3d4' }}>
       内容区
     </Flex>
   </Flex>

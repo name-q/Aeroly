@@ -19,7 +19,7 @@ export default () => {
 
   return (
     <ConfigProvider locale={locale}>
-      <Flex direction="column" gap={16}>
+      <Flex vertical gap={16} align="center">
         <Segmented
           value={lang}
           onChange={(v) => setLang(v as 'zh' | 'en')}
@@ -29,7 +29,7 @@ export default () => {
           ]}
         />
 
-        <Flex gap={12} wrap>
+        <Flex gap={12} wrap align="center">
           <Button onClick={() => setModalOpen(true)}>Modal</Button>
           <Button ref={btnRef} onClick={() => setTourOpen(true)}>Tour</Button>
           <DatePicker />

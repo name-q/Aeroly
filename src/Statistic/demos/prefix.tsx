@@ -7,7 +7,7 @@ import { Statistic, Flex } from 'aeroly';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export default () => (
-  <Flex gap="lg">
+  <Flex gap={16} align="center">
     <Statistic
       title="增长率"
       value={11.28}

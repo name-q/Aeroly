@@ -9,12 +9,12 @@ export default () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <Flex direction="column" gap="md">
-      <Flex gap="lg">
+    <Flex vertical gap={12} align="center">
+      <Flex gap={16} align="center">
         <Statistic title="Total Sales" value={126560} prefix="$" loading={loading} />
         <Statistic title="Orders" value={8846} loading={loading} />
       </Flex>
-      <Flex>
+      <Flex align="center">
         <Button size="small" onClick={() => setLoading((v) => !v)}>
           {loading ? 'Done Loading' : 'Reload'}
         </Button>

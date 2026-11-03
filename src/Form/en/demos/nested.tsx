@@ -47,7 +47,7 @@ export default () => {
         name="code"
         rules={[{ required: true, message: 'Please enter the verification code' }]}
       >
-        <Flex gap="sm" align="center">
+        <Flex gap={8} align="center">
           <Input
             prefix={<Lock size={16} />}
             placeholder="Enter verification code"

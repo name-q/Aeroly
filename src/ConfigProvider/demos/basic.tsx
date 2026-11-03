@@ -10,7 +10,7 @@ export default () => {
 
   return (
     <ConfigProvider>
-      <Flex gap={12}>
+      <Flex gap={12} align="center">
         <Button onClick={() => setOpen(true)}>打开弹窗</Button>
         <Button onClick={() => Modal.confirm({ title: '确认操作', content: '确定要继续吗？' })}>
           命令式确认

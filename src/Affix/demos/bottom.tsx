@@ -13,7 +13,7 @@ export default () => {
         <p style={{ paddingTop: 40, color: '#bbb' }}>长内容区域...</p>
       </div>
       <Affix offsetBottom={0}>
-        <Flex gap={12} style={{ padding: '8px 12px' }}>
+        <Flex gap={12} style={{ padding: '8px 12px' }} align="center">
           <Button type="primary" size="small">提交</Button>
           <Button size="small">取消</Button>
         </Flex>

@@ -29,7 +29,7 @@ const columns = [
     key: 'action',
     align: 'right',
     render: () => (
-      <Flex gap="xs" inline>
+      <Flex gap={4} align="center" style={{ display: 'inline-flex' }}>
         <Button size="small" type="text">Edit</Button>
         <Button size="small" type="text">Delete</Button>
       </Flex>

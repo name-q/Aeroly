@@ -8,7 +8,7 @@ import { Statistic, Flex } from 'aeroly';
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 30;
 
 export default () => (
-  <Flex gap="lg">
+  <Flex gap={16} align="center">
     <Statistic.Countdown title="活动倒计时" value={deadline} />
     <Statistic.Countdown title="含天数" value={deadline} format="D 天 HH:mm:ss" />
   </Flex>

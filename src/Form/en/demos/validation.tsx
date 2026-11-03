@@ -112,7 +112,7 @@ export default () => {
       </Form.Item>
 
       <Form.Item>
-        <Flex gap={12}>
+        <Flex gap={12} align="center">
           <Button type="primary" htmlType="submit">Register</Button>
           <Button onClick={() => form.resetFields()}>Reset</Button>
         </Flex>

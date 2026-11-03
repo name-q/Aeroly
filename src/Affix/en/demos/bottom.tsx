@@ -13,7 +13,7 @@ export default () => {
         <p style={{ paddingTop: 40, color: '#bbb' }}>Long content area...</p>
       </div>
       <Affix offsetBottom={0}>
-        <Flex gap={12} style={{ padding: '8px 12px' }}>
+        <Flex gap={12} style={{ padding: '8px 12px' }} align="center">
           <Button type="primary" size="small">Submit</Button>
           <Button size="small">Cancel</Button>
         </Flex>

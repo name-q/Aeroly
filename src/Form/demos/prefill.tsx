@@ -262,7 +262,7 @@ export default () => {
         </Form.Item>
 
         <Form.Item>
-          <Flex gap={12}>
+          <Flex gap={12} align="center">
             <Button type="primary" htmlType="submit">保存</Button>
             <Button onClick={() => switchData(current === 'A' ? 'B' : 'A')}>
               切换到用户 {current === 'A' ? 'B' : 'A'}

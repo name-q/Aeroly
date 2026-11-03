@@ -13,7 +13,7 @@ export default () => (
       <Col span={4}><DemoBox w="100%" h={36} color="#36a3d4">Center</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#2b8ab5">Center</DemoBox></Col>
     </Row>
-    <Row gutter={12} justify="between">
+    <Row gutter={12} justify="space-between">
       <Col span={4}><DemoBox w="100%" h={36}>Between</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#36a3d4">Between</DemoBox></Col>
       <Col span={4}><DemoBox w="100%" h={36} color="#2b8ab5">Between</DemoBox></Col>

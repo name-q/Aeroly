@@ -264,7 +264,7 @@ export default () => {
         </Form.Item>
 
         <Form.Item>
-          <Flex gap={12}>
+          <Flex gap={12} align="center">
             <Button type="primary" htmlType="submit">Save</Button>
             <Button onClick={() => switchData(current === 'A' ? 'B' : 'A')}>
               Switch to User {current === 'A' ? 'B' : 'A'}

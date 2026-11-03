@@ -154,12 +154,6 @@
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
     border-color: transparent;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),
-                0 2px 8px rgba(0, 0, 0, 0.06);
-
-    @{dark-selector} & {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
   }
 
   &.aero-lg-surface.aero-button-glass--pill {
@@ -172,13 +166,14 @@
 
   // 只在环形边缘叠加主题色，保留内部玻璃材质不变。
   &.aero-lg-surface::before {
-    opacity: 0.9;
+    inset: -1px;
+    opacity: 1;
     mix-blend-mode: normal;
     background: linear-gradient(
       var(--aero-lg-angle, 135deg),
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.12) 28%,
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.18) 52%,
-      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.1) 92%
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.32) 28%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.45) 52%,
+      rgba(var(--aero-primary-color-rgb, 80, 184, 231), 0.28) 92%
     );
     box-shadow: none;
   }

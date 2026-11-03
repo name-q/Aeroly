@@ -154,13 +154,11 @@
   &.aero-lg-surface {
     border-radius: var(--aero-button-radius, var(--aero-border-radius, 8px));
     border-color: transparent;
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1),
-                0 1px 2px rgba(0, 0, 0, 0.06),
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),
                 0 2px 8px rgba(0, 0, 0, 0.06);
 
     @{dark-selector} & {
-      box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.1),
-                  0 2px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -197,12 +195,10 @@
 
   &.aero-lg-surface:active {
     transform: translateY(1px) scale(0.96);
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12),
-                inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 
     @{dark-selector} & {
-      box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12),
-                  inset 0 1px 3px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
     }
   }
 

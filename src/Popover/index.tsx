@@ -232,7 +232,7 @@ const Popover: React.FC<PopoverProps> = ({
   // Position the already-mounted popup with its real dimensions.
   useEffect(() => {
     updatePosition();
-  }, [updatePosition, content, title, raw]);
+  }, [updatePosition, content, title, raw, isOpen]);
 
   // 滚动/resize 时更新位置
   useEffect(() => {

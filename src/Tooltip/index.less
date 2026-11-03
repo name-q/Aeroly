@@ -6,15 +6,12 @@
 .aero-tooltip {
 
   // 内容面板：深色半透明，blur 用 8px（覆盖 hook 默认 40px）
-  // 叠加 .aero-lg-surface 提升优先级：liquid-glass.less 被多个组件重复引入，
-  // 其 `.aero-lg-panel.aero-lg-surface--full { background: transparent }` 可能后加载覆盖深色底
   .aero-popover-inner.aero-lg-surface {
     --aero-lg-blur: 8px !important;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.06);
     background: rgba(30, 30, 30, 0.85);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-    // 小尺寸文字提示不走位移折射：折射层会把深色底提亮成灰色，边缘还会出现色差彩边
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
